@@ -11,6 +11,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/coordinador-setup-repo-and-pages] Estructura de plan.md  
   PR: [#2](https://github.com/GonzaloBarbano/E-commerce/pull/2) - @GonzaloBarbano (Coordinador / DevOps)
 
+- [feature/frontend-add-html-structure] Estructura de index.html
+  PR: [#12](https://github.com/GonzaloBarbano/E-commerce/pull/12) - @GonzaloBarbano (Desarrollador Frontend)
+
 ### Changed
 
 ### Fixed
