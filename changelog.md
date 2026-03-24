@@ -4,9 +4,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Pre-Entrega 1] - 23/03/2026
 
-- **PR #[4]:** [(https://github.com/GonzaloBarbano/E-commerce/pull/4)]
-  - **Autor:** @Naguirre0102 (Especialista IA)
-  - **Resumen:** Se agregan las bases de la metodología SDD, template de specs y el spec inicial de IA.
+- **[feature/ia-add-prompts-1-to-5]** Agrego metodología SDD, template y spec inicial
+- **PR:** [#4](https://github.com/GonzaloBarbano/E-commerce/pull/4) - @Naguirre0102 (Especialista IA)
 
 ---
 
