@@ -39,6 +39,12 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 ---
 
 ## 👥 Integrantes del Grupo
+| Nombre completo           | N° de Matrícula | Usuario GitHub       | Rol en esta entrega              |
+|--------------------------|----------------|---------------------|----------------------------------|
+| Gonzalo Barbano          | 152127         | @GonzaloBarbano     | Frontend                         |
+| Lucas Ivan Fischer       | 152159         | @LucasFUces         | Documentador / UX-UI            |
+| Gonzalo Barbano          | 152127         | @GonzaloBarbano     | DevOps                          |
+| Nicolas Aguirre          | 153791         | @Naguirre0102       | IA / Prompt Engineering         |
 
 | Nombre completo           | N° de Matrícula | Usuario GitHub       | Rol en esta entrega              |
 |--------------------------|----------------|---------------------|----------------------------------|
