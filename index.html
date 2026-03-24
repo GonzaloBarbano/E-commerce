@@ -297,16 +297,20 @@
 
             <!-- Campo: Teléfono -->
             <div class="form-group">
-              <label for="input-telefono">Teléfono (opcional):</label>
-              <input
-                type="tel"
-                id="input-telefono"
-                name="telefono"
-                placeholder="+54 9 11 1234-5678"
-                aria-describedby="telefono-help"
-              />
-              <small id="telefono-help">Incluye el código de país</small>
-            </div>
+            <label for="input-telefono">Teléfono (opcional):</label>
+            <input
+              type="tel"
+              id="input-telefono"
+              name="telefono"
+              placeholder="+54 9 11 1234-5678"
+              pattern="[0-9\s\-\+]+"
+              title="Ingrese un teléfono válido (ej: +54 9 11 1234-5678)"
+              aria-describedby="telefono-help"
+            />
+            <small id="telefono-help">
+              Formato: +54 9 11 1234-5678 (incluye el código de país)
+            </small>
+          </div>
 
             <!-- Campo: Checkbox de términos -->
             <div class="form-group checkbox">
