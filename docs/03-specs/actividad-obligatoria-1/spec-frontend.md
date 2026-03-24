@@ -9,8 +9,8 @@
 
 ## 2. Requerimientos Técnicos y Funcionales
 
-- [ ] **HTML5 Semántico:** Utilizar etiquetas HTML5 semánticas (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`, etc.) para estructura clara y accesible.
-- [ ] **Elementos Básicos Requeridos:** Incluir en la página:
+- [x] **HTML5 Semántico:** Utilizar etiquetas HTML5 semánticas (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`, etc.) para estructura clara y accesible.
+- [x] **Elementos Básicos Requeridos:** Incluir en la página:
   - Título de la página y encabezados jerárquicos (`<h1>`, `<h2>`, `<h3>`)
   - Párrafos descriptivos sobre el E-commerce
   - Al menos 3 imágenes relacionadas con productos/categorías (con atributo `alt` descriptivo)
@@ -18,12 +18,12 @@
   - Al menos una lista (ordenada o desordenada) de categorías o productos
   - Un formulario básico (ej: newsletter, contacto o búsqueda)
   - Una tabla con información de productos o comparativa
-- [ ] **Accesibilidad y SEO:** Incluir metaetiquetas esenciales (`<meta name="viewport">`, `<meta name="description">`, etc.) y atributos accesibles en todos los elementos.
-- [ ] **Marcadores para Fases Futuras:** Incluir comentarios HTML indicando:
+- [x] **Accesibilidad y SEO:** Incluir metaetiquetas esenciales (`<meta name="viewport">`, `<meta name="description">`, etc.) y atributos accesibles en todos los elementos.
+- [x] **Marcadores para Fases Futuras:** Incluir comentarios HTML indicando:
   - Dónde se aplicarán estilos CSS (con etiquetas como `<!-- TODO: CSS: ... -->`)
   - Dónde se integrarán funcionalidades JavaScript (con etiquetas como `<!-- TODO: JS: ... -->`)
-- [ ] **Documentación en Código:** Agregar comentarios claros explicando la estructura de cada sección y propósito de elementos clave.
-- [ ] **Validez HTML:** El código debe pasar validación del W3C sin errores (advertencias aceptables).
+- [x] **Documentación en Código:** Agregar comentarios claros explicando la estructura de cada sección y propósito de elementos clave.
+- [x] **Validez HTML:** El código debe pasar validación del W3C sin errores (advertencias aceptables).
 
 ---
 
@@ -31,15 +31,15 @@
 
 _Para que esta tarea se considere lista, debe cumplir con:_
 
-- [ ] **Validación W3C:** El archivo `index.html` pasa el validador del W3C sin errores críticos (https://validator.w3.org/).
-- [ ] **Estructura Semántica:** El HTML utiliza etiquetas semánticas apropiadas y no abusa de divs genéricos.
-- [ ] **Completitud de Elementos:** Contiene todos los elementos básicos solicitados (título, párrafos, imágenes, enlaces, listas, formularios, tablas).
-- [ ] **Comentarios Descriptivos:** Cada sección principal contiene al menos un comentario explicatorio.
-- [ ] **Marcadores Identificados:** Los comentarios `<!-- TODO: CSS: ... -->` y `<!-- TODO: JS: ... -->` están claramente marcados.
-- [ ] **Atributos Accesibles:** Todas las imágenes tienen `alt` descriptivo, formularios tienen `<label>` asociadas, y se utilizan atributos `aria` donde corresponda.
-- [ ] **Commits Descriptivos:** La rama contiene commits con mensajes claros en formato `feat: ...` o `docs: ...` detallando qué se agregó o modificó.
-- [ ] **README.md Actualizado:** El archivo `README.md` incluye descripción del proyecto, instrucciones de uso y contexto del E-commerce elegido.
-- [ ] **Archivos Organizados:** El proyecto sigue la estructura especificada en `plan.md` con `docs/specs/`, `docs/mockups/`, etc.
+- [x] **Validación W3C:** El archivo `index.html` pasa el validador del W3C sin errores críticos (https://validator.w3.org/).
+- [x] **Estructura Semántica:** El HTML utiliza etiquetas semánticas apropiadas y no abusa de divs genéricos.
+- [x] **Completitud de Elementos:** Contiene todos los elementos básicos solicitados (título, párrafos, imágenes, enlaces, listas, formularios, tablas).
+- [x] **Comentarios Descriptivos:** Cada sección principal contiene al menos un comentario explicatorio.
+- [x] **Marcadores Identificados:** Los comentarios `<!-- TODO: CSS: ... -->` y `<!-- TODO: JS: ... -->` están claramente marcados.
+- [x] **Atributos Accesibles:** Todas las imágenes tienen `alt` descriptivo, formularios tienen `<label>` asociadas, y se utilizan atributos `aria` donde corresponda.
+- [x] **Commits Descriptivos:** La rama contiene commits con mensajes claros en formato `feat: ...` o `docs: ...` detallando qué se agregó o modificó.
+- [x] **README.md Actualizado:** El archivo `README.md` incluye descripción del proyecto, instrucciones de uso y contexto del E-commerce elegido.
+- [x] **Archivos Organizados:** El proyecto sigue la estructura especificada en `plan.md` con `docs/specs/`, `docs/mockups/`, etc.
 
 ---
 
