@@ -16,21 +16,21 @@
 - [x ] Generar README.md usando GitHub Copilot en modo Agente con el plan.md 
       como contexto
 - [x ] Revisar y completar manualmente el README.md generado por Copilot
-- [ ] Incluir enlace al archivo de Figma en el README.md
-- [ ] Usar un LLM para obtener sugerencias de layout y documentar el proceso 
+- [X ] Incluir enlace al archivo de Figma en el README.md
+- [ X] Usar un LLM para obtener sugerencias de layout y documentar el proceso 
       en este archivo
-- [ ] Crear carpeta docs/01-mockup/actividad-obligatoria-1/ con la imagen exportada
+- [ X] Crear carpeta docs/01-mockup/actividad-obligatoria-1/ con la imagen exportada
 
 ## 3. Criterios de Aceptación (Definición de "Terminado")
-- [ ] El mockup muestra estructura visual clara con secciones, jerarquía de 
+- [X ] El mockup muestra estructura visual clara con secciones, jerarquía de 
       contenido y navegación identificables
-- [ ] La imagen está exportada en docs/01-mockup/actividad-obligatoria-1/diseño-inicial.png
-- [ ] El archivo Figma es accesible públicamente vía link en el README.md
-- [ ] El README.md contiene: título, descripción, objetivos, tecnologías, 
+- [X ] La imagen está exportada en docs/01-mockup/actividad-obligatoria-1/diseño-inicial.png
+- [ X] El archivo Figma es accesible públicamente vía link en el README.md
+- [ X] El README.md contiene: título, descripción, objetivos, tecnologías, 
       funcionalidades previstas, enlace al mockup y tabla de integrantes
-- [ ] El README.md fue generado con Copilot y revisado/completado manualmente
-- [ ] Este spec fue commiteado ANTES que el README.md y el mockup
-- [ ] El proceso de diseño asistido por IA está documentado en este archivo
+- [X ] El README.md fue generado con Copilot y revisado/completado manualmente
+- [X ] Este spec fue commiteado ANTES que el README.md y el mockup
+- [ X] El proceso de diseño asistido por IA está documentado en este archivo
 
 ## 4. Estrategia de Prompts (Para el Agente IA)
 - **Herramienta a utilizar:** GitHub Copilot en modo Agente en VS Code
