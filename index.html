@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Metaetiquetas esenciales para SEO y compatibilidad -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="E-commerce: Tu tienda en línea para productos de calidad. Explora nuestras categorías y realiza tus compras de forma segura."
+    />
+    <meta
+      name="keywords"
+      content="e-commerce, tienda, productos, compras, online"
+    />
+    <meta name="author" content="Equipo de Desarrollo Frontend" />
+
+    <title>E-Commerce - Tu Tienda Online</title>
+
+    <!-- TODO: CSS: Agregar link a estilos CSS personalizados -->
+    <!-- <link rel="stylesheet" href="assets/styles/main.css"> -->
+  </head>
+  <body>
+    <!-- ========== ENCABEZADO (HEADER) ========== -->
+    <header>
+      <!-- Nombre/Logo de la tienda -->
+      <div class="logo-container">
+        <h1>NOMBRE DE LA TIENDA</h1>
+      </div>
+
+      <!-- Navegación principal -->
+      <!-- TODO: JS: Agregar funcionalidad de menú respondible (hamburguesa en móvil) -->
+      <nav aria-label="Navegación Principal">
+        <ul>
+          <li><a href="#inicio" title="Ir a la página de inicio">Inicio</a></li>
+          <li>
+            <a href="#nosotros" title="Conocer más sobre nosotros">Nosotros</a>
+          </li>
+          <li><a href="#tienda" title="Ver nuestros productos">Shop</a></li>
+          <li><a href="#ayuda" title="Centro de ayuda">Ayuda</a></li>
+          <!-- TODO: JS: Agregar contador de items y funcionalidad del carrito -->
+          <li>
+            <a
+              href="#carrito"
+              aria-label="Carrito de compras"
+              title="Ver carrito de compras"
+              >Carrito</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <main>
+      <!-- ========== SECCIÓN: DESCRIPCIÓN DE LA TIENDA ========== -->
+      <section id="inicio" class="hero-section">
+        <h2>DESCRIPCIÓN DE LA TIENDA</h2>
+
+        <!-- Párrafo descriptivo sobre la tienda -->
+        <p>
+          Bienvenido a nuestra tienda virtual. Aquí encontrarás una amplia
+          variedad de productos de excelente calidad, seleccionados
+          cuidadosamente para satisfacer tus necesidades. Contamos con envío
+          rápido, atención al cliente 24/7 y las mejores garantías del mercado.
+        </p>
+
+        <!-- Galería de productos destacados (imágenes) -->
+        <!-- TODO: CSS: Aplicar estilos para layout en grid/flex y efectos hover -->
+        <!-- TODO: JS: Agregar lightbox o galería interactiva -->
+        <div class="featured-products-gallery">
+          <figure>
+            <img
+              src="assets/images/producto1.jpg"
+              alt="Producto destacado 1 - Una selección de nuestros mejores articulos"
+              loading="lazy"
+            />
+          </figure>
+          <figure>
+            <img
+              src="assets/images/producto2.jpg"
+              alt="Producto destacado 2 - Artículos populares de nuestra tienda"
+              loading="lazy"
+            />
+          </figure>
+          <figure>
+            <img
+              src="assets/images/producto3.jpg"
+              alt="Producto destacado 3 - Última colección disponible"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+
+        <!-- Llamada a la acción principal -->
+        <!-- TODO: CSS: Estilizar botón con hover y transiciones -->
+        <!-- TODO: JS: Agregar lógica para redireccionar a la tienda o scroll suave -->
+        <div class="cta-container">
+          <button
+            id="comprar-ahora-btn"
+            class="btn-primary"
+            aria-label="Ir a sección de compras"
+          >
+            COMPRAR AHORA
+          </button>
+        </div>
+      </section>
+
+      <!-- ========== SECCIÓN: PRODUCTOS PRESENTADOS ========== -->
+      <section id="tienda" class="products-section">
+        <h2>PRODUCTOS PRESENTADOS</h2>
+
+        <!-- Lista de categorías de productos (requerida) -->
+        <!-- TODO: CSS: Diseñar lista con estilos personalizados -->
+        <!-- TODO: JS: Agregar filtrado por categoría dinámico -->
+        <aside class="categories-sidebar">
+          <h3>Categorías</h3>
+          <ul class="categories-list">
+            <li><a href="#categoría-electrónica">Electrónica</a></li>
+            <li><a href="#categoría-ropa">Ropa y Accesorios</a></li>
+            <li><a href="#categoría-hogar">Hogar y Decoración</a></li>
+            <li><a href="#categoría-deportes">Deportes y Outdoors</a></li>
+            <li><a href="#categoría-libros">Libros y Media</a></li>
+          </ul>
+        </aside>
+
+        <!-- Grid de productos -->
+        <!-- TODO: CSS: Crear grid responsive (3 columnas desktop, 2 tablet, 1 móvil) -->
+        <!-- TODO: JS: Agregar carrito de compras, favoritos, y detalles del producto -->
+        <div class="products-grid">
+          <!-- Producto 1 -->
+          <article class="product-card">
+            <figure class="product-image">
+              <img
+                src="assets/images/producto-a.jpg"
+                alt="Nombre del producto - Descripción breve del artículo disponible"
+                loading="lazy"
+              />
+            </figure>
+            <h3>Nombre del producto</h3>
+            <p class="product-description">
+              Descripción breve del producto con características principales.
+            </p>
+            <p class="product-price" aria-label="Precio del producto">$99.99</p>
+            <!-- TODO: JS: Agregar funcionalidad al botón Agregar al Carrito -->
+            <button
+              type="button"
+              id="btn-add-cart-a"
+              class="btn-add-cart"
+              aria-label="Agregar producto A al carrito"
+            >
+              Agregar al Carrito
+            </button>
+            <!-- En sección hero -->
+            <button
+              type="button"
+              id="btn-comprar-ahora"
+              class="btn-primary"
+              aria-label="Ir a sección de compras"
+            >
+              COMPRAR AHORA
+            </button>
+            
+          </article>
+
+          <!-- Producto 2 -->
+          <article class="product-card">
+            <figure class="product-image">
+              <img
+                src="assets/images/producto-b.jpg"
+                alt="Nombre del producto - Otro artículo destacado en nuestro catálogo"
+                loading="lazy"
+              />
+            </figure>
+            <h3>Nombre del producto</h3>
+            <p class="product-description">
+              Descripción breve del producto con características principales.
+            </p>
+            <p class="product-price" aria-label="Precio del producto">
+              $149.99
+            </p>
+            <!-- TODO: JS: Agregar funcionalidad al botón Agregar al Carrito -->
+            <!-- En sección de productos -->
+            <button
+              type="button"
+              id="btn-add-cart-a"
+              class="btn-add-cart"
+              aria-label="Agregar producto A al carrito"
+            >
+              Agregar al Carrito
+            </button>
+            
+            <!-- En sección hero -->
+            <button
+              type="button"
+              id="btn-comprar-ahora"
+              class="btn-primary"
+              aria-label="Ir a sección de compras"
+            >
+              COMPRAR AHORA
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <!-- ========== SECCIÓN: SOBRE NOSOTROS ========== -->
+      <section id="nosotros" class="about-section">
+        <h2>Sobre Nosotros</h2>
+        <p>
+          Somos una empresa dedicada a ofrecer los mejores productos a nuestros
+          clientes. Con más de 10 años de experiencia, hemos construido una
+          reputación sólida en el mercado gracias a nuestro compromiso con la
+          calidad y el servicio al cliente.
+        </p>
+
+        <!-- Tabla comparativa de productos (requerida) -->
+        <!-- TODO: CSS: Estilizar tabla para mejor legibilidad en responsive -->
+        <table class="comparison-table">
+          <caption>
+            Comparativa de Productos Estrella
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Valoración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Producto Premium</td>
+              <td>$199.99</td>
+              <td>25 unidades</td>
+              <td>★★★★★ (147 reviews)</td>
+            </tr>
+            <tr>
+              <td>Producto Estándar</td>
+              <td>$99.99</td>
+              <td>50 unidades</td>
+              <td>★★★★☆ (89 reviews)</td>
+            </tr>
+            <tr>
+              <td>Producto Económico</td>
+              <td>$49.99</td>
+              <td>100 unidades</td>
+              <td>★★★☆☆ (34 reviews)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ========== SECCIÓN: FORMULARIO DE CONTACTO/NEWSLETTER ========== -->
+      <!-- TODO: CSS: Estilizar formulario con validación visual -->
+      <!-- TODO: JS: Agregar validación de formulario del lado del cliente y envío de datos -->
+      <section id="ayuda" class="contact-section">
+        <h2>Suscríbete a Nuestro Newsletter</h2>
+        <p>
+          Recibe las últimas noticias, ofertas exclusivas y actualizaciones de
+          nuestros productos.
+        </p>
+
+        <form id="newsletter-form" class="newsletter-form">
+          <fieldset>
+            <legend>Formulario de Suscripción</legend>
+
+            <!-- Campo: Nombre -->
+            <div class="form-group">
+              <label for="input-nombre">Nombre Completo:</label>
+              <input
+                type="text"
+                id="input-nombre"
+                name="nombre"
+                required
+                placeholder="Tu nombre completo"
+                aria-required="true"
+                aria-describedby="nombre-help"
+              />
+              <small id="nombre-help">Campo obligatorio</small>
+            </div>
+
+            <!-- Campo: Email -->
+            <div class="form-group">
+              <label for="input-email">Correo Electrónico:</label>
+              <input
+                type="email"
+                id="input-email"
+                name="email"
+                required
+                placeholder="tu@email.com"
+                aria-required="true"
+                aria-describedby="email-help"
+              />
+              <small id="email-help"
+                >Campo obligatorio. Ej: usuario@ejemplo.com</small
+              >
+            </div>
+
+            <!-- Campo: Teléfono -->
+            <div class="form-group">
+            <label for="input-telefono">Teléfono (opcional):</label>
+            <input
+              type="tel"
+              id="input-telefono"
+              name="telefono"
+              placeholder="+54 9 11 1234-5678"
+              pattern="[0-9\s\-\+]+"
+              title="Ingrese un teléfono válido (ej: +54 9 11 1234-5678)"
+              aria-describedby="telefono-help"
+            />
+            <small id="telefono-help">
+              Formato: +54 9 11 1234-5678 (incluye el código de país)
+            </small>
+          </div>
+
+            <!-- Campo: Checkbox de términos -->
+            <div class="form-group checkbox">
+              <input
+                type="checkbox"
+                id="input-terminos"
+                name="terminos"
+                required
+                aria-required="true"
+              />
+              <label for="input-terminos">
+                Acepto los términos y condiciones y la política de privacidad
+              </label>
+            </div>
+
+            <!-- Botón de envío -->
+            <button
+              type="submit"
+              class="btn-submit"
+              aria-label="Enviar formulario de suscripción"
+            >
+              Suscribirse
+            </button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+
+    <!-- ========== PIE DE PÁGINA (FOOTER) ========== -->
+    <footer>
+      <section class="footer-content">
+        <!-- Información de contacto -->
+        <article class="footer-section">
+          <h3>Contacto</h3>
+          <address>
+            <p>Email: <a href="mailto:info@tienda.com">info@tienda.com</a></p>
+            <p>Teléfono: <a href="tel:+541112345678">+54 9 11 1234-5678</a></p>
+            <p>Dirección: Calle Principal 123, CABA, Argentina</p>
+          </address>
+        </article>
+
+        <!-- Enlaces útiles -->
+        <article class="footer-section">
+          <h3>Enlaces Útiles</h3>
+          <ul>
+            <li><a href="#politica-privacidad">Política de Privacidad</a></li>
+            <li><a href="#terminos-condiciones">Términos y Condiciones</a></li>
+            <li><a href="#devolucion">Política de Devoluciones</a></li>
+            <li><a href="#envios">Información de Envíos</a></li>
+          </ul>
+        </article>
+
+        <!-- Redes sociales -->
+        <article class="footer-section">
+          <h3>Síguenos</h3>
+          <ul class="social-links">
+            <li>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visitarnos en Facebook"
+                >Facebook</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visitarnos en Instagram"
+                >Instagram</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visitarnos en Twitter"
+                >Twitter</a
+              >
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Copyright -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 E-Commerce Tienda. Todos los derechos reservados.</p>
+        <p>Desarrollado con ❤️ por el equipo frontend</p>
+      </div>
+    </footer>
+
+    <!-- TODO: JS: Script principal con funcionalidades interactivas -->
+    <!-- <script src="assets/scripts/main.js"></script> -->
+    <!-- TODO: JS: Script para validación de formularios -->
+    <!-- <script src="assets/scripts/form-validation.js"></script> -->
+    <!-- TODO: JS: Script para carrito de compras -->
+    <!-- <script src="assets/scripts/cart.js"></script> -->
+  </body>
+</html>
