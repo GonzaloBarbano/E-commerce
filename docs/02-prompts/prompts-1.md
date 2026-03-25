@@ -60,3 +60,6 @@ que hayan aportado valor al proyecto actual (no algo ficticio).
 - **Resultado Esperado:** Un archivo `plan.md` formateado en Markdown con las tareas divididas por roles.
 - **Resultado Obtenido:** La IA generó correctamente la estructura, reconociendo los puntos clave de la entrega.
 - **Correcciones Manuales:** Se ajustaron detalles menores de formato para que encajara con el repositorio base del equipo.
+
+**Aplicacion en el proyecto:**
+Archivo plan.md 

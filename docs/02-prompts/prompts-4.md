@@ -38,3 +38,6 @@ aceptación.
 - **Resultado Esperado:** Un archivo `spec-frontend.md` completo con tareas claras y criterios de aceptación medibles.
 - **Resultado Obtenido:** La IA rellenó la plantilla adaptando los requerimientos generales a tareas específicas de Frontend (ej. maquetación, uso de etiquetas semánticas).
 - **Correcciones Manuales:** Revisión rápida para asegurar que no se incluyeran tareas fuera de alcance (como agregar CSS o JS, que no corresponden a esta entrega).
+
+**Aplicacion en el proyecto:**
+Archivo spec-frontend.md

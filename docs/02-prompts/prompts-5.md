@@ -12,3 +12,6 @@
 - **Resultado Esperado:** Un fragmento de código HTML5 utilizando etiquetas como `<article>`, `<figure>`, `<figcaption>` y botones estructurados.
 - **Resultado Obtenido:** Ambos modelos generaron el código, pero se notaron diferencias en la elección semántica de las etiquetas, lo cual servirá de base para el archivo de comparativa.
 - **Correcciones Manuales:** Ninguna, el código generado se utilizó tal cual para el análisis comparativo.
+
+**Aplicacion en el proyecto:**
+Archivo comparativa-modelos.md

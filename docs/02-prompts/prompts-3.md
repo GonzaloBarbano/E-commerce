@@ -12,3 +12,6 @@
 - **Resultado Esperado:** Un archivo `index.html` estructurado semánticamente que refleje el diseño visual propuesto en Figma, sin utilizar CSS.
 - **Resultado Obtenido:** La IA interpretó correctamente las secciones del diseño visual y las tradujo a etiquetas HTML.
 - **Correcciones Manuales:** Se validó que las etiquetas semánticas (`<header>`, `<main>`, `<section>`) estuvieran correctamente aplicadas según lo requerido en la Unidad 1.
+
+**Aplicacion en el proyecto:**
+Archivo index.html 
