@@ -18,6 +18,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/ia-add-prompts-1-to-5] Agrego metodología SDD, template y spec inicial
   PR: [#4](https://github.com/GonzaloBarbano/E-commerce/pull/4) - @Naguirre0102 (Especialista IA)
 
+- [feature/doc-ux-add-readme-and-mockup]  Realizacion de readme.md y mockup 
+  PR: [#10](https://github.com/GonzaloBarbano/E-commerce/pull/10) - @LucasFUces(Documentador / UX)
+
+
 ### Changed
 
 ### Fixed
