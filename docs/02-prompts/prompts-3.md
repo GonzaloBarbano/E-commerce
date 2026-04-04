@@ -6,8 +6,7 @@
 - **Contexto Proveído:** Se le proporcionó el contenido exacto del archivo `plan.md` con los requerimientos de la primera entrega.
 
 ## Prompt Exacto
-
-```text
+```
 ESTRUCTURA BASE DEL PROYECTO :   
 
 Tengo el siguiente plan.md de mi proyecto e-commerce.
@@ -28,3 +27,4 @@ SEO.
 - **Resultado Esperado:** Una propuesta de estructura de etiquetas HTML5 (layout) y una guía de jerarquía visual que cumpla con los requisitos del plan para empezar a diseñar/maquetar.
 - **Resultado Obtenido:** Copilot generó un esquema semántico excelente detallando el uso de <header>, <main>, <section>, <article>, <aside> y <footer>, además de proponer un plan inicial para la jerarquía visual (tamaños, colores base y disposición en grilla).
 - **Correcciones Manuales:** Ninguna para la estructura propuesta, el equipo de UX y Frontend lo utilizó como guía directa para la maquetación inicial.
+```

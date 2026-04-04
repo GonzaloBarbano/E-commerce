@@ -6,7 +6,7 @@
 - **Contexto Proveído:** Se le dio el texto exacto de los requerimientos de la cátedra para que los adapte al formato del proyecto.
 
 ## Prompt Exacto
-```text
+```
 Actualiza el plan.md con esta informacion:
 
 Desarrollo de una Página Interactiva: [Sobre un E-commerce]
@@ -61,7 +61,8 @@ que hayan aportado valor al proyecto actual (no algo ficticio).
 ## Resultados
 - **Resultado Esperado:** Un archivo `plan.md` formateado en Markdown con las tareas divididas por roles.
 - **Resultado Obtenido:** La IA generó correctamente la estructura, reconociendo los puntos clave de la entrega.
-- **Correcciones Manuales:** Se ajustaron detalles menores de formato para que encajara con el repositorio base del equipo.
+- **Correcciones Manuales:** Se ajustaron detalles menores de formato para que encajara con el repositorio base del equipo. 
 
 **Aplicacion en el proyecto:**
-Archivo plan.md 
+Archivo plan.md  
+```

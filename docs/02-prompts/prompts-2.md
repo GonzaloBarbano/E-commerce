@@ -6,7 +6,7 @@
 - **Contexto Proveído:** Diferencias de código (diffs) de la Pull Request contra la rama develop.
 
 ## Prompt Exacto
-```text
+```
 Actúa como Senior Software Engineer realizando un code review profesional.
 CONTEXTO Y ACCIÓN:
 Analiza los cambios de la Pull Request activa comparando la rama actual con develop. Utiliza las herramientas de GitKraken (MCP) para identificar los archivos modificados y publicar los hallazgos.
@@ -38,4 +38,5 @@ Proporciona aquí en el chat un "RESUMEN GENERAL DE LA PR" con evaluación de ri
 ## Resultados
 - **Resultado Esperado:** Comentarios automatizados directamente en GitHub señalando errores reales de código.
 - **Resultado Obtenido:** El Agente analizó el código y aplicó la plantilla de evaluación solicitada (Hallazgo, Severidad, Explicación).
-- **Correcciones Manuales:** El coordinador humano tuvo que aprobar/rechazar las sugerencias finales para evitar falsos positivos.
+- **Correcciones Manuales:** El coordinador humano tuvo que aprobar/rechazar las sugerencias finales para evitar falsos positivos. 
+```
