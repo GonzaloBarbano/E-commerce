@@ -29,6 +29,42 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ---
 
+## 🛠️ Tecnologías
+
+- **HTML5** - Estructura semántica y accesible
+- **GitHub** - Control de versiones y colaboración
+- **Figma** - Diseño y mockups de interfaz
+- **GitHub Copilot** - Asistencia en generación de código y documentación
+- **Visual Studio Code** - Editor de desarrollo
+- **Git** - Versionado de cambios
+
+---
+
+## 🚀 Funcionalidades Previstas
+
+### Entrega 1 (Actual)
+- ✅ Estructura HTML5 semántica y accesible
+- ✅ Mockup de interfaz en Figma
+- ✅ Documentación y especificaciones
+
+### Entrega 2 (Próxima)
+- 📅 Estilos CSS responsive
+- 📅 Diseño visual completo
+- 📅 Mejora de UX/UI
+
+### Entrega 3 (Futura)
+- 📅 Funcionalidad de carrito de compras
+- 📅 Sistema de filtrado y búsqueda
+- 📅 Interactividad con JavaScript
+
+### Entregas Posteriores
+- 📅 Backend y base de datos
+- 📅 Sistema de autenticación
+- 📅 Pasarela de pagos
+- 📅 Sistema de envíos
+
+---
+
 ## 📂 Documentación
 
 - 📁 **[Mockup](docs/01-mockup/actividad-obligatoria-1/diseño-inicial.png)** - **[Figma](https://www.figma.com/design/r07vXwitxehsc5eUGyAmNK/%22E-commerce---Mockup-Inicial?node-id=1-3&t=EihuJLJAG4dB47tJ-1)**
@@ -39,19 +75,12 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 ---
 
 ## 👥 Integrantes del Grupo
-| Nombre completo           | N° de Matrícula | Usuario GitHub       | Rol en esta entrega              |
-|--------------------------|----------------|---------------------|----------------------------------|
-| Gonzalo Barbano          | 152127         | @GonzaloBarbano     | Frontend                         |
-| Lucas Ivan Fischer       | 152159         | @LucasFUces         | Documentador / UX-UI            |
-| Gonzalo Barbano          | 152127         | @GonzaloBarbano     | DevOps                          |
-| Nicolas Aguirre          | 153791         | @Naguirre0102       | IA / Prompt Engineering         |
 
-| Nombre completo           | N° de Matrícula | Usuario GitHub       | Rol en esta entrega              |
-|--------------------------|----------------|---------------------|----------------------------------|
-| Gonzalo Barbano          | 152127         | @GonzaloBarbano     | Frontend                         |
-| Lucas Ivan Fischer       | 152159         | LucasFUces          | Documentador / UX-UI            |
-| Gonzalo Barbano          | 152127         | @GonzaloBarbano     | DevOps                          |
-| Nicolas Aguirre          | 153791            @Naguirre0102 | —                   | IA / Prompt Engineering         |
+| Nombre completo           | N° de Matrícula | Usuario GitHub       | Carrera                                            | Materia              | Rol en esta entrega              |
+|--------------------------|----------------|---------------------|--------------------------------------------------|----------------------|----------------------------------|
+| Gonzalo Barbano          | 152127         | @GonzaloBarbano     | Tecnicatura en Programación de Sistemas          | Programación Web I   | Frontend / DevOps                |
+| Lucas Ivan Fischer       | 152159         | @LucasFUces         | Tecnicatura en Programación de Sistemas          | Programación Web I   | Documentador / UX-UI             |
+| Nicolas Aguirre          | 153791         | @Naguirre0102       | Tecnicatura en Programación de Sistemas          | Programación Web I   | IA / Prompt Engineering          |
 
 ---
 
