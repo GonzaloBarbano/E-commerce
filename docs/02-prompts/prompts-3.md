@@ -1,17 +1,30 @@
-# Prompt 3: Generación de código HTML desde Mockup
+# Prompt 3: Generación de Estructura y Layout Visual
 
-- **Rol:** Desarrollador Frontend
-- **Modelo de IA utilizado:** Claude 4.5 Haiku 
-- **Método / Técnica:** *Prompt Multimodal* (Análisis de enlace/imagen) + *Inyección de Contexto* (Archivos base).
-- **Contexto Proveído:** Se le dio acceso al archivo `plan.md`, al `spec-frontend.md` y un enlace directo al diseño en Figma.
+- **Rol:** Diseño UX/UI (@LucasFUces)
+- **Modelo de IA utilizado:** GitHub Copilot
+- **Método / Técnica:** *Context Injection* (Inyección de contexto).
+- **Contexto Proveído:** Se le proporcionó el contenido exacto del archivo `plan.md` con los requerimientos de la primera entrega.
 
 ## Prompt Exacto
-> Teniendo en cuenta el plan.md y el spec-frontend.md. Genera un simple HTML desde este diseño de figma: https://www.figma.com/design/r07vXwitxehsc5eUGyAmNK/%22E-commerce---Mockup-Inicial?node-id=1-3&m=dev&t=sy8c1Q1DOpboUMc4-1
+```
+ESTRUCTURA BASE DEL PROYECTO :   
 
-## Resultados
-- **Resultado Esperado:** Un archivo `index.html` estructurado semánticamente que refleje el diseño visual propuesto en Figma, sin utilizar CSS.
-- **Resultado Obtenido:** La IA interpretó correctamente las secciones del diseño visual y las tradujo a etiquetas HTML.
-- **Correcciones Manuales:** Se validó que las etiquetas semánticas (`<header>`, `<main>`, `<section>`) estuvieran correctamente aplicadas según lo requerido en la Unidad 1.
+Tengo el siguiente plan.md de mi proyecto e-commerce.
+Basándote en él, sugierme el layout, la estructura de secciones y la jerarquía
+visual para la página principal. El proyecto es una tienda online. plan.md: #
+Desarrollo de una Página Interactiva: Sobre un E-commerce En esta primera
+entrega, crearás la estructura básica de una página web que servirá como base
+para un proyecto interactivo que desarrollarás a lo largo del curso. La página
+web estará enfocada en E-commerce, ofreciendo información inicial sobre el
+mismo y estableciendo las bases para futuras funcionalidades. ## 2.1
+REQUERIMIENTOS PARA ESTA ENTREGA 1. Estructura HTML: - Utiliza HTML5 para
+estructurar la página. - Incluye elementos básicos como título, párrafos,
+imágenes, enlaces, listas, formularios y tablas relacionados con el tema. -
+Introduce etiquetas semánticas pertinentes para mejorar la accesibilidad y el
+SEO.
 
-**Aplicacion en el proyecto:**
-Archivo index.html 
+# Resultados
+- **Resultado Esperado:** Una propuesta de estructura de etiquetas HTML5 (layout) y una guía de jerarquía visual que cumpla con los requisitos del plan para empezar a diseñar/maquetar.
+- **Resultado Obtenido:** Copilot generó un esquema semántico excelente detallando el uso de <header>, <main>, <section>, <article>, <aside> y <footer>, además de proponer un plan inicial para la jerarquía visual (tamaños, colores base y disposición en grilla).
+- **Correcciones Manuales:** Ninguna para la estructura propuesta, el equipo de UX y Frontend lo utilizó como guía directa para la maquetación inicial.
+```

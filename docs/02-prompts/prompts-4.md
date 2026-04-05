@@ -1,12 +1,13 @@
 # Prompt 4: Redacción de Especificación Técnica (Spec)
 
 - **Rol:** Desarrollador Frontend
-- **Modelo de IA utilizado:** ChatGPT / Claude (Asistente de texto)
-- **Método / Técnica:** *Template-based Prompting* (Uso de plantillas) + *Inyección de Contexto*.
+- **Modelo de IA utilizado:** **Claude 3.5 Sonnet**
+- **Método / Técnica:** **Template-based Prompting**.
 - **Contexto Proveído:** Se le pasó el plan general del proyecto, la consigna específica de la materia y la plantilla vacía diseñada por el Especialista en IA.
 
 ## Prompt Exacto
-> Teniendo en cuenta el plan.md,  la consinga (En esta primera entrega, crearás la estructura básica de una página web que servirá como base para un proyecto interactivo que desarrollarás a lo largo del curso. La página web estará enfocada en [tE-commerce], ofreciendo información inicial sobre el mismo y estableciendo las bases para futuras funcionalidades.) y este template
+```
+ Teniendo en cuenta el plan.md,  la consinga (En esta primera entrega, crearás la estructura básica de una página web que servirá como base para un proyecto interactivo que desarrollarás a lo largo del curso. La página web estará enfocada en [tE-commerce], ofreciendo información inicial sobre el mismo y estableciendo las bases para futuras funcionalidades.) y este template
 
 # Spec: [Desarrollador Frontend]
 
@@ -41,3 +42,4 @@ aceptación.
 
 **Aplicacion en el proyecto:**
 Archivo spec-frontend.md
+```

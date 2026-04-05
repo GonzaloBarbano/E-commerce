@@ -1,12 +1,14 @@
 # Prompt 1: Generación de plan.md
 
 - **Rol:** Coordinador / DevOps
-- **Modelo de IA utilizado:** GPT-5-mini
-- **Método / Técnica:** *Zero-Shot Prompting* con inyección de contexto.
+- **Modelo de IA utilizado:** **GPT-4o-mini**.
+- **Método / Técnica:** **Zero-Shot Prompting**.
 - **Contexto Proveído:** Se le dio el texto exacto de los requerimientos de la cátedra para que los adapte al formato del proyecto.
 
 ## Prompt Exacto
-> Actualiza el plan.md con esta informacion:
+```
+Actualiza el plan.md con esta informacion:
+
 Desarrollo de una Página Interactiva: [Sobre un E-commerce]
 En esta primera entrega, crearás la estructura básica de una página web que servirá
 como base para un proyecto interactivo que desarrollarás a lo largo del curso. La
@@ -59,7 +61,8 @@ que hayan aportado valor al proyecto actual (no algo ficticio).
 ## Resultados
 - **Resultado Esperado:** Un archivo `plan.md` formateado en Markdown con las tareas divididas por roles.
 - **Resultado Obtenido:** La IA generó correctamente la estructura, reconociendo los puntos clave de la entrega.
-- **Correcciones Manuales:** Se ajustaron detalles menores de formato para que encajara con el repositorio base del equipo.
+- **Correcciones Manuales:** Se ajustaron detalles menores de formato para que encajara con el repositorio base del equipo. 
 
 **Aplicacion en el proyecto:**
-Archivo plan.md 
+Archivo plan.md  
+```
