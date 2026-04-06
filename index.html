@@ -1,48 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
-    <!-- Metaetiquetas esenciales para SEO y compatibilidad -->
+    <!-- ========== METAETIQUETAS ESENCIALES PARA SEO Y COMPATIBILIDAD ========== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="E-commerce: Tu tienda en línea para productos de calidad. Explora nuestras categorías y realiza tus compras de forma segura."
+      content="PC Hardware - E-commerce especializado en componentes y hardware para computadoras. Procesadores, GPUs, RAM, almacenamiento y más. Envío rápido y garantía."
     />
     <meta
       name="keywords"
-      content="e-commerce, tienda, productos, compras, online"
+      content="hardware PC, procesadores, GPU, tarjetas gráficas, RAM, SSD, componentes computadora, e-commerce"
     />
-    <meta name="author" content="Equipo de Desarrollo Frontend" />
+    <meta name="author" content="Equipo de Desarrollo Frontend - GRUPO N°3" />
+    <meta name="theme-color" content="#1e1e1e" />
 
-    <title>E-Commerce - Tu Tienda Online</title>
+    <title>PC Hardware</title>
 
     <!-- TODO: CSS: Agregar link a estilos CSS personalizados -->
     <!-- <link rel="stylesheet" href="assets/styles/main.css"> -->
   </head>
   <body>
     <!-- ========== ENCABEZADO (HEADER) ========== -->
-    <header>
-      <!-- Nombre/Logo de la tienda -->
+    <header role="banner" class="header-container">
+      <!-- Logo y nombre de la tienda -->
       <div class="logo-container">
-        <h1>NOMBRE DE LA TIENDA</h1>
+        <a href="#inicio" class="logo-link">
+          <h1 class="logo-text">PC - HARDWARE</h1>
+        </a>
       </div>
 
       <!-- Navegación principal -->
-      <!-- TODO: JS: Agregar funcionalidad de menú respondible (hamburguesa en móvil) -->
-      <nav aria-label="Navegación Principal">
-        <ul>
-          <li><a href="#inicio" title="Ir a la página de inicio">Inicio</a></li>
-          <li>
-            <a href="#nosotros" title="Conocer más sobre nosotros">Nosotros</a>
+      <!-- TODO: CSS: Estilizar nav con layout horizontal, hover effects y responsive menu -->
+      <!-- TODO: JS: Agregar menú hamburguesa para dispositivos móviles -->
+      <nav class="navigation" aria-label="Navegación Principal">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#inicio" class="nav-link">Inicio</a>
           </li>
-          <li><a href="#tienda" title="Ver nuestros productos">Shop</a></li>
-          <li><a href="#ayuda" title="Centro de ayuda">Ayuda</a></li>
-          <!-- TODO: JS: Agregar contador de items y funcionalidad del carrito -->
-          <li>
-            <a
-              href="#carrito"
-              aria-label="Carrito de compras"
-              title="Ver carrito de compras"
+          <li class="nav-item">
+            <a href="#nosotros" class="nav-link">Nosotros</a>
+          </li>
+          <li class="nav-item"><a href="#tienda" class="nav-link">Shop</a></li>
+          <li class="nav-item"><a href="#ayuda" class="nav-link">Ayuda</a></li>
+          <!-- TODO: JS: Agregar contador de items en el carrito y funcionalidad interactiva -->
+          <li class="nav-item">
+            <a href="#carrito" class="nav-link" aria-label="Carrito de compras"
               >Carrito</a
             >
           </li>
@@ -51,176 +54,537 @@
     </header>
 
     <!-- ========== CONTENIDO PRINCIPAL ========== -->
-    <main>
-      <!-- ========== SECCIÓN: DESCRIPCIÓN DE LA TIENDA ========== -->
-      <section id="inicio" class="hero-section">
-        <h2>DESCRIPCIÓN DE LA TIENDA</h2>
-
-        <!-- Párrafo descriptivo sobre la tienda -->
-        <p>
-          Bienvenido a nuestra tienda virtual. Aquí encontrarás una amplia
-          variedad de productos de excelente calidad, seleccionados
-          cuidadosamente para satisfacer tus necesidades. Contamos con envío
-          rápido, atención al cliente 24/7 y las mejores garantías del mercado.
-        </p>
-
-        <!-- Galería de productos destacados (imágenes) -->
-        <!-- TODO: CSS: Aplicar estilos para layout en grid/flex y efectos hover -->
-        <!-- TODO: JS: Agregar lightbox o galería interactiva -->
-        <div class="featured-products-gallery">
-          <figure>
-            <img
-              src="assets/images/producto1.jpg"
-              alt="Producto destacado 1 - Una selección de nuestros mejores articulos"
-              loading="lazy"
+    <main role="main">
+      <!-- ========== CONTENEDOR PRINCIPAL CON SIDEBAR Y CONTENIDO ========== -->
+      <div class="main-container">
+        <!-- ========== SIDEBAR IZQUIERDA: BÚSQUEDA, CATEGORÍAS Y FILTROS ========== -->
+        <!-- TODO: CSS: Estilizar sidebar con background, bordes y espaciado -->
+        <!-- TODO: JS: Implementar funcionalidad de búsqueda dinámica y filtros interactivos -->
+        <aside class="sidebar" role="complementary">
+          <!-- BUSCADOR -->
+          <div class="search-section">
+            <input
+              type="search"
+              id="search-input"
+              class="search-input"
+              placeholder="Buscador..."
+              aria-label="Buscar productos"
             />
-          </figure>
-          <figure>
-            <img
-              src="assets/images/producto2.jpg"
-              alt="Producto destacado 2 - Artículos populares de nuestra tienda"
-              loading="lazy"
-            />
-          </figure>
-          <figure>
-            <img
-              src="assets/images/producto3.jpg"
-              alt="Producto destacado 3 - Última colección disponible"
-              loading="lazy"
-            />
-          </figure>
-        </div>
+            <!-- TODO: JS: Agregar evento de búsqueda con debounce -->
+          </div>
 
-        <!-- Llamada a la acción principal -->
-        <!-- TODO: CSS: Estilizar botón con hover y transiciones -->
-        <!-- TODO: JS: Agregar lógica para redireccionar a la tienda o scroll suave -->
-        <div class="cta-container">
-          <button
-            id="comprar-ahora-btn"
-            class="btn-primary"
-            aria-label="Ir a sección de compras"
-          >
-            COMPRAR AHORA
-          </button>
-        </div>
-      </section>
+          <!-- CATEGORÍAS DE PRODUCTOS -->
+          <nav class="categories-section" aria-label="Categorías de Productos">
+            <h3>CATEGORÍAS</h3>
+            <ul class="categories-list">
+              <li>
+                <a href="#cat-procesadores" data-category="cpu"
+                  >Procesadores (CPU)</a
+                >
+              </li>
+              <li>
+                <a href="#cat-gpus" data-category="gpu"
+                  >Tarjetas Gráficas (GPU)</a
+                >
+              </li>
+              <li>
+                <a href="#cat-ram" data-category="ram">Memoria RAM</a>
+              </li>
+              <li>
+                <a href="#cat-almacenamiento" data-category="storage"
+                  >Almacenamiento (SSD/HDD)</a
+                >
+              </li>
+              <li>
+                <a href="#cat-fuentes" data-category="psu"
+                  >Fuentes de Alimentación</a
+                >
+              </li>
+              <li>
+                <a href="#cat-refrigeracion" data-category="cooling"
+                  >Refrigeración</a
+                >
+              </li>
+              <li>
+                <a href="#cat-perifericos" data-category="peripherals"
+                  >Periféricos</a
+                >
+              </li>
+            </ul>
+          </nav>
 
-      <!-- ========== SECCIÓN: PRODUCTOS PRESENTADOS ========== -->
-      <section id="tienda" class="products-section">
-        <h2>PRODUCTOS PRESENTADOS</h2>
+          <!-- FILTROS -->
+          <!-- TODO: CSS: Estilizar formulario de filtros con checkboxes y inputs -->
+          <!-- TODO: JS: Implementar lógica de filtrado por precio, marca y especificaciones -->
+          <section class="filters-section" aria-label="Filtros de Productos">
+            <h3>FILTROS</h3>
+            <form id="filters-form" class="filters-form">
+              <!-- Filtro: Rango de Precio -->
+              <fieldset class="filter-group">
+                <legend>Rango de Precio</legend>
+                <div class="price-range">
+                  <label for="price-min">Mín: $</label>
+                  <input
+                    type="number"
+                    id="price-min"
+                    name="price-min"
+                    min="0"
+                    placeholder="0"
+                    aria-label="Precio mínimo"
+                  />
+                  <label for="price-max">Máx: $</label>
+                  <input
+                    type="number"
+                    id="price-max"
+                    name="price-max"
+                    min="0"
+                    placeholder="10000"
+                    aria-label="Precio máximo"
+                  />
+                </div>
+              </fieldset>
 
-        <!-- Lista de categorías de productos (requerida) -->
-        <!-- TODO: CSS: Diseñar lista con estilos personalizados -->
-        <!-- TODO: JS: Agregar filtrado por categoría dinámico -->
-        <aside class="categories-sidebar">
-          <h3>Categorías</h3>
-          <ul class="categories-list">
-            <li><a href="#categoría-electrónica">Electrónica</a></li>
-            <li><a href="#categoría-ropa">Ropa y Accesorios</a></li>
-            <li><a href="#categoría-hogar">Hogar y Decoración</a></li>
-            <li><a href="#categoría-deportes">Deportes y Outdoors</a></li>
-            <li><a href="#categoría-libros">Libros y Media</a></li>
-          </ul>
+              <!-- Filtro: Marca -->
+              <fieldset class="filter-group">
+                <legend>Marca</legend>
+                <div class="checkbox-list">
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="brand-intel"
+                      name="brand"
+                      value="intel"
+                    />
+                    <label for="brand-intel">Intel</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="brand-amd"
+                      name="brand"
+                      value="amd"
+                    />
+                    <label for="brand-amd">AMD</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="brand-nvidia"
+                      name="brand"
+                      value="nvidia"
+                    />
+                    <label for="brand-nvidia">NVIDIA</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="brand-corsair"
+                      name="brand"
+                      value="corsair"
+                    />
+                    <label for="brand-corsair">Corsair</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="brand-kingston"
+                      name="brand"
+                      value="kingston"
+                    />
+                    <label for="brand-kingston">Kingston</label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Filtro: Especificaciones Clave -->
+              <fieldset class="filter-group">
+                <legend>Especificaciones Clave</legend>
+                <div class="checkbox-list">
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="spec-highend"
+                      name="specs"
+                      value="high-performance"
+                    />
+                    <label for="spec-highend">Alto Rendimiento</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="spec-economy"
+                      name="specs"
+                      value="budget-friendly"
+                    />
+                    <label for="spec-economy">Presupuesto</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="spec-warranty"
+                      name="specs"
+                      value="warranty"
+                    />
+                    <label for="spec-warranty">Garantía Extendida</label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Botones de acción -->
+              <div class="filter-actions">
+                <button type="submit" class="btn-apply-filters">
+                  Aplicar Filtros
+                </button>
+                <button type="reset" class="btn-clear-filters">Limpiar</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- ENLACES RÁPIDOS -->
+          <nav class="quick-links-section" aria-label="Enlaces Rápidos">
+            <h3>ENLACES RÁPIDOS</h3>
+            <ul class="quick-links-list">
+              <li><a href="#compatibilidad">Guías de compatibilidad</a></li>
+              <li><a href="#nosotros">Sobre nosotros</a></li>
+            </ul>
+          </nav>
         </aside>
 
-        <!-- Grid de productos -->
-        <!-- TODO: CSS: Crear grid responsive (3 columnas desktop, 2 tablet, 1 móvil) -->
-        <!-- TODO: JS: Agregar carrito de compras, favoritos, y detalles del producto -->
-        <div class="products-grid">
-          <!-- Producto 1 -->
-          <article class="product-card">
-            <figure class="product-image">
-              <img
-                src="assets/images/producto-a.jpg"
-                alt="Nombre del producto - Descripción breve del artículo disponible"
-                loading="lazy"
-              />
-            </figure>
-            <h3>Nombre del producto</h3>
-            <p class="product-description">
-              Descripción breve del producto con características principales.
-            </p>
-            <p class="product-price" aria-label="Precio del producto">$99.99</p>
-            <!-- TODO: JS: Agregar funcionalidad al botón Agregar al Carrito -->
-            <button
-              type="button"
-              id="btn-add-cart-a"
-              class="btn-add-cart"
-              aria-label="Agregar producto A al carrito"
-            >
-              Agregar al Carrito
-            </button>
-            <!-- En sección hero -->
-            <button
-              type="button"
-              id="btn-comprar-ahora"
-              class="btn-primary"
-              aria-label="Ir a sección de compras"
-            >
-              COMPRAR AHORA
-            </button>
-            
-          </article>
+        <!-- ========== CONTENIDO PRINCIPAL ========== -->
+        <div class="main-content">
+          <!-- ========== SECCIÓN: DESCRIPCIÓN DE LA TIENDA ========== -->
+          <section id="inicio" class="hero-section">
+            <h2>DESCRIPCIÓN DE LA TIENDA</h2>
 
-          <!-- Producto 2 -->
-          <article class="product-card">
-            <figure class="product-image">
-              <img
-                src="assets/images/producto-b.jpg"
-                alt="Nombre del producto - Otro artículo destacado en nuestro catálogo"
-                loading="lazy"
-              />
-            </figure>
-            <h3>Nombre del producto</h3>
-            <p class="product-description">
-              Descripción breve del producto con características principales.
+            <!-- Párrafo descriptivo -->
+            <p class="hero-description">
+              Bienvenido a <strong>PC Hardware</strong>, tu tienda online
+              especializada en componentes de alta calidad para computadoras.
+              Ofrecemos una selección cuidada de procesadores, tarjetas
+              gráficas, memoria RAM, almacenamiento y más. Brindamos
+              asesoramiento técnico, garantía de calidad y envío rápido a toda
+              el país.
             </p>
-            <p class="product-price" aria-label="Precio del producto">
-              $149.99
+
+            <!-- Galería de productos destacados -->
+            <!-- TODO: CSS: Crear layout grid para 3 imágenes, efectos hover y lightbox -->
+            <!-- TODO: JS: Agregar zoom interactivo y galería lightbox de imágenes -->
+            <div class="featured-gallery">
+              <figure class="gallery-item">
+                <img
+                  src="assets/images/gpu-destacada.jpg"
+                  alt="Tarjeta Gráfica NVIDIA RTX 4090 - Componente de alto rendimiento"
+                  loading="lazy"
+                />
+              </figure>
+              <figure class="gallery-item">
+                <img
+                  src="assets/images/cpu-destacada.jpg"
+                  alt="Procesador Intel Core i9 - CPU de última generación"
+                  loading="lazy"
+                />
+              </figure>
+              <figure class="gallery-item">
+                <img
+                  src="assets/images/build-completo.jpg"
+                  alt="PC Gaming Completo - Configuración de alta gama"
+                  loading="lazy"
+                />
+              </figure>
+            </div>
+
+            <!-- Llamada a la acción principal -->
+            <!-- TODO: CSS: Estilizar botón con gradiente, sombra y hover effect -->
+            <!-- TODO: JS: Agregar scroll suave a la sección de productos -->
+            <div class="cta-section">
+              <a href="#tienda" class="btn-primary">COMPRAR AHORA</a>
+            </div>
+          </section>
+
+          <!-- ========== SECCIÓN: PRODUCTOS PRESENTADOS ========== -->
+          <section id="tienda" class="products-section">
+            <h2>PRODUCTOS PRESENTADOS</h2>
+
+            <!-- Grid de productos con datos reales de hardware -->
+            <!-- TODO: CSS: Crear grid responsivo (3 cols desktop, 2 tablet, 1 mobile) -->
+            <!-- TODO: JS: Agregar funcionalidad de carrito, favoritos y modal de detalles -->
+            <div class="products-grid">
+              <!-- Producto 1: Procesador Intel -->
+              <article
+                class="product-card"
+                data-category="cpu"
+                data-brand="intel"
+              >
+                <div class="product-image-wrapper">
+                  <img
+                    src="assets/images/intel-i9-13900k.jpg"
+                    alt="Intel Core i9-13900K - Procesador 13ava generación, 24 núcleos"
+                    class="product-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">Intel Core i9-13900K</h3>
+                  <p class="product-brand">Marca: Intel</p>
+                  <p class="product-specs">
+                    24 núcleos | 5.8 GHz Turbo | Socket LGA1700
+                  </p>
+                  <p class="product-stock" aria-label="Stock disponible">
+                    Stock: 12 unidades
+                  </p>
+                  <p class="product-price" aria-label="Precio del producto">
+                    $599.99 USD
+                  </p>
+                  <!-- TODO: JS: Implementar carrito interactivo con validación de stock -->
+                  <button
+                    type="button"
+                    class="btn-add-cart"
+                    aria-label="Agregar Intel Core i9-13900K al carrito"
+                  >
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </article>
+
+              <!-- Producto 2: Tarjeta Gráfica NVIDIA -->
+              <article
+                class="product-card"
+                data-category="gpu"
+                data-brand="nvidia"
+              >
+                <div class="product-image-wrapper">
+                  <img
+                    src="assets/images/nvidia-rtx4090.jpg"
+                    alt="NVIDIA GeForce RTX 4090 - 24GB GDDR6X, 16384 CUDA Cores"
+                    class="product-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">NVIDIA RTX 4090</h3>
+                  <p class="product-brand">Marca: NVIDIA</p>
+                  <p class="product-specs">
+                    24GB GDDR6X | 16384 CUDA Cores | 450W TDP
+                  </p>
+                  <p class="product-stock">Stock: 5 unidades</p>
+                  <p class="product-price">$1,799.99 USD</p>
+                  <button
+                    type="button"
+                    class="btn-add-cart"
+                    aria-label="Agregar NVIDIA RTX 4090 al carrito"
+                  >
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </article>
+
+              <!-- Producto 3: Memoria RAM -->
+              <article
+                class="product-card"
+                data-category="ram"
+                data-brand="corsair"
+              >
+                <div class="product-image-wrapper">
+                  <img
+                    src="assets/images/corsair-vengeance-ddr5.jpg"
+                    alt="Corsair Vengeance DDR5 - 32GB (2x16GB), 5600MHz, RGB"
+                    class="product-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">Corsair Vengeance DDR5 32GB</h3>
+                  <p class="product-brand">Marca: Corsair</p>
+                  <p class="product-specs">
+                    32GB (2x16GB) | DDR5 5600MHz | RGB Iluminado
+                  </p>
+                  <p class="product-stock">Stock: 28 unidades</p>
+                  <p class="product-price">$249.99 USD</p>
+                  <button
+                    type="button"
+                    class="btn-add-cart"
+                    aria-label="Agregar Corsair Vengeance DDR5 al carrito"
+                  >
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </article>
+
+              <!-- Producto 4: SSD NVMe -->
+              <article
+                class="product-card"
+                data-category="storage"
+                data-brand="kingston"
+              >
+                <div class="product-image-wrapper">
+                  <img
+                    src="assets/images/kingston-nv2-ssd.jpg"
+                    alt="Kingston NV2 1TB - SSD NVMe M.2, velocidad secuencial 3500MB/s"
+                    class="product-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">Kingston NV2 1TB SSD</h3>
+                  <p class="product-brand">Marca: Kingston</p>
+                  <p class="product-specs">
+                    1TB NVMe M.2 | 3500 MB/s | Garantía 3 años
+                  </p>
+                  <p class="product-stock">Stock: 45 unidades</p>
+                  <p class="product-price">$89.99 USD</p>
+                  <button
+                    type="button"
+                    class="btn-add-cart"
+                    aria-label="Agregar Kingston NV2 al carrito"
+                  >
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </article>
+
+              <!-- Producto 5: Fuente de Alimentación -->
+              <article
+                class="product-card"
+                data-category="psu"
+                data-brand="corsair"
+              >
+                <div class="product-image-wrapper">
+                  <img
+                    src="assets/images/corsair-rm850-gold.jpg"
+                    alt="Corsair RM850x Gold - 850W, 80+ Gold, Modular, 10 años garantía"
+                    class="product-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">Corsair RM850x Gold</h3>
+                  <p class="product-brand">Marca: Corsair</p>
+                  <p class="product-specs">
+                    850W | 80+ Gold | Completamente Modular
+                  </p>
+                  <p class="product-stock">Stock: 19 unidades</p>
+                  <p class="product-price">$179.99 USD</p>
+                  <button
+                    type="button"
+                    class="btn-add-cart"
+                    aria-label="Agregar Corsair RM850x Gold al carrito"
+                  >
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </article>
+
+              <!-- Producto 6: Refrigeración CPU -->
+              <article
+                class="product-card"
+                data-category="cooling"
+                data-brand="corsair"
+              >
+                <div class="product-image-wrapper">
+                  <img
+                    src="assets/images/corsair-h150i-elite.jpg"
+                    alt="Corsair iCUE H150i ELITE CAPELLIX - AIO Liquid Cooler 360mm"
+                    class="product-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">Corsair H150i ELITE</h3>
+                  <p class="product-brand">Marca: Corsair</p>
+                  <p class="product-specs">
+                    360mm AIO | RGB iCUE | Silencioso | Intel/AMD
+                  </p>
+                  <p class="product-stock">Stock: 8 unidades</p>
+                  <p class="product-price">$159.99 USD</p>
+                  <button
+                    type="button"
+                    class="btn-add-cart"
+                    aria-label="Agregar Corsair H150i ELITE al carrito"
+                  >
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <!-- Paginación -->
+            <!-- TODO: CSS: Estilizar paginación con botones y números -->
+            <!-- TODO: JS: Implementar carga dinámica de productos por página -->
+            <nav class="pagination" aria-label="Paginación de productos">
+              <ul class="pagination-list">
+                <li><a href="#" class="page-link page-active">1</a></li>
+                <li><a href="#" class="page-link">2</a></li>
+                <li><a href="#" class="page-link">3</a></li>
+                <li><a href="#" class="page-link">4</a></li>
+                <li><span class="page-ellipsis">...</span></li>
+                <li><a href="#" class="page-link">12</a></li>
+              </ul>
+            </nav>
+          </section>
+
+          <!-- ========== SECCIÓN: CARRITO DE COMPRAS ========== -->
+          <!-- TODO: CSS: Estilizar carrito con tabla responsiva y resumen de compra -->
+          <!-- TODO: JS: Implementar carrito interactivo (add, remove, actualizar cantidad, total) -->
+          <section id="carrito" class="cart-section">
+            <h2>Mi Carrito</h2>
+            <p class="cart-empty-message">
+              Tu carrito está vacío. Selecciona productos para comenzar.
             </p>
-            <!-- TODO: JS: Agregar funcionalidad al botón Agregar al Carrito -->
-            <!-- En sección de productos -->
-            <button
-              type="button"
-              id="btn-add-cart-a"
-              class="btn-add-cart"
-              aria-label="Agregar producto A al carrito"
-            >
-              Agregar al Carrito
-            </button>
-            
-            <!-- En sección hero -->
-            <button
-              type="button"
-              id="btn-comprar-ahora"
-              class="btn-primary"
-              aria-label="Ir a sección de compras"
-            >
-              COMPRAR AHORA
-            </button>
-          </article>
+
+            <table class="cart-table" style="display: none">
+              <caption>
+                Productos en tu carrito
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Precio Unitario</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items">
+                <!-- Los items se agregarán dinámicamente con JavaScript -->
+              </tbody>
+            </table>
+
+            <div class="cart-summary" style="display: none">
+              <p class="cart-total">
+                <strong>Total:</strong>
+                <span id="cart-total">$0.00</span>
+              </p>
+              <button class="btn-checkout" aria-label="Proceder al pago">
+                Proceder al Pago
+              </button>
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
 
       <!-- ========== SECCIÓN: SOBRE NOSOTROS ========== -->
       <section id="nosotros" class="about-section">
         <h2>Sobre Nosotros</h2>
         <p>
-          Somos una empresa dedicada a ofrecer los mejores productos a nuestros
-          clientes. Con más de 10 años de experiencia, hemos construido una
-          reputación sólida en el mercado gracias a nuestro compromiso con la
-          calidad y el servicio al cliente.
+          <strong>PC Hardware</strong> es un e-commerce especializado en
+          componentes de calidad superior para computadoras personales. Contamos
+          con más de una década de experiencia atendiendo a entusiastas, gamers
+          y profesionales que requieren los mejores componentes para sus
+          sistemas. Nuestro compromiso es ofrecer productos auténticos, precios
+          competitivos y asesoramiento técnico experto.
         </p>
 
-        <!-- Tabla comparativa de productos (requerida) -->
-        <!-- TODO: CSS: Estilizar tabla para mejor legibilidad en responsive -->
+        <!-- Tabla comparativa de productos destacados -->
+        <!-- TODO: CSS: Estilizar tabla con zebra striping, hover effects y responsive design -->
+        <h3>Productos Estrella - Comparativa</h3>
         <table class="comparison-table">
           <caption>
-            Comparativa de Productos Estrella
+            Comparativa de productos más populares
           </caption>
           <thead>
             <tr>
               <th scope="col">Producto</th>
+              <th scope="col">Categoría</th>
               <th scope="col">Precio</th>
               <th scope="col">Stock</th>
               <th scope="col">Valoración</th>
@@ -228,35 +592,134 @@
           </thead>
           <tbody>
             <tr>
-              <td>Producto Premium</td>
-              <td>$199.99</td>
-              <td>25 unidades</td>
-              <td>★★★★★ (147 reviews)</td>
+              <td>Intel Core i9-13900K</td>
+              <td>Procesador</td>
+              <td>$599.99</td>
+              <td>12 unidades</td>
+              <td>★★★★★ (385 reviews)</td>
             </tr>
             <tr>
-              <td>Producto Estándar</td>
-              <td>$99.99</td>
-              <td>50 unidades</td>
-              <td>★★★★☆ (89 reviews)</td>
+              <td>NVIDIA RTX 4090</td>
+              <td>GPU</td>
+              <td>$1,799.99</td>
+              <td>5 unidades</td>
+              <td>★★★★★ (542 reviews)</td>
             </tr>
             <tr>
-              <td>Producto Económico</td>
-              <td>$49.99</td>
-              <td>100 unidades</td>
-              <td>★★★☆☆ (34 reviews)</td>
+              <td>Corsair Vengeance DDR5 32GB</td>
+              <td>Memoria RAM</td>
+              <td>$249.99</td>
+              <td>28 unidades</td>
+              <td>★★★★☆ (218 reviews)</td>
+            </tr>
+            <tr>
+              <td>Kingston NV2 1TB SSD</td>
+              <td>Almacenamiento</td>
+              <td>$89.99</td>
+              <td>45 unidades</td>
+              <td>★★★★★ (621 reviews)</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-      <!-- ========== SECCIÓN: FORMULARIO DE CONTACTO/NEWSLETTER ========== -->
-      <!-- TODO: CSS: Estilizar formulario con validación visual -->
-      <!-- TODO: JS: Agregar validación de formulario del lado del cliente y envío de datos -->
-      <section id="ayuda" class="contact-section">
-        <h2>Suscríbete a Nuestro Newsletter</h2>
+      <!-- ========== SECCIÓN: COMPATIBILIDAD Y GUÍAS ========== -->
+      <!-- TODO: CSS: Estilizar sección con cards informativos y tablas de compatibilidad -->
+      <section id="compatibilidad" class="compatibility-section">
+        <h2>Guías de Compatibilidad</h2>
         <p>
-          Recibe las últimas noticias, ofertas exclusivas y actualizaciones de
-          nuestros productos.
+          En esta sección encontrarás información técnica para asegurarte de que
+          los componentes que elijas sean compatibles entre sí.
+        </p>
+
+        <!-- Guía 1: Socket de Procesadores -->
+        <article class="guide-card">
+          <h3>Socket de Procesadores y Placas Madre</h3>
+          <p>
+            Es fundamental que el socket del procesador coincida con el socket
+            de tu placa madre. Los sockets más comunes actualmente son:
+          </p>
+          <ul>
+            <li>
+              <strong>LGA 1700:</strong> Intel 13ª y 14ª generación (Raptor
+              Lake, Arrow Lake)
+            </li>
+            <li><strong>AM5:</strong> AMD Ryzen 7000 series (Zen 5)</li>
+            <li>
+              <strong>LGA 1200:</strong> Intel 10ª, 11ª y 12ª generación
+              (legacy)
+            </li>
+            <li><strong>AM4:</strong> AMD Ryzen 3000-5000 series (legacy)</li>
+          </ul>
+        </article>
+
+        <!-- Guía 2: Consumo de Potencia -->
+        <article class="guide-card">
+          <h3>Fuente de Alimentación Recomendada por GPU</h3>
+          <p>
+            La siguiente tabla muestra la potencia recomendada según tu tarjeta
+            gráfica:
+          </p>
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th scope="col">Tarjeta Gráfica</th>
+                <th scope="col">TDP (W)</th>
+                <th scope="col">Fuente Recomendada (W)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>RTX 4060 Ti</td>
+                <td>130W</td>
+                <td>600W+</td>
+              </tr>
+              <tr>
+                <td>RTX 4070 Ti</td>
+                <td>285W</td>
+                <td>750W+</td>
+              </tr>
+              <tr>
+                <td>RTX 4090</td>
+                <td>450W</td>
+                <td>1000W+</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <!-- Guía 3: Compatibilidad de Memoria RAM -->
+        <article class="guide-card">
+          <h3>Especificaciones de Memoria RAM</h3>
+          <p>
+            Verifica que tu placa madre soporte el tipo y velocidad de RAM que
+            deseas comprar:
+          </p>
+          <ul>
+            <li>
+              <strong>DDR5:</strong> Placas LGA1700 modernas y AM5 (2024+) -
+              Velocidad: 5600MHz+
+            </li>
+            <li>
+              <strong>DDR4:</strong> Placas LGA1200 y AM4 - Velocidad: 3200MHz+
+            </li>
+            <li>
+              <strong>Capacidad Máxima:</strong> Consulta las especificaciones
+              de tu placa madre (generalmente 192GB o más)
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ========== SECCIÓN: FORMULARIO DE CONTACTO/NEWSLETTER ========== -->
+      <!-- TODO: CSS: Estilizar formulario con campos visuales y validación en tiempo real -->
+      <!-- TODO: JS: Implementar validación de formulario y envío de datos a backend -->
+      <section id="ayuda" class="contact-section">
+        <h2>Centro de Ayuda y Suscripción</h2>
+        <p>
+          ¿Necesitas ayuda? Suscríbete a nuestro newsletter para recibir
+          actualizaciones sobre nuevos productos, ofertas exclusivas y guías de
+          ensamblaje.
         </p>
 
         <form id="newsletter-form" class="newsletter-form">
@@ -271,7 +734,7 @@
                 id="input-nombre"
                 name="nombre"
                 required
-                placeholder="Tu nombre completo"
+                placeholder="Tu nombre y apellido"
                 aria-required="true"
                 aria-describedby="nombre-help"
               />
@@ -291,28 +754,61 @@
                 aria-describedby="email-help"
               />
               <small id="email-help"
-                >Campo obligatorio. Ej: usuario@ejemplo.com</small
+                >Utilizaremos tu email para enviar boletines y ofertas
+                exclusivas</small
               >
             </div>
 
             <!-- Campo: Teléfono -->
             <div class="form-group">
-            <label for="input-telefono">Teléfono (opcional):</label>
-            <input
-              type="tel"
-              id="input-telefono"
-              name="telefono"
-              placeholder="+54 9 11 1234-5678"
-              pattern="[0-9\s\-\+]+"
-              title="Ingrese un teléfono válido (ej: +54 9 11 1234-5678)"
-              aria-describedby="telefono-help"
-            />
-            <small id="telefono-help">
-              Formato: +54 9 11 1234-5678 (incluye el código de país)
-            </small>
-          </div>
+              <label for="input-telefono">Teléfono (opcional):</label>
+              <input
+                type="tel"
+                id="input-telefono"
+                name="telefono"
+                placeholder="+54 9 11 1234-5678"
+                pattern="[0-9\s\-\+]+"
+                title="Ej: +54 9 11 1234-5678"
+                aria-describedby="telefono-help"
+              />
+              <small id="telefono-help">Formato: +54 9 11 1234-5678</small>
+            </div>
 
-            <!-- Campo: Checkbox de términos -->
+            <!-- Campo: Intereses -->
+            <fieldset class="form-group checkbox-group">
+              <legend>Temas de Interés:</legend>
+              <div class="checkbox-item">
+                <input
+                  type="checkbox"
+                  id="interest-gaming"
+                  name="intereses"
+                  value="gaming"
+                />
+                <label for="interest-gaming">Gaming y Rendimiento Alto</label>
+              </div>
+              <div class="checkbox-item">
+                <input
+                  type="checkbox"
+                  id="interest-professional"
+                  name="intereses"
+                  value="professional"
+                />
+                <label for="interest-professional"
+                  >Workstations y Profesional</label
+                >
+              </div>
+              <div class="checkbox-item">
+                <input
+                  type="checkbox"
+                  id="interest-budget"
+                  name="intereses"
+                  value="budget"
+                />
+                <label for="interest-budget">Opciones Presupuesto</label>
+              </div>
+            </fieldset>
+
+            <!-- Campo: Términos -->
             <div class="form-group checkbox">
               <input
                 type="checkbox"
@@ -322,7 +818,10 @@
                 aria-required="true"
               />
               <label for="input-terminos">
-                Acepto los términos y condiciones y la política de privacidad
+                Acepto los
+                <a href="#terminos" target="_blank">términos y condiciones</a> y
+                la
+                <a href="#privacidad" target="_blank">política de privacidad</a>
               </label>
             </div>
 
@@ -338,33 +837,50 @@
         </form>
       </section>
     </main>
-
     <!-- ========== PIE DE PÁGINA (FOOTER) ========== -->
-    <footer>
-      <section class="footer-content">
-        <!-- Información de contacto -->
-        <article class="footer-section">
+    <footer role="contentinfo" class="footer">
+      <div class="footer-container">
+        <!-- Sección: Contacto -->
+        <!-- TODO: CSS: Estilizar footer con layout multi-columna y estilos personalizados -->
+        <section class="footer-section">
           <h3>Contacto</h3>
           <address>
-            <p>Email: <a href="mailto:info@tienda.com">info@tienda.com</a></p>
+            <p>
+              Email:
+              <a href="mailto:soporte@pchardware.com">soporte@pchardware.com</a>
+            </p>
             <p>Teléfono: <a href="tel:+541112345678">+54 9 11 1234-5678</a></p>
-            <p>Dirección: Calle Principal 123, CABA, Argentina</p>
+            <p>Dirección: Av. Tecnológica 456, Buenos Aires, Argentina</p>
+            <p>Atención: Lunes a Viernes 9:00 - 18:00 (GMT-3)</p>
           </address>
-        </article>
+        </section>
 
-        <!-- Enlaces útiles -->
-        <article class="footer-section">
+        <!-- Sección: Enlaces Útiles -->
+        <section class="footer-section">
           <h3>Enlaces Útiles</h3>
           <ul>
-            <li><a href="#politica-privacidad">Política de Privacidad</a></li>
-            <li><a href="#terminos-condiciones">Términos y Condiciones</a></li>
+            <li><a href="#privacidad">Política de Privacidad</a></li>
+            <li><a href="#terminos">Términos y Condiciones</a></li>
             <li><a href="#devolucion">Política de Devoluciones</a></li>
             <li><a href="#envios">Información de Envíos</a></li>
+            <li><a href="#garantia">Garantía y Soporte Técnico</a></li>
           </ul>
-        </article>
+        </section>
 
-        <!-- Redes sociales -->
-        <article class="footer-section">
+        <!-- Sección: Categorías Rápidas -->
+        <section class="footer-section">
+          <h3>Categorías Principales</h3>
+          <ul>
+            <li><a href="#cat-procesadores">Procesadores</a></li>
+            <li><a href="#cat-gpus">Tarjetas Gráficas</a></li>
+            <li><a href="#cat-ram">Memoria RAM</a></li>
+            <li><a href="#cat-almacenamiento">Almacenamiento</a></li>
+            <li><a href="#cat-fuentes">Fuentes de Alimentación</a></li>
+          </ul>
+        </section>
+
+        <!-- Sección: Redes Sociales -->
+        <section class="footer-section">
           <h3>Síguenos</h3>
           <ul class="social-links">
             <li>
@@ -373,17 +889,9 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visitarnos en Facebook"
-                >Facebook</a
               >
-            </li>
-            <li>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visitarnos en Instagram"
-                >Instagram</a
-              >
+                Facebook
+              </a>
             </li>
             <li>
               <a
@@ -391,25 +899,54 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visitarnos en Twitter"
-                >Twitter</a
               >
+                Twitter
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visitarnos en Instagram"
+              >
+                Instagram
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visitarnos en LinkedIn"
+              >
+                LinkedIn
+              </a>
             </li>
           </ul>
-        </article>
-      </section>
+        </section>
+      </div>
 
-      <!-- Copyright -->
+      <!-- Footer Bottom: Copyright -->
       <div class="footer-bottom">
-        <p>&copy; 2026 E-Commerce Tienda. Todos los derechos reservados.</p>
-        <p>Desarrollado con ❤️ por el equipo frontend</p>
+        <p>&copy; 2026 PC Hardware Store. Todos los derechos reservados.</p>
       </div>
     </footer>
 
-    <!-- TODO: JS: Script principal con funcionalidades interactivas -->
+    <!-- ========== SCRIPTS PARA FUNCIONALIDADES INTERACTIVAS ========== -->
+    <!-- TODO: JS: Script principal con funcionalidades del carrito, filtros y búsqueda -->
     <!-- <script src="assets/scripts/main.js"></script> -->
-    <!-- TODO: JS: Script para validación de formularios -->
+
+    <!-- TODO: JS: Script para validación de formularios en tiempo real -->
     <!-- <script src="assets/scripts/form-validation.js"></script> -->
-    <!-- TODO: JS: Script para carrito de compras -->
+
+    <!-- TODO: JS: Script para gestionar el carrito de compras (add, remove, persist) -->
     <!-- <script src="assets/scripts/cart.js"></script> -->
+
+    <!-- TODO: JS: Script para filtrado dinámico de productos por categoría, precio y marca -->
+    <!-- <script src="assets/scripts/filters.js"></script> -->
+
+    <!-- TODO: JS: Script para búsqueda en tiempo real (debounce, API calls) -->
+    <!-- <script src="assets/scripts/search.js"></script> -->
   </body>
 </html>
