@@ -6,7 +6,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
-### Added
+### Fixed
+
+- [fix/prompts] Correcciones generales
+  PR: [#14](https://github.com/GonzaloBarbano/E-commerce/pull/14) - @Naguirre0102 (Especialista IA)
+
 
 ---
 

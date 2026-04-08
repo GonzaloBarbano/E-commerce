@@ -8,7 +8,6 @@
 ## Prompt Exacto
 ```
 ESTRUCTURA BASE DEL PROYECTO :   
-
 Tengo el siguiente plan.md de mi proyecto e-commerce.
 Basándote en él, sugierme el layout, la estructura de secciones y la jerarquía
 visual para la página principal. El proyecto es una tienda online. plan.md: #
@@ -22,9 +21,30 @@ estructurar la página. - Incluye elementos básicos como título, párrafos,
 imágenes, enlaces, listas, formularios y tablas relacionados con el tema. -
 Introduce etiquetas semánticas pertinentes para mejorar la accesibilidad y el
 SEO.
-
-# Resultados
-- **Resultado Esperado:** Una propuesta de estructura de etiquetas HTML5 (layout) y una guía de jerarquía visual que cumpla con los requisitos del plan para empezar a diseñar/maquetar.
-- **Resultado Obtenido:** Copilot generó un esquema semántico excelente detallando el uso de <header>, <main>, <section>, <article>, <aside> y <footer>, además de proponer un plan inicial para la jerarquía visual (tamaños, colores base y disposición en grilla).
-- **Correcciones Manuales:** Ninguna para la estructura propuesta, el equipo de UX y Frontend lo utilizó como guía directa para la maquetación inicial.
 ```
+## 📸 Captura de pantalla
+![Captura del Prompt 3](./img/prompt3.jpg)
+
+---
+## Resultado Esperado
+Una propuesta de estructura de etiquetas HTML5 (layout) y una guía de jerarquía visual que cumpla con los requisitos del plan para empezar a diseñar/maquetar.
+
+--- 
+
+## Resultado Obtenido:
+GitHubCopilot generó un esquema semántico excelente detallando el uso de <header>, <main>, <section>, <article>, <aside> y <footer>, además de proponer un plan inicial para la jerarquía visual (tamaños, colores base y disposición en grilla).
+
+## 📸 Captura de pantalla
+![respuesta1.jpg](./img/respuesta1.jpg)
+![respuesta2.jpg](./img/respuesta2.jpg)
+![respuesta3.jpg](./img/respuesta3.jpg)
+
+---
+
+## Correcciones Manuales
+Ninguna para la estructura propuesta, el equipo de UX y Frontend lo utilizó como guía directa para la maquetación inicial.
+
+---
+
+## Archivo o parte del proyecto donde se aplicó
+Se utilizó directamente para codificar el archivo index.html y redactar el spec-frontend.md.
