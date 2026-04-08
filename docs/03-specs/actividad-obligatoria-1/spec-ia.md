@@ -7,7 +7,7 @@
 ## 2. Requerimientos Técnicos y Funcionales
 - [x] Crear documento de decisiones SDD (`docs/02-prompts/sdd-decisions.md`).
 - [x] Crear template para los specs del equipo (`docs/specs/template-spec.md`).
-- [ ] Recopilar y documentar el prompt más valioso de cada integrante (en `docs/02-prompts/prompts-x.md`).
+- [x] Recopilar y documentar el prompt más valioso de cada integrante (en `docs/02-prompts/prompts-x.md`).
 - [ ] Realizar una comparativa entre dos modelos de IA aplicados a la misma tarea (`docs/02-prompts/comparativa-modelos.md`).
 
 ## 3. Criterios de Aceptación (Definición de "Terminado")
