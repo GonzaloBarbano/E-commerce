@@ -48,6 +48,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/prompts] Correcciones generales
   PR: [#14](https://github.com/GonzaloBarbano/E-commerce/pull/14) - @Naguirre0102 (Especialista IA)
 
+- [fix/prompts] Correcciones y agregado de spec-devops.md
+  PR: [#15](https://github.com/GonzaloBarbano/E-commerce/pull/15) - @GonzaloBarbano (Coordinador / DevOps)
+
 ---
 
 ## Cómo usar este archivo
