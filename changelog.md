@@ -8,13 +8,29 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
-- [fix/prompts] Correcciones generales
-  PR: [#14](https://github.com/GonzaloBarbano/E-commerce/pull/14) - @Naguirre0102 (Especialista IA)
+- [release/actividad-obligatoria-1] Corrección de `plan.md`
+  Commit: [552b084](https://github.com/GonzaloBarbano/E-commerce/commit/552b084) — @GonzaloBarbano (Coordinador / DevOps)
 
+- [release/actividad-obligatoria-1] Corrección de `plan.md`
+  Commit: [7f31e1d](https://github.com/GonzaloBarbano/E-commerce/commit/7f31e1d) — @GonzaloBarbano (Coordinador / DevOps)
+
+- [release/actividad-obligatoria-1] Correcciones de carpetas y prompts
+  Commit: [04acebe](https://github.com/GonzaloBarbano/E-commerce/commit/04acebe) — @Naguirre0102 (Especialista IA)
+
+- [release/actividad-obligatoria-1] Corrección de `index.html`, `README.md` y `changelog.md`
+  Commit: [4809960](https://github.com/GonzaloBarbano/E-commerce/commit/4809960) — @GonzaloBarbano (Coordinador / DevOps)
+
+- [release/actividad-obligatoria-1] Correcciones de prompts y capturas de pantalla
+  Commit: [211c318](https://github.com/GonzaloBarbano/E-commerce/commit/211c318) — @Naguirre0102 (Especialista IA)
+
+- [release/actividad-obligatoria-1] Modificación de `changelog.md`
+  Commit: [2f95271](https://github.com/GonzaloBarbano/E-commerce/commit/2f95271) — @Naguirre0102 (Especialista IA)
 
 ---
 
 ## [Release Actividad Obligatoria N°1] - 2026-03-25
+
+### Added
 
 - [feature/coordinador-setup-repo-and-pages] Estructura de plan.md  
   PR: [#2](https://github.com/GonzaloBarbano/E-commerce/pull/2) - @GonzaloBarbano (Coordinador / DevOps)
@@ -26,6 +42,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#10](https://github.com/GonzaloBarbano/E-commerce/pull/10) - @LucasFUces(Documentador / UX)
 - [feature/frontend-add-html-structure] Estructura de index.html
   PR: [#12](https://github.com/GonzaloBarbano/E-commerce/pull/12) - @GonzaloBarbano (Desarrollador Frontend)
+
+### Fixed
+
+- [fix/prompts] Correcciones generales
+  PR: [#14](https://github.com/GonzaloBarbano/E-commerce/pull/14) - @Naguirre0102 (Especialista IA)
+
+- [fix/prompts] Correcciones y agregado de spec-devops.md
+  PR: [#15](https://github.com/GonzaloBarbano/E-commerce/pull/15) - @GonzaloBarbano (Coordinador / DevOps)
 
 ---
 
