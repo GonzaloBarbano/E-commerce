@@ -6,6 +6,23 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+---
+
+## [Release Actividad Obligatoria N°1] - 2026-03-25
+
+### Added
+
+- [feature/coordinador-setup-repo-and-pages] Estructura de plan.md  
+  PR: [#2](https://github.com/GonzaloBarbano/E-commerce/pull/2) - @GonzaloBarbano (Coordinador / DevOps)
+
+- [feature/ia-add-prompts-1-to-5] Agrego metodología SDD, template y spec inicial
+  PR: [#4](https://github.com/GonzaloBarbano/E-commerce/pull/4) - @Naguirre0102 (Especialista IA)
+
+- [feature/doc-ux-add-readme-and-mockup] Realizacion de readme.md y mockup
+  PR: [#10](https://github.com/GonzaloBarbano/E-commerce/pull/10) - @LucasFUces(Documentador / UX)
+- [feature/frontend-add-html-structure] Estructura de index.html
+  PR: [#12](https://github.com/GonzaloBarbano/E-commerce/pull/12) - @GonzaloBarbano (Desarrollador Frontend)
+
 ### Fixed
 
 - [release/actividad-obligatoria-1] Corrección de `plan.md`
@@ -25,25 +42,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [release/actividad-obligatoria-1] Modificación de `changelog.md`
   Commit: [2f95271](https://github.com/GonzaloBarbano/E-commerce/commit/2f95271) — @Naguirre0102 (Especialista IA)
-
----
-
-## [Release Actividad Obligatoria N°1] - 2026-03-25
-
-### Added
-
-- [feature/coordinador-setup-repo-and-pages] Estructura de plan.md  
-  PR: [#2](https://github.com/GonzaloBarbano/E-commerce/pull/2) - @GonzaloBarbano (Coordinador / DevOps)
-
-- [feature/ia-add-prompts-1-to-5] Agrego metodología SDD, template y spec inicial
-  PR: [#4](https://github.com/GonzaloBarbano/E-commerce/pull/4) - @Naguirre0102 (Especialista IA)
-
-- [feature/doc-ux-add-readme-and-mockup] Realizacion de readme.md y mockup
-  PR: [#10](https://github.com/GonzaloBarbano/E-commerce/pull/10) - @LucasFUces(Documentador / UX)
-- [feature/frontend-add-html-structure] Estructura de index.html
-  PR: [#12](https://github.com/GonzaloBarbano/E-commerce/pull/12) - @GonzaloBarbano (Desarrollador Frontend)
-
-### Fixed
 
 - [fix/prompts] Correcciones generales
   PR: [#14](https://github.com/GonzaloBarbano/E-commerce/pull/14) - @Naguirre0102 (Especialista IA)
