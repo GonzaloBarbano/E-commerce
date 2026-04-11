@@ -69,11 +69,8 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 📂 Documentación
 
-<<<<<<< HEAD
 - 📁 **[Mockup](docs/01-mockup/diseño-inicial.png)** - **[Figma](https://www.figma.com/design/LdjthTrqI614Fyr0M8bjF6/%22E-commerce---Mockup-Inicial--copia-?node-id=0-1&t=yQmJ3yqiaQa9vi85-1)**
-=======
 - 📁 **[Mockup](docs/01-mockup/diseño-inicial.png)** - **[Figma](https://www.figma.com/design/r07vXwitxehsc5eUGyAmNK/%22E-commerce---Mockup-Inicial?node-id=1-3&t=EihuJLJAG4dB47tJ-1)**
->>>>>>> 18c700dcba717cf6d197cae4c117305b4fe380aa
 
 - 🧠 **[Indice de Prompts](docs/02-prompts/prompts.md)**
 - 📝 **[Changelog](changelog.md)**
@@ -82,11 +79,11 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 👥 Integrantes del Grupo
 
-| Nombre completo    | N° de Matrícula | Usuario GitHub  | Carrera                                 | Materia            | Rol en esta entrega     |
-| ------------------ | --------------- | --------------- | --------------------------------------- | ------------------ | ----------------------- |
-| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Frontend / DevOps       |
-| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Documentador / UX-UI    |
-| Nicolas Aguirre    | 153791          | @Naguirre0102   | Tecnicatura en Programación de Sistemas | Programación Web I | IA / Prompt Engineering |
+| Nombre completo    | N° de Matrícula | Usuario GitHub  | Carrera                                 | Materia            | Rol en esta entrega (Actividad 2) |
+| ------------------ | --------------- | --------------- | --------------------------------------- | ------------------ | --------------------------------- |
+| Nicolas Aguirre    | 153791          | @Naguirre0102   | Tecnicatura en Programación de Sistemas | Programación Web I | Coordinador / DevOps              |
+| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Documentador / QA Tester  |
+| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Frontend CSS / Responsive Design   |
 
 ---
 
