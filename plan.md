@@ -325,3 +325,73 @@ En esta primera entrega nos enfocamos en establecer:
 **Fecha de creación del plan**: Abril 2026  
 **Versión**: 1.0 - Spec Maestro para Primera Entrega  
 **Estado**: Ready for Development
+<<<<<<< HEAD
+
+
+---
+
+## Actividad Obligatoria N° 2: Estilos, Layout y Responsive Design
+
+### 1. Objetivos de la Entrega
+El objetivo de esta segunda fase es transformar el esqueleto semántico de la Actividad 1 en una interfaz visualmente atractiva, estructurada y adaptable a cualquier dispositivo, siguiendo un estricto flujo de trabajo colaborativo.
+
+### 2. Requerimientos Técnicos (Frontend & UX)
+- **Estilos Visuales:** Aplicar la paleta de colores, tipografías y espaciados definidos en el mockup de Figma (`diseño-con-estilos.png`).
+- **Layout Avanzado:** Implementar el catálogo de productos de hardware y las secciones principales utilizando **CSS Flexbox** y **CSS Grid**.
+- **Diseño Responsivo:** Garantizar que la página sea completamente funcional en dispositivos móviles y tablets mediante el uso de **Media Queries** en CSS.
+- **Integridad Semántica:** Mantener intacta la estructura HTML5 y de accesibilidad lograda en la entrega anterior.
+
+### 3. Sistema de Diseño
+
+> Referencia visual: [Mockup en Figma](https://www.figma.com/design/LdjthTrqI614Fyr0M8bjF6/%22E-commerce---Mockup-Inicial--copia-?node-id=0-1)  
+> Imagen exportada: `docs/01-mockup/actividad-obligatoria-2/diseño-con-estilos.png`
+
+#### Paleta de Colores
+
+| Token | Hex | Uso |
+|---|---|---|
+| `--color-primary` | `#7C3AED` | Botones, CTAs, navbar |
+| `--color-primary-hover` | `#6D28D9` | Hover de botones |
+| `--color-primary-light` | `#EDE9FE` | Badges, tags |
+| `--color-surface-dark` | `#1E1B2E` | Navbar, footer |
+| `--color-surface-card` | `#FFFFFF` | Fondo de cards |
+| `--color-bg` | `#F8F9FA` | Fondo general |
+| `--color-border` | `#E2E8F0` | Bordes, separadores |
+| `--color-text` | `#111827` | Texto principal |
+| `--color-text-muted` | `#64748B` | Texto secundario |
+| `--color-success` | `#16A34A` | Stock disponible |
+| `--color-error` | `#DC2626` | Sin stock |
+
+#### Tipografía
+
+**Fuente:** Inter — `@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');`
+
+| Token | Tamaño | Peso | Uso |
+|---|---|---|---|
+| `--font-size-h1` | 32px | 700 | Título principal |
+| `--font-size-h2` | 24px | 600 | Títulos de sección |
+| `--font-size-h3` | 20px | 600 | Subtítulos |
+| `--font-size-body` | 16px | 400 | Texto general |
+| `--font-size-sm` | 14px | 400 | Categorías, filtros |
+| `--font-size-nav` | 15px | 500 | Links del navbar |
+| `--font-size-price` | 22px | 700 | Precio de producto |
+
+#### Espaciados y Componentes
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--navbar-height` | 64px | Alto del navbar |
+| `--sidebar-width` | 240px | Ancho del sidebar |
+| `--card-padding` | 16px | Padding interno de cards |
+| `--page-padding-x` | 32px | Padding horizontal de página |
+| `--gap-cards` | 24px | Separación entre cards |
+| `--radius-md` | 6px | Border-radius de botones |
+| `--radius-lg` | 8px | Border-radius de cards |
+
+### 4. Flujo de Trabajo y Calidad (DevOps & QA)
+- **Gestión de Ramas:** Todo desarrollo nuevo debe hacerse en ramas `feature/` que nacen de `develop`.
+- **Estandarización:** Uso obligatorio del template para Pull Requests. Cada PR debe estar vinculada a un Issue.
+- **Code Review con IA:** El equipo de DevOps realizará un mínimo de 4 revisiones de código utilizando **Copilot Agent** directamente sobre los diffs, para asegurar la calidad y coherencia con el diseño.
+- **Despliegue:** La entrega culminará con la fusión hacia `release/actividad-obligatoria-2` y su despliegue público en **GitHub Pages**.
+=======
+>>>>>>> 18c700dcba717cf6d197cae4c117305b4fe380aa
