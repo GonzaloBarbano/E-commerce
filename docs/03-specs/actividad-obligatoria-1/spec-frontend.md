@@ -62,6 +62,29 @@ _Para que esta tarea se considere lista, debe cumplir con:_
 
 ---
 
+## 5. Configuración del Servidor MCP de Figma
+
+### Instalación y Verificación
+
+La integración con Figma se realiza mediante el **Model Context Protocol (MCP)**, que permite a GitHub Copilot acceder a diseños de Figma para mejorar la generación de código frontend.
+
+**Configuración en el workspace:**
+- Archivo: `.vscode/mcp.json`
+- Servidor: `@figma/code-connect` (instalado vía NPX bajo demanda)
+- Propósito: Conectar diseños de Figma con el código generado para mantener consistencia visual
+
+**Para verificar que MCP Figma está configurado correctamente:**
+1. Abre `.vscode/mcp.json` en el workspace
+2. Verifica que contenga la entrada `figma` bajo `mcpServers`
+3. Al utilizar GitHub Copilot, si proporcionas un enlace de Figma, el servidor extrae automáticamente el contexto del diseño
+
+**Ventajas de esta configuración:**
+- Copilot puede analizar componentes, colores, tipografía y layout directamente desde Figma
+- Mejora la calidad del HTML generado al alinearlo con los mockups de diseño
+- Permite generar Code Connect mappings entre componentes Figma y código HTML/CSS
+
+---
+
 ## Notas de Desarrollo
 
 - El HTML no debe incluir estilos inline; toda la presentación se delegará a CSS en futuras entregas.

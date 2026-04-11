@@ -1,65 +1,86 @@
-# Prompt 1: Generación de plan.md
+# Prompt 1: Generación del Plan Maestro (Spec Maestro)
 
-- **Rol:** Coordinador / DevOps
-- **Modelo de IA utilizado:** GPT-5-mini
-- **Método / Técnica:** *Zero-Shot Prompting* con inyección de contexto.
-- **Contexto Proveído:** Se le dio el texto exacto de los requerimientos de la cátedra para que los adapte al formato del proyecto.
+- **Rol:** Coordinador / DevOps (@GonzaloBarbano)
+- **Modelo de IA utilizado:** GPT-4o
+- **Método / Técnica:** *Role Prompting* (Asignación de rol experto) + *Zero-Shot*.
+- **Contexto Proveído:** Se definió la temática exacta del proyecto (E-commerce de Hardware para PC) y la estructura obligatoria requerida por la cátedra.
 
 ## Prompt Exacto
-> Actualiza el plan.md con esta informacion:
-Desarrollo de una Página Interactiva: [Sobre un E-commerce]
-En esta primera entrega, crearás la estructura básica de una página web que servirá
-como base para un proyecto interactivo que desarrollarás a lo largo del curso. La
-página web estará enfocada en [E-commerce], ofreciendo información inicial sobre
-el mismo y estableciendo las bases para futuras funcionalidades.
-2.1 REQUERIMIENTOS PARA ESTA ENTREGA
-1. Estructura HTML:
-Utiliza HTML5 para estructurar la página.
-Incluye elementos básicos como título, párrafos, imágenes, enlaces, listas,
-formularios y tablas relacionados con tu tema.
-Introduce etiquetas semánticas pertinentes para mejorar la accesibilidad y el
-SEO.
-2. Maquetación CSS:
-No es requerida en esta entrega, pero deja marcadores o comentarios en tu
-código para indicar dónde se aplicarán estilos en futuras entregas.
-3. Interactividad JavaScript:
-No es requerida en esta entrega, pero planifica y deja marcadores o
-comentarios en tu código para indicar dónde se integrarán funcionalidades
-interactivas en futuras entregas.
-4. Documentación:
-Incluye comentarios claros y concisos en tu código HTML para explicar la
-estructura y los elementos utilizados.
-Identifica áreas futuras de desarrollo en tu código para guiar las próximas
-etapas del proyecto.
-Antes de iniciar con el desarrollo del proyecto, es fundamental proporcionar
-una descripción detallada del mismo en el archivo README.md de tu
-repositorio en GitHub.
-5. Especificación técnica (Spec-Driven Development):
-●Antes de iniciar cualquier tarea de desarrollo, el integrante responsable
-debe redactar una especificación técnica en formato Markdown
-describiendo qué se va a hacer, por qué y con qué criterios se
-considerará terminado. Esta especificación se escribe antes de realizar
-código y se incluye en el PR correspondiente.
 
-●Cada rol tiene un archivo asignado en docs/specs/:
-○docs/specs/spec-devops.md
-○docs/specs/spec-frontend.md
-○docs/specs/spec-ux.md
-○docs/specs/spec-ia.md
-Un PR sin su spec no será aprobado. El detalle de responsabilidades
-por rol se encuentra en la sección 3.
-6. IA y Prompt Engineering:
-En el repositorio, crear una carpeta llamada docs y la subcarpeta
-/02-prompts/, dentro contendra diferentes archivos markdown
-prompts-x.md donde se documenten al menos 5 prompts utilizados con
-modelos de IA diferentes (ChatGPT, Gemini, Claude, Copilot, Cursor, etc.)
-que hayan aportado valor al proyecto actual (no algo ficticio).
+```
+Actúa como un Arquitecto de Software Senior. Tu tarea es redactar el archivo plan.md (Spec Maestro) para la primera entrega de un proyecto académico. El proyecto es un E-commerce de Hardware para PC.
 
+Debes seguir estrictamente la metodología de Spec-Driven Development y estructurar el documento con los siguientes apartados, adaptándolos al mundo de la venta de componentes tecnológicos:"
 
-## Resultados
-- **Resultado Esperado:** Un archivo `plan.md` formateado en Markdown con las tareas divididas por roles.
-- **Resultado Obtenido:** La IA generó correctamente la estructura, reconociendo los puntos clave de la entrega.
-- **Correcciones Manuales:** Se ajustaron detalles menores de formato para que encajara con el repositorio base del equipo.
+1. Contexto del Proyecto
+Define el propósito de una plataforma de venta de hardware (CPUs, GPUs, Periféricos).
 
-**Aplicacion en el proyecto:**
-Archivo plan.md 
+Explica que esta primera entrega se centra en la arquitectura base, el esqueleto semántico y la preparación para la interactividad futura.
+
+2. Objetivos del Proyecto
+Establecer una estructura HTML5 profesional y escalable.
+
+Documentar el flujo de trabajo mediante especificaciones por rol (Frontend, UX, DevOps, IA).
+
+Sentar las bases para un catálogo dinámico y un sistema de filtrado de productos.
+
+3. Requerimientos Funcionales (Adaptados a Hardware)
+RF1 - Catálogo de Componentes: Visualización de una lista de productos.
+
+RF2 - Ficha Técnica: Cada producto debe mostrar: Marca, Modelo, Precio, Stock y especificaciones clave.
+
+RF3 - Categorización: Estructura preparada para navegar por categorías (Procesadores, Placas de Video, Fuentes, etc.).
+
+RF4 - Carrito de Compras: Área designada para el listado de productos seleccionados.
+
+RF5 - Buscador y Filtros: Espacio en la interfaz para búsqueda por texto o filtros de marca/precio.
+
+RF6 - Contenido Educativo/Soporte: Información sobre compatibilidad de piezas (ej. ¿Qué fuente necesita esta GPU?).
+
+4. Requerimientos No Funcionales
+RNF1 – Usabilidad
+La interfaz debe ser simple, clara y fácil de navegar.
+
+RNF2 – Compatibilidad
+La página web debe funcionar correctamente en navegadores modernos.
+
+RNF3 – Estructura del código
+El código HTML, CSS y JavaScript debe mantenerse organizado y documentado para facilitar futuras mejoras.
+
+5. Criterios de Aceptación (Checklist de Entrega)
+- [ ] El repositorio contiene plan.md con los requerimientos funcionales, objetivos y criterios de aceptación.
+- [ ] Existe un README.md con descripción y estructura del proyecto.
+- [ ] docs/specs/ incluye los 4 archivos de spec (spec-devops.md, spec-frontend.md, spec-ux.md, spec-ia.md).
+- [ ] docs/02-prompts/ contiene al menos 5 archivos prompts-*.md con prompts reales y su aporte.
+- [ ] La página principal (index.html) incluye:
+  - Header, main y footer semánticos.
+  - Formulario básico, lista y tabla relacionados con la planificación.
+  - Comentarios indicando futuras implementaciones de CSS y JS.
+- [ ] El contenido técnico está redactado en español y sigue el formato Markdown.
+```
+## 📸 Captura de pantalla
+![Captura del Prompt 1](./img/planmd.jpeg)
+
+---
+
+## Resultado Esperado
+- Un archivo plan.md completo, formateado en Markdown, que sirva como guía estructurada para que el resto del equipo redacte sus propios Specs.
+
+---
+
+## Resultado Obtenido 
+- La IA generó un documento profesional, adaptando los requerimientos genéricos de la materia a un caso de uso real de venta de hardware.
+
+## 📸 Captura de pantalla
+![respuestaplanmd.jpeg](./img/respuestaplanmd.jpeg)
+
+---
+
+## Correcciones Manuales
+- Se revisó la estructura final y se ajustaron detalles de formato para alinearlos con el repositorio del equipo.
+
+---
+
+## Archivo o parte del proyecto donde se aplicó
+
+- Se genero el archivo `plan.md`
