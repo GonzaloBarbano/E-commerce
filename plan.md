@@ -325,7 +325,6 @@ En esta primera entrega nos enfocamos en establecer:
 **Fecha de creación del plan**: Abril 2026  
 **Versión**: 1.0 - Spec Maestro para Primera Entrega  
 **Estado**: Ready for Development
-<<<<<<< HEAD
 
 
 ---
@@ -393,5 +392,4 @@ El objetivo de esta segunda fase es transformar el esqueleto semántico de la Ac
 - **Estandarización:** Uso obligatorio del template para Pull Requests. Cada PR debe estar vinculada a un Issue.
 - **Code Review con IA:** El equipo de DevOps realizará un mínimo de 4 revisiones de código utilizando **Copilot Agent** directamente sobre los diffs, para asegurar la calidad y coherencia con el diseño.
 - **Despliegue:** La entrega culminará con la fusión hacia `release/actividad-obligatoria-2` y su despliegue público en **GitHub Pages**.
-=======
->>>>>>> 18c700dcba717cf6d197cae4c117305b4fe380aa
+

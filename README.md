@@ -40,19 +40,19 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 🚀 Funcionalidades Previstas
 
-### Entrega 1 (Actual)
+### Entrega 1 (Realizado)
 
 - ✅ Estructura HTML5 semántica y accesible
 - ✅ Mockup de interfaz en Figma
 - ✅ Documentación y especificaciones
 
-### Entrega 2 (Próxima)
+### Entrega 2 (Actual)
 
 - 📅 Estilos CSS responsive
 - 📅 Diseño visual completo
 - 📅 Mejora de UX/UI
 
-### Entrega 3 (Futura)
+### Entrega 3 (Próxima)
 
 - 📅 Funcionalidad de carrito de compras
 - 📅 Sistema de filtrado y búsqueda
@@ -69,8 +69,7 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 📂 Documentación
 
-- 📁 **[Mockup](docs/01-mockup/diseño-inicial.png)** - **[Figma](https://www.figma.com/design/LdjthTrqI614Fyr0M8bjF6/%22E-commerce---Mockup-Inicial--copia-?node-id=0-1&t=yQmJ3yqiaQa9vi85-1)**
-- 📁 **[Mockup](docs/01-mockup/diseño-inicial.png)** - **[Figma](https://www.figma.com/design/r07vXwitxehsc5eUGyAmNK/%22E-commerce---Mockup-Inicial?node-id=1-3&t=EihuJLJAG4dB47tJ-1)**
+- 📁 **[Mockup](docs/01-mockup/actividad-obligatoria-2/diseño-con-estilos.png)** - **[Figma](https://www.figma.com/design/r07vXwitxehsc5eUGyAmNK/%22E-commerce---Mockup-Inicial?node-id=1-3&t=EihuJLJAG4dB47tJ-1)**
 
 - 🧠 **[Indice de Prompts](docs/02-prompts/prompts.md)**
 - 📝 **[Changelog](changelog.md)**

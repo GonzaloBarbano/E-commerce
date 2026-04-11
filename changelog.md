@@ -7,18 +7,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased] - Actividad Obligatoria 2
 
 ### Added
-- **Coordinación y DevOps (@Naguirre0102) - PR [#19](https://github.com/GonzaloBarbano/E-commerce/pull/19):**
-  - Creación del archivo de especificaciones inicial (`docs/03-specs/actividad-obligatoria-2/spec-devops.md`).
-  - Implementación de plantilla global para Pull Requests (`.github/pull_request_template.md`).
-  - Actualización de `plan.md` con los requerimientos técnicos (CSS, Flexbox/Grid, Responsive) y flujo de trabajo.
+- [feature/coord-dev-ops-repo-update-readme-md] Creación de spec-devops.md, template de PRs y actualización de plan.md
+  PR: [#20](https://github.com/GonzaloBarbano/E-commerce/pull/20) - @Naguirre0102 (Coordinador / DevOps)
 
 ### Changed
-- **Coordinación y DevOps (@Naguirre0102) - PR [#19](https://github.com/GonzaloBarbano/E-commerce/pull/19):**
-  - Actualización del mockup en Figma (`diseño-con-estilos.png`) definiendo paleta de colores definitiva, tipografías, jerarquías, espaciados (padding/margin) y estados de interacción (hover/disabled).
-  - Actualización de `README.md` con el nuevo enlace al mockup con estilos.
+- [feature/coord-dev-ops-repo-update-readme-md] Actualización de mockup en Figma y enlace en README.md
+  PR: [#20](https://github.com/GonzaloBarbano/E-commerce/pull/20) - @Naguirre0102 (Coordinador / DevOps)
 
-- **Coordinación y DevOps (@GonzaloBarbano / @Naguirre0102) - PR [#17](https://github.com/GonzaloBarbano/E-commerce/pull/17):**
-  - Ejecución de Backport desde `master` hacia `develop` para integrar las correcciones aprobadas de la Actividad 1.
+- [backport/release-actividad-obligatoria-1] Ejecución de Backport desde master hacia develop
+  PR: [#17](https://github.com/GonzaloBarbano/E-commerce/pull/17) - @GonzaloBarbano (Coordinador / DevOps)
 
 ### Fixed
 - [fix/prompts] Correcciones generales
