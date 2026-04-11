@@ -69,7 +69,11 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 📂 Documentación
 
+<<<<<<< HEAD
 - 📁 **[Mockup](docs/01-mockup/diseño-inicial.png)** - **[Figma](https://www.figma.com/design/LdjthTrqI614Fyr0M8bjF6/%22E-commerce---Mockup-Inicial--copia-?node-id=0-1&t=yQmJ3yqiaQa9vi85-1)**
+=======
+- 📁 **[Mockup](docs/01-mockup/diseño-inicial.png)** - **[Figma](https://www.figma.com/design/r07vXwitxehsc5eUGyAmNK/%22E-commerce---Mockup-Inicial?node-id=1-3&t=EihuJLJAG4dB47tJ-1)**
+>>>>>>> 18c700dcba717cf6d197cae4c117305b4fe380aa
 
 - 🧠 **[Indice de Prompts](docs/02-prompts/prompts.md)**
 - 📝 **[Changelog](changelog.md)**
