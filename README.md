@@ -48,9 +48,9 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ### Entrega 2 (Actual)
 
-- 📅 Estilos CSS responsive
-- 📅 Diseño visual completo
-- 📅 Mejora de UX/UI
+- ✅ Estilos CSS responsive
+- ✅ Diseño visual completo
+- ✅ Mejora de UX/UI
 
 ### Entrega 3 (Próxima)
 
@@ -69,7 +69,7 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 📂 Documentación
 
-- 📁 **[Mockup](docs/01-mockup/actividad-obligatoria-2/diseño-con-estilos.png)** - **[Figma](https://www.figma.com/design/r07vXwitxehsc5eUGyAmNK/%22E-commerce---Mockup-Inicial?node-id=1-3&t=EihuJLJAG4dB47tJ-1)**
+- 📁 **[Mockup](docs/01-mockup/actividad-obligatoria-2/diseño-con-estilos.png)** - **[Figma](https://www.figma.com/design/LdjthTrqI614Fyr0M8bjF6/%22E-commerce---Mockup-Inicial--copia-?node-id=0-1&p=f)**
 
 - 🧠 **[Indice de Prompts](docs/02-prompts/prompts.md)**
 - 📝 **[Changelog](changelog.md)**
