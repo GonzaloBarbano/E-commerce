@@ -1,0 +1,353 @@
+/* ============================================
+   PC-HARDWARE E-COMMERCE | RESPONSIVE DESIGN
+   ============================================
+   
+   Media queries organizadas por breakpoint para adaptar
+   el layout, tipografías y componentes a diferentes
+   tamaños de pantalla (mobile, tablet, desktop).
+   
+   Enfoque: Desktop-first con overrides en mobile/tablet.
+   
+   ============================================ */
+
+/* ============================================
+   TABLET: 768px - 1023px
+   ============================================ */
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  
+  /* LAYOUT BASE */
+  /* En tablet, ocultamos el sidebar para ganar espacio */
+  .sidebar {
+    display: none;
+  }
+  
+  /* Contenido principal sin margen izquierdo */
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: var(--spacing-md);
+  }
+  
+  /* Navbar compacto */
+  .navbar {
+    padding: 0 var(--spacing-md);
+  }
+  
+  /* Gap reducido entre elementos del navbar */
+  .navbar-end {
+    gap: var(--spacing-md);
+  }
+  
+  /* TIPOGRAFÍA */
+  /* Escalas de tipo adaptadas para tablet */
+  h1 {
+    font-size: 28px;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  h2 {
+    font-size: var(--font-size-h2);
+  }
+  
+  /* GRID DE PRODUCTOS */
+  /* 2 columnas en tablet */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  /* HERO */
+  /* Imágenes en 2 columnas, tercera abajo */
+  .hero-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .hero {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* ============================================
+   MOBILE: max-width 767px
+   ============================================ */
+
+@media screen and (max-width: 767px) {
+  
+  /* LAYOUT BASE */
+  /* Sidebar oculto en mobile */
+  .sidebar {
+    display: none;
+  }
+  
+  /* Contenido principal ocupa 100% */
+  .main-content {
+    margin-left: 0;
+    margin-top: var(--navbar-height);
+    width: 100%;
+    padding: var(--spacing-md);
+  }
+  
+  /* NAVBAR */
+  /* Navbar más compacto, padding reducido */
+  .navbar {
+    height: auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+    flex-wrap: wrap;
+  }
+  
+  /* Logo más pequeño en mobile */
+  .navbar-logo {
+    font-size: var(--font-size-h3);
+  }
+  
+  /* Contenedor derecho: gap reducido */
+  .navbar-end {
+    gap: var(--spacing-sm);
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  /* Links de navbar: tamaño reducido */
+  .nav-link {
+    font-size: 13px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  /* TIPOGRAFÍA */
+  /* Escalas de tipo ajustadas para mobile */
+  h1 {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  h3 {
+    font-size: 18px;
+  }
+  
+  body {
+    font-size: 15px;
+  }
+  
+  /* HERO */
+  /* Hero con padding reducido, imágenes en columna */
+  .hero {
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  /* Imágenes del hero en una columna */
+  .hero-images {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .hero-images img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  /* Descripción de tienda: sin margen excesivo */
+  .hero-description {
+    font-size: var(--font-size-body);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  /* Botón CTA: ancho completo en mobile */
+  .hero .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* GRID DE PRODUCTOS */
+  /* Una columna en mobile */
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  /* Card de producto: más compacta */
+  .product-card {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .product-card img {
+    height: 150px;
+  }
+  
+  .product-card-body {
+    padding: var(--spacing-sm);
+  }
+  
+  /* FORM / INPUTS */
+  /* Inputs ocupan ancho completo */
+  input[type="text"],
+  input[type="email"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px; /* Prevenir zoom en iOS */
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .search-input {
+    font-size: 16px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .form-group {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  /* PAGINACIÓN */
+  /* Flex wrap para móvil */
+  .pagination {
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+  
+  /* Botones de página más pequeños */
+  .pagination-item {
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+    padding: var(--spacing-xs);
+  }
+  
+  /* BOTONES */
+  /* Botones con padding ajustado */
+  .btn-primary,
+  .btn-secondary {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 14px;
+    width: auto;
+  }
+  
+  /* SIDEBAR LINKS (si aparece en overlay/menú) */
+  .sidebar-link {
+    font-size: 14px;
+    padding: var(--spacing-sm) 0;
+  }
+  
+  /* COMPONENTES */
+  /* Reducir gaps en general */
+  ul {
+    margin-left: var(--spacing-md);
+  }
+  
+  li {
+    margin-bottom: var(--spacing-xs);
+  }
+}
+
+/* ============================================
+   DESKTOP: min-width 1024px
+   ============================================
+   Los estilos base de styles.css y components.css
+   ya están optimizados para desktop, así que aquí
+   solo agregamos confirmaciones opcionales.
+   ============================================ */
+
+@media screen and (min-width: 1024px) {
+  
+  /* Layout completo: sidebar visible, 3+ columnas */
+  /* Estos estilos ya están en styles.css, pero se confirman aquí */
+  
+  .app-container {
+    display: flex;
+  }
+  
+  .sidebar {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: var(--navbar-height);
+    width: var(--sidebar-width);
+  }
+  
+  .main-content {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--navbar-height);
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+/* ============================================
+   UTILIDADES RESPONSIVAS GLOBALES
+   ============================================ */
+
+/* Prevenir overflow horizontal en todos los breakpoints */
+* {
+  max-width: 100%;
+}
+
+/* Imágenes: responsive por defecto */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Videos/iframes: responsive */
+iframe,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Scroll horizontal en tablas si es necesario */
+table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Ajuste de texto: evitar overflow en palabras largas */
+body {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ============================================
+   MEDIA QUERY: ORIENTATION LANDSCAPE
+   ============================================ */
+
+/* En landscape mobile (max-height) */
+@media screen and (max-height: 600px) {
+  /* Reducir alturas de hero y navbar si es necesario */
+  .navbar {
+    height: 50px;
+  }
+}
+
+/* ============================================
+   MEDIA QUERY: PRINT
+   ============================================ */
+
+@media print {
+  /* Ocultar navbar y sidebar en impresión */
+  .navbar,
+  .sidebar {
+    display: none;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    margin-top: 0;
+    padding: 0;
+  }
+}
