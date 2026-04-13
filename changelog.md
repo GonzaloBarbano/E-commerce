@@ -7,8 +7,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased] - Actividad Obligatoria 2
 
 ### Added
+
 - [feature/coord-dev-ops-repo-update-readme-md] Creación de spec-devops.md y actualización de plan.md, readme y mockup
   PR: [#20](https://github.com/GonzaloBarbano/E-commerce/pull/20) - @Naguirre0102 (Coordinador / DevOps)
+
+- [feature/doc-qa] Creación de spec-qa.md
+  PR: [#25](https://github.com/GonzaloBarbano/E-commerce/pull/25) - @GonzaloBarbano (QA Tester)
 
 ---
 
@@ -24,7 +28,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [feature/doc-ux-add-readme-and-mockup] Realizacion de readme.md y mockup
   PR: [#10](https://github.com/GonzaloBarbano/E-commerce/pull/10) - @LucasFUces(Documentador / UX)
-  
 - [feature/frontend-add-html-structure] Estructura de index.html
   PR: [#12](https://github.com/GonzaloBarbano/E-commerce/pull/12) - @GonzaloBarbano (Desarrollador Frontend)
 
