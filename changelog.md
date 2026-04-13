@@ -11,7 +11,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/coord-dev-ops-repo-update-readme-md] Creación de spec-devops.md y actualización de plan.md, readme y mockup
   PR: [#20](https://github.com/GonzaloBarbano/E-commerce/pull/20) - @Naguirre0102 (Coordinador / DevOps)
 
-- [feature/doc-qa] Creación de spec-qa.md
+- [feature/doc-qa] Creación de spec-qa.md y configuración de MCPs para testing
+  Archivos: spec-qa.md, .env.example, .gitignore, MCP-SETUP.md, actualización .vscode/mcp.json
+  Instalaciones: @playwright/mcp, @modelcontextprotocol/server-github
   PR: [#25](https://github.com/GonzaloBarbano/E-commerce/pull/25) - @GonzaloBarbano (QA Tester)
 
 ---
