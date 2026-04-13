@@ -30,6 +30,7 @@ Este documento define el flujo de testing y aseguramiento de calidad (QA) para e
 - **Documentación de hallazgos** con capturas de pantalla y evidencia
 
 El testing se ejecuta en **dos momentos clave**:
+
 - **Momento 1:** Testing de integración parcial (pre-merge en develop)
 - **Momento 2:** Testing de integración final (post-merge en develop)
 
@@ -41,13 +42,15 @@ El testing se ejecuta en **dos momentos clave**:
 
 **Propósito:** Controlar un navegador real para ejecutar tests automatizados contra la URL local del proyecto.
 
-**Justificación:** 
+**Justificación:**
+
 - Permite simular interacciones reales del usuario (clicks, scrolls, inputs)
 - Soporta viewport emulation para testing responsive
 - Integración con Copilot Agent Mode para ejecución asistida
 - Inyección de librerías (axe-core para accesibilidad, Performance API para métricas)
 
 **Configuración:**
+
 ```json
 {
   "mcpServers": {
@@ -60,6 +63,7 @@ El testing se ejecuta en **dos momentos clave**:
 ```
 
 **Endpoints objetivo:**
+
 - Local: `http://localhost:3000` (o puerto configurado por Live Preview)
 - Producción: GitHubPages (cuando aplicable)
 
@@ -70,12 +74,14 @@ El testing se ejecuta en **dos momentos clave**:
 **Propósito:** Crear issues de tipo bug directamente desde Copilot Agent Mode sin acceso manual a GitHub.
 
 **Justificación:**
+
 - Automatización de creación de issues con template de bug
 - Vinculación automática con PRs (issue linking)
 - Notificación directa a responsables sin salir del editor
 - Trazabilidad completa del hallazgo en el repositorio
 
 **Configuración:**
+
 ```json
 {
   "mcpServers": {
@@ -91,6 +97,7 @@ El testing se ejecuta en **dos momentos clave**:
 ```
 
 **Permisos requeridos:**
+
 - `repo` (full control of private repositories)
 - `issues` (read and write access)
 
@@ -99,7 +106,9 @@ El testing se ejecuta en **dos momentos clave**:
 ## 📊 Plan de Testing
 
 ### Objetivo General
+
 Validar que el proyecto E-commerce cumple con criterios de calidad en:
+
 - **Compatibilidad:** navegadores y dispositivos
 - **Rendimiento:** carga y velocidad
 - **Accesibilidad:** WCAG 2.1 AA mínimo
@@ -107,13 +116,13 @@ Validar que el proyecto E-commerce cumple con criterios de calidad en:
 
 ### Test Cases Planificados
 
-| # | Test Case | Propósito | Herramienta | Momento(s) |
-|---|-----------|----------|------------|-----------|
-| 1 | Compatibilidad Navegadores Desktop | Verificar funcionamiento en Chrome, Firefox, Safari, Edge | Playwright MCP | 1 y 2 |
-| 2 | Responsive en Dispositivos Móviles | Validar adaptación a iPhone, Samsung Galaxy, iPad | Playwright MCP (viewport emulation) | 1 y 2 |
-| 3 | Performance y Carga | Medir métricas de rendimiento (FCP, LCP, CLS) | Playwright MCP + Performance API | 1 y 2 |
-| 4 | Accesibilidad Web | Validar cumplimiento WCAG 2.1 AA con axe-core | Playwright MCP + axe-core injection | 1 y 2 |
-| 5 | Validación HTML Semántica | Verificar estructura HTML y CSS válidos W3C | Playwright MCP + snapshot validation | 2 |
+| #   | Test Case                          | Propósito                                                 | Herramienta                          | Momento(s) |
+| --- | ---------------------------------- | --------------------------------------------------------- | ------------------------------------ | ---------- |
+| 1   | Compatibilidad Navegadores Desktop | Verificar funcionamiento en Chrome, Firefox, Safari, Edge | Playwright MCP                       | 1 y 2      |
+| 2   | Responsive en Dispositivos Móviles | Validar adaptación a iPhone, Samsung Galaxy, iPad         | Playwright MCP (viewport emulation)  | 1 y 2      |
+| 3   | Performance y Carga                | Medir métricas de rendimiento (FCP, LCP, CLS)             | Playwright MCP + Performance API     | 1 y 2      |
+| 4   | Accesibilidad Web                  | Validar cumplimiento WCAG 2.1 AA con axe-core             | Playwright MCP + axe-core injection  | 1 y 2      |
+| 5   | Validación HTML Semántica          | Verificar estructura HTML y CSS válidos W3C               | Playwright MCP + snapshot validation | 2          |
 
 ### Coordinaciones Requeridas
 
@@ -157,6 +166,7 @@ Validar que el proyecto E-commerce cumple con criterios de calidad en:
 ### Flujo de Ejecución
 
 #### Paso 1: Redactar y Commitear spec-qa.md
+
 ```bash
 # Crear rama de testing
 git checkout -b feature/doc-qa
@@ -171,6 +181,7 @@ git push origin feature/doc-qa
 ```
 
 **Evidencia de compleción:**
+
 - ✅ Commit visible en historia de git
 - ✅ spec-qa.md disponible en repositorio
 
@@ -189,6 +200,7 @@ git pull origin feature/responsive
 ```
 
 **Verificaciones:**
+
 - ✅ Ambas ramas están actualizadas
 - ✅ No hay conflictos locales
 - ✅ Los cambios están listos para testing
@@ -198,11 +210,13 @@ git pull origin feature/responsive
 #### Paso 3: Levantar Proyecto con Live Preview
 
 1. **Abrir proyecto en VS Code**
+
    ```bash
    code .
    ```
 
 2. **Instalar dependencias (si es necesario)**
+
    ```bash
    npm install
    ```
@@ -220,6 +234,7 @@ git pull origin feature/responsive
    ```
 
 **Criterios de aceptación:**
+
 - ✅ Página carga sin errores 500
 - ✅ Consola del navegador sin errores críticos
 - ✅ Todos los assets está disponibles (CSS, JS, imágenes)
@@ -229,6 +244,7 @@ git pull origin feature/responsive
 #### Paso 4: Conectar Playwright MCP en Copilot Agent Mode
 
 1. **Verificar configuración en `.vscode/mcp.json`:**
+
    ```json
    {
      "mcpServers": {
@@ -253,6 +269,7 @@ git pull origin feature/responsive
    ```
 
 **Verificación:**
+
 - ✅ Playwright MCP conectado (mostrar en tool calls de Copilot)
 - ✅ Copilot puede acceder a spec-qa.md como contexto
 
@@ -270,6 +287,7 @@ Para **cada test case**:
 **Protocolo de ejecución por test case:**
 
 **Test Case 1:** Compatibilidad Navegadores Desktop
+
 ```
 Prompt (copy-paste a Copilot Agent):
 "Ejecutar test de compatibilidad en navegadores desktop contra http://localhost:3000.
@@ -281,6 +299,7 @@ Prompt (copy-paste a Copilot Agent):
 ```
 
 **Test Case 2:** Responsive en Dispositivos Móviles
+
 ```
 Prompt (copy-paste a Copilot Agent):
 "Ejecutar test responsive contra http://localhost:3000 usando Playwright MCP.
@@ -292,6 +311,7 @@ Prompt (copy-paste a Copilot Agent):
 ```
 
 **Test Case 3:** Performance y Carga
+
 ```
 Prompt (copy-paste a Copilot Agent):
 "Ejecutar test de performance contra http://localhost:3000 con Playwright MCP.
@@ -303,6 +323,7 @@ Prompt (copy-paste a Copilot Agent):
 ```
 
 **Test Case 4:** Accesibilidad Web
+
 ```
 Prompt (copy-paste a Copilot Agent):
 "Ejecutar test de accesibilidad contra http://localhost:3000 usando Playwright MCP + axe-core.
@@ -314,6 +335,7 @@ Prompt (copy-paste a Copilot Agent):
 ```
 
 **Test Case 5:** Validación HTML Semántica
+
 ```
 Prompt (copy-paste a Copilot Agent):
 "Ejecutar test de estructura HTML semántica contra http://localhost:3000.
@@ -325,6 +347,7 @@ Prompt (copy-paste a Copilot Agent):
 ```
 
 **Registro por test case:**
+
 ```markdown
 ## Test Case X: [Nombre]
 
@@ -372,31 +395,38 @@ Link a PR: feature/[rama correspondiente]"
 ```
 
 **GitHub Issue Template (generado por GitHub MCP):**
+
 ```markdown
 ## 🐛 Bug Report
 
 **Test Case:** Test Case X - [Nombre]  
 **Momento:** Momento 1 - Pre-Merge  
-**Rama:** feature/[nombre]  
+**Rama:** feature/[nombre]
 
 ### 📝 Descripción
+
 [Descripción clara del bug]
 
 ### 🔁 Pasos para Reproducir
+
 1. [Paso 1]
 2. [Paso 2]
 3. [Paso 3]
 
 ### ✅ Resultado Esperado
+
 [Qué debería ocurrir]
 
 ### ❌ Resultado Actual
+
 [Qué ocurre realmente]
 
 ### 📸 Evidencia
+
 [Screenshots/videos]
 
 ### 🔧 Contexto
+
 - **Navegador:** [Chrome/Firefox/Safari/Edge]
 - **Dispositivo:** [Desktop/Mobile/Tablet]
 - **Viewport:** [1920x1080 / 390x844 / etc.]
@@ -404,10 +434,12 @@ Link a PR: feature/[rama correspondiente]"
 - **Console Errors:** [Si los hay]
 
 ### 📌 Linked PR
+
 Closes: [Link a la feature PR]
 ```
 
 **Notificación al responsable:**
+
 ```bash
 # Una vez creado el issue (GitHub MCP genera URL):
 "Notificar a @[Frontend Developer] sobre issue #XXX: [Título del bug]
@@ -428,12 +460,14 @@ Deadline: Resolver antes de mergear a develop"
 #### Paso 1: Confirmar Merge con Coordinador
 
 Verificar con el Coordinador que:
+
 - ✅ `feature/frontend` mergeado a develop
 - ✅ `feature/responsive` mergeado a develop
 - ✅ Todos los conflictos resueltos
 - ✅ Develop está actualizado con todos los cambios
 
 **Slack/Email:**
+
 ```
 "Confirmación: ¿Todos los feature branches están mergeados en develop y listo para testing Momento 2?"
 ```
@@ -455,6 +489,7 @@ npm install
 ```
 
 **Verificaciones:**
+
 - ✅ Rama develop está actualizada
 - ✅ Página carga sin errores
 - ✅ Todos los cambios de feature/ están visibles
@@ -475,6 +510,7 @@ Comparar con resultados de Momento 1 para detectar problemas de integración."
 ```
 
 **Enfoque especial en Momento 2:**
+
 - Validar que la integración de **todos** los estilos juntos no genera conflictos
 - Detectar efectos secundarios invisibles en Momento 1
 - Verificar que los bugfixes del Momento 1 se mantienen
@@ -551,15 +587,18 @@ git push origin feature/testing-documentation
 ```
 
 **PR Description:**
+
 ```markdown
 ## 📋 Testing Documentation - Momento 1 & 2
 
 ### Resumen
+
 - Test Cases ejecutados: 5/5
 - Issues creados: [Cantidad]
 - Documentación: Completar
 
 ### Test Cases Documentados
+
 - [ ] test-case-1.md: Compatibilidad Desktop
 - [ ] test-case-2.md: Responsive Mobile
 - [ ] test-case-3.md: Performance
@@ -567,9 +606,11 @@ git push origin feature/testing-documentation
 - [ ] test-case-5.md: HTML Semántico
 
 ### Issues Relacionados
+
 [Listar todos los issues creados con GitHub MCP]
 
 ### Reviewer
+
 @frontend-developer @responsive-specialist @coordinator
 ```
 
@@ -593,30 +634,36 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 ## Resultados
 
 ### Chrome
+
 - Status: PASS/FAIL
 - Screenshot: ![Chrome](../../../path/to/chrome.png)
 - Notas: [Hallazgos]
 
 ### Firefox
+
 - Status: PASS/FAIL
 - Screenshot: ![Firefox](../../../path/to/firefox.png)
 - Notas: [Hallazgos]
 
 ### Safari
+
 - Status: PASS/FAIL
 - Screenshot: ![Safari](../../../path/to/safari.png)
 - Notas: [Hallazgos]
 
 ### Edge
+
 - Status: PASS/FAIL
 - Screenshot: ![Edge](../../../path/to/edge.png)
 - Notas: [Hallazgos]
 
 ## Issues Creados
+
 - #XXX: [Descripción bug 1]
 - #YYY: [Descripción bug 2]
 
 ## Conclusión
+
 [Resumen de hallazgos]
 ```
 
@@ -634,28 +681,34 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 ## Resultados por Dispositivo
 
 ### iPhone 12 (390x844)
+
 - Status: PASS/FAIL
 - Screenshot: ![iPhone 12](../../../path/to/iphone12.png)
 - Layout: [Notas sobre responsive]
 - Interactividad: [Notas sobre touch]
 
 ### iPhone SE (375x667)
+
 - Status: PASS/FAIL
 - Screenshot: ![iPhone SE](../../../path/to/iphonese.png)
 
 ### Samsung Galaxy S21 (360x800)
+
 - Status: PASS/FAIL
 - Screenshot: ![Galaxy S21](../../../path/to/galaxy.png)
 
 ### iPad (768x1024)
+
 - Status: PASS/FAIL
 - Screenshot: ![iPad](../../../path/to/ipad.png)
 
 ## Issues Creados
+
 - #XXX: [Layout issues]
 - #YYY: [Touch interaction bugs]
 
 ## Conclusión
+
 [Análisis de responsive design]
 ```
 
@@ -672,16 +725,18 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 
 ## Métricas Medidas
 
-| Métrica | Valor | Target | Status |
-|---------|-------|--------|--------|
-| First Contentful Paint (FCP) | XXXms | < 1500ms | PASS/FAIL |
+| Métrica                        | Valor | Target   | Status    |
+| ------------------------------ | ----- | -------- | --------- |
+| First Contentful Paint (FCP)   | XXXms | < 1500ms | PASS/FAIL |
 | Largest Contentful Paint (LCP) | XXXms | < 2500ms | PASS/FAIL |
-| Cumulative Layout Shift (CLS) | X.XX | < 0.1 | PASS/FAIL |
-| Load Time (DOMContentLoaded) | XXXms | < 3000ms | PASS/FAIL |
+| Cumulative Layout Shift (CLS)  | X.XX  | < 0.1    | PASS/FAIL |
+| Load Time (DOMContentLoaded)   | XXXms | < 3000ms | PASS/FAIL |
 
 ## Console Logs
 ```
+
 [Pegar output de Performance API]
+
 ```
 
 ## Screenshot de Web Vitals
@@ -697,7 +752,7 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 
 ### [test-case-4.md](../../04-testing/test-case-4.md) — Accesibilidad Web
 
-```markdown
+````markdown
 # Test Case 4: Accesibilidad Web (WCAG 2.1 AA)
 
 **Objetivo:** Validar cumplimiento de estándares de accesibilidad web.
@@ -711,19 +766,23 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 ### Violations (Issues encontradas)
 
 **Critical Issues:**
+
 - [ ] Violation 1: [Descripción]
   - Elements: [count]
   - Fix: [Recomendación]
   - Issue: #XXX
 
 **Serious Issues:**
+
 - [ ] Violation 1: [Descripción]
   - Issue: #YYY
 
 **Moderate Issues:**
+
 - [ ] Violation 1: [Descripción]
 
 ## axe-core JSON Output
+
 ```json
 {
   "violations": [...],
@@ -731,17 +790,22 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
   "inapplicable": [...]
 }
 ```
+````
 
 ## Screenshots
+
 ![axe-core Results](../../../path/to/axe-results.png)
 
 ## Issues Creados
+
 - #XXX: Critical accessibility issue
 - #YYY: Serious accessibility issue
 
 ## Conclusión
+
 [Cumplimiento de WCAG 2.1 AA]
-```
+
+````
 
 ### [test-case-5.md](../../04-testing/test-case-5.md) — Validación HTML Semántica
 
@@ -750,14 +814,14 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 
 **Objetivo:** Validar que el HTML es semántico y cumple con W3C standards.
 
-**Standards:** HTML5 W3C, CSS Validation  
-**URL:** http://localhost:3000  
+**Standards:** HTML5 W3C, CSS Validation
+**URL:** http://localhost:3000
 **Herramienta:** Playwright MCP + W3C Validators
 
 ## Validación HTML (W3C)
 
-**Status:** PASS/FAIL  
-**Errores:** X  
+**Status:** PASS/FAIL
+**Errores:** X
 **Warnings:** Y
 
 ### Errores encontrados
@@ -772,7 +836,7 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 
 ## Validación CSS (W3C)
 
-**Status:** PASS/FAIL  
+**Status:** PASS/FAIL
 **Errores:** X
 
 ### Hallazgos de CSS
@@ -799,7 +863,7 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 
 ## Conclusión
 [Cumplimiento de W3C standards]
-```
+````
 
 ---
 
@@ -808,6 +872,7 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 ### Criterios para Registrar como Bug
 
 ✅ **Crear issue si:**
+
 - El hallazgo viola el spec original del proyecto
 - El hallazgo diferencia entre feature branch y develop
 - El hallazgo afecta a más de un navegador/dispositivo
@@ -815,6 +880,7 @@ Los siguientes test cases deben ser documentados en `docs/04-testing/`:
 - El hallazgo causa error de usuario (crash, datos perdidos)
 
 ❌ **NO crear issue si:**
+
 - El hallazgo es estético y está dentro de especificación
 - El hallazgo es una característica futura (backlog)
 - El hallazgo es una optimización menor (< 50ms)
@@ -846,11 +912,13 @@ Labels:
 ### Resumen de Momento 1
 
 **Fecha:** YYYY-MM-DD  
-**Ramas testeadas:** 
+**Ramas testeadas:**
+
 - feature/frontend (commit: XXXX)
 - feature/responsive (commit: XXXX)
 
 **Resultados:**
+
 - ✅ Test Case 1 (Navegadores): PASS/FAIL - [Breve descripción]
 - ✅ Test Case 2 (Responsive): PASS/FAIL - [Breve descripción]
 - ✅ Test Case 3 (Performance): PASS/FAIL - [Breve descripción]
@@ -873,6 +941,7 @@ Labels:
 **Rama testeada:** develop (commit: XXXX)
 
 **Resultados Comparativos:**
+
 - Test Case 1: PASS (sin cambios vs Momento 1)
 - Test Case 2: FAIL (nuevo issue de responsive)
 - Test Case 3: FAIL (mejora de performance)
@@ -909,25 +978,28 @@ Referencia a [docs/04-testing/testing-doc.md](../../04-testing/testing-doc.md):
 ## 🐛 Resumen de Issues
 
 ### Momento 1 - Pre-Merge (Total: X issues)
+
 [Tabla de issues]
 
 ### Momento 2 - Post-Merge (Total: X issues)
+
 [Tabla de issues]
 
 ### Estado General
+
 - Bugs críticos pendientes: X
 - Bugs en resolución: Y
 - Bugs cerrados: Z
 
 ## 📈 Métricas
 
-| Métrica | Valor |
-|---------|-------|
-| Test cases ejecutados | 5/5 |
-| Coverage de testing | 100% |
-| Issues creados | XX |
-| Issues cerrados | XX |
-| Tiempo de testing | XX horas |
+| Métrica               | Valor    |
+| --------------------- | -------- |
+| Test cases ejecutados | 5/5      |
+| Coverage de testing   | 100%     |
+| Issues creados        | XX       |
+| Issues cerrados       | XX       |
+| Tiempo de testing     | XX horas |
 
 ## 🚀 Checklist de Cierre
 
@@ -952,7 +1024,7 @@ Contexto: Proyecto E-commerce, QA Testing Momento [1 / 2]
 
 Leer archivo: docs/03-specs/spec-qa.md
 
-Requiero que ejecutes los siguientes test cases contra http://localhost:3000 
+Requiero que ejecutes los siguientes test cases contra http://localhost:3000
 usando Playwright MCP:
 
 1. **Test Case 1: Compatibilidad Navegadores Desktop**
@@ -1005,6 +1077,7 @@ Crear/Actualizar docs/04-testing/testing-doc.md con índice y resumen.
 ## 📞 Contactos y Notificaciones
 
 ### Notificación a Frontend Developer
+
 ```
 @frontend-developer
 
@@ -1021,6 +1094,7 @@ Detalles: docs/04-testing/
 ```
 
 ### Notificación a Responsive Specialist
+
 ```
 @responsive-specialist
 
@@ -1035,6 +1109,7 @@ Detalles: docs/04-testing/test-case-2.md
 ```
 
 ### Notificación a Coordinador (Pre-Release)
+
 ```
 @coordinator
 
