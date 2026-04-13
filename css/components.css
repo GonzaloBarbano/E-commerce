@@ -231,20 +231,7 @@ input[type="radio"] {
   border-left-color: var(--color-primary);
 }
 
-/* Links en navbar (redundante con styles.css pero específico para componentes) */
-.nav-link {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-nav);
-  font-weight: var(--font-weight-medium);
-  transition: var(--transition-default);
-  padding: var(--spacing-sm) 0;
-  border-bottom: 2px solid transparent;
-}
 
-.nav-link:hover {
-  color: var(--color-primary);
-  border-bottom-color: var(--color-primary);
-}
 
 /* ============================================
    PAGINACIÓN
