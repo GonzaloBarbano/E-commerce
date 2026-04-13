@@ -46,9 +46,7 @@
     margin-bottom: var(--spacing-md);
   }
   
-  h2 {
-    font-size: var(--font-size-h2);
-  }
+  
   
   /* GRID DE PRODUCTOS */
   /* 2 columnas en tablet */
@@ -193,13 +191,14 @@
   /* FORM / INPUTS */
   /* Inputs ocupan ancho completo */
   input[type="text"],
-  input[type="email"],
-  input[type="search"],
-  textarea,
-  select {
-    font-size: 16px; /* Prevenir zoom en iOS */
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  font-size: 16px;
+  padding: var(--spacing-sm) var(--spacing-md);
+}
   
   .search-input {
     font-size: 16px;
