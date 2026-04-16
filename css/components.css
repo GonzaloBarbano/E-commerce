@@ -45,7 +45,7 @@
 
 /* Botón secundario: borde, sin relleno */
 .btn-secondary {
-  background-color: transparent;
+ background-color: var(--color-surface-dark) !important;
   color: var(--color-primary);
   padding: var(--spacing-sm) var(--spacing-lg);
   border: 2px solid var(--color-primary);
