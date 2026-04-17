@@ -287,6 +287,19 @@ Screenshots a obtener:
 
 ---
 
+## Captura de pantalla (Manual)
+
+![](screenshots/tc-005-w3c-validator-uri-1.png)
+![](screenshots/tc-005-w3c-validator-uri-2.png)
+![](screenshots/tc-005-w3c-validator-uri-3.png)
+![](screenshots/tc-005-w3c-validator-uri-4.png)
+![](screenshots/tc-005-w3c-validator-uri-5.png)
+![](screenshots/tc-005-w3c-validator-uri-6.png)
+![](screenshots/tc-005-w3c-validator-uri-7.png)
+![](screenshots/tc-005-w3c-validator-uri-8.png)
+
+---
+
 ## 8. Issues Relacionados
 
 | Título                                                            | Severidad | Estado  |
