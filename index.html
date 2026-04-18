@@ -262,7 +262,7 @@
         </aside>
 
         <!-- ========== CONTENIDO PRINCIPAL ========== -->
-        <div class="main-content">
+        <div class="main-content" aria-label="Contenido principal de la tienda"></div>
           <!-- ========== SECCIÓN: DESCRIPCIÓN DE LA TIENDA ========== -->
           <section id="inicio" class="hero-section">
             <h2>DESCRIPCIÓN DE LA TIENDA</h2>
@@ -281,27 +281,20 @@
             <!-- TODO: CSS: Crear layout grid para 3 imágenes, efectos hover y lightbox -->
             <!-- TODO: JS: Agregar zoom interactivo y galería lightbox de imágenes -->
             <div class="featured-gallery">
-              <figure class="gallery-item">
-                <img
-                  src="assets/images/nvidia-rtx4090-destacada.jpg"
-                  alt="Tarjeta Gráfica NVIDIA RTX 4090 - Componente de alto rendimiento"
-                  loading="lazy"
-                />
-              </figure>
-              <figure class="gallery-item">
-                <img
-                  src="assets/images/intel-i9-13900k-destacado.jpg"
-                  alt="Procesador Intel Core i9 - CPU de última generación"
-                  loading="lazy"
-                />
-              </figure>
-              <figure class="gallery-item">
-                <img
-                  src="assets/images/pc-gaming-completo.jpg"
-                  alt="PC Gaming Completo - Configuración de alta gama"
-                  loading="lazy"
-                />
-              </figure>
+           <figure class="gallery-item">
+  <img src="assets/images/gpu-destacada.jpg" alt="Tarjeta Gráfica NVIDIA RTX 4090 - Componente de alto rendimiento" loading="lazy" />
+  <figcaption class="visually-hidden">Tarjeta Gráfica NVIDIA RTX 4090</figcaption>
+</figure>
+
+<figure class="gallery-item">
+  <img src="assets/images/cpu-destacada.jpg" alt="Procesador Intel Core i9 - CPU de última generación" loading="lazy" />
+  <figcaption class="visually-hidden">Procesador Intel Core i9</figcaption>
+</figure>
+
+<figure class="gallery-item">
+  <img src="assets/images/build-completo.jpg" alt="PC Gaming Completo - Configuración de alta gama" loading="lazy" />
+  <figcaption class="visually-hidden">PC Gaming Completo</figcaption>
+</figure>
             </div>
 
             <!-- Llamada a la acción principal -->
@@ -587,8 +580,12 @@
 
         <!-- Tabla comparativa de productos destacados -->
         <!-- TODO: CSS: Estilizar tabla con zebra striping, hover effects y responsive design -->
-        <h3>Productos Estrella - Comparativa</h3>
-        <table class="comparison-table">
+        <section aria-label="Comparativa de Productos Estrella">
+  <h3>Productos Estrella - Comparativa</h3>
+  <table class="comparison-table">
+    ...
+  </table>
+</section>
           <caption>
             Comparativa de productos más populares
           </caption>
