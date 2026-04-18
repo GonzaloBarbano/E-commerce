@@ -350,3 +350,20 @@ body {
     padding: 0;
   }
 }
+@media (max-width: 767px) {
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--color-surface-dark);
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+  }
+  .nav-list.open {
+    display: flex;
+  }
+  .hamburger-btn {
+    display: block;
+  }
+}
