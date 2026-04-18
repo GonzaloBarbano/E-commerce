@@ -366,4 +366,7 @@ body {
   .hamburger-btn {
     display: block;
   }
+  .header-container {
+    overflow-x: hidden;
+  }
 }
