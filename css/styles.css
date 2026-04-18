@@ -272,3 +272,11 @@ small,
   white-space: nowrap;
   border: 0;
 }
+.sidebar-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-sm);
+}
