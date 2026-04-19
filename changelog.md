@@ -16,6 +16,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Instalaciones: @playwright/mcp, @modelcontextprotocol/server-github
   PR: [#25](https://github.com/GonzaloBarbano/E-commerce/pull/25) - @GonzaloBarbano (QA Tester)
 
+- [feature/dev-frontend-css-add-styles] Generación de styles.css y components.css desde mockup Figma usando Copilot Agent
+  PR: [#23](https://github.com/GonzaloBarbano/E-commerce/pull/23) - @LucasFUces (Desarrollador Frontend/CSS)
+
+- [feature/responsive-design-add-responsive-styles] Generación de responsive.css con media queries mobile, tablet y desktop usando Copilot Agent
+  PR: [#24](https://github.com/GonzaloBarbano/E-commerce/pull/24) - @LucasFUces (Especialista en Responsive Design)
 ---
 
 ## [Release Actividad Obligatoria N°1] - 2026-03-25
