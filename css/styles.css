@@ -260,6 +260,46 @@ small,
   border-top: 1px solid var(--color-border);
 }
 
+/* QUERIES - RESPONSIVE DESIGN */
+
+/* Tablet: max-width 768px */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 0px;
+    --spacing-lg: 16px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: var(--spacing-md);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: max-width 480px */
+@media (max-width: 480px) {
+  :root {
+    --font-size-h1: 24px;
+    --font-size-h2: 18px;
+    --font-size-h3: 15px;
+    --spacing-lg: 12px;
+  }
+
+  .main-content {
+    padding: var(--spacing-md);
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
 /* Accesibilidad: ocultar visualmente pero accesible para lectores de pantalla */
 .visually-hidden {
   position: absolute;
