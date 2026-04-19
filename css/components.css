@@ -322,3 +322,42 @@ input[type="radio"] {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
+ /* ============================================
+   HAMBURGER BUTTON
+   ============================================ */
+
+.hamburger-btn {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  position: relative;
+  cursor: pointer;
+}
+
+.hamburger-btn::before,
+.hamburger-btn::after,
+.hamburger-btn span {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: white;
+  position: absolute;
+  left: 7px;
+  transition: var(--transition-default);
+}
+
+.hamburger-btn span {
+  top: 18px;
+}
+
+.hamburger-btn::before {
+  top: 10px;
+}
+
+.hamburger-btn::after {
+  top: 26px;
+}
