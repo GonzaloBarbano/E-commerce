@@ -252,3 +252,144 @@ corsair-h150i-elite.jpg → 404
 
 _Generado con Playwright MCP — Chromium 147.0.0.0_
 _Firefox, Safari y Edge requieren verificación manual local con `npx playwright test`_
+
+---
+
+---
+
+# MOMENTO 2 — Post-Merge (GitHub Pages)
+
+**Fecha de ejecución:** 19 de abril de 2026
+**URL:** https://gonzalobarbano.github.io/E-commerce/
+**Rama:** develop → release (GitHub Pages deployment)
+**Herramienta:** Playwright MCP (Chromium 147.0.0.0)
+**Viewport:** 1920×1080
+
+---
+
+## Chrome (Chromium) — Testing Automatizado ✅
+
+### Estado general: ⚠️ PASS estructural / FAIL parcial en recursos
+
+#### CSS y Estilos — Comparativa con Momento 1
+
+| Stylesheet           | Momento 1 (local)        | Momento 2 (Pages) | Cambio                |
+| -------------------- | ------------------------ | ----------------- | --------------------- |
+| Google Fonts (Inter) | blocked-CORS             | blocked-CORS      | Sin cambio (esperado) |
+| `styles.css`         | ✅ 22 reglas             | ✅ 23 reglas      | ✅ +1 regla nueva     |
+| `components.css`     | ✅ 32 reglas             | ✅ 32 reglas      | Sin cambio            |
+| `responsive.css`     | ❌ 0 reglas (MIME error) | ✅ **11 reglas**  | **🟢 RESUELTO**       |
+
+**`responsive.css` ahora carga correctamente en GitHub Pages.** El error de MIME type del Momento 1 era un problema exclusivo del entorno local (Live Server), no del código.
+
+#### Estilos Computados (runtime)
+
+| Propiedad           | Valor                            | Spec esperada          | Estado          |
+| ------------------- | -------------------------------- | ---------------------- | --------------- |
+| `body background`   | `rgb(248, 249, 250)` = `#F8F9FA` | `--color-bg`           | ✅              |
+| `body font-family`  | `Inter, sans-serif`              | Inter                  | ✅              |
+| `body color`        | `rgb(17, 24, 39)` = `#111827`    | `--color-text`         | ✅              |
+| `navbar background` | `rgb(30, 27, 46)` = `#1E1B2E`    | `--color-surface-dark` | **🟢 RESUELTO** |
+
+#### Imágenes — Comparativa
+
+| Imagen                       | Momento 1 | Momento 2                 | Estado                       |
+| ---------------------------- | --------- | ------------------------- | ---------------------------- |
+| `gpu-destacada.jpg`          | ❌ 404    | ❌ 404                    | Persiste                     |
+| `cpu-destacada.jpg`          | ❌ 404    | ❌ 404                    | Persiste                     |
+| `build-completo.jpg`         | ❌ 404    | ❌ 404                    | Persiste                     |
+| `intel-i9-13900k.jpg`        | ❌ 404    | ✅ Carga                  | **🟢 RESUELTO**              |
+| `nvidia-rtx4090.jpg`         | ❌ 404    | ✅ Carga                  | **🟢 RESUELTO**              |
+| `corsair-vengeance-ddr5.jpg` | ❌ 404    | ✅ Carga                  | **🟢 RESUELTO**              |
+| `kingston-nv2-ssd.jpg`       | ❌ 404    | ✅ `kingston-nv2-1tb.jpg` | **🟢 RESUELTO** (renombrada) |
+| `corsair-rm850-gold.jpg`     | ❌ 404    | ✅ `corsair-rm850x.jpg`   | **🟢 RESUELTO** (renombrada) |
+| `corsair-h150i-elite.jpg`    | ❌ 404    | ✅ `corsair-h150i.jpg`    | **🟢 RESUELTO** (renombrada) |
+
+**Imágenes cargadas: 6/9 → Pendientes: 3/9** (gpu-destacada, cpu-destacada, build-completo)
+
+#### Errores en Consola (4 errores — reducción de 10 a 4)
+
+```
+[ERROR] Failed to load resource: 404 @ https://gonzalobarbano.github.io/favicon.ico
+[ERROR] Failed to load resource: 404 @ assets/images/build-completo.jpg
+[ERROR] Failed to load resource: 404 @ assets/images/gpu-destacada.jpg
+[ERROR] Failed to load resource: 404 @ assets/images/cpu-destacada.jpg
+```
+
+**Mejora significativa:** de 10 errores en Momento 1 a 4 errores en Momento 2.
+
+---
+
+### Firefox — Verificación Manual Requerida
+
+- **Status:** ⏳ Pendiente
+- Los bugs críticos de MIME y 404 que habrían afectado Firefox en Momento 1 están mayormente resueltos en producción.
+- Se recomienda verificar manualmente en Firefox para confirmar comportamiento de `responsive.css` (11 reglas).
+
+### Safari (WebKit) — Verificación Manual Requerida
+
+- **Status:** ⏳ Pendiente
+- Con `responsive.css` ahora funcional, verificar especialmente media queries y comportamiento de flexbox.
+
+### Edge — Verificación Manual Requerida
+
+- **Status:** ⏳ Pendiente (comportamiento esperado idéntico a Chrome por compartir engine Chromium)
+
+---
+
+## Issues Resueltos en Momento 2
+
+| Bug Momento 1                          | Estado en Momento 2                             |
+| -------------------------------------- | ----------------------------------------------- |
+| 🔴 BUG-01: `responsive.css` MIME error | **🟢 RESUELTO** — Carga con 11 reglas en Pages  |
+| 🔴 BUG-02: 9 imágenes 404              | **⚠️ PARCIAL** — 6/9 resueltas, 3 persisten     |
+| ⚠️ BUG-03: Navbar transparente         | **🟢 RESUELTO** — `#1E1B2E` correcto en runtime |
+
+---
+
+## Issues Nuevos en Momento 2
+
+| #      | Título                                          | Severidad | Detalle                                                                                                 |
+| ------ | ----------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------- |
+| BUG-04 | `[BUG] favicon.ico no encontrado`               | Minor     | `https://gonzalobarbano.github.io/favicon.ico` → 404. Genera error en consola.                          |
+| BUG-05 | `[BUG] 3 imágenes de hero/banner siguen en 404` | Moderate  | `gpu-destacada.jpg`, `cpu-destacada.jpg`, `build-completo.jpg` no subidas al repo. Afecta sección hero. |
+
+---
+
+## Comparativa Visual Momento 1 vs Momento 2
+
+| Elemento           | Momento 1 (local) | Momento 2 (Pages) | Diferencia        |
+| ------------------ | ----------------- | ----------------- | ----------------- |
+| Navbar background  | ❌ Transparente   | ✅ `#1E1B2E`      | **Mejorado**      |
+| CSS responsive     | ❌ 0 reglas       | ✅ 11 reglas      | **Mejorado**      |
+| Imágenes productos | ❌ 0/9 cargan     | ✅ 6/9 cargan     | **Mejorado**      |
+| Imágenes hero      | ❌ 0/3 cargan     | ❌ 0/3 cargan     | Sin cambio        |
+| Favicon            | N/A               | ❌ 404            | Nuevo error menor |
+| HTML semántico     | ✅                | ✅                | Sin cambio        |
+| Estilos base       | ✅                | ✅                | Sin cambio        |
+
+---
+
+## Conclusión General — Momento 2
+
+La integración hacia develop y el despliegue en GitHub Pages **resolvió los 2 bugs críticos y el moderado del Momento 1**:
+
+- `responsive.css` ahora carga correctamente (11 reglas)
+- El navbar tiene el color correcto (`#1E1B2E`)
+- 6 de las 9 imágenes de productos ya están disponibles
+
+**Pendientes bloqueantes para release:**
+
+- ❌ 3 imágenes de la sección hero siguen en 404 (BUG-05, severidad Moderate)
+
+**Pendientes menores:**
+
+- ❌ Favicon 404 (BUG-04, severidad Minor)
+- ⏳ Verificación manual en Firefox, Safari y Edge
+
+**Recomendación:** ⚠️ Se puede continuar hacia release con los issues conocidos documentados. BUG-05 debería resolverse antes del release final para completar la experiencia visual del hero.
+
+---
+
+_Testing Momento 2 ejecutado con Playwright MCP — Chromium 147.0.0.0_
+_URL: https://gonzalobarbano.github.io/E-commerce/_

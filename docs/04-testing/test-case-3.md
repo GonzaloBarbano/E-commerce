@@ -313,3 +313,92 @@ Criterio de cierre: HTTP 200 en todas las imágenes en GitHub Pages.
 ---
 
 _Documento generado como parte del Momento 3 — Performance Test. Completar Tabla A con capturas de Chrome DevTools (§6) para cerrar las métricas de tiempo restantes._
+
+## 2. INVENTARIO DE RECURSOS (Momento 2 - Integridad)
+
+### 2.1 Imágenes — **ESTADO CRÍTICO (Faltantes en Hero)** 🔴
+
+Se verificó la disponibilidad de los recursos multimedia. A pesar de la carga de productos, las imágenes principales fallan:
+
+| #   | Archivo referenciado                       | Sección  | Estado HTTP |
+| --- | ------------------------------------------ | -------- | ----------- |
+| 1   | `assets/images/gpu-destacada.jpg`          | Hero     | **404**     |
+| 2   | `assets/images/cpu-destacada.jpg`          | Hero     | **404**     |
+| 3   | `assets/images/build-completo.jpg`         | Hero     | **404**     |
+| 4   | `assets/images/intel-i9-13900k.jpg`        | Producto | **200 OK**  |
+| 5   | `assets/images/nvidia-rtx4090.jpg`         | Producto | **200 OK**  |
+| 6   | `assets/images/corsair-vengeance-ddr5.jpg` | Producto | **200 OK**  |
+| 7   | `favicon.ico`                              | Global   | **404**     |
+
+**Total: 4 recursos fallan.** La latencia de red se ve afectada por las peticiones fallidas a archivos inexistentes en el deploy actual.
+
+### 2.2 Estructura HTML confirmada
+
+- Navbar fijo con 5 links de navegación interna.
+- Sidebar con categorías + filtros de precio, marca y especificaciones.
+- Hero section con 3 imágenes (404 detectados) + CTA.
+- Grid de productos funcional con imágenes parciales.
+- Secciones complementarias: Carrito, Nosotros, Compatibilidad, Suscripción y Footer.
+
+---
+
+## 3. MÉTRICAS TÉCNICAS
+
+### Tabla A — Tiempos de carga (Datos de Capturas)
+
+| Métrica                | Valor obtenido | Umbral aceptable | Estado |
+| ---------------------- | -------------- | ---------------- | ------ |
+| DOMContentLoaded       | **686 ms**     | ≤ 800 ms         | ✅ OK  |
+| Load Event (total)     | **863 ms**     | ≤ 1500 ms        | ✅ OK  |
+| First Contentful Paint | **0.5 s**      | ≤ 1000 ms        | ✅ OK  |
+| Tiempo Google Fonts    | **167 ms**     | ≤ 300 ms         | ✅ OK  |
+| Requests totales       | 17 requests    | < 20             | ✅ OK  |
+
+### Tabla B — Top 3 recursos más lentos (Análisis Network)
+
+| #   | Recurso                             | Tipo | Bloquea render | Observación                               |
+| --- | ----------------------------------- | ---- | -------------- | ----------------------------------------- |
+| 1   | Google Fonts (`Inter`)              | Font | **Sí**         | Carga mediante @import genera delay.      |
+| 2   | `css/styles.css` / `components.css` | CSS  | Sí             | Carga síncrona de 486ms / 487ms.          |
+| 3   | Imágenes Hero (404)                 | IMG  | No             | Latencia de red innecesaria (~150ms c/u). |
+
+---
+
+## 4. ANÁLISIS CSS (archivos de la rama)
+
+### 4.1 🔴 CRÍTICO — `@import` de Google Fonts bloquea el renderizado
+
+```css
+/* css/styles.css — línea 1 */
+@import url("[https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap)");
+```
+
+---
+
+## 5. RECOMENDACION DE OPTIMIZACION
+
+- R1: Mover la carga de fuentes al index.html usando <link rel="preconnect">.
+
+- R2: Corregir los nombres de archivos o paths para las 3 imágenes del Hero Section (404 detectados).
+
+- R3: Unificar archivos CSS (styles.css + components.css + responsive.css) para reducir el número de peticiones.
+
+---
+
+## 6. RESULTADO GENERAL
+
+| Ítem                                           | Estado                                                     |
+| ---------------------------------------------- | ---------------------------------------------------------- |
+| **Métricas de tiempo (DOMContentLoaded, FCP)** | ✅ Aprobado                                                |
+| **Análisis de CSS**                            | ✅ Completado                                              |
+| **Recursos de Imagen**                         | ❌ **FALLA** (4 recursos críticos con 404)                 |
+| **Veredicto Final**                            | **APROBADO CON OBSERVACIONES** (Bloqueado por assets Hero) |
+
+---
+
+## 7. ANEXO EVIDENCIA
+
+- Lighthouse Score
+  ![](screenshots/Lighthouse-score.png)
+- Network Stats
+  ![](screenshots/Netwokr-stats.png)

@@ -327,3 +327,281 @@ El HTML demuestra un nivel de calidad semántica destacado para el contexto del 
 1. ⬆️ Corregir **WARNING-1** — `h1` como logo (mayor impacto en SEO)
 2. ⬆️ Agregar `<figcaption>` a las `<figure>` — **WARNING-6**
 3. Envolver `h3` + tabla en `<section>` dentro de `#nosotros` — **WARNING-4**
+
+---
+
+## MOMENTO 2 — Post-merge (`develop` / producción)
+
+| Campo         | Detalle                                                    |
+| ------------- | ---------------------------------------------------------- |
+| **Rama**      | `develop` (desplegada en GitHub Pages)                     |
+| **Fecha**     | 2026-04-19                                                 |
+| **Resultado** | 🔴 FAIL — 2 Errores de sintaxis graves + 2 Warnings nuevos |
+
+### Comparativa de cambios respecto al Momento 1
+
+| #   | Cambio detectado                                                                                | Tipo                    | Estado       |
+| --- | ----------------------------------------------------------------------------------------------- | ----------------------- | ------------ |
+| 1   | `h1` + `span` con `visually-hidden` reemplaza al logo en `<a>`                                  | Corrección ✅           | W-1 resuelto |
+| 2   | `h3` dentro de `nav.categories-section` reemplazado por `<p class="sidebar-title">`             | Corrección ✅           | W-2 resuelto |
+| 3   | `<figure>` ahora incluyen `<figcaption class="visually-hidden">`                                | Corrección ✅           | W-6 resuelto |
+| 4   | `<header>` tiene `</header>` de cierre prematuro antes del `<nav>`                              | 🔴 ERROR NUEVO          | Bug M2-E1    |
+| 5   | `<div class="main-content">` tiene `</div>` de cierre prematuro — todo el contenido queda fuera | 🔴 ERROR NUEVO          | Bug M2-E2    |
+| 6   | `<section>` para comparativa en `#nosotros` cierra antes de `<caption>`, `<thead>` y `<tbody>`  | 🔴 ERROR NUEVO          | Bug M2-E3    |
+| 7   | `<h2>` usado dentro del `<aside>` para "FILTROS" y "ENLACES RÁPIDOS" (antes eran `h3`)          | ⚠️ WARNING NUEVO        | Bug M2-W1    |
+| 8   | `<script src="assets/scripts/search.js">` comentado duplicado al final del body                 | ⚠️ WARNING NUEVO        | Bug M2-W2    |
+| 9   | `<button class="hamburger-btn">` fuera del `<header>` por el cierre prematuro (E1)              | 🔴 Consecuencia de E1   | Bug M2-E1    |
+| 10  | `<title>` es "PC Hardware" pero el `<h1>` oculto dice "PC Hardware — Tienda de Componentes"     | ℹ️ Inconsistencia menor | —            |
+
+### Esquema de Estructura Semántica M2
+
+```
+html[lang="es"]
+└── head
+│   ├── meta[charset / viewport / description / ...] ✅
+│   └── title: "PC Hardware"  ← ℹ️ Inconsistente con h1 oculto
+└── body
+    ├── header[role="banner"].navbar
+    │   └── </header> ← 🔴 CIERRE PREMATURO (E1)
+    ├── div.logo-container  ← FUERA del header
+    │   ├── h1.visually-hidden "PC Hardware — Tienda de Componentes" ✅ (W-1 corregido)
+    │   └── a[aria-label] > span[aria-hidden] ✅
+    ├── button.hamburger-btn[aria-expanded]  ← FUERA del header (consecuencia E1)
+    ├── nav[aria-label="Navegación Principal"]  ← FUERA del header (consecuencia E1)
+    │   └── ul > li ×5 > a
+    ├── main[role="main"]
+    │   ├── div.main-container
+    │   │   ├── aside[role="complementary"]
+    │   │   │   ├── input[type="search"][aria-label] ✅
+    │   │   │   ├── nav[aria-label="Categorías"]
+    │   │   │   │   ├── p.sidebar-title "CATEGORÍAS" ✅ (W-2 corregido)
+    │   │   │   │   └── ul > li ×7 > a
+    │   │   │   ├── section[aria-label="Filtros"]
+    │   │   │   │   ├── h2 "FILTROS"  ⚠️ WARNING M2-W1
+    │   │   │   │   └── form#filters-form > fieldset ×3
+    │   │   │   └── nav[aria-label="Enlaces Rápidos"]
+    │   │   │       ├── h2 "ENLACES RÁPIDOS"  ⚠️ WARNING M2-W1
+    │   │   │       └── ul > li ×2 > a
+    │   │   └── div.main-content[aria-label] + </div> ← 🔴 CIERRE PREMATURO (E2)
+    │   ← Todo lo siguiente queda FUERA de div.main-content
+    │   ├── section#inicio ✅ (pero desconectado del layout)
+    │   │   ├── h2 "DESCRIPCIÓN DE LA TIENDA"
+    │   │   ├── figure ×3 > img + figcaption.visually-hidden ✅ (W-6 corregido)
+    │   │   └── a.btn-primary
+    │   ├── section#tienda > article ×6 ✅
+    │   ├── section#carrito > table ✅
+    │   ├── section#nosotros
+    │   │   ├── h2 "Sobre Nosotros"
+    │   │   └── section[aria-label="Comparativa..."]
+    │   │       ├── h3 "Productos Estrella" ✅ (W-4 corregido en intención)
+    │   │       └── </section> + table ... ← 🔴 TABLA FUERA DE SECTION (E3)
+    │   │           ← caption, thead, tbody quedan huérfanos
+    │   ├── section#compatibilidad > article ×3 ✅
+    │   └── section#ayuda > form > fieldset ✅
+    └── footer[role="contentinfo"] ✅
+        └── section ×4 + address + rel=noopener ✅
+```
+
+### Checklist M2
+
+| Etiqueta                                    | Momento 1 | Momento 2 | Cambio                                  |
+| ------------------------------------------- | --------- | --------- | --------------------------------------- |
+| `<header>` — cierre correcto                | ✅        | 🔴        | Regresión — cierre prematuro            |
+| `<nav>` principal dentro de `<header>`      | ✅        | 🔴        | Queda fuera del header                  |
+| `<h1>` semántico correcto                   | ⚠️        | ✅        | Corregido                               |
+| `<nav>` sidebar sin `<h3>` interno          | ⚠️        | ✅        | Corregido                               |
+| `<figure>` con `<figcaption>`               | ⚠️        | ✅        | Corregido                               |
+| `<h3>` en `#nosotros` dentro de `<section>` | ⚠️        | ⚠️        | Intención correcta, ejecución rota (E3) |
+| `div.main-content` cierre correcto          | ✅        | 🔴        | Regresión — cierre prematuro            |
+| `<h2>` dentro de `<aside>`                  | ✅        | ⚠️        | Regresión semántica — nivel incorrecto  |
+| `<table>` comparativa con `<caption>`       | ✅        | 🔴        | Tabla huérfana por E3                   |
+| Comentario duplicado en `</body>`           | ✅        | ⚠️        | Ruido en el código                      |
+
+### Errores y Warnings M2
+
+#### 🔴 ERROR M2-E1 — `<header>` cierra prematuramente antes del `<nav>` y el logo
+
+- **Ubicación:** Línea ~35, rama `develop`
+- **Código actual:**
+
+```html
+...
+```
+
+- **Problema:** El `</header>` de cierre está en la misma línea de apertura, antes del logo, el botón hamburguesa y la nav. Todo ese contenido queda fuera del landmark `<header>`, rompiendo la estructura semántica y el comportamiento visual en pantalla.
+- **Corrección:**
+
+```html
+... ... ...
+```
+
+- **Severidad:** 🔴 ALTA — Rompe el landmark, la accesibilidad y el CSS del navbar.
+
+---
+
+#### 🔴 ERROR M2-E2 — `<div class="main-content">` cierra inmediatamente, dejando todas las secciones huérfanas
+
+- **Ubicación:** Línea ~100, rama `develop`
+- **Código actual:**
+
+```html
+...
+```
+
+- **Problema:** El `</div>` de cierre está en la misma línea que la apertura. Las secciones `#inicio`, `#tienda` y `#carrito` quedan fuera del contenedor de layout, lo que rompe el diseño CSS de dos columnas (sidebar + contenido) y deja esas secciones sin el contexto estructural esperado.
+- **Corrección:** Mover el `</div>` al final del bloque, después del cierre de `section#carrito`:
+
+```html
+... ... ...
+```
+
+- **Severidad:** 🔴 ALTA — Rompe el layout CSS completo del área principal.
+
+---
+
+#### 🔴 ERROR M2-E3 — `<section>` de comparativa cierra antes de la tabla, dejando `<caption>`, `<thead>` y `<tbody>` huérfanos
+
+- **Ubicación:** Dentro de `section#nosotros`, rama `develop`
+- **Código actual:**
+
+```html
+Productos Estrella - Comparativa ... Comparativa de productos más populares ...
+...
+```
+
+- **Problema:** La `<table>` cierra dentro de la `<section>`, pero el `<caption>`, `<thead>` y `<tbody>` con todos los datos quedan fuera de ambas. Esto genera HTML inválido — elementos de tabla fuera de un contexto de tabla — y el validador W3C emitirá errores reales.
+- **Corrección:** Mover `</table>` y `</section>` al final del bloque completo:
+
+```html
+Productos Estrella - Comparativa Comparativa de productos más populares ... ...
+```
+
+- **Severidad:** 🔴 ALTA — HTML inválido. El validador W3C reportará errores reales. La tabla no renderiza correctamente.
+
+---
+
+#### ⚠️ WARNING M2-W1 — `<h2>` dentro del `<aside>` rompe la jerarquía de headings
+
+- **Ubicación:** `aside > section[aria-label="Filtros"] > h2` y `aside > nav > h2`
+- **Problema:** En el Momento 1 se usaban `<h3>` correctamente. En el Momento 2 fueron reemplazados por `<h2>`, lo que genera una jerarquía incoherente: el `<aside>` tiene `h2` mientras el `<main>` también tiene `h2` para las secciones principales. Los lectores de pantalla y los crawlers de SEO no pueden distinguir la importancia relativa de estos headings.
+- **Jerarquía resultante problemática:**
+
+```
+  h1 → "PC Hardware — Tienda de Componentes"
+    h2 → "FILTROS"          ← aside (mismo nivel que secciones principales)
+    h2 → "ENLACES RÁPIDOS"  ← aside (mismo nivel que secciones principales)
+    h2 → "DESCRIPCIÓN..."   ← main/section#inicio
+    h2 → "PRODUCTOS..."     ← main/section#tienda
+```
+
+- **Corrección:** Revertir a `<h3>` dentro del `<aside>`, o usar elementos sin heading si el `aria-label` del bloque padre ya provee el contexto necesario.
+- **Severidad:** ⚠️ MEDIA — Regresión semántica respecto al Momento 1.
+
+---
+
+#### ⚠️ WARNING M2-W2 — Comentario `<script>` duplicado al final del `<body>`
+
+- **Ubicación:** Últimas líneas del `<body>`, rama `develop`
+- **Código actual:**
+
+```html
+--> --> ← duplicado
+```
+
+- **Problema:** El comentario del script `search.js` aparece dos veces. No rompe nada funcionalmente, pero indica descuido en el merge y puede generar confusión al descomentar scripts en el futuro.
+- **Corrección:** Eliminar la línea duplicada.
+- **Severidad:** 🟢 BAJA — Ruido en el código.
+
+### Jerarquía de Headings M2
+
+```
+h1 → "PC Hardware — Tienda de Componentes" (visually-hidden) ✅
+  h2 → "FILTROS"              (aside — ⚠️ nivel incorrecto M2-W1)
+  h2 → "ENLACES RÁPIDOS"     (aside — ⚠️ nivel incorrecto M2-W1)
+  h2 → "DESCRIPCIÓN..."      (section#inicio) ✅
+  h2 → "PRODUCTOS..."        (section#tienda) ✅
+    h3 → product-name ×6    ✅
+  h2 → "Mi Carrito"          ✅
+  h2 → "Sobre Nosotros"      ✅
+    h3 → "Productos Estrella" ✅ (dentro de section — corrección de W-4)
+  h2 → "Guías..."            ✅
+    h3 ×3 (guide-cards)      ✅
+  h2 → "Centro de Ayuda"     ✅
+  -- footer --
+    h3 ×4                    ✅
+```
+
+### Verificación de Atributos Críticos M2
+
+| Check                                       | M1    | M2    | Detalle                           |
+| ------------------------------------------- | ----- | ----- | --------------------------------- |
+| `<html lang="es">`                          | ✅    | ✅    | Sin cambios                       |
+| `<header>` contiene nav y logo              | ✅    | 🔴    | Cierre prematuro — E1             |
+| `<h1>` semántico correcto                   | ⚠️    | ✅    | Corregido con `visually-hidden`   |
+| `<figure>` con `<figcaption>`               | ⚠️    | ✅    | Corregido                         |
+| `<h3>` en `#nosotros` en section            | ⚠️    | ⚠️    | Intención ok, tabla huérfana — E3 |
+| `<div.main-content>` cierra correctamente   | ✅    | 🔴    | Cierre prematuro — E2             |
+| `<table>` comparativa válida                | ✅    | 🔴    | Elementos fuera de tabla — E3     |
+| Headings en `<aside>`                       | h3 ✅ | h2 ⚠️ | Regresión — M2-W1                 |
+| `aria-label` en `div.main-content`          | ❌    | ✅    | Mejora nueva                      |
+| `<button>` hamburguesa con `aria-expanded`  | ❌    | ✅    | Mejora nueva                      |
+| Script duplicado en body                    | ✅    | ⚠️    | Regresión — M2-W2                 |
+| `alt`, `loading`, `scope`, `caption`, `rel` | ✅    | ✅    | Sin regresiones                   |
+
+### Resumen M2
+
+| Tipo                 | Cantidad | Descripción                                         |
+| -------------------- | -------- | --------------------------------------------------- |
+| 🔴 Error             | 3        | E1 (header), E2 (main-content), E3 (tabla huérfana) |
+| ⚠️ Warning           | 2        | M2-W1 (h2 en aside), M2-W2 (script duplicado)       |
+| ✅ Corregidos del M1 | 3        | W-1, W-2, W-6                                       |
+| ℹ️ Mejoras nuevas    | 2        | aria-label en main-content, botón hamburguesa       |
+
+---
+
+## Comparativa Final M1 → M2
+
+| ID    | Descripción                           | M1         | M2                                  |
+| ----- | ------------------------------------- | ---------- | ----------------------------------- |
+| W-1   | `h1` como logo                        | ⚠️ Warning | ✅ Resuelto                         |
+| W-2   | `h3` dentro de `nav` en sidebar       | ⚠️ Warning | ✅ Resuelto                         |
+| W-3   | `div.main-content` sin landmark       | ⚠️ Warning | ✅ Mejorado (aria-label agregado)   |
+| W-4   | `h3` suelto en `#nosotros`            | ⚠️ Warning | ⚠️ Parcial (section ok, tabla rota) |
+| W-5   | `fieldset` anidado                    | ⚠️ Warning | ⚠️ Persiste (sin cambios)           |
+| W-6   | `figure` sin `figcaption`             | ⚠️ Warning | ✅ Resuelto                         |
+| M2-E1 | `<header>` cierre prematuro           | —          | 🔴 Nuevo Error                      |
+| M2-E2 | `<div.main-content>` cierre prematuro | —          | 🔴 Nuevo Error                      |
+| M2-E3 | `<table>` comparativa huérfana        | —          | 🔴 Nuevo Error                      |
+| M2-W1 | `<h2>` en `<aside>` (debería ser h3)  | —          | ⚠️ Nuevo Warning                    |
+| M2-W2 | Script comentado duplicado            | —          | ⚠️ Nuevo Warning                    |
+
+**Conclusión M2:** El merge introdujo regresiones de sintaxis graves. Los 3 errores nuevos deben corregirse antes de cualquier release. Las 3 correcciones aplicadas son válidas y representan una mejora real sobre el Momento 1.
+
+---
+
+## Evidencia Visual — Instrucciones W3C Validator
+
+**Para Momento 1 (`feature/dev-frontend-css-add-styles`):**
+
+1. Ir a https://validator.w3.org/ → "Validate by URI"
+2. URL: `https://gonzalobarbano.github.io/E-commerce/` _(apuntar a la rama en Pages si está disponible)_
+3. Guardar screenshot como `docs/evidence/tc-005-m1-w3c.png`
+
+**Para Momento 2 (`develop` / producción actual):**
+
+1. Ir a https://validator.w3.org/ → "Validate by URI"
+2. URL: `https://gonzalobarbano.github.io/E-commerce/`
+3. Guardar screenshot como `docs/evidence/tc-005-m2-w3c.png`
+4. Se esperan al menos **3 errores reales** por E1, E2 y E3.
+
+---
+
+## Issues Relacionados
+
+| Título                                                                     | Momento | Severidad                 |
+| -------------------------------------------------------------------------- | ------- | ------------------------- |
+| `[SEMANTICA] h1 usado como logo`                                           | M1      | 🟡 Media — Resuelto en M2 |
+| `[BUG] header cierra prematuramente — nav y logo fuera del landmark`       | M2      | 🔴 Alta                   |
+| `[BUG] div.main-content cierra en línea de apertura — secciones huérfanas` | M2      | 🔴 Alta                   |
+| `[BUG] table comparativa huérfana — caption/thead/tbody fuera de table`    | M2      | 🔴 Alta                   |
+| `[SEMANTICA] h2 en aside rompe jerarquía de headings`                      | M2      | ⚠️ Media                  |
