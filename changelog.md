@@ -10,6 +10,32 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/coord-dev-ops-repo-update-readme-md] Creación de spec-devops.md y actualización de plan.md, readme y mockup
   PR: [#20](https://github.com/GonzaloBarbano/E-commerce/pull/20) - @Naguirre0102 (Coordinador / DevOps)
 
+### Fixed
+
+- [feature/css-y-responsive] Imágenes faltantes de sección hero agregadas (`gpu-destacada.jpg`, `cpu-destacada.jpg`, `build-completo.jpg`)
+  PR: [#XX](https://github.com/GonzaloBarbano/E-commerce/pull/XX) - @LucasFUces (Desarrollador Frontend)
+
+- [feature/css-y-responsive] Altura fija del navbar en mobile para evitar superposición de contenido
+  PR: [#XX](https://github.com/GonzaloBarbano/E-commerce/pull/XX) - @LucasFUces (Desarrollador Frontend)
+
+- [feature/css-y-responsive] Estilos del botón hamburguesa con dimensiones y color
+  PR: [#XX](https://github.com/GonzaloBarbano/E-commerce/pull/XX) - @LucasFUces (Desarrollador Frontend)
+
+- [feature/css-y-responsive] Selectores CSS corregidos para botones de la tienda (`btn-add-cart`, `btn-apply-filters`, `btn-clear-filters`, `btn-submit`)
+  PR: [#XX](https://github.com/GonzaloBarbano/E-commerce/pull/XX) - @LucasFUces (Desarrollador Frontend)
+
+- [feature/css-y-responsive] Clase `visually-hidden` corregida según estándar de accesibilidad
+  PR: [#XX](https://github.com/GonzaloBarbano/E-commerce/pull/XX) - @LucasFUces (Desarrollador Frontend)
+
+- [feature/css-y-responsive] Skip link agregado para navegación por teclado (WCAG 2.4.1)
+  PR: [#XX](https://github.com/GonzaloBarbano/E-commerce/pull/XX) - @LucasFUces (Desarrollador Frontend)
+
+- [feature/css-y-responsive] Tabla comparativa corregida con `caption`, `thead` y `tbody` dentro de `<table>`
+  PR: [#XX](https://github.com/GonzaloBarbano/E-commerce/pull/XX) - @LucasFUces (Desarrollador Frontend)
+
+- [feature/css-y-responsive] Botón hamburguesa agregado dentro del `<header>`
+  PR: [#XX](https://github.com/GonzaloBarbano/E-commerce/pull/XX) - @LucasFUces (Desarrollador Frontend)
+
 ---
 
 ## [Release Actividad Obligatoria N°1] - 2026-03-25
