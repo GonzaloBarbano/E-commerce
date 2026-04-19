@@ -17,17 +17,28 @@
 
     <title>PC Hardware</title>
 
-    <!-- TODO: CSS: Agregar link a estilos CSS personalizados -->
-    <!-- <link rel="stylesheet" href="assets/styles/main.css"> -->
+
+
+<!-- Google Fonts: Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Estilos CSS -->
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+    
   </head>
   <body>
     <!-- ========== ENCABEZADO (HEADER) ========== -->
-    <header role="banner" class="header-container">
+    <header role="banner" class="navbar"></header>
       <!-- Logo y nombre de la tienda -->
       <div class="logo-container">
-        <a href="#inicio" class="logo-link">
-          <h1 class="logo-text">PC - HARDWARE</h1>
-        </a>
+        <h1 class="visually-hidden">PC Hardware — Tienda de Componentes</h1>
+<a href="#inicio" class="logo-link" aria-label="Ir al inicio de PC Hardware">
+  <span class="logo-text" aria-hidden="true">PC - HARDWARE</span>
+</a>
       </div>
 
       <!-- Navegación principal -->
@@ -80,7 +91,7 @@
 
           <!-- CATEGORÍAS DE PRODUCTOS -->
           <nav class="categories-section" aria-label="Categorías de Productos">
-            <h3>CATEGORÍAS</h3>
+  <p class="sidebar-title">CATEGORÍAS</p>
             <ul class="categories-list">
               <li>
                 <a href="#cat-procesadores" data-category="cpu"
@@ -122,7 +133,7 @@
           <!-- TODO: CSS: Estilizar formulario de filtros con checkboxes y inputs -->
           <!-- TODO: JS: Implementar lógica de filtrado por precio, marca y especificaciones -->
           <section class="filters-section" aria-label="Filtros de Productos">
-            <h3>FILTROS</h3>
+            <h2>FILTROS</h2>
             <form id="filters-form" class="filters-form">
               <!-- Filtro: Rango de Precio -->
               <fieldset class="filter-group">
@@ -247,7 +258,7 @@
 
           <!-- ENLACES RÁPIDOS -->
           <nav class="quick-links-section" aria-label="Enlaces Rápidos">
-            <h3>ENLACES RÁPIDOS</h3>
+            <h2>ENLACES RÁPIDOS</h2>
             <ul class="quick-links-list">
               <li><a href="#compatibilidad">Guías de compatibilidad</a></li>
               <li><a href="#nosotros">Sobre nosotros</a></li>
@@ -256,7 +267,7 @@
         </aside>
 
         <!-- ========== CONTENIDO PRINCIPAL ========== -->
-        <div class="main-content">
+        <div class="main-content" aria-label="Contenido principal de la tienda"></div>
           <!-- ========== SECCIÓN: DESCRIPCIÓN DE LA TIENDA ========== -->
           <section id="inicio" class="hero-section">
             <h2>DESCRIPCIÓN DE LA TIENDA</h2>
@@ -275,27 +286,20 @@
             <!-- TODO: CSS: Crear layout grid para 3 imágenes, efectos hover y lightbox -->
             <!-- TODO: JS: Agregar zoom interactivo y galería lightbox de imágenes -->
             <div class="featured-gallery">
-              <figure class="gallery-item">
-                <img
-                  src="assets/images/gpu-destacada.jpg"
-                  alt="Tarjeta Gráfica NVIDIA RTX 4090 - Componente de alto rendimiento"
-                  loading="lazy"
-                />
-              </figure>
-              <figure class="gallery-item">
-                <img
-                  src="assets/images/cpu-destacada.jpg"
-                  alt="Procesador Intel Core i9 - CPU de última generación"
-                  loading="lazy"
-                />
-              </figure>
-              <figure class="gallery-item">
-                <img
-                  src="assets/images/build-completo.jpg"
-                  alt="PC Gaming Completo - Configuración de alta gama"
-                  loading="lazy"
-                />
-              </figure>
+           <figure class="gallery-item">
+  <img src="assets/images/gpu-destacada.jpg" alt="Tarjeta Gráfica NVIDIA RTX 4090 - Componente de alto rendimiento" loading="lazy" />
+  <figcaption class="visually-hidden">Tarjeta Gráfica NVIDIA RTX 4090</figcaption>
+</figure>
+
+<figure class="gallery-item">
+  <img src="assets/images/cpu-destacada.jpg" alt="Procesador Intel Core i9 - CPU de última generación" loading="lazy" />
+  <figcaption class="visually-hidden">Procesador Intel Core i9</figcaption>
+</figure>
+
+<figure class="gallery-item">
+  <img src="assets/images/build-completo.jpg" alt="PC Gaming Completo - Configuración de alta gama" loading="lazy" />
+  <figcaption class="visually-hidden">PC Gaming Completo</figcaption>
+</figure>
             </div>
 
             <!-- Llamada a la acción principal -->
@@ -423,7 +427,7 @@
               >
                 <div class="product-image-wrapper">
                   <img
-                    src="assets/images/kingston-nv2-ssd.jpg"
+                    src="assets/images/kingston-nv2-1tb.jpg"
                     alt="Kingston NV2 1TB - SSD NVMe M.2, velocidad secuencial 3500MB/s"
                     class="product-image"
                     loading="lazy"
@@ -455,7 +459,7 @@
               >
                 <div class="product-image-wrapper">
                   <img
-                    src="assets/images/corsair-rm850-gold.jpg"
+                    src="assets/images/corsair-rm850x.jpg"
                     alt="Corsair RM850x Gold - 850W, 80+ Gold, Modular, 10 años garantía"
                     class="product-image"
                     loading="lazy"
@@ -487,7 +491,7 @@
               >
                 <div class="product-image-wrapper">
                   <img
-                    src="assets/images/corsair-h150i-elite.jpg"
+                    src="assets/images/corsair-h150i.jpg"
                     alt="Corsair iCUE H150i ELITE CAPELLIX - AIO Liquid Cooler 360mm"
                     class="product-image"
                     loading="lazy"
@@ -581,8 +585,12 @@
 
         <!-- Tabla comparativa de productos destacados -->
         <!-- TODO: CSS: Estilizar tabla con zebra striping, hover effects y responsive design -->
-        <h3>Productos Estrella - Comparativa</h3>
-        <table class="comparison-table">
+        <section aria-label="Comparativa de Productos Estrella">
+  <h3>Productos Estrella - Comparativa</h3>
+  <table class="comparison-table">
+    ...
+  </table>
+</section>
           <caption>
             Comparativa de productos más populares
           </caption>
