@@ -44,6 +44,11 @@
       <!-- Navegación principal -->
       <!-- TODO: CSS: Estilizar nav con layout horizontal, hover effects y responsive menu -->
       <!-- TODO: JS: Agregar menú hamburguesa para dispositivos móviles -->
+
+      <button class="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
       <nav class="navigation" aria-label="Navegación Principal">
         <ul class="nav-list">
           <li class="nav-item">
@@ -956,5 +961,18 @@
 
     <!-- TODO: JS: Script para búsqueda en tiempo real (debounce, API calls) -->
     <!-- <script src="assets/scripts/search.js"></script> -->
+     <!-- <script src="assets/scripts/search.js"></script> -->
+
+    <script>
+      const hamburger = document.querySelector('.hamburger-btn');
+      const navList = document.querySelector('.nav-list');
+
+      hamburger.addEventListener('click', () => {
+        navList.classList.toggle('open');
+        const isOpen = navList.classList.contains('open');
+        hamburger.setAttribute('aria-expanded', isOpen);
+      });
+    </script>
   </body>
 </html>
+
