@@ -3,6 +3,17 @@
     "figma": {
       "command": "npx",
       "args": ["-y", "@figma/code-connect"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}" /* ⚠️ Token desde .env - NUNCA commitear */
+      }
     }
   }
 }
