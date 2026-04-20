@@ -11,19 +11,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/coord-dev-ops-repo-update-readme-md] Creación de spec-devops.md y actualización de plan.md, readme y mockup
   PR: [#20](https://github.com/GonzaloBarbano/E-commerce/pull/20) - @Naguirre0102 (Coordinador / DevOps)
 
-- [feature/doc-qa-tester-add-test-case] Creación de test-case.md
-  PR: [#51](https://github.com/GonzaloBarbano/E-commerce/pull/51) - @GonzaloBarbano (QA tester)
-
-- [feature/doc-qa] Creación de spec-qa.md y configuración de MCPs para testing
-  Archivos: spec-qa.md, .env.example, .gitignore, MCP-SETUP.md, actualización .vscode/mcp.json
-  Instalaciones: @playwright/mcp, @modelcontextprotocol/server-github
-  PR: [#25](https://github.com/GonzaloBarbano/E-commerce/pull/25) - @GonzaloBarbano (QA Tester)
-
-- [feature/dev-frontend-css-add-styles] Generación de styles.css y components.css desde mockup Figma usando Copilot Agent
-  PR: [#23](https://github.com/GonzaloBarbano/E-commerce/pull/23) - @LucasFUces (Desarrollador Frontend/CSS)
-
-- [feature/responsive-design-add-responsive-styles] Generación de responsive.css con media queries mobile, tablet y desktop usando Copilot Agent
-  PR: [#24](https://github.com/GonzaloBarbano/E-commerce/pull/24) - @LucasFUces (Especialista en Responsive Design)
 ---
 
 ## [Release Actividad Obligatoria N°1] - 2026-03-25

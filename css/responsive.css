@@ -9,11 +9,19 @@
    Enfoque: Desktop-first con overrides en mobile/tablet.
    
    ============================================ */
+<<<<<<< HEAD
+ 
+/* ============================================
+   TABLET: 768px - 1023px
+   ============================================ */
+ 
+=======
 
 /* ============================================
    TABLET: 768px - 1023px
    ============================================ */
 
+>>>>>>> develop
 @media screen and (max-width: 1023px) and (min-width: 768px) {
   
   /* LAYOUT BASE */
@@ -46,8 +54,11 @@
     margin-bottom: var(--spacing-md);
   }
   
+<<<<<<< HEAD
+=======
   
   
+>>>>>>> develop
   /* GRID DE PRODUCTOS */
   /* 2 columnas en tablet */
   .products-grid {
@@ -68,11 +79,19 @@
     padding: var(--spacing-lg);
   }
 }
+<<<<<<< HEAD
+ 
+/* ============================================
+   MOBILE: max-width 767px
+   ============================================ */
+ 
+=======
 
 /* ============================================
    MOBILE: max-width 767px
    ============================================ */
 
+>>>>>>> develop
 @media screen and (max-width: 767px) {
   
   /* LAYOUT BASE */
@@ -90,11 +109,20 @@
   }
   
   /* NAVBAR */
+<<<<<<< HEAD
+  /* Navbar altura fija para no tapar contenido */
+  .navbar {
+    height: var(--navbar-height);
+    padding: var(--spacing-sm) var(--spacing-md);
+    flex-wrap: nowrap;
+    overflow: hidden;
+=======
   /* Navbar más compacto, padding reducido */
   .navbar {
     height: auto;
     padding: var(--spacing-sm) var(--spacing-md);
     flex-wrap: wrap;
+>>>>>>> develop
   }
   
   /* Logo más pequeño en mobile */
@@ -191,6 +219,16 @@
   /* FORM / INPUTS */
   /* Inputs ocupan ancho completo */
   input[type="text"],
+<<<<<<< HEAD
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+=======
 input[type="email"],
 input[type="password"],
 input[type="search"],
@@ -199,6 +237,7 @@ select {
   font-size: 16px;
   padding: var(--spacing-sm) var(--spacing-md);
 }
+>>>>>>> develop
   
   .search-input {
     font-size: 16px;
@@ -248,8 +287,18 @@ select {
   li {
     margin-bottom: var(--spacing-xs);
   }
+<<<<<<< HEAD
+ 
+  /* Header: prevenir overflow horizontal */
+  .header-container {
+    overflow-x: hidden;
+  }
+}
+ 
+=======
 }
 
+>>>>>>> develop
 /* ============================================
    DESKTOP: min-width 1024px
    ============================================
@@ -257,12 +306,18 @@ select {
    ya están optimizados para desktop, así que aquí
    solo agregamos confirmaciones opcionales.
    ============================================ */
+<<<<<<< HEAD
+ 
+@media screen and (min-width: 1024px) {
+  
+=======
 
 @media screen and (min-width: 1024px) {
   
   /* Layout completo: sidebar visible, 3+ columnas */
   /* Estos estilos ya están en styles.css, pero se confirman aquí */
   
+>>>>>>> develop
   .app-container {
     display: flex;
   }
@@ -284,6 +339,17 @@ select {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 }
+<<<<<<< HEAD
+ 
+/* ============================================
+   UTILIDADES RESPONSIVAS GLOBALES
+   ============================================ */
+ 
+* {
+  max-width: 100%;
+}
+ 
+=======
 
 /* ============================================
    UTILIDADES RESPONSIVAS GLOBALES
@@ -295,31 +361,52 @@ select {
 }
 
 /* Imágenes: responsive por defecto */
+>>>>>>> develop
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
+<<<<<<< HEAD
+ 
+=======
 
 /* Videos/iframes: responsive */
+>>>>>>> develop
 iframe,
 video {
   max-width: 100%;
   height: auto;
 }
+<<<<<<< HEAD
+ 
+=======
 
 /* Scroll horizontal en tablas si es necesario */
+>>>>>>> develop
 table {
   max-width: 100%;
   overflow-x: auto;
   display: block;
 }
+<<<<<<< HEAD
+ 
+=======
 
 /* Ajuste de texto: evitar overflow en palabras largas */
+>>>>>>> develop
 body {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+<<<<<<< HEAD
+ 
+/* ============================================
+   MEDIA QUERY: ORIENTATION LANDSCAPE
+   ============================================ */
+ 
+@media screen and (max-height: 600px) {
+=======
 
 /* ============================================
    MEDIA QUERY: ORIENTATION LANDSCAPE
@@ -328,10 +415,19 @@ body {
 /* En landscape mobile (max-height) */
 @media screen and (max-height: 600px) {
   /* Reducir alturas de hero y navbar si es necesario */
+>>>>>>> develop
   .navbar {
     height: 50px;
   }
 }
+<<<<<<< HEAD
+ 
+/* ============================================
+   MEDIA QUERY: PRINT
+   ============================================ */
+ 
+@media print {
+=======
 
 /* ============================================
    MEDIA QUERY: PRINT
@@ -339,6 +435,7 @@ body {
 
 @media print {
   /* Ocultar navbar y sidebar en impresión */
+>>>>>>> develop
   .navbar,
   .sidebar {
     display: none;
@@ -350,6 +447,14 @@ body {
     padding: 0;
   }
 }
+<<<<<<< HEAD
+ 
+/* ============================================
+   HAMBURGER MENU
+   ============================================ */
+ 
+=======
+>>>>>>> develop
 @media (max-width: 767px) {
   .nav-list {
     display: none;
@@ -366,7 +471,11 @@ body {
   .hamburger-btn {
     display: block;
   }
+<<<<<<< HEAD
+}
+=======
   .header-container {
     overflow-x: hidden;
   }
 }
+>>>>>>> develop
