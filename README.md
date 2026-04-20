@@ -73,6 +73,7 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 - 🧠 **[Indice de Prompts](docs/02-prompts/prompts.md)**
 - 📝 **[Changelog](changelog.md)**
+- 📊 **[Ver Índice de Testing y QA (Playwright)](docs/04-testing/testing-doc.md)**
 
 ---
 
