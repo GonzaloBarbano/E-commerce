@@ -6,6 +6,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
+### Fixed
+
+- [fix/resolver-conflictos-responsive] Correccion de responsive.css
+  PR: [#55](https://github.com/GonzaloBarbano/E-commerce/pull/55) - @GonzaloBarbano (QA tester)
+
 ### Added
 
 - [feature/doc-qa-tester-add-test-case] Creación de test-case.md
