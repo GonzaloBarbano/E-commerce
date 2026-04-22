@@ -11,6 +11,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/resolver-conflictos-responsive] Correccion de responsive.css
   PR: [#55](https://github.com/GonzaloBarbano/E-commerce/pull/55) - @GonzaloBarbano (QA tester)
 
+- [fix/mover-mediaqueries-a-responsive] Movi queries de styles a responsive
+  PR: [#56](https://github.com/GonzaloBarbano/E-commerce/pull/56) - @GonzaloBarbano (QA tester)
+
 ### Added
 
 - [feature/doc-qa-tester-add-test-case] Creación de test-case.md
