@@ -15,6 +15,7 @@
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: var(--transition-default);
+  display: inline-block;
   text-align: center;
 }
 
@@ -25,15 +26,6 @@
   transform: translateY(-2px);
 }
 
-.btn-clear-filters {
-  background: transparent;
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary);
-  padding: 8px 16px;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-}
-
 /* CARDS DE PRODUCTO */
 .product-card {
   background: white;
@@ -41,10 +33,6 @@
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: var(--transition-default);
-}
-
-.product-card:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 .product-image {
@@ -57,12 +45,6 @@
   padding: var(--spacing-md);
 }
 
-.product-name {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: var(--spacing-xs);
-}
-
 .product-price {
   font-size: var(--font-size-price);
   color: var(--color-primary);
@@ -70,17 +52,16 @@
   margin: var(--spacing-sm) 0;
 }
 
-/* FORMULARIOS Y SIDEBAR */
+/* FORMULARIOS */
 .sidebar-title {
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--color-text-muted);
   margin-bottom: var(--spacing-md);
-  display: block;
+  text-transform: uppercase;
 }
 
-.search-input,
-.filters-form input[type="number"] {
+.search-input {
   width: 100%;
   padding: 10px;
   border: 1px solid var(--color-border);
@@ -88,30 +69,12 @@
   margin-bottom: var(--spacing-md);
 }
 
-.filter-group {
-  border: none;
-  margin-bottom: var(--spacing-lg);
-}
-
-.filter-group legend {
-  font-weight: 600;
-  margin-bottom: var(--spacing-sm);
-}
-
-.checkbox-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-xs);
-  font-size: var(--font-size-sm);
-}
-
-/* TABLAS */
+/* TABLAS CORREGIDAS (E3) */
 .comparison-table,
 .specs-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
   background: white;
 }
 
@@ -126,33 +89,21 @@
   background: var(--color-bg);
 }
 
-/* ============================================
-   HAMBURGER BUTTON
-   ============================================ */
+/* BOTÓN HAMBURGUESA */
 .hamburger-btn {
-  display: none; /* Se oculta en desktop */
-  width: 35px;
-  height: 30px;
+  display: none;
   background: transparent;
   border: none;
   cursor: pointer;
-  position: relative;
-  z-index: 101;
+  padding: 5px;
 }
 
 .hamburger-btn span {
   display: block;
-  width: 100%;
+  width: 25px;
   height: 3px;
   background-color: white;
-  margin: 6px 0;
-  transition: var(--transition-default);
+  margin: 5px 0;
+  transition: 0.4s;
   border-radius: 3px;
-}
-
-/* Responsive: mostrar solo en móviles */
-@media screen and (max-width: 768px) {
-  .hamburger-btn {
-    display: block;
-  }
 }
