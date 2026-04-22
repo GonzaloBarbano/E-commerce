@@ -33,37 +33,41 @@
   <body>
     <a href="#inicio" class="skip-link">Saltar al contenido principal</a>
     <!-- ========== ENCABEZADO (HEADER) ========== -->
-    <header role="banner" class="navbar">
-      <h1 class="visually-hidden">PC Hardware — Tienda de Componentes</h1>
-      <!-- Logo y nombre de la tienda -->
-      <div class="logo-container">
-        <a href="#inicio" class="logo-link" aria-label="Ir al inicio de PC Hardware">
-          <span class="logo-text" aria-hidden="true">PC - HARDWARE</span>
-        </a>
-      </div>
+ <header role="banner" class="navbar">
+  <h1 class="visually-hidden">PC Hardware — Tienda de Componentes</h1>
+  
+  <div class="logo-container">
+    <a href="#inicio" class="logo-link" aria-label="Ir al inicio de PC Hardware">
+      <span class="logo-text" aria-hidden="true">PC - HARDWARE</span>
+    </a>
+  </div>
 
-      <!-- Navegación principal -->
-      <!-- TODO: CSS: Estilizar nav con layout horizontal, hover effects y responsive menu -->
-      <!-- TODO: JS: Agregar menú hamburguesa para dispositivos móviles -->
-      <nav class="navigation" aria-label="Navegación Principal">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="#inicio" class="nav-link">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a href="#nosotros" class="nav-link">Nosotros</a>
-          </li>
-          <li class="nav-item"><a href="#tienda" class="nav-link">Shop</a></li>
-          <li class="nav-item"><a href="#ayuda" class="nav-link">Ayuda</a></li>
-          <li class="nav-item">
-            <a href="#carrito" class="nav-link" aria-label="Carrito de compras"
-              >Carrito</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </header>
+  <button class="hamburger-btn" aria-label="Abrir menú de navegación" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
+  <nav class="navigation" aria-label="Navegación Principal">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="#inicio" class="nav-link">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tienda" class="nav-link">Shop</a>
+      </li>
+      <li class="nav-item">
+        <a href="#ayuda" class="nav-link">Ayuda</a>
+      </li>
+      <li class="nav-item">
+        <a href="#carrito" class="nav-link" aria-label="Carrito de compras">Carrito</a>
+      </li>
+    </ul>
+  </nav>
+</header>
     <!-- ========== CONTENIDO PRINCIPAL ========== -->
     <main role="main">
       <!-- ========== CONTENEDOR PRINCIPAL CON SIDEBAR Y CONTENIDO ========== -->
