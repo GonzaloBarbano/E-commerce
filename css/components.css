@@ -1,438 +1,158 @@
 /* ============================================
    PC-HARDWARE E-COMMERCE | COMPONENTES
-   ============================================
-   
-   Estilos para componentes reutilizables:
-   - Botones (primario, secundario)
-   - Cards de producto
-   - Input de búsqueda y formularios
-   - Links de navegación y sidebar
-   - Paginación
-   - Estados interactivos (hover, focus)
-   
    ============================================ */
 
-/* ============================================
-   BOTONES
-   ============================================ */
-
-/* Botón primario: color púrpura, hover dinámico, transición suave */
-.btn-primary {
+/* BOTONES */
+.btn-primary,
+.btn-add-cart,
+.btn-submit,
+.btn-apply-filters {
   background-color: var(--color-primary);
-  color: var(--color-surface-card);
-  padding: var(--spacing-sm) var(--spacing-lg);
+  color: white;
+  padding: 12px 24px;
   border: none;
   border-radius: var(--border-radius);
-  font-size: var(--font-size-body);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: var(--transition-default);
-  display: inline-block;
+  text-align: center;
 }
 
-/* Estado hover: oscurecer el color primario */
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-add-cart:hover,
+.btn-submit:hover {
   background-color: var(--color-primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
 }
 
-/* Estado focus para accesibilidad */
-.btn-primary:focus {
-  outline: 2px solid var(--color-primary-hover);
-  outline-offset: 2px;
-}
-
-/* Botón secundario: borde, sin relleno */
-.btn-secondary {
- background-color: var(--color-surface-dark) !important;
+.btn-clear-filters {
+  background: transparent;
   color: var(--color-primary);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: 2px solid var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 8px 16px;
   border-radius: var(--border-radius);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-semibold);
   cursor: pointer;
-  transition: var(--transition-default);
-  display: inline-block;
 }
 
-/* Estado hover: invertir colores */
-.btn-secondary:hover {
-  background-color: var(--color-primary);
-  color: var(--color-surface-card);
-}
-
-/* ============================================
-   CARDS DE PRODUCTO
-   ============================================ */
-
-/* Card base: contenedor con borde, sombra leve, overflow hidden */
+/* CARDS DE PRODUCTO */
 .product-card {
-  background-color: var(--color-surface-card);
+  background: white;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: var(--transition-default);
-  display: flex;
-  flex-direction: column;
 }
 
-/* Hover en card: sombra y elevación visual */
 .product-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Imagen dentro de card: fill completo, aspect ratio controlado */
-.product-card img {
+.product-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  background-color: #f0f0f0;
 }
 
-/* Contenido de la card: padding consistente */
-.product-card-body {
+.product-info {
   padding: var(--spacing-md);
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
 }
 
-/* Nombre del producto: título dentro de la card */
-.product-card-title {
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text);
-  margin-bottom: var(--spacing-sm);
+.product-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
 }
 
-/* Precio dentro de la card */
-.product-card-price {
+.product-price {
   font-size: var(--font-size-price);
-  font-weight: var(--font-weight-bold);
   color: var(--color-primary);
-  margin-bottom: var(--spacing-md);
+  font-weight: 700;
+  margin: var(--spacing-sm) 0;
 }
 
-/* Descripción corta: texto muted, tamaño pequeño */
-.product-card-description {
-  font-size: var(--font-size-sm);
+/* FORMULARIOS Y SIDEBAR */
+.sidebar-title {
+  font-weight: 700;
+  font-size: 12px;
   color: var(--color-text-muted);
   margin-bottom: var(--spacing-md);
+  display: block;
 }
 
-/* Botón dentro de card: ocupar ancho completo */
-.product-card .btn-primary {
+.search-input,
+.filters-form input[type="number"] {
   width: 100%;
-  text-align: center;
-}
-
-/* ============================================
-   INPUTS Y FORMULARIOS
-   ============================================ */
-
-/* Input base: borde sutil, padding controlado */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="search"],
-textarea,
-select {
-  width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 10px;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-body);
-  font-family: 'Inter', sans-serif;
-  background-color: var(--color-surface-card);
-  color: var(--color-text);
-  transition: var(--transition-default);
-  display: block;
   margin-bottom: var(--spacing-md);
 }
 
-/* Estado focus: outline con color primario */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="search"]:focus,
-textarea:focus,
-select:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 0;
-  border-color: var(--color-primary);
-}
-
-/* Input de búsqueda específico */
-.search-input {
-  width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-body);
-  background-color: var(--color-surface-card);
-  transition: var(--transition-default);
-}
-
-.search-input:focus {
-  outline: 2px solid var(--color-primary);
-  border-color: var(--color-primary);
-}
-
-/* Contenedor de formulario */
-.form-group {
+.filter-group {
+  border: none;
   margin-bottom: var(--spacing-lg);
 }
 
-/* Label: tipografía clara, peso medio */
-label {
-  display: block;
-  font-weight: var(--font-weight-medium);
+.filter-group legend {
+  font-weight: 600;
   margin-bottom: var(--spacing-sm);
-  color: var(--color-text);
 }
 
-/* Checkbox y radio: mantener accesibilidad */
-input[type="checkbox"],
-input[type="radio"] {
-  width: auto;
-  margin-right: var(--spacing-sm);
-  cursor: pointer;
-}
-
-/* ============================================
-   LINKS DE NAVEGACIÓN
-   ============================================ */
-
-/* Links de sidebar: display block, color muted, hover en primario */
-.sidebar-link {
-  display: block;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  padding: var(--spacing-sm) 0;
-  transition: var(--transition-default);
-  border-left: 3px solid transparent;
-  padding-left: var(--spacing-sm);
-}
-
-/* Estado hover en sidebar links */
-.sidebar-link:hover {
-  color: var(--color-primary);
-  border-left-color: var(--color-primary);
-  padding-left: calc(var(--spacing-sm) + 2px);
-}
-
-/* Estado activo en sidebar links */
-.sidebar-link.active {
-  color: var(--color-primary);
-  font-weight: var(--font-weight-semibold);
-  border-left-color: var(--color-primary);
-}
-
-
-
-/* ============================================
-   PAGINACIÓN
-   ============================================ */
-
-/* Contenedor de paginación: flex, centrado */
-.pagination {
+.checkbox-item {
   display: flex;
+  align-items: center;
   gap: var(--spacing-sm);
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
 }
 
-/* Item de página: botón con borde */
-.pagination-item {
-  min-width: 36px;
-  height: 36px;
-  padding: var(--spacing-xs) var(--spacing-sm);
+/* TABLAS */
+.comparison-table,
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacing-lg);
+  background: white;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 12px;
   border: 1px solid var(--color-border);
-  background-color: var(--color-surface-card);
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  border-radius: var(--border-radius-sm);
-  transition: var(--transition-default);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: left;
 }
 
-/* Hover en item de página */
-.pagination-item:hover:not(.active) {
-  background-color: var(--color-bg);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
-/* Página activa: fondo primario */
-.pagination-item.active {
-  background-color: var(--color-primary);
-  color: var(--color-surface-card);
-  border-color: var(--color-primary);
+.comparison-table thead {
+  background: var(--color-bg);
 }
 
 /* ============================================
-   BADGES Y TAGS
-   ============================================ */
-
-/* Badge base: pequeño, redondeado, color light */
-.badge {
-  display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--border-radius-sm);
-}
-
-/* Badge de éxito */
-.badge-success {
-  background-color: rgba(22, 163, 74, 0.1);
-  color: var(--color-success);
-}
-
-/* Badge de error */
-.badge-error {
-  background-color: rgba(220, 38, 38, 0.1);
-  color: var(--color-error);
-}
-
-/* ============================================
-   ESTADOS INTERACTIVOS GLOBALES
-   ============================================ */
-
-/* Deshabilitado: opacidad y cursor */
-:disabled,
-.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* Focus visible: para navegación por teclado */
-:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
- /* ============================================
    HAMBURGER BUTTON
    ============================================ */
-
 .hamburger-btn {
-  display: block;
-  width: 40px;
-  height: 40px;
-  background-color: var(--color-primary);
+  display: none; /* Se oculta en desktop */
+  width: 35px;
+  height: 30px;
+  background: transparent;
   border: none;
-  border-radius: var(--border-radius-sm);
+  cursor: pointer;
   position: relative;
-  cursor: pointer;
+  z-index: 101;
 }
 
-.hamburger-btn::before,
-.hamburger-btn::after,
 .hamburger-btn span {
-  content: "";
   display: block;
-  width: 25px;
+  width: 100%;
   height: 3px;
-  background: white;
-  position: absolute;
-  left: 7px;
+  background-color: white;
+  margin: 6px 0;
   transition: var(--transition-default);
+  border-radius: 3px;
 }
 
-.hamburger-btn span {
-  top: 18px;
-}
-
-.hamburger-btn::before {
-  top: 10px;
-}
-
-.hamburger-btn::after {
-  top: 26px;
-}
-
-/* ============================================
-   BOTONES DE TIENDA
-   ============================================ */
-
-.btn-add-cart {
-  background-color: var(--color-primary);
-  color: var(--color-surface-card);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: none;
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-  transition: var(--transition-default);
-  width: 100%;
-}
-
-.btn-add-cart:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-2px);
-}
-
-.btn-apply-filters {
-  background-color: var(--color-primary);
-  color: var(--color-surface-card);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: none;
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-  transition: var(--transition-default);
-  width: 100%;
-}
-
-.btn-apply-filters:hover {
-  background-color: var(--color-primary-hover);
-}
-
-.btn-clear-filters {
-  background-color: transparent;
-  color: var(--color-primary);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-  transition: var(--transition-default);
-  width: 100%;
-}
-
-.btn-clear-filters:hover {
-  background-color: var(--color-primary);
-  color: var(--color-surface-card);
-}
-
-.btn-submit {
-  background-color: var(--color-primary);
-  color: var(--color-surface-card);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: none;
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-  transition: var(--transition-default);
-  width: 100%;
-}
-
-.btn-submit:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-2px);
+/* Responsive: mostrar solo en móviles */
+@media screen and (max-width: 768px) {
+  .hamburger-btn {
+    display: block;
+  }
 }

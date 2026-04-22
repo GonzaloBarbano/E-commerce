@@ -14,6 +14,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/mover-mediaqueries-a-responsive] Movi queries de styles a responsive
   PR: [#56](https://github.com/GonzaloBarbano/E-commerce/pull/56) - @GonzaloBarbano (QA tester)
 
+- [fix/alinear-clases-css-html] Alineacion html y css para estilos, incorporacion de menu hamburguesa
+  PR: [#57](https://github.com/GonzaloBarbano/E-commerce/pull/57) - @GonzaloBarbano (QA tester)
+
 ### Added
 
 - [feature/doc-qa-tester-add-test-case] Creación de test-case.md
