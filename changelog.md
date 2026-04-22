@@ -17,6 +17,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/alinear-clases-css-html] Alineacion html y css para estilos, incorporacion de menu hamburguesa
   PR: [#57](https://github.com/GonzaloBarbano/E-commerce/pull/57) - @GonzaloBarbano (QA tester)
 
+- [fix/corregir-estructura-html] Correccion de la estructura html
+  PR: [#58](https://github.com/GonzaloBarbano/E-commerce/pull/58) - @GonzaloBarbano (QA tester)
+
 ### Added
 
 - [feature/doc-qa-tester-add-test-case] Creación de test-case.md
