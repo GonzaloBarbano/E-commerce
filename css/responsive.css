@@ -7,15 +7,12 @@
   :root {
     --sidebar-width: 0px;
   }
-
   .sidebar {
-    display: none; /* Se oculta para dar espacio en tablets */
+    display: none;
   }
-
   .main-content {
     margin-left: 0;
   }
-
   .featured-gallery {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -23,12 +20,12 @@
 
 /* MOBILE */
 @media screen and (max-width: 768px) {
-  .navbar {
-    padding: 0 var(--spacing-md);
+  .hamburger-btn {
+    display: block;
   }
 
   .nav-list {
-    display: none; /* Oculto por defecto en móvil */
+    display: none;
     position: absolute;
     top: var(--navbar-height);
     left: 0;
@@ -37,16 +34,21 @@
     background: var(--color-surface-dark);
     padding: var(--spacing-lg);
     gap: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .nav-list.open {
     display: flex;
   }
 
-  .featured-gallery {
-    grid-template-columns: 1fr;
+  /* RC11: Corrección Hero Images Mobile */
+  .featured-gallery img,
+  .hero-gallery img,
+  .hero-images img {
+    max-height: 200px;
   }
 
+  .featured-gallery,
   .products-grid {
     grid-template-columns: 1fr;
   }
@@ -56,18 +58,11 @@
   }
 }
 
-/* BOTÓN HAMBURGUESA (Necesario añadir al HTML para funcionar) */
-.hamburger-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-@media screen and (max-width: 768px) {
-  .hamburger-btn {
-    display: block;
+@media screen and (max-width: 480px) {
+  :root {
+    --font-size-h1: 26px;
+  }
+  .logo-text {
+    font-size: 16px;
   }
 }
