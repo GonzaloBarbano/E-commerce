@@ -29,13 +29,13 @@ Este documento centraliza los resultados de testing ejecutados en dos momentos:
 
 | Issue       | Título                                                    | Tipo de hallazgo         | Responsable | Estado               |
 | ----------- | --------------------------------------------------------- | ------------------------ | ----------- | -------------------- |
-| BUG-01      | `responsive.css` no carga — MIME type error               | CSS / Servidor local     | Frontend    | Cerrado              |
-| BUG-02      | 9 imágenes de productos retornan 404                      | Assets faltantes         | Frontend    | Parcialmente cerrado |
-| BUG-03      | Navbar sin color de fondo (transparente)                  | CSS visual               | Frontend    | Cerrado              |
-| BUG-001     | Menú hamburguesa ausente en mobile/tablet                 | Responsive / JS          | Frontend    | Cerrado              |
-| DEF-01      | Jerarquía de encabezados H1→H3 en sidebar (heading-order) | Accesibilidad WCAG 2.4.6 | Frontend    | Cerrado              |
-| W-1         | `h1` usado como texto del logo dentro de `<a>`            | HTML semántico / SEO     | Frontend    | Cerrado              |
-| Performance | `@import` Google Fonts bloquea el renderizado             | Performance CSS          | Frontend    | Abierto              |
+| [BUG-01](#) | `responsive.css` no carga — MIME type error               | CSS / Servidor local     | Frontend    | Cerrado              |
+| [BUG-02](https://github.com/GonzaloBarbano/E-commerce/issues/39) | 9 imágenes de productos retornan 404 | Assets faltantes | Frontend | Parcialmente cerrado |
+| [BUG-03](#) | Navbar sin color de fondo (transparente)                  | CSS visual               | Frontend    | Cerrado              |
+| [BUG-001](#) | Menú hamburguesa ausente en mobile/tablet                | Responsive / JS          | Frontend    | Cerrado              |
+| [DEF-01](#) | Jerarquía de encabezados H1→H3 en sidebar                 | Accesibilidad WCAG 2.4.6 | Frontend    | Cerrado              |
+| [W-1](#)    | `h1` usado como texto del logo dentro de `<a>`            | HTML semántico / SEO     | Frontend    | Cerrado              |
+| [PERF](https://github.com/GonzaloBarbano/E-commerce/issues/42) | `@import` Google Fonts bloquea el renderizado | Performance CSS | Frontend | Abierto |
 
 ---
 
@@ -43,15 +43,14 @@ Este documento centraliza los resultados de testing ejecutados en dos momentos:
 
 | Issue   | Título                                                                         | Tipo de hallazgo         | Responsable | Estado  |
 | ------- | ------------------------------------------------------------------------------ | ------------------------ | ----------- | ------- |
-| BUG-05  | 3 imágenes de hero/banner siguen en 404 en producción                          | Assets faltantes         | Frontend    | Abierto |
-| BUG-04  | favicon.ico no encontrado en GitHub Pages                                      | Asset menor              | Frontend    | Abierto |
-| BUG-004 | Botón hamburguesa con dimensiones 4×4px en tablet (820px)                      | CSS responsive           | Frontend    | Abierto |
-| DEF-03  | `aria-label` prohibido en `<div>` sin role (regresión)                         | Accesibilidad WCAG 4.1.2 | Frontend    | Abierto |
-| DEF-04  | `h1 visually-hidden` fuera de landmark (regresión)                             | Accesibilidad WCAG 1.3.1 | Frontend    | Abierto |
-| M2-E1   | `<header>` cierre prematuro — nav y logo fuera del landmark                    | HTML semántico           | Frontend    | Abierto |
-| M2-E2   | `<div class="main-content">` cierra en línea de apertura — secciones huérfanas | HTML semántico           | Frontend    | Abierto |
-| M2-E3   | Tabla comparativa huérfana — `caption/thead/tbody` fuera de `<table>`          | HTML semántico           | Frontend    | Abierto |
-
+| [BUG-05](https://github.com/GonzaloBarbano/E-commerce/issues/39) | 3 imágenes de hero/banner siguen en 404 | Assets faltantes | Frontend | Abierto |
+| [BUG-04](#) | favicon.ico no encontrado en GitHub Pages                                  | Asset menor              | Frontend    | Abierto |
+| [BUG-004](https://github.com/GonzaloBarbano/E-commerce/issues/40) | Botón hamburguesa con dimensiones 4×4px en tablet | CSS responsive | Frontend | Abierto |
+| [DEF-03](https://github.com/GonzaloBarbano/E-commerce/issues/43) | `aria-label` prohibido en `<div>` sin role (regresión) | Accesibilidad WCAG 4.1.2 | Frontend | Abierto |
+| [DEF-04](https://github.com/GonzaloBarbano/E-commerce/issues/44) | `h1 visually-hidden` fuera de landmark (regresión) | Accesibilidad WCAG 1.3.1 | Frontend | Abierto |
+| [M2-E1](https://github.com/GonzaloBarbano/E-commerce/issues/47) | `<header>` cierre prematuro — nav y logo fuera del landmark | HTML semántico | Frontend | Abierto |
+| [M2-E2](https://github.com/GonzaloBarbano/E-commerce/issues/48) | `<div class="main-content">` cierra en línea de apertura | HTML semántico | Frontend | Abierto |
+| [M2-E3](https://github.com/GonzaloBarbano/E-commerce/issues/49) | Tabla comparativa huérfana — `caption/thead/tbody` fuera de `<table>` | HTML semántico | Frontend | Abierto |
 ---
 
 ## Observaciones
