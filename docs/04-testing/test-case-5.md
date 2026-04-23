@@ -282,6 +282,8 @@ El documento superaría la validación W3C sin errores.
 
 Screenshots capturados con Playwright MCP:
 
+- `docs/evidence/tc-005-w3c-validator-uri.png` — resultado completo del validador
+- `docs/evidence/tc-005-dom-screenshot.png` — captura del sitio en producción (opcional)
 - `docs/04-testing/screenshots/momento-1/estructura-principal.jpg` — Vista del header y descripción
 - `docs/04-testing/screenshots/momento-1/seccion-productos.jpg` — Tarjetas de productos con etiquetas semánticas
 - `docs/04-testing/screenshots/momento-1/tabla-comparativa.jpg` — Tabla con `<caption>` y `<thead>`/`<tbody>` correctos
@@ -296,6 +298,15 @@ Para validar completamente con el W3C Validator oficial:
 4. Capturar los resultados en: `docs/04-testing/screenshots/momento-1/w3c-validator-report.png`
 
 ---
+## Captura de pantalla (Manual)
+![](screenshots/tc-005-w3c-validator-uri-1.png)
+![](screenshots/tc-005-w3c-validator-uri-2.png)
+![](screenshots/tc-005-w3c-validator-uri-3.png)
+![](screenshots/tc-005-w3c-validator-uri-4.png)
+![](screenshots/tc-005-w3c-validator-uri-5.png)
+![](screenshots/tc-005-w3c-validator-uri-6.png)
+![](screenshots/tc-005-w3c-validator-uri-7.png)
+![](screenshots/tc-005-w3c-validator-uri-8.png)
 
 ## Capturas de pantalla actualizadas (Momento 1 — 2026-04-22)
 
