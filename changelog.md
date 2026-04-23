@@ -9,6 +9,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ### Fixed
 
 - [fix/test-case-5] Correccion de responsive.css
+  PR: [#62](https://github.com/GonzaloBarbano/E-commerce/pull/62) - @Naguirre0102 (Coordinador / DevOps)
+
+- [fix/test-case-5] Correccion de responsive.css
   PR: [#60](https://github.com/GonzaloBarbano/E-commerce/pull/60) - @Naguirre0102 (Coordinador / DevOps)
 
 - [fix/resolver-conflictos-responsive] Correccion de responsive.css
