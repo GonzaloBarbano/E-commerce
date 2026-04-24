@@ -278,6 +278,56 @@ input[type="radio"] {
   border-color: var(--color-primary);
 }
 
+/* Paginación con botones: lista y enlaces */
+.pagination-list {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.page-link,
+.page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface-card);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: var(--transition-default);
+}
+
+.page-link:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.page-link.page-active,
+.page-link.page-active:focus,
+.page-link.page-active:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-surface-card);
+}
+
+.page-ellipsis {
+  cursor: default;
+  color: var(--color-text-muted);
+  background-color: transparent;
+  border-color: transparent;
+}
+
 /* ============================================
    BADGES Y TAGS
    ============================================ */
