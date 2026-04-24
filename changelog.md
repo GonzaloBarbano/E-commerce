@@ -7,6 +7,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
+- [fix/estilos-paginacion] Correccion de estilos de paginacion
+  PR: [#68](https://github.com/GonzaloBarbano/E-commerce/pull/68) - @Naguirre0102 (Coordinador / DevOps)
 
 - [fix/renombrar-spec-frontend-a2-] renombra spec-frontend (1).md a spec-frontend.md en actividad-obligatoria-2 y correccion de changelog.md
   PR: [#66](https://github.com/GonzaloBarbano/E-commerce/pull/66) - @GonzaloBarbano (QA tester)

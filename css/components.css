@@ -89,7 +89,6 @@
   background: var(--color-bg);
 }
 
-<<<<<<< HEAD
 /* Página activa: fondo primario */
 .pagination-item.active {
   background-color: var(--color-primary);
@@ -195,9 +194,6 @@
    HAMBURGER BUTTON
    ============================================ */
 
-=======
-/* BOTÓN HAMBURGUESA */
->>>>>>> b2ae63bedbd212398dcd0ef09c29c55b43a3f3a0
 .hamburger-btn {
   display: none;
   background: transparent;
