@@ -8,26 +8,29 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
-- [fix/test-case-5] Correccion de responsive.css
+- [fix/completar-code-reviews] Documenta 4 code reviews asistidos por IA con GitHub Copilot (PR#21, #22, #25, #51)
   PR: [#62](https://github.com/GonzaloBarbano/E-commerce/pull/62) - @Naguirre0102 (Coordinador / DevOps)
+
+- [fix/testing-doc-issue-links] Reemplaza URLs ficticias de issues por links reales a GitHub en testing-doc.md
+  PR: [#61](https://github.com/GonzaloBarbano/E-commerce/pull/61) - @LucasFUces (Frontend CSS / Responsive Design)
 
 - [fix/test-case-5] Correccion de responsive.css
   PR: [#60](https://github.com/GonzaloBarbano/E-commerce/pull/60) - @Naguirre0102 (Coordinador / DevOps)
 
-- [fix/resolver-conflictos-responsive] Correccion de responsive.css
-  PR: [#55](https://github.com/GonzaloBarbano/E-commerce/pull/55) - @GonzaloBarbano (QA tester)
-
-- [fix/mover-mediaqueries-a-responsive] Movi queries de styles a responsive
-  PR: [#56](https://github.com/GonzaloBarbano/E-commerce/pull/56) - @GonzaloBarbano (QA tester)
-
-- [fix/alinear-clases-css-html] Alineacion html y css para estilos, incorporacion de menu hamburguesa
-  PR: [#57](https://github.com/GonzaloBarbano/E-commerce/pull/57) - @GonzaloBarbano (QA tester)
+- [fix/responsive.css] Correccion de responsive.css max y archivo changelog.md
+  PR: [#59](https://github.com/GonzaloBarbano/E-commerce/pull/59) - @GonzaloBarbano (QA tester)
 
 - [fix/corregir-estructura-html] Correccion de la estructura html
   PR: [#58](https://github.com/GonzaloBarbano/E-commerce/pull/58) - @GonzaloBarbano (QA tester)
 
-- [fix/responsive.css] Correccion de responsive.css max y archivo changelog.md
-  PR: [#59](https://github.com/GonzaloBarbano/E-commerce/pull/59) - @GonzaloBarbano (QA tester)
+- [fix/alinear-clases-css-html] Alineacion html y css para estilos, incorporacion de menu hamburguesa
+  PR: [#57](https://github.com/GonzaloBarbano/E-commerce/pull/57) - @GonzaloBarbano (QA tester)
+
+- [fix/mover-mediaqueries-a-responsive] Movi queries de styles a responsive
+  PR: [#56](https://github.com/GonzaloBarbano/E-commerce/pull/56) - @GonzaloBarbano (QA tester)
+
+- [fix/resolver-conflictos-responsive] Correccion de responsive.css
+  PR: [#55](https://github.com/GonzaloBarbano/E-commerce/pull/55) - @GonzaloBarbano (QA tester)
 
 ### Added
 
