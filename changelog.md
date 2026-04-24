@@ -8,7 +8,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
-- [fix/responsive.css] Renombra spec-frontend (1).md a spec-frontend.md en actividad-obligatoria-2 - Correccion en changelog
+- [fix/renombrar-spec-frontend-a2] Renombra spec-frontend (1).md a spec-frontend.md en actividad-obligatoria-2 - Correccion en changelog
   PR: [#63](https://github.com/GonzaloBarbano/E-commerce/pull/63) - @GonzaloBarbano (QA tester)
 
 - [fix/completar-code-reviews] Documenta 4 code reviews asistidos por IA con GitHub Copilot (PR#21, #22, #25, #51)
