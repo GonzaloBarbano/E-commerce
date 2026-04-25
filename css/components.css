@@ -89,6 +89,13 @@
   background: var(--color-bg);
 }
 
+/* Table wrapper for horizontal scrolling on mobile */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--border-radius-sm);
+}
+
 /* Página activa: fondo primario */
 .pagination-item.active {
   background-color: var(--color-primary);

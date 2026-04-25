@@ -120,8 +120,11 @@ h3 {
   border-right: 1px solid var(--color-border);
   padding: var(--spacing-lg);
   position: fixed;
+  top: var(--navbar-height);
+  left: 0;
   height: calc(100vh - var(--navbar-height));
   overflow-y: auto;
+  z-index: 10;
 }
 
 .main-content {
