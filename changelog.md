@@ -7,6 +7,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
+- [fix/tabla-overflow-mobile]  agrego contenedor con overflow auto para evitar desbordamiento de la tabla en mobile
+  PR: [#70](https://github.com/GonzaloBarbano/E-commerce/pull/70) - @Naguirre0102 (Coordinador / DevOps)
+
 - [fix/estructura-nosotros-main-container]  reubico cierre de main-content para envolver secciones
   PR: [#69](https://github.com/GonzaloBarbano/E-commerce/pull/69) - @Naguirre0102 (Coordinador / DevOps)
 
