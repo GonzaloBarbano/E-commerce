@@ -496,141 +496,142 @@
               <button class="btn-checkout">Proceder al Pago</button>
             </div>
           </section>
-        </div>
-      </div>
-      <section id="nosotros" class="about-section">
-        <div class="container-inner">
-          <h2>Sobre Nosotros</h2>
-          <p>
-            <strong>PC Hardware</strong> es un e-commerce especializado en
-            componentes de calidad superior para computadoras personales...
-          </p>
 
-          <section aria-label="Comparativa de Productos Estrella">
-            <h3>Productos Estrella - Comparativa</h3>
-            <table class="comparison-table">
-              <caption>
-                Comparativa de productos más populares
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Producto</th>
-                  <th scope="col">Categoría</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Stock</th>
-                  <th scope="col">Valoración</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Intel Core i9-13900K</td>
-                  <td>Procesador</td>
-                  <td>$599.99</td>
-                  <td>12 unidades</td>
-                  <td>★★★★★ (385 reviews)</td>
-                </tr>
-                <tr>
-                  <td>NVIDIA RTX 4090</td>
-                  <td>GPU</td>
-                  <td>$1,799.99</td>
-                  <td>5 unidades</td>
-                  <td>★★★★★ (542 reviews)</td>
-                </tr>
-                <tr>
-                  <td>Corsair Vengeance DDR5 32GB</td>
-                  <td>Memoria RAM</td>
-                  <td>$249.99</td>
-                  <td>28 unidades</td>
-                  <td>★★★★☆ (218 reviews)</td>
-                </tr>
-                <tr>
-                  <td>Kingston NV2 1TB SSD</td>
-                  <td>Almacenamiento</td>
-                  <td>$89.99</td>
-                  <td>45 unidades</td>
-                  <td>★★★★★ (621 reviews)</td>
-                </tr>
-              </tbody>
-            </table>
+          <section id="nosotros" class="about-section">
+            <div class="container-inner">
+              <h2>Sobre Nosotros</h2>
+              <p>
+                <strong>PC Hardware</strong> es un e-commerce especializado en
+                componentes de calidad superior para computadoras personales...
+              </p>
+
+              <section aria-label="Comparativa de Productos Estrella">
+                <h3>Productos Estrella - Comparativa</h3>
+                <table class="comparison-table">
+                  <caption>
+                    Comparativa de productos más populares
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Producto</th>
+                      <th scope="col">Categoría</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Stock</th>
+                      <th scope="col">Valoración</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Intel Core i9-13900K</td>
+                      <td>Procesador</td>
+                      <td>$599.99</td>
+                      <td>12 unidades</td>
+                      <td>★★★★★ (385 reviews)</td>
+                    </tr>
+                    <tr>
+                      <td>NVIDIA RTX 4090</td>
+                      <td>GPU</td>
+                      <td>$1,799.99</td>
+                      <td>5 unidades</td>
+                      <td>★★★★★ (542 reviews)</td>
+                    </tr>
+                    <tr>
+                      <td>Corsair Vengeance DDR5 32GB</td>
+                      <td>Memoria RAM</td>
+                      <td>$249.99</td>
+                      <td>28 unidades</td>
+                      <td>★★★★☆ (218 reviews)</td>
+                    </tr>
+                    <tr>
+                      <td>Kingston NV2 1TB SSD</td>
+                      <td>Almacenamiento</td>
+                      <td>$89.99</td>
+                      <td>45 unidades</td>
+                      <td>★★★★★ (621 reviews)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+          </section>
+
+          <section id="compatibilidad" class="compatibility-section">
+            <div class="container-inner">
+              <h2>Guías de Compatibilidad</h2>
+              <div class="guides-grid">
+                <article class="guide-card">
+                  <h3>Socket de Procesadores</h3>
+                  <ul>
+                    <li><strong>LGA 1700:</strong> Intel 13ª y 14ª generación</li>
+                    <li><strong>AM5:</strong> AMD Ryzen 7000 series</li>
+                  </ul>
+                </article>
+
+                <article class="guide-card">
+                  <h3>Fuente de Alimentación</h3>
+                  <table class="specs-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">GPU</th>
+                        <th scope="col">Fuente Recomendada</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>RTX 4090</td>
+                        <td>1000W+</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section id="ayuda" class="contact-section">
+            <div class="container-inner">
+              <h2>Centro de Ayuda y Suscripción</h2>
+              <form id="newsletter-form" class="newsletter-form">
+                <fieldset>
+                  <legend>Formulario de Suscripción</legend>
+                  <div class="form-group">
+                    <label for="input-nombre">Nombre Completo:</label>
+                    <input
+                      type="text"
+                      id="input-nombre"
+                      name="nombre"
+                      required
+                      placeholder="Tu nombre"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="input-email">Correo Electrónico:</label>
+                    <input
+                      type="email"
+                      id="input-email"
+                      name="email"
+                      required
+                      placeholder="tu@email.com"
+                    />
+                  </div>
+                  <div class="form-group checkbox">
+                    <input
+                      type="checkbox"
+                      id="input-terminos"
+                      name="terminos"
+                      required
+                    />
+                    <label for="input-terminos"
+                      >Acepto los términos y condiciones</label
+                    >
+                  </div>
+                  <button type="submit" class="btn-submit">Suscribirse</button>
+                </fieldset>
+              </form>
+            </div>
           </section>
         </div>
-      </section>
-
-      <section id="compatibilidad" class="compatibility-section">
-        <div class="container-inner">
-          <h2>Guías de Compatibilidad</h2>
-          <div class="guides-grid">
-            <article class="guide-card">
-              <h3>Socket de Procesadores</h3>
-              <ul>
-                <li><strong>LGA 1700:</strong> Intel 13ª y 14ª generación</li>
-                <li><strong>AM5:</strong> AMD Ryzen 7000 series</li>
-              </ul>
-            </article>
-
-            <article class="guide-card">
-              <h3>Fuente de Alimentación</h3>
-              <table class="specs-table">
-                <thead>
-                  <tr>
-                    <th scope="col">GPU</th>
-                    <th scope="col">Fuente Recomendada</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>RTX 4090</td>
-                    <td>1000W+</td>
-                  </tr>
-                </tbody>
-              </table>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="ayuda" class="contact-section">
-        <div class="container-inner">
-          <h2>Centro de Ayuda y Suscripción</h2>
-          <form id="newsletter-form" class="newsletter-form">
-            <fieldset>
-              <legend>Formulario de Suscripción</legend>
-              <div class="form-group">
-                <label for="input-nombre">Nombre Completo:</label>
-                <input
-                  type="text"
-                  id="input-nombre"
-                  name="nombre"
-                  required
-                  placeholder="Tu nombre"
-                />
-              </div>
-              <div class="form-group">
-                <label for="input-email">Correo Electrónico:</label>
-                <input
-                  type="email"
-                  id="input-email"
-                  name="email"
-                  required
-                  placeholder="tu@email.com"
-                />
-              </div>
-              <div class="form-group checkbox">
-                <input
-                  type="checkbox"
-                  id="input-terminos"
-                  name="terminos"
-                  required
-                />
-                <label for="input-terminos"
-                  >Acepto los términos y condiciones</label
-                >
-              </div>
-              <button type="submit" class="btn-submit">Suscribirse</button>
-            </fieldset>
-          </form>
-        </div>
-      </section>
+      </div>
     </main>
 
     <footer role="contentinfo" class="footer">
