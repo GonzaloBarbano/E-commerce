@@ -45,7 +45,7 @@
   .featured-gallery img,
   .hero-gallery img,
   .hero-images img {
-    max-height: 200px;
+    height: 180px;
   }
 
   .featured-gallery,

@@ -7,6 +7,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
+- [fix/hero-images-object-fit]  ajusto height y object-fit para evitar recorte de imagenes
+  PR: [#71](https://github.com/GonzaloBarbano/E-commerce/pull/71) - @Naguirre0102 (Coordinador / DevOps)
+
 - [fix/tabla-overflow-mobile]  agrego contenedor con overflow auto para evitar desbordamiento de la tabla en mobile
   PR: [#70](https://github.com/GonzaloBarbano/E-commerce/pull/70) - @Naguirre0102 (Coordinador / DevOps)
 
