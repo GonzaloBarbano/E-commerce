@@ -56,6 +56,12 @@
   .main-content {
     padding: var(--spacing-md);
   }
+
+  .comparison-table th,
+  .comparison-table td {
+    white-space: nowrap;
+    font-size: var(--font-size-sm);
+  }
 }
 
 @media screen and (max-width: 480px) {
