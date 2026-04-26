@@ -3,6 +3,16 @@
    ============================================ */
 
 /* BOTONES */
+.btn-clear-filters {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
 .btn-primary,
 .btn-add-cart,
 .btn-submit,
