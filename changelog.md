@@ -7,6 +7,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
+- [fix/eliminar-js-hamburger]  extraigo script de menu hamburguesa a archivo externo
+  PR: [#72](https://github.com/GonzaloBarbano/E-commerce/pull/72) - @Naguirre0102 (Coordinador / DevOps)
+
 - [fix/hero-images-object-fit]  ajusto height y object-fit para evitar recorte de imagenes
   PR: [#71](https://github.com/GonzaloBarbano/E-commerce/pull/71) - @Naguirre0102 (Coordinador / DevOps)
 
