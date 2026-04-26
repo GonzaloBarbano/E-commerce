@@ -7,6 +7,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
+- [fix/estilos-btn-clear-filters]  agrego estilos al botón de limpiar filtros
+  PR: [#73](https://github.com/GonzaloBarbano/E-commerce/pull/73) - @Naguirre0102 (Coordinador / DevOps)
+
 - [fix/eliminar-js-hamburger]  extraigo script de menu hamburguesa a archivo externo
   PR: [#72](https://github.com/GonzaloBarbano/E-commerce/pull/72) - @Naguirre0102 (Coordinador / DevOps)
 
