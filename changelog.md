@@ -7,19 +7,23 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
-- [fix/estilos-btn-clear-filters]  agrego estilos al botón de limpiar filtros
+
+- [fix/responsive] correccion de responsive
+  PR: [#74](https://github.com/GonzaloBarbano/E-commerce/pull/74) - @GonzaloBarbano (QA tester)
+
+- [fix/estilos-btn-clear-filters] agrego estilos al botón de limpiar filtros
   PR: [#73](https://github.com/GonzaloBarbano/E-commerce/pull/73) - @Naguirre0102 (Coordinador / DevOps)
 
-- [fix/eliminar-js-hamburger]  extraigo script de menu hamburguesa a archivo externo
+- [fix/eliminar-js-hamburger] extraigo script de menu hamburguesa a archivo externo
   PR: [#72](https://github.com/GonzaloBarbano/E-commerce/pull/72) - @Naguirre0102 (Coordinador / DevOps)
 
-- [fix/hero-images-object-fit]  ajusto height y object-fit para evitar recorte de imagenes
+- [fix/hero-images-object-fit] ajusto height y object-fit para evitar recorte de imagenes
   PR: [#71](https://github.com/GonzaloBarbano/E-commerce/pull/71) - @Naguirre0102 (Coordinador / DevOps)
 
-- [fix/tabla-overflow-mobile]  agrego contenedor con overflow auto para evitar desbordamiento de la tabla en mobile
+- [fix/tabla-overflow-mobile] agrego contenedor con overflow auto para evitar desbordamiento de la tabla en mobile
   PR: [#70](https://github.com/GonzaloBarbano/E-commerce/pull/70) - @Naguirre0102 (Coordinador / DevOps)
 
-- [fix/estructura-nosotros-main-container]  reubico cierre de main-content para envolver secciones
+- [fix/estructura-nosotros-main-container] reubico cierre de main-content para envolver secciones
   PR: [#69](https://github.com/GonzaloBarbano/E-commerce/pull/69) - @Naguirre0102 (Coordinador / DevOps)
 
 - [fix/estilos-paginacion] Correccion de estilos de paginacion

@@ -13,6 +13,10 @@
   .main-content {
     margin-left: 0;
   }
+  /* RC-FIX: footer sin margin cuando no hay sidebar */
+  .footer {
+    margin-left: 0;
+  }
   .featured-gallery {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -20,15 +24,37 @@
 
 /* MOBILE */
 @media screen and (max-width: 768px) {
+  /* RC-FIX: Navbar mobile - ocultar nav-list por defecto y mostrar hamburger */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .navigation {
+    display: none;
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    background-color: var(--color-surface-dark);
+    z-index: 99;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .navigation.nav-open {
+    display: block;
+  }
+
   .nav-list {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
-    padding: var(--spacing-md) 0;
+    padding: var(--spacing-sm) 0;
   }
 
   .nav-link {
     font-size: var(--font-size-body);
+    padding: var(--spacing-sm) 0;
+    display: block;
   }
 
   /* RC11: Corrección Hero Images Mobile */
@@ -45,6 +71,19 @@
 
   .main-content {
     padding: var(--spacing-md);
+  }
+
+  /* RC-FIX: Tabla mobile - garantizar scroll horizontal */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    display: block;
+  }
+
+  .comparison-table,
+  .specs-table {
+    min-width: 500px;
   }
 
   .comparison-table th,
