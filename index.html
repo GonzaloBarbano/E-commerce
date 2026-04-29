@@ -43,7 +43,10 @@
         </a>
       </div>
 
-      <nav class="navigation" aria-label="Navegación Principal">
+      <button class="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded')==='false'?'true':'false'); document.querySelector('.navigation').classList.toggle('nav-open')">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="navigation" id="main-nav" aria-label="Navegación Principal">
         <ul class="nav-list">
           <li class="nav-item">
             <a href="#inicio" class="nav-link">Inicio</a>
@@ -241,7 +244,7 @@
           </nav>
         </aside>
 
-        <div class="main-content">
+        <div class="main-content" style="padding-bottom: var(--spacing-2xl);">
           <section id="inicio" class="hero-section">
             <h2>DESCRIPCIÓN DE LA TIENDA</h2>
             <p class="hero-description">
@@ -561,6 +564,7 @@
 
                 <article class="guide-card">
                   <h3>Fuente de Alimentación</h3>
+                  <div class="table-wrapper">
                   <table class="specs-table">
                     <thead>
                       <tr>

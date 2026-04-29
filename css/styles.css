@@ -71,7 +71,7 @@ h3 {
   margin-bottom: var(--spacing-md);
 }
 
-/* NAVBAR - Asegurando el color para Playwright */
+/* NAVBAR */
 .navbar {
   position: fixed;
   top: 0;
@@ -166,4 +166,48 @@ h3 {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+/* ============================================
+   RC-FIX: FOOTER — evitar que el sidebar fixed
+   lo tape en desktop
+   ============================================ */
+.footer {
+  margin-left: var(--sidebar-width);
+  background-color: var(--color-surface-dark);
+  color: #cbd5e1;
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-md);
+}
+
+.footer-container {
+  display: flex;
+  gap: var(--spacing-xl);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer-section h3 {
+  color: white;
+  font-size: var(--font-size-body);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-section a {
+  color: #cbd5e1;
+  transition: var(--transition-default);
+}
+
+.footer-section a:hover {
+  color: var(--color-primary-light);
+}
+
+.footer-section ul li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: #94a3b8;
 }
