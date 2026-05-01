@@ -8,6 +8,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/footer-responsive] ajusto margin del footer con media queries para no romper mobile
+  PR: [#75](https://github.com/GonzaloBarbano/E-commerce/pull/75) - @Naguirre0102 (Coordinador / DevOps)
+
 - [fix/responsive] correccion de responsive
   PR: [#74](https://github.com/GonzaloBarbano/E-commerce/pull/74) - @GonzaloBarbano (QA tester)
 
