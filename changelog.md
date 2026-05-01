@@ -7,6 +7,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
+- [fix/eliminar-js-inline-navbar] refactorizo navbar usando checkbox hack para eliminar dependencias de JS inline
+  PR: [#77](https://github.com/GonzaloBarbano/E-commerce/pull/77) - @Naguirre0102 (Coordinador / DevOps)
+
 - [fix/navbar-mobile-active] corrijo estilos del menu hamburguesa desplegable en mobile
   PR: [#76](https://github.com/GonzaloBarbano/E-commerce/pull/76) - @Naguirre0102 (Coordinador / DevOps)
 

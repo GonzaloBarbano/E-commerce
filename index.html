@@ -43,9 +43,10 @@
         </a>
       </div>
 
-      <button class="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded')==='false'?'true':'false'); document.querySelector('.navigation').classList.toggle('nav-open')">
+      <input type="checkbox" id="menu-toggle" hidden />
+      <label for="menu-toggle" class="hamburger-btn" aria-label="Abrir menú" aria-controls="main-nav">
         <span></span><span></span><span></span>
-      </button>
+      </label>
       <nav class="navigation" id="main-nav" aria-label="Navegación Principal">
         <ul class="nav-list">
           <li class="nav-item">
