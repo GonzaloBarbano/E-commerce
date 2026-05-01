@@ -169,14 +169,21 @@ h3 {
 }
 
 /* ============================================
-   RC-FIX: FOOTER — evitar que el sidebar fixed
-   lo tape en desktop
+   RC-FIX: FOOTER — Responsive Mobile First
+   evitar que el sidebar fixed lo tape en desktop
    ============================================ */
 .footer {
-  margin-left: var(--sidebar-width);
+  width: 100%;
   background-color: var(--color-surface-dark);
   color: #cbd5e1;
   padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-md);
+}
+
+/* Desktop: ajustar para dejar espacio del sidebar fijo */
+@media (min-width: 992px) {
+  .footer {
+    margin-left: var(--sidebar-width);
+  }
 }
 
 .footer-container {
