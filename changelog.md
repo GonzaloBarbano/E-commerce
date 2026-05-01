@@ -7,6 +7,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
+
+- [fix/testing-doc-urls]agrego los link reales de los issues en testing-doc.md
+  PR: [#78](https://github.com/GonzaloBarbano/E-commerce/pull/78) - @Naguirre0102 (Coordinador / DevOps)
+
 - [fix/eliminar-js-inline-navbar] refactorizo navbar usando checkbox hack para eliminar dependencias de JS inline
   PR: [#77](https://github.com/GonzaloBarbano/E-commerce/pull/77) - @Naguirre0102 (Coordinador / DevOps)
 
