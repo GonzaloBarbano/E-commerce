@@ -63,6 +63,9 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   line-height: 1.6;
+  /* RC-FIX: prevenir scroll horizontal global */
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 h1,
@@ -153,7 +156,8 @@ h3 {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* RC-FIX: min() garantiza que nunca supere el ancho disponible en mobile */
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
   gap: var(--spacing-lg);
 }
 
