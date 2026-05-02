@@ -43,6 +43,9 @@
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: var(--transition-default);
+  /* RC-FIX: evitar que la card desborde su columna de grid */
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* RC-FIX: Cambiado object-fit de cover a contain para no recortar las imágenes */
@@ -106,6 +109,10 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: var(--border-radius-sm);
+  /* RC-FIX: width máximo acotado al contenedor padre */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Página activa: fondo primario */

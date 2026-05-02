@@ -8,6 +8,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/responsive-2] Resuelvo problemas de responsive
+  PR: [#79](https://github.com/GonzaloBarbano/E-commerce/pull/79) - @GonzaloBarbano (QA tester)
+
 - [fix/testing-doc-urls]agrego los link reales de los issues en testing-doc.md
   PR: [#78](https://github.com/GonzaloBarbano/E-commerce/pull/78) - @Naguirre0102 (Coordinador / DevOps)
 
