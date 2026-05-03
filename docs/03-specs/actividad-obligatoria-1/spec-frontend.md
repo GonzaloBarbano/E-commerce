@@ -1,88 +1,93 @@
 # Spec: [Desarrollador Frontend]
 
-spec-frontend.md — Desarrollador Frontend/CSS
-1. Descripción general
-Qué se va a hacer:
-Generar los archivos de estilos base del sitio e-commerce PC-Hardware a partir del mockup provisto en FigJam. Se crearán dos archivos CSS: styles.css (variables, reset, tipografía, colores, layout base) y components.css (botones, cards, navegación, formularios, estados hover/focus).
-Por qué:
-El proyecto necesita una capa de estilos consistente y mantenible que refleje fielmente el diseño del mockup, aplicando correctamente selectores CSS, herencia, especificidad, box model y diferenciación de elementos en línea vs en bloque.
+## 1. Meta y Contexto
 
-2. Análisis de Figma / Mockup
-Layout general
+- **Tarea asignada (según plan.md):** Crear la estructura HTML5 básica para una página de E-commerce que sirva como cimiento para el desarrollo interactivo a lo largo del curso.
+- **Objetivo:** Establecer una estructura semántica y accesible de una página web de E-commerce que incluya todos los elementos fundamentales solicitados, dejando preparada la base para futuras fases de estilos CSS y funcionalidades JavaScript.
 
-Estructura de dos columnas: sidebar izquierdo fijo + área de contenido principal a la derecha.
-Navbar horizontal en la parte superior con logo a la izquierda y links + carrito a la derecha.
-Sección Hero: descripción de la tienda + 3 imágenes de producto en fila + botón CTA.
-Sección "Productos Presentados": grid de cards con imagen y nombre de producto.
-Paginación al pie del contenido principal.
+---
 
-Secciones identificadas
-SecciónDescripciónNavbarLogo (PC-HARDWARE) + links (Inicio, Nosotros, Shop, Ayuda) + CarritoSidebarBuscador, Categorías, Filtros (precio, marca, specs), Enlaces rápidos, SíguenosHeroTítulo tienda + 3 imágenes producto + botón "COMPRAR AHORA"ProductosGrid de cards (imagen + nombre del producto)PaginaciónLinks numéricos al pie
+## 2. Requerimientos Técnicos y Funcionales
 
-Paleta de colores
-TokenHexUso--color-primary#7C3AEDBotones, CTAs, navbar--color-primary-hover#6D28D9Hover de botones--color-primary-light#EDE9FEBadges, tags--color-surface-dark#1E1B2ENavbar, footer--color-surface-card#FFFFFFFondo de cards--color-bg#F8F9FAFondo general--color-border#E2E8F0Bordes, separadores--color-text#111827Texto principal--color-text-muted#64748BTexto secundario--color-success#16A34AStock disponible--color-error#DC2626Sin stock
+- [x] **HTML5 Semántico:** Utilizar etiquetas HTML5 semánticas (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`, etc.) para estructura clara y accesible.
+- [x] **Elementos Básicos Requeridos:** Incluir en la página:
+  - Título de la página y encabezados jerárquicos (`<h1>`, `<h2>`, `<h3>`)
+  - Párrafos descriptivos sobre el E-commerce
+  - Al menos 3 imágenes relacionadas con productos/categorías (con atributo `alt` descriptivo)
+  - Enlaces funcionales (internos y/o externos) relacionados con el E-commerce
+  - Al menos una lista (ordenada o desordenada) de categorías o productos
+  - Un formulario básico (ej: newsletter, contacto o búsqueda)
+  - Una tabla con información de productos o comparativa
+- [x] **Accesibilidad y SEO:** Incluir metaetiquetas esenciales (`<meta name="viewport">`, `<meta name="description">`, etc.) y atributos accesibles en todos los elementos.
+- [x] **Marcadores para Fases Futuras:** Incluir comentarios HTML indicando:
+  - Dónde se aplicarán estilos CSS (con etiquetas como `<!-- TODO: CSS: ... -->`)
+  - Dónde se integrarán funcionalidades JavaScript (con etiquetas como `<!-- TODO: JS: ... -->`)
+- [x] **Documentación en Código:** Agregar comentarios claros explicando la estructura de cada sección y propósito de elementos clave.
+- [x] **Validez HTML:** El código debe pasar validación del W3C sin errores (advertencias aceptables).
 
-Tipografía
-Fuente: Inter — importada desde Google Fonts
-TokenTamañoPesoUso--font-size-h132px700Título principal--font-size-h224px600Títulos de sección--font-size-h320px600Subtítulos--font-size-body16px400Texto general--font-size-sm14px400Categorías, filtros--font-size-nav15px500Links del navbar--font-size-price22px700Precio de producto
+---
 
-Espaciados y grillas
-TokenValorUso--spacing-xs4pxSeparación mínima--spacing-sm8pxPadding interno pequeño--spacing-md16pxEspaciado general--spacing-lg24pxSeparación entre secciones--spacing-xl32pxMárgenes grandes--spacing-2xl48pxSeparación de secciones hero--sidebar-width220pxAncho del sidebar--navbar-height60pxAlto del navbar--border-radius8pxBordes redondeados general--border-radius-sm4pxBordes badges/tags
-Componentes principales identificados
+## 3. Criterios de Aceptación (Definición de "Terminado")
 
-Botón primario: fondo --color-primary, texto blanco, border-radius, hover con --color-primary-hover
-Card de producto: fondo blanco, borde --color-border, sombra leve, imagen superior + nombre inferior
-Navbar: fondo --color-surface-dark, flex con space-between, links con --color-text-muted
-Input buscador: borde --color-border, padding interno, width 100%
-Checkboxes filtros: estilo nativo con label asociado
-Links de categoría/sidebar: display block, font-size-sm, color-text-muted, hover color-primary
+_Para que esta tarea se considere lista, debe cumplir con:_
 
+- [x] **Validación W3C:** El archivo `index.html` pasa el validador del W3C sin errores críticos (https://validator.w3.org/).
+- [x] **Estructura Semántica:** El HTML utiliza etiquetas semánticas apropiadas y no abusa de divs genéricos.
+- [x] **Completitud de Elementos:** Contiene todos los elementos básicos solicitados (título, párrafos, imágenes, enlaces, listas, formularios, tablas).
+- [x] **Comentarios Descriptivos:** Cada sección principal contiene al menos un comentario explicatorio.
+- [x] **Marcadores Identificados:** Los comentarios `<!-- TODO: CSS: ... -->` y `<!-- TODO: JS: ... -->` están claramente marcados.
+- [x] **Atributos Accesibles:** Todas las imágenes tienen `alt` descriptivo, formularios tienen `<label>` asociadas, y se utilizan atributos `aria` donde corresponda.
+- [x] **Commits Descriptivos:** La rama contiene commits con mensajes claros en formato `feat: ...` o `docs: ...` detallando qué se agregó o modificó.
+- [x] **README.md Actualizado:** El archivo `README.md` incluye descripción del proyecto, instrucciones de uso y contexto del E-commerce elegido.
+- [x] **Archivos Organizados:** El proyecto sigue la estructura especificada en `plan.md` con `docs/specs/`, `docs/mockups/`, etc.
 
-3. Criterios de aceptación
+---
 
- Variables CSS definidas en :root con todos los tokens de color, tipografía y espaciado.
- Reset CSS aplicado (box-sizing, margin/padding 0, etc.).
- Fuente Inter importada desde Google Fonts y aplicada globalmente.
- Layout base con sidebar + contenido principal definido en styles.css.
- Navbar estilizado con fondo oscuro, flex y links correctamente espaciados.
- Botón primario con hover y focus estilizados en components.css.
- Cards de producto con imagen, nombre y sombra leve.
- Input de búsqueda con estilos coherentes al diseño.
- Selectores con especificidad correcta (sin uso innecesario de !important).
- Box model explícito: padding, margin y border definidos conscientemente.
- Diferenciación correcta entre elementos inline y block.
- Comentarios explicativos en el código sobre decisiones de estilo.
- Pruebas de integración coordinadas con Especialista en Responsive en GitHub Pages y localhost.
+## 4. Estrategia de Prompts (Para el Agente IA)
 
+- **Herramienta a utilizar:** GitHub Copilot en VS Code con el contexto del proyecto. MCP Figma
+- **Contexto a proveer a la IA:**
+  > "Actúa como un desarrollador frontend experto en HTML5 semántico y accesibilidad web (WCAG). Tu tarea es crear una estructura HTML válida y bien documentada para una página de E-commerce siguiendo las especificaciones en `docs/specs/spec-frontend.md`. El código debe incluir comentarios explicativos y marcadores para futuras fases de CSS y JavaScript."
+- **Archivos de referencia:**
+  - `index.html` (a crear)
+  - `docs/specs/spec-frontend.md` (esta especificación)
+  - `plan.md` (requerimientos generales del proyecto)
+  - `docs/mockup/actividad-obligatoria-1/` (si hay mockups disponibles)
 
-4. Archivos a generar
-ArchivoContenidocss/styles.cssVariables CSS en :root, reset, tipografías, colores, layout basecss/components.cssBotones, cards, navegación, formularios, estados hover/focus
+- **Características adicionales a considerar:**
+  - Utilizar estructura de carpetas clara: `/assets/images/` para imágenes
+  - Seguir convenciones de nombres descriptivos en clases e ids (aunque no haya CSS aún)
+  - Preparar la estructura para que sea responsive (agregar viewport meta)
+  - Considerar SEO desde el inicio con metaetiquetas adecuadas
 
-5. Prompt utilizado en Copilot Agent
-Tengo un e-commerce de PC Hardware con el siguiente mockup y sistema de diseño.
-Adjunto: mockup-actv2.png, este spec-frontend.md
+---
 
-Necesito que generes dos archivos CSS:
+## 5. Configuración del Servidor MCP de Figma
 
-1. css/styles.css con:
-   - @import de la fuente Inter desde Google Fonts
-   - Variables CSS en :root con todos los tokens de color, tipografía y espaciado definidos en el spec
-   - Reset CSS: box-sizing border-box, margin 0, padding 0 para todos los elementos
-   - Estilos base para body, h1-h3, p, a, ul
-   - Layout base con sidebar izquierdo fijo de 220px y área de contenido principal usando flexbox
-   - Navbar con fondo --color-surface-dark, altura 60px, display flex, justify-content space-between
-   - Comentarios explicativos en cada sección del código
+### Instalación y Verificación
 
-2. css/components.css con:
-   - Botón primario (.btn-primary): fondo --color-primary, texto blanco, padding, border-radius 8px, hover con --color-primary-hover, transición suave
-   - Card de producto (.product-card): fondo blanco, borde --color-border, border-radius 8px, box-shadow leve, overflow hidden
-   - Input buscador (.search-input): width 100%, borde --color-border, padding, border-radius 4px, focus con outline --color-primary
-   - Links de navbar (.nav-link): color --color-text-muted, font-size 15px, font-weight 500, hover color --color-primary
-   - Links de sidebar (.sidebar-link): display block, font-size 14px, color --color-text-muted, hover color --color-primary
-   - Paginación (.pagination): display flex, gap, botones con borde y hover
+La integración con Figma se realiza mediante el **Model Context Protocol (MCP)**, que permite a GitHub Copilot acceder a diseños de Figma para mejorar la generación de código frontend.
 
-Requisitos técnicos:
-- Aplicar selectores, herencia y especificidad de forma correcta (sin !important innecesario)
-- Box model explícito: definir padding, margin y border conscientemente en cada componente
-- Diferenciar elementos inline y block con estilos apropiados
-- Dejar comentarios explicativos sobre decisiones de estilo.
+**Configuración en el workspace:**
+- Archivo: `.vscode/mcp.json`
+- Servidor: `@figma/code-connect` (instalado vía NPX bajo demanda)
+- Propósito: Conectar diseños de Figma con el código generado para mantener consistencia visual
+
+**Para verificar que MCP Figma está configurado correctamente:**
+1. Abre `.vscode/mcp.json` en el workspace
+2. Verifica que contenga la entrada `figma` bajo `mcpServers`
+3. Al utilizar GitHub Copilot, si proporcionas un enlace de Figma, el servidor extrae automáticamente el contexto del diseño
+
+**Ventajas de esta configuración:**
+- Copilot puede analizar componentes, colores, tipografía y layout directamente desde Figma
+- Mejora la calidad del HTML generado al alinearlo con los mockups de diseño
+- Permite generar Code Connect mappings entre componentes Figma y código HTML/CSS
+
+---
+
+## Notas de Desarrollo
+
+- El HTML no debe incluir estilos inline; toda la presentación se delegará a CSS en futuras entregas.
+- La funcionalidad interactiva será agregada en fases posteriores del proyecto.
+- Se recomienda usar herramientas de validación y linters HTML durante el desarrollo para mantener la calidad del código.
+- Este archivo spec-frontend.md debe ser incluido en el PR correspondiente como referencia de trabajo realizado.
