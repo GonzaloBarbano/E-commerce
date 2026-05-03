@@ -1,0 +1,188 @@
+/* ============================================
+   PC-HARDWARE E-COMMERCE | RESPONSIVE DESIGN
+   ============================================ */
+
+/* RC-FIX GLOBAL: prevenir scroll horizontal en cualquier viewport */
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* TABLET */
+@media screen and (max-width: 1024px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+  .sidebar {
+    display: none;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  /* RC-FIX: footer sin margin cuando no hay sidebar */
+  .footer {
+    margin-left: 0;
+  }
+  .featured-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+  /* RC-FIX: Navbar mobile - ocultar nav-list por defecto y mostrar hamburger */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .navigation {
+    display: none;
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--color-surface-dark);
+    z-index: 999;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  #menu-toggle:checked ~ .navigation {
+    display: block;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--spacing-md) 0;
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: var(--font-size-body);
+    padding: var(--spacing-lg) var(--spacing-lg);
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition-default);
+  }
+
+  .nav-link:hover {
+    background-color: rgba(124, 58, 237, 0.1);
+    color: var(--color-primary-light);
+  }
+
+  /* RC-FIX: main-content no desborda en mobile */
+  .main-content {
+    padding: var(--spacing-md);
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* RC-FIX: main-container contenido acotado al viewport */
+  .main-container {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* RC11: Corrección Hero Images Mobile */
+  .featured-gallery img,
+  .hero-gallery img,
+  .hero-images img {
+    height: 180px;
+  }
+
+  .featured-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  /* RC-FIX: Tabla mobile - garantizar scroll horizontal */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    display: block;
+  }
+
+  /* RC-FIX: cart-table también necesita wrapper de scroll */
+  .cart-section {
+    overflow-x: auto;
+  }
+
+  .cart-table {
+    min-width: 480px;
+  }
+
+  .comparison-table,
+  .specs-table {
+    min-width: 500px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    white-space: nowrap;
+    font-size: var(--font-size-sm);
+  }
+
+  /* RC-FIX: formularios mobile */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px; /* evita zoom automático en iOS */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* RC-FIX: botones full-width en mobile */
+  .btn-apply-filters,
+  .btn-submit {
+    width: 100%;
+  }
+
+  /* RC-FIX: price-range inputs no desborden */
+  .price-range {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+
+  .price-range input {
+    width: calc(50% - 30px);
+    min-width: 60px;
+  }
+
+  /* RC-FIX: about/nosotros sección ocupa ancho completo */
+  .about-section,
+  .contact-section,
+  .compatibility-section,
+  .cart-section,
+  .hero-section {
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --font-size-h1: 26px;
+  }
+  .logo-text {
+    font-size: 16px;
+  }
+
+  /* RC-FIX: productos en cards más compactos en 480px */
+  .product-info {
+    padding: var(--spacing-sm);
+  }
+}
