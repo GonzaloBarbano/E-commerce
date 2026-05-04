@@ -4,6 +4,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Unreleased]
+
+### Added
+
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
