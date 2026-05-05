@@ -75,8 +75,9 @@
     </header>
 
     <main role="main">
-      <div class="main-container">
-        <aside class="sidebar" role="complementary">
+      <div class="container-fluid main-container">
+        <div class="row">
+        <aside class="sidebar col-lg-3 d-none d-lg-block" role="complementary">
           <div class="search-section">
             <input
               type="search"
@@ -253,7 +254,7 @@
           </nav>
         </aside>
 
-        <div class="main-content" style="padding-bottom: var(--spacing-2xl);">
+        <div class="main-content col-lg-9" style="padding-bottom: var(--spacing-2xl);">
           <section id="inicio" class="hero-section">
             <h2>DESCRIPCIÓN DE LA TIENDA</h2>
             <p class="hero-description">
@@ -638,6 +639,7 @@
             </div>
           </section>
         </div>
+      </div>
       </div>
     </main>
 
