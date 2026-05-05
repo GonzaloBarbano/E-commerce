@@ -4,6 +4,13 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- [feature/coord-devops-update-figma-and-readme] Actualizo readme y mockup
+  PR: [#82](https://github.com/GonzaloBarbano/E-commerce/pull/82) - @GonzaloBarbano (Coordinador / DevOps)
+
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
