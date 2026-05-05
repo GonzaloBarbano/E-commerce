@@ -2,7 +2,7 @@
 ## `<input type="range">` + `<datalist>` — Filtro de Precio y Sugerencias de Búsqueda
 
 **Rol:** Desarrollador de Componentes HTML Avanzados  
-**Integrante:** Lucas Funes | Matrícula: 152159  
+**Integrante:** Lucas Fischer | Matrícula: 152159  
 **Fecha de ejecución:** 2026-04-22  
 **Herramienta:** Playwright MCP (`@playwright/mcp`)  
 **URL testeada:** `http://127.0.0.1:5500/index.html`  
