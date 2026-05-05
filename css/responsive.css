@@ -23,9 +23,6 @@ html {
   .footer {
     margin-left: 0;
   }
-  .featured-gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 /* MOBILE */
@@ -92,15 +89,6 @@ html {
   .hero-gallery img,
   .hero-images img {
     height: 180px;
-  }
-
-  .featured-gallery {
-    grid-template-columns: 1fr;
-  }
-
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
   }
 
   /* RC-FIX: Tabla mobile - garantizar scroll horizontal */

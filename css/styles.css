@@ -140,17 +140,7 @@ main {
 }
 
 .featured-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-md);
   margin: var(--spacing-lg) 0;
-}
-
-.products-grid {
-  display: grid;
-  /* RC-FIX: min() garantiza que nunca supere el ancho disponible en mobile */
-  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-  gap: var(--spacing-lg);
 }
 
 .visually-hidden {
@@ -176,9 +166,6 @@ main {
 }
 
 .footer-container {
-  display: flex;
-  gap: var(--spacing-xl);
-  flex-wrap: wrap;
   margin-bottom: var(--spacing-lg);
 }
 
