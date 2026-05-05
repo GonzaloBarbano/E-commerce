@@ -69,6 +69,8 @@
     <main role="main">
       <div class="main-container">
         <aside class="sidebar" role="complementary">
+
+          <!-- COMPONENTE HTML AVANZADO 2 (Parte A): datalist en buscador -->
           <div class="search-section">
             <input
               type="search"
@@ -76,8 +78,22 @@
               class="search-input"
               placeholder="Buscador..."
               aria-label="Buscar productos"
+              list="search-suggestions"
+              autocomplete="off"
             />
+            <datalist id="search-suggestions">
+              <option value="NVIDIA"></option>
+              <option value="AMD"></option>
+              <option value="Intel"></option>
+              <option value="Corsair"></option>
+              <option value="Kingston"></option>
+              <option value="RTX 4090"></option>
+              <option value="Core i9"></option>
+              <option value="DDR5"></option>
+              <option value="SSD NVMe"></option>
+            </datalist>
           </div>
+          <!-- FIN COMPONENTE HTML AVANZADO 2 (Parte A) -->
 
           <nav class="categories-section" aria-label="Categorías de Productos">
             <p class="sidebar-title">CATEGORÍAS</p>
@@ -119,29 +135,44 @@
           <section class="filters-section" aria-label="Filtros de Productos">
             <h3 class="sidebar-title">FILTROS</h3>
             <form id="filters-form" class="filters-form">
+
+              <!-- COMPONENTE HTML AVANZADO 2 (Parte B): input type="range" para filtro de precio -->
               <fieldset class="filter-group">
                 <legend>Rango de Precio</legend>
-                <div class="price-range">
-                  <label for="price-min">Mín: $</label>
+                <div class="price-range-slider">
+                  <label for="price-range-min">
+                    Mín: $<span id="price-min-display">0</span>
+                  </label>
                   <input
-                    type="number"
-                    id="price-min"
+                    type="range"
+                    id="price-range-min"
                     name="price-min"
                     min="0"
-                    placeholder="0"
+                    max="2000"
+                    step="50"
+                    value="0"
+                    class="price-slider"
                     aria-label="Precio mínimo"
+                    oninput="document.getElementById('price-min-display').textContent = this.value"
                   />
-                  <label for="price-max">Máx: $</label>
+                  <label for="price-range-max">
+                    Máx: $<span id="price-max-display">2000</span>
+                  </label>
                   <input
-                    type="number"
-                    id="price-max"
+                    type="range"
+                    id="price-range-max"
                     name="price-max"
                     min="0"
-                    placeholder="10000"
+                    max="2000"
+                    step="50"
+                    value="2000"
+                    class="price-slider"
                     aria-label="Precio máximo"
+                    oninput="document.getElementById('price-max-display').textContent = this.value"
                   />
                 </div>
               </fieldset>
+              <!-- FIN COMPONENTE HTML AVANZADO 2 (Parte B) -->
 
               <fieldset class="filter-group">
                 <legend>Marca</legend>
@@ -298,6 +329,8 @@
           <section id="tienda" class="products-section">
             <h2>PRODUCTOS PRESENTADOS</h2>
             <div class="products-grid">
+
+              <!-- Producto 1: Intel Core i9-13900K -->
               <article
                 class="product-card"
                 data-category="cpu"
@@ -317,12 +350,27 @@
                   <p class="product-specs">24 núcleos | 5.8 GHz Turbo</p>
                   <p class="product-stock">Stock: 12 unidades</p>
                   <p class="product-price">$599.99 USD</p>
+                  <!-- COMPONENTE HTML AVANZADO 1: details/summary -->
+                  <details class="product-specs-details">
+                    <summary>Ver especificaciones técnicas</summary>
+                    <ul class="specs-list">
+                      <li><strong>Socket:</strong> LGA 1700</li>
+                      <li><strong>Núcleos:</strong> 24 (8P + 16E)</li>
+                      <li><strong>Frecuencia base:</strong> 3.0 GHz</li>
+                      <li><strong>Frecuencia turbo:</strong> 5.8 GHz</li>
+                      <li><strong>TDP:</strong> 125W</li>
+                      <li><strong>Caché L3:</strong> 36 MB</li>
+                      <li><strong>Garantía:</strong> 3 años</li>
+                    </ul>
+                  </details>
+                  <!-- FIN COMPONENTE HTML AVANZADO 1 -->
                   <button type="button" class="btn-add-cart">
                     Agregar al Carrito
                   </button>
                 </div>
               </article>
 
+              <!-- Producto 2: NVIDIA RTX 4090 -->
               <article
                 class="product-card"
                 data-category="gpu"
@@ -342,12 +390,26 @@
                   <p class="product-specs">24GB GDDR6X | 16384 CUDA</p>
                   <p class="product-stock">Stock: 5 unidades</p>
                   <p class="product-price">$1,799.99 USD</p>
+                  <!-- COMPONENTE HTML AVANZADO 1: details/summary -->
+                  <details class="product-specs-details">
+                    <summary>Ver especificaciones técnicas</summary>
+                    <ul class="specs-list">
+                      <li><strong>VRAM:</strong> 24GB GDDR6X</li>
+                      <li><strong>CUDA Cores:</strong> 16,384</li>
+                      <li><strong>Bus:</strong> 384-bit</li>
+                      <li><strong>Consumo:</strong> 450W TDP</li>
+                      <li><strong>Salidas:</strong> 3x DisplayPort 1.4a, 1x HDMI 2.1</li>
+                      <li><strong>Garantía:</strong> 3 años</li>
+                    </ul>
+                  </details>
+                  <!-- FIN COMPONENTE HTML AVANZADO 1 -->
                   <button type="button" class="btn-add-cart">
                     Agregar al Carrito
                   </button>
                 </div>
               </article>
 
+              <!-- Producto 3: Corsair Vengeance DDR5 -->
               <article
                 class="product-card"
                 data-category="ram"
@@ -367,12 +429,26 @@
                   <p class="product-specs">32GB (2x16GB) | 5600MHz</p>
                   <p class="product-stock">Stock: 28 unidades</p>
                   <p class="product-price">$249.99 USD</p>
+                  <!-- COMPONENTE HTML AVANZADO 1: details/summary -->
+                  <details class="product-specs-details">
+                    <summary>Ver especificaciones técnicas</summary>
+                    <ul class="specs-list">
+                      <li><strong>Capacidad:</strong> 32GB (2x16GB)</li>
+                      <li><strong>Tipo:</strong> DDR5</li>
+                      <li><strong>Velocidad:</strong> 5600MHz</li>
+                      <li><strong>Latencia:</strong> CL36</li>
+                      <li><strong>Voltaje:</strong> 1.25V</li>
+                      <li><strong>Garantía:</strong> Lifetime</li>
+                    </ul>
+                  </details>
+                  <!-- FIN COMPONENTE HTML AVANZADO 1 -->
                   <button type="button" class="btn-add-cart">
                     Agregar al Carrito
                   </button>
                 </div>
               </article>
 
+              <!-- Producto 4: Kingston NV2 1TB -->
               <article
                 class="product-card"
                 data-category="storage"
@@ -392,12 +468,26 @@
                   <p class="product-specs">1TB NVMe M.2 | 3500 MB/s</p>
                   <p class="product-stock">Stock: 45 unidades</p>
                   <p class="product-price">$89.99 USD</p>
+                  <!-- COMPONENTE HTML AVANZADO 1: details/summary -->
+                  <details class="product-specs-details">
+                    <summary>Ver especificaciones técnicas</summary>
+                    <ul class="specs-list">
+                      <li><strong>Capacidad:</strong> 1TB</li>
+                      <li><strong>Interfaz:</strong> NVMe PCIe 4.0 M.2</li>
+                      <li><strong>Lectura:</strong> 3500 MB/s</li>
+                      <li><strong>Escritura:</strong> 2100 MB/s</li>
+                      <li><strong>Factor de forma:</strong> 2280</li>
+                      <li><strong>Garantía:</strong> 3 años</li>
+                    </ul>
+                  </details>
+                  <!-- FIN COMPONENTE HTML AVANZADO 1 -->
                   <button type="button" class="btn-add-cart">
                     Agregar al Carrito
                   </button>
                 </div>
               </article>
 
+              <!-- Producto 5: Corsair RM850x -->
               <article
                 class="product-card"
                 data-category="psu"
@@ -417,12 +507,26 @@
                   <p class="product-specs">850W | 80+ Gold | Modular</p>
                   <p class="product-stock">Stock: 19 unidades</p>
                   <p class="product-price">$179.99 USD</p>
+                  <!-- COMPONENTE HTML AVANZADO 1: details/summary -->
+                  <details class="product-specs-details">
+                    <summary>Ver especificaciones técnicas</summary>
+                    <ul class="specs-list">
+                      <li><strong>Potencia:</strong> 850W</li>
+                      <li><strong>Certificación:</strong> 80+ Gold</li>
+                      <li><strong>Modular:</strong> Totalmente modular</li>
+                      <li><strong>Conectores PCIe:</strong> 4x 6+2 pin</li>
+                      <li><strong>Ventilador:</strong> 135mm Zero RPM</li>
+                      <li><strong>Garantía:</strong> 10 años</li>
+                    </ul>
+                  </details>
+                  <!-- FIN COMPONENTE HTML AVANZADO 1 -->
                   <button type="button" class="btn-add-cart">
                     Agregar al Carrito
                   </button>
                 </div>
               </article>
 
+              <!-- Producto 6: Corsair H150i ELITE -->
               <article
                 class="product-card"
                 data-category="cooling"
@@ -442,11 +546,25 @@
                   <p class="product-specs">360mm AIO | RGB iCUE</p>
                   <p class="product-stock">Stock: 8 unidades</p>
                   <p class="product-price">$159.99 USD</p>
+                  <!-- COMPONENTE HTML AVANZADO 1: details/summary -->
+                  <details class="product-specs-details">
+                    <summary>Ver especificaciones técnicas</summary>
+                    <ul class="specs-list">
+                      <li><strong>Radiador:</strong> 360mm</li>
+                      <li><strong>Ventiladores:</strong> 3x 120mm RGB</li>
+                      <li><strong>Compatibilidad:</strong> LGA 1700, AM5, AM4</li>
+                      <li><strong>Bomba:</strong> 2400 RPM</li>
+                      <li><strong>Software:</strong> iCUE compatible</li>
+                      <li><strong>Garantía:</strong> 5 años</li>
+                    </ul>
+                  </details>
+                  <!-- FIN COMPONENTE HTML AVANZADO 1 -->
                   <button type="button" class="btn-add-cart">
                     Agregar al Carrito
                   </button>
                 </div>
               </article>
+
             </div>
 
             <nav class="pagination" aria-label="Paginación de productos">
@@ -658,4 +776,4 @@
       </div>
     </footer>
   </body>
-</html>
+</html> 
