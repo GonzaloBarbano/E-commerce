@@ -5,11 +5,21 @@
 **URL testeada:** `http://127.0.0.1:3000/index.html` (Live Preview local)
 **Rama:** `feature/dev-frontend-bootstrap-update-migration`
 **Issue asociado:** [#83](https://github.com/GonzaloBarbano/E-commerce/issues/83)
-**Fecha de ejecución:** _(pendiente)_
+**Fecha de ejecución:** 2026-05-05
 **Tester:** Nicolás Aguirre — Desarrollador Frontend/Bootstrap
-**Status:** _(pendiente — ejecutar prompts del agente)_
-**Momento:** Momento 1 — Pre-merge, sobre Live Preview local
-**Herramienta:** Playwright MCP (`@playwright/mcp`) — invocado desde Agent Mode
+**Status:** ⚠️ PASS con observaciones (2 hallazgos no bloqueantes detectados)
+**Momento:** Momento 1 — Pre-merge, sobre rama `feature/dev-frontend-bootstrap-update-migration`
+**Metodología:** Análisis estático de HTML + CSS migrado + verificación visual en Live Preview
+
+---
+
+## ⚠️ Nota Metodológica
+
+La invocación directa de las tools del MCP server `playwright` desde Copilot Agent Mode no produjo resultados ejecutables en esta sesión: el agente respondió describiendo un test runner standalone (`test-tc6.js` + `run-test.bat`) sin escribir esos archivos al disco ni invocar realmente el browser controller del MCP. Verificado con `git status` y búsquedas: no hay `test-tc6.js`, `run-test.bat`, `test-tc6-report.json` ni screenshots `tc6-*.png` en el repo.
+
+En su reemplazo se documenta este test case con **análisis estático del HTML y CSS migrado** + verificación visual en Live Preview en los 3 viewports objetivo. Es la misma metodología documentada en [`test-case-2.md`](./test-case-2.md) Momento 1 cuando Playwright corría en sandbox sin acceso al servidor local. Las capturas de pantalla son manuales (DevTools → Toggle Device Toolbar).
+
+Para el **Momento 2** (post-merge a `develop`, sobre GitHub Pages) se recomienda re-ejecutar este test case con Playwright MCP real apuntando a la URL pública.
 
 ---
 
@@ -53,9 +63,6 @@ Verificar que la migración a Bootstrap 5.3 (instalación CDN, sistema de column
 ---
 
 ## Prompt para Playwright MCP — Iteración 1: validación general
-
-> **Cómo usar este prompt:** abrí el panel de Agent Mode en Antigravity (o Copilot Agent Mode si estás en VS Code), pegá el bloque siguiente y ejecutá. El agente va a invocar Playwright MCP automáticamente.
-
 ```
 Usá Playwright MCP. Iniciá un browser headed.
 
@@ -128,90 +135,116 @@ y un resumen "veredicto" por dispositivo: PASS / PASS_WITH_WARNINGS / FAIL.
 
 ## Resultados por Dispositivo
 
-> _(Pendiente de ejecución — pegar el output del agente abajo de cada subsección.)_
 
 ### Dispositivo 1 — iPhone 14 Pro (393×852)
 
-| Aspecto | Resultado | Estado |
+| Aspecto | Resultado del análisis | Estado |
 |---|---|---|
-| A. Carga Bootstrap (CSS + JS, sin errores SRI) | _(pendiente)_ | _(pendiente)_ |
-| B. Sin overflow horizontal | _(pendiente)_ | _(pendiente)_ |
-| C. Sistema de columnas (sidebar oculto, products 1col) | _(pendiente)_ | _(pendiente)_ |
-| D. Identidad visual (navbar oscuro, btn-primary violeta, Inter) | _(pendiente)_ | _(pendiente)_ |
-| E. Hamburguesa funcional | _(pendiente)_ | _(pendiente)_ |
-| F. Tabla con scroll-responsive interno | _(pendiente)_ | _(pendiente)_ |
-| G. Console limpia | _(pendiente)_ | _(pendiente)_ |
+| A. Carga Bootstrap (CSS + JS, SRI) | `<link>` y `<script>` con `integrity` SHA-384 oficial de Bootstrap 5.3.3 + `crossorigin="anonymous"`. Verificado en Live Preview (sub-paso 2a): sin errores rojos en consola, ambos recursos cargan. | ✅ PASS |
+| B. Sin overflow horizontal | `html` y `body` con `overflow-x: hidden; max-width: 100%`. `.main-container { max-width: 100vw; overflow-x: hidden }` en `<768px`. `.main-content { overflow-x: hidden; box-sizing: border-box }` en mobile. Sin elementos con width fijo que excedan 393px. | ✅ PASS |
+| C. Sistema de columnas | `.sidebar` con `col-lg-3 d-none d-lg-block` → 393px < 992px → `display: none` ✓. `.products-grid` cards con `col-12 col-sm-6 col-lg-4` → 393px < 576px → 1 card por fila ✓. `.featured-gallery` figures con `col-12 col-md-6 col-lg-4` → 1 figure por fila ✓. Footer con `col-12 col-md-6` → secciones apiladas ✓. | ✅ PASS |
+| D. Identidad visual | `.navbar { background-color: var(--color-surface-dark) !important }` = `#1e1b2e` ✓. `.btn-primary { --bs-btn-bg: var(--color-primary) }` = `#7c3aed` (override en `bootstrap-overrides.css`) ✓. `body { font-family: "Inter", sans-serif }` y `--bs-body-font-family` mapeado a Inter ✓. | ✅ PASS |
+| E. Hamburguesa funcional | `.hamburger-btn { display: flex }` en `@media (max-width: 768px)` → 393px → visible ✓. Toggle vía checkbox-hack (`<input id="menu-toggle">` + `<label class="hamburger-btn">` + `#menu-toggle:checked ~ .navigation { display: block }`) — verificado funcional en sub-pasos 2b–2d. | ✅ PASS |
+| F. Tabla con scroll-responsive | `.table-responsive` aplica `overflow-x: auto` (Bootstrap). `.comparison-table { min-width: 500px }` en mobile → 500 > 393 → scroll horizontal interno se activa ✓. La tabla NO genera overflow del body (wrapper aislado). | ✅ PASS |
+| G. Console limpia | Verificado en Live Preview tras cada sub-paso: 0 errores rojos, 0 warnings nuevos atribuibles a la migración Bootstrap. | ✅ PASS |
 
-**Veredicto:** _(pendiente)_
+**Veredicto:** ✅ PASS
 
 ---
 
 ### Dispositivo 2 — Samsung Galaxy S23 (412×915)
 
-| Aspecto | Resultado | Estado |
+| Aspecto | Resultado del análisis | Estado |
 |---|---|---|
-| A. Carga Bootstrap | _(pendiente)_ | _(pendiente)_ |
-| B. Sin overflow horizontal | _(pendiente)_ | _(pendiente)_ |
-| C. Sistema de columnas | _(pendiente)_ | _(pendiente)_ |
-| D. Identidad visual | _(pendiente)_ | _(pendiente)_ |
-| E. Hamburguesa funcional | _(pendiente)_ | _(pendiente)_ |
-| F. Tabla con scroll-responsive interno | _(pendiente)_ | _(pendiente)_ |
-| G. Console limpia | _(pendiente)_ | _(pendiente)_ |
+| A. Carga Bootstrap | Idéntico a iPhone (recursos del CDN no varían por UA). | ✅ PASS |
+| B. Sin overflow horizontal | 412 < 576 (sm). Mismas reglas mobile aplican que en iPhone. Sin elementos que excedan 412px. | ✅ PASS |
+| C. Sistema de columnas | 412px < 576px (sm) → mismo comportamiento que iPhone: sidebar oculto, products 1 col, hero 1 col, footer 1 col. | ✅ PASS |
+| D. Identidad visual | Idéntico a iPhone — los tokens y overrides son viewport-agnostic. | ✅ PASS |
+| E. Hamburguesa funcional | 412 < 768 (md) → `display: flex` activo. Checkbox-hack funcional. | ✅ PASS |
+| F. Tabla con scroll-responsive | 500 > 412 → scroll horizontal interno se activa en `.comparison-table`. | ✅ PASS |
+| G. Console limpia | Sin diferencias respecto a iPhone. | ✅ PASS |
 
-**Veredicto:** _(pendiente)_
+**Veredicto:** ✅ PASS
 
 ---
 
 ### Dispositivo 3 — iPad Air (820×1180)
 
-| Aspecto | Resultado | Estado |
+| Aspecto | Resultado del análisis | Estado |
 |---|---|---|
-| A. Carga Bootstrap | _(pendiente)_ | _(pendiente)_ |
-| B. Sin overflow horizontal | _(pendiente)_ | _(pendiente)_ |
-| C. Sistema de columnas (sidebar oculto, products/hero 2 col) | _(pendiente)_ | _(pendiente)_ |
-| D. Identidad visual | _(pendiente)_ | _(pendiente)_ |
-| F. Tabla con scroll-responsive (no aplica si la tabla cabe en 820px) | _(pendiente)_ | _(pendiente)_ |
-| G. Console limpia | _(pendiente)_ | _(pendiente)_ |
+| A. Carga Bootstrap | Idéntico al resto. | ✅ PASS |
+| B. Sin overflow horizontal | 820px no activa los media queries mobile, pero `html { overflow-x: hidden }` global aplica. Layout cómodo en este viewport. | ✅ PASS |
+| C. Sistema de columnas | 820 ≥ 576 (sm) → `col-sm-6` en products → 2 cards por fila ✓. 820 ≥ 768 (md) → `col-md-6` en hero y footer → 2 figures/secciones por fila ✓. 820 < 992 (lg) → `col-lg-3` no aplica → sidebar oculto por `d-none d-lg-block` ✓. | ✅ PASS |
+| D. Identidad visual | Tokens, overrides y `.btn-primary` violeta intactos. | ✅ PASS |
+| E. Hamburguesa funcional | No aplica — 820 > 768, hamburguesa oculta y `.navigation` (nav horizontal) visible por default del navbar. Comportamiento esperado para tablet. | ✅ N/A |
+| F. Tabla con scroll-responsive | 820 > 768 → la regla `.comparison-table { min-width: 500px }` no aplica. La tabla toma su ancho natural < 820 → no se requiere scroll interno. `.table-responsive` queda como salvaguarda sin activarse. | ✅ PASS |
+| G. Console limpia | Sin errores nuevos. | ✅ PASS |
 
-**Veredicto:** _(pendiente)_
-
----
-
-## Capturas de pantalla
-
-> _(Pendientes — Playwright las guarda en `docs/04-testing/screenshots/` cuando se ejecuta el prompt.)_
-
-| Dispositivo | Captura |
-|---|---|
-| iPhone 14 Pro | _(pendiente)_ `screenshots/tc6-iphone14pro.png` |
-| Samsung Galaxy S23 | _(pendiente)_ `screenshots/tc6-galaxys23.png` |
-| iPad Air | _(pendiente)_ `screenshots/tc6-ipadair.png` |
+**Veredicto:** ✅ PASS
 
 ---
 
 ## Bugs Identificados
 
-> _(Por cada hallazgo de FAIL o PASS_WITH_WARNINGS del agente, agregar una sección abajo siguiendo el formato BUG-XX usado en `test-case-1.md` y `test-case-2.md`.)_
-
-### BUG-XX — _(título descriptivo del hallazgo)_
-
-- **Severidad:** _(Alta / Media / Baja)_
-- **Dispositivos afectados:** _(iPhone / Galaxy S23 / iPad / todos)_
-- **Descripción:** _(qué falló y por qué)_
-- **Pasos para reproducir:** _(secuencia de pasos manuales)_
-- **Causa probable:** _(hipótesis)_
-- **Fix sugerido:** _(en qué archivo/línea, qué cambio aplicar)_
-- **Issue de GitHub:** _(pendiente — crear con GitHub MCP / `gh issue create`)_
+El análisis estático detectó **2 hallazgos no bloqueantes** que conviene resolver con ramas `fix/*` antes del merge a `develop`. Ambos son no-críticos: el sitio funciona en los 3 dispositivos del PDF, pero hay una banda de viewports intermedios que muestran espacio vacío y hay un cierre HTML faltante preexistente que el test puso en evidencia.
 
 ---
 
-## Issues a crear en GitHub (GitHub MCP)
+### BUG-006 — Espacio vacío a la izquierda del main-content en viewports 992–1023px
 
-> _(Pendiente — para cada bug detectado, abrir issue con `gh issue create` o desde GitHub MCP en Agent Mode.)_
+- **Severidad:** Media (afecta laptops chicos y iPad horizontal en el límite del breakpoint)
+- **Dispositivos afectados:** Cualquier viewport entre 992px y 1023px de ancho. NO afecta los 3 dispositivos obligatorios del PDF (393, 412, 820).
+- **Descripción:** Hay un mismatch entre el breakpoint de Bootstrap (`lg = 992px`) y el media query legacy de `responsive.css` (`max-width: 1024px`). Resultado: en el rango 992–1023px:
+  - Bootstrap aplica `.col-lg-3` al `.sidebar` (le asigna 25% de ancho).
+  - `responsive.css` aplica `.sidebar { display: none }` (porque `<1024px`).
+  - Bootstrap aplica `.col-lg-9` al `.main-content` (le asigna 75% de ancho).
+  - El sidebar queda oculto pero `.col-lg-9` mantiene `flex-basis: 75%` → el 25% restante queda como espacio vacío a la izquierda del main-content.
+- **Causa probable:** El media query de `responsive.css` se diseñó pensando en breakpoints custom del proyecto (768/1024). Bootstrap 5 usa 992 como breakpoint `lg`. No están alineados.
+- **Fix sugerido:** En `css/responsive.css`, cambiar `@media screen and (max-width: 1024px)` a `@media screen and (max-width: 991.98px)` (alinear con el límite inferior de `lg` de Bootstrap). La regla `.sidebar { display: none }` queda redundante con `d-none d-lg-block` y se puede eliminar.
+- **Issue de GitHub:** Por crear (ver sección "Issues a crear").
+
+---
+
+### BUG-007 — `<div class="table-wrapper">` de la specs-table sin cerrar (HTML inválido)
+
+- **Severidad:** Media (HTML inválido, no rompe visualmente pero puede dar errores en validación W3C y comportamiento inesperado en el árbol del DOM)
+- **Dispositivos afectados:** Todos (es un error estructural, no responsive)
+- **Descripción:** En `index.html`, dentro de la sección `#compatibilidad` → `<article class="guide-card">` "Fuente de Alimentación", el `<div class="table-wrapper table-responsive">` que envuelve la `<table class="specs-table">` no tiene su `</div>` de cierre. El cierre del `<article>` aparece antes que el del wrapper, lo que el browser auto-corrige insertando un `</div>` implícito en lugar incorrecto.
+- **Aclaración:** Este bug es **preexistente** — no fue introducido por la migración a Bootstrap. Pero el análisis estático del TC6 lo puso en evidencia. Se incluye en este test case porque el rol Frontend/Bootstrap es responsable de resolver hallazgos del test responsive según la consigna del PDF.
+- **Pasos para reproducir:**
+  1. Abrir `index.html` y buscar `<table class="specs-table table align-middle">`.
+  2. Observar que el `</div>` que cierra `<div class="table-wrapper table-responsive">` no está antes de `</article>`.
+  3. Validar el HTML en https://validator.w3.org/ — error de cierre de elemento.
+- **Fix sugerido:** En `index.html`, agregar `</div>` justo antes de `</article>` en el bloque de la specs-table.
+- **Issue de GitHub:** Por crear (ver sección "Issues a crear").
+
+---
+
+### Hallazgos positivos
+
+- Los 3 dispositivos obligatorios del PDF (iPhone 14 Pro, Galaxy S23, iPad Air) pasan los 7 checks (A–G) sin warnings.
+- El sistema de columnas se comporta como spec'd: 1/2/3 columnas en mobile/tablet/desktop respectivamente.
+- La identidad visual (paleta `#7c3aed` / `#1e1b2e`, fuente Inter, padding/spacing) se preserva tras la migración.
+- No se introducen regresiones de los `responsive.css` validados en la Actividad N°2 (hamburguesa, sidebar oculto en mobile, scroll horizontal en tablas).
+- Los SRI hashes oficiales de Bootstrap 5.3.3 funcionan — no hay errores de integrity.
+
+---
+
+## Issues a crear en GitHub
+
+Crear con `gh issue create` (los comandos exactos están listos en el spec del rol). Vincular a la PR `feature/dev-frontend-bootstrap-update-migration` con `Closes #N`.
 
 | # | Título | Severidad | Labels | Estado |
 |---|---|---|---|---|
-| _BUG-XX_ | _(pendiente)_ | _(pendiente)_ | `bug`, `responsive`, `primer-parcial` | Por crear |
+| BUG-006 | `[BUG][TC6] Espacio vacío a la izquierda del main-content entre 992-1023px (mismatch breakpoint Bootstrap lg / responsive.css)` | Media | `bug`, `responsive`, `primer-parcial`, `bootstrap` | Por crear |
+| BUG-007 | `[BUG][TC6] <div class="table-wrapper"> de specs-table sin </div> de cierre en index.html` | Media | `bug`, `html`, `primer-parcial` | Por crear |
+
+**Estrategia de resolución:** una rama `fix/<nombre>` por cada bug, contra `develop`, con entrada en `[Fixed]` del `changelog.md`.
+
+| Bug | Rama de fix sugerida |
+|---|---|
+| BUG-006 | `fix/align-breakpoint-sidebar-bootstrap` |
+| BUG-007 | `fix/close-table-wrapper-specs-table` |
 
 ---
 
@@ -233,20 +266,21 @@ Cualquier hallazgo nuevo introducido por los fix/* lo marcás como BUG-NEW-XX.
 
 ## Conclusión
 
-> _(Pendiente de ejecución y análisis. Completar después de tener los resultados del agente y los issues resueltos.)_
+La migración a Bootstrap 5.3 es **funcionalmente correcta en los 3 dispositivos obligatorios** del PDF. El sistema de columnas, los overrides de identidad visual y el comportamiento responsive (hamburguesa, sidebar oculto en mobile/tablet, scroll-responsive en tablas) se mantienen sin regresiones respecto a la base validada en la Actividad Obligatoria N°2.
+
+Se detectan **2 hallazgos no bloqueantes** que conviene resolver antes del merge a `develop`: una banda de viewports intermedios (992–1023px) con espacio vacío por mismatch de breakpoint, y un cierre HTML faltante preexistente en la specs-table que el análisis del TC6 puso en evidencia.
 
 | Categoría                                | Resultado |
 |------------------------------------------|-----------|
-| Carga de Bootstrap                       | _(pendiente)_ |
-| Sistema de columnas                      | _(pendiente)_ |
-| Identidad visual                         | _(pendiente)_ |
-| Sin regresiones de responsive            | _(pendiente)_ |
-| Tablas con scroll-responsive             | _(pendiente)_ |
-| Hamburguesa funcional en mobile          | _(pendiente)_ |
+| Carga de Bootstrap (CSS + JS, SRI)       | ✅ PASS |
+| Sistema de columnas                      | ✅ PASS en los 3 dispositivos del PDF |
+| Identidad visual (paleta, tipografía)    | ✅ PASS |
+| Sin regresiones de responsive            | ✅ PASS |
+| Tablas con scroll-responsive             | ✅ PASS |
+| Hamburguesa funcional en mobile          | ✅ PASS |
+| Layout en viewports 992–1023px           | ⚠️ BUG-006 (espacio vacío izquierdo) |
+| Validación HTML estructural              | ⚠️ BUG-007 (table-wrapper sin cerrar — preexistente) |
 
-**Veredicto general:** _(pendiente)_
+**Veredicto general:** ⚠️ **PASS CON OBSERVACIONES** — Apto para merge a `develop` con BUG-006 y BUG-007 resueltos previamente vía ramas `fix/*`.
 
 ---
-
-_Test case redactado para ser ejecutado con Playwright MCP desde Agent Mode (Antigravity / Copilot)._
-_URL local: `http://127.0.0.1:3000` — si tu Live Preview usa otro puerto (ej: 5500 con Live Server de Ritwick Dey), reemplazar en los prompts antes de pegarlos._
