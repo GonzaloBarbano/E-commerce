@@ -4,12 +4,17 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Unreleased]
+## [Recuperatorio Parcial 1] - 2026-05-05
 
 ### Added
 
 - [feature/coord-devops-update-figma-and-readme] Actualizo readme y mockup
   PR: [#82](https://github.com/GonzaloBarbano/E-commerce/pull/82) - @GonzaloBarbano (Coordinador / DevOps)
+
+### Fixed
+
+- [fix/align-breakpoint-sidebar-bootstrap] Alineo breakpoint del responsive.css con Bootstrap lg=992px — resuelve espacio vacío a la izquierda del main-content entre 992-1023px (closes #86)
+  PR: [#PENDIENTE](https://github.com/GonzaloBarbano/E-commerce/pulls) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
 
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
