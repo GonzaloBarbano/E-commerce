@@ -7,12 +7,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added
-
 - [feature/dev-comp-html-avanzados-add-components] Creacion de nueva rama y test realizados 
   PR: [#85](https://github.com/GonzaloBarbano/E-commerce/pull/85) - @LucasFUces ( Desarrollador de Componentes HTML Avanzados)
 
 - [feature/coord-devops-update-figma-and-readme] Actualizo readme y mockup
   PR: [#82](https://github.com/GonzaloBarbano/E-commerce/pull/82) - @GonzaloBarbano (Coordinador / DevOps)
+
+### Fixed
+- [fix/html-avanzado] Correcciones generales 
+  PR: [#92](https://github.com/GonzaloBarbano/E-commerce/pull/92) - @LucasFUces ( Desarrollador de Componentes HTML Avanzados)
 
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
