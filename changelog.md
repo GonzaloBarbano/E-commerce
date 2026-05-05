@@ -14,7 +14,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ### Fixed
 
 - [fix/align-breakpoint-sidebar-bootstrap] Alineo breakpoint del responsive.css con Bootstrap lg=992px — resuelve espacio vacío a la izquierda del main-content entre 992-1023px (closes #86)
-  PR: [#PENDIENTE](https://github.com/GonzaloBarbano/E-commerce/pulls) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
+  PR: [#90](https://github.com/GonzaloBarbano/E-commerce/pull/90) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
 
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
