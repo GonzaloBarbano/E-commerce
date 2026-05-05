@@ -14,6 +14,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/coord-devops-update-figma-and-readme] Actualizo readme y mockup
   PR: [#82](https://github.com/GonzaloBarbano/E-commerce/pull/82) - @GonzaloBarbano (Coordinador / DevOps)
 
+### Fixed
+
+- [fix/close-table-wrapper-specs-table] Cierro &lt;div class="table-wrapper"&gt; faltante en la specs-table de la sección Compatibilidad — resuelve HTML inválido detectado en el TC6 (closes #87)
+  PR: [#PENDIENTE](https://github.com/GonzaloBarbano/E-commerce/pulls) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
+
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed
