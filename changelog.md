@@ -4,7 +4,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Unreleased]
+## [Recuperatorio Parcial 1] - 2026-05-05
 
 ### Added
 - [feature/dev-comp-html-avanzados-add-components] Creacion de nueva rama y test realizados 
@@ -17,6 +17,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#82](https://github.com/GonzaloBarbano/E-commerce/pull/82) - @GonzaloBarbano (Coordinador / DevOps)
 
 ### Fixed
+
+- [fix/align-breakpoint-sidebar-bootstrap] Alineo breakpoint del responsive.css con Bootstrap lg=992px — resuelve espacio vacío a la izquierda del main-content entre 992-1023px (closes #86)
+  PR: [#90](https://github.com/GonzaloBarbano/E-commerce/pull/90) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
 - [fix/html-avanzado] Correcciones generales 
   PR: [#92](https://github.com/GonzaloBarbano/E-commerce/pull/92) - @LucasFUces ( Desarrollador de Componentes HTML Avanzados)
 
