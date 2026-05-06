@@ -13,6 +13,7 @@
 - [Test Case 3 — Performance y carga](./test-case-3.md)
 - [Test Case 4 — Accesibilidad web (WCAG 2.1 AA)](./test-case-4.md)
 - [Test Case 5 — Validación de estructura HTML semántica y CSS](./test-case-5.md)
+- [Test Case 6 — Responsive: Migración a Bootstrap (Primer Parcial)](./test-case-6.md)
 
 ---
 
