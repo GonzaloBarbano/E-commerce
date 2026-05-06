@@ -8,13 +8,11 @@ html {
   max-width: 100%;
 }
 
-/* TABLET */
-@media screen and (max-width: 1024px) {
+/* TABLET — alineado con breakpoint lg de Bootstrap (≥992px) para evitar
+   espacio vacío a la izquierda del main-content entre 992-1023px (BUG-006) */
+@media screen and (max-width: 991.98px) {
   :root {
     --sidebar-width: 0px;
-  }
-  .sidebar {
-    display: none;
   }
   .main-content {
     margin-left: 0;
@@ -22,9 +20,6 @@ html {
   /* RC-FIX: footer sin margin cuando no hay sidebar */
   .footer {
     margin-left: 0;
-  }
-  .featured-gallery {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -92,15 +87,6 @@ html {
   .hero-gallery img,
   .hero-images img {
     height: 180px;
-  }
-
-  .featured-gallery {
-    grid-template-columns: 1fr;
-  }
-
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
   }
 
   /* RC-FIX: Tabla mobile - garantizar scroll horizontal */
