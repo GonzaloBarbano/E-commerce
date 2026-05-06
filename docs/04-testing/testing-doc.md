@@ -14,6 +14,8 @@
 - [Test Case 4 — Accesibilidad web (WCAG 2.1 AA)](./test-case-4.md)
 - [Test Case 5 — Validación de estructura HTML semántica y CSS](./test-case-5.md)
 - [Test Case 6 — Responsive: Migración a Bootstrap (Primer Parcial)](./test-case-6.md)
+- [Test Case 7 — Componente Bootstrap avanzado: Carousel (Primer Parcial)](./test-case-7.md)
+- [Test Case 8 — Componente Bootstrap avanzado: Modal (Primer Parcial)](./test-case-8.md)
 
 ---
 
