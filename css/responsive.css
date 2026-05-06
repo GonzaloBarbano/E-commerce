@@ -8,13 +8,13 @@ html {
   max-width: 100%;
 }
 
-/* TABLET */
+/* TABLET — la regla `.sidebar { display: none }` se removió por redundancia
+   con la clase utilitaria `d-none d-lg-block` aplicada al <aside> en index.html.
+   Bootstrap es ahora la única fuente de verdad para el ocultamiento del sidebar
+   en mobile/tablet. */
 @media screen and (max-width: 1024px) {
   :root {
     --sidebar-width: 0px;
-  }
-  .sidebar {
-    display: none;
   }
   .main-content {
     margin-left: 0;

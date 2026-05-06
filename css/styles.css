@@ -4,6 +4,7 @@
 
 :root {
   --color-primary: #7c3aed;
+  --color-primary-rgb: 124, 58, 237;
   --color-primary-hover: #6d28d9;
   --color-primary-light: #ede9fe;
   --color-surface-dark: #1e1b2e; /* Equivale a rgb(30, 27, 46) */
@@ -139,8 +140,11 @@ main {
   border-radius: var(--border-radius-sm);
 }
 
+/* margin-bottom solo (en lugar de top+bottom) para no interferir con el
+   margin-inline negativo del .row de Bootstrap. El espacio superior lo aporta
+   el margin-bottom natural del <h2> que precede a la galería. */
 .featured-gallery {
-  margin: var(--spacing-lg) 0;
+  margin-bottom: var(--spacing-lg);
 }
 
 .visually-hidden {
