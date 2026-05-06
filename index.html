@@ -297,38 +297,46 @@
               el país.
             </p>
 
-            <div class="featured-gallery row g-3">
-              <figure class="gallery-item col-12 col-md-6 col-lg-4">
-                <img
-                  src="assets/images/gpu-destacada.jpg"
-                  alt="Tarjeta Gráfica NVIDIA RTX 4090"
-                  loading="lazy"
-                />
-                <figcaption class="visually-hidden">
-                  Tarjeta Gráfica NVIDIA RTX 4090
-                </figcaption>
-              </figure>
-              <figure class="gallery-item col-12 col-md-6 col-lg-4">
-                <img
-                  src="assets/images/cpu-destacada.jpg"
-                  alt="Procesador Intel Core i9"
-                  loading="lazy"
-                />
-                <figcaption class="visually-hidden">
-                  Procesador Intel Core i9
-                </figcaption>
-              </figure>
-              <figure class="gallery-item col-12 col-md-6 col-lg-4">
-                <img
-                  src="assets/images/build-completo.jpg"
-                  alt="PC Gaming Completo"
-                  loading="lazy"
-                />
-                <figcaption class="visually-hidden">
-                  PC Gaming Completo
-                </figcaption>
-              </figure>
+            <!-- COMPONENTE BOOTSTRAP AVANZADO 1: Carousel — productos destacados -->
+            <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Productos destacados">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1: NVIDIA RTX 4090"></button>
+                <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2: Intel Core i9"></button>
+                <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3: Builds Completos"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="assets/images/gpu-destacada.jpg" class="d-block w-100" alt="Tarjeta Gráfica NVIDIA RTX 4090" loading="lazy" />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h3>NVIDIA RTX 4090</h3>
+                    <p>Tarjetas gráficas de última generación con 24GB GDDR6X.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="assets/images/cpu-destacada.jpg" class="d-block w-100" alt="Procesador Intel Core i9" loading="lazy" />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h3>Intel Core i9</h3>
+                    <p>Procesadores de alto rendimiento para gaming y productividad.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="assets/images/build-completo.jpg" class="d-block w-100" alt="PC Gaming Completo" loading="lazy" />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h3>Builds Completos</h3>
+                    <p>PCs armadas listas para gamers y creadores de contenido.</p>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+              </button>
             </div>
+            <!-- FIN COMPONENTE BOOTSTRAP AVANZADO 1 -->
 
             <div class="cta-section">
               <a href="#tienda" class="btn-primary">COMPRAR AHORA</a>
@@ -374,9 +382,14 @@
                     </ul>
                   </details>
                   <!-- FIN COMPONENTE HTML AVANZADO  -->
-                  <button type="button" class="btn-add-cart">
-                    Agregar al Carrito
-                  </button>
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#product-modal" data-product-name="Intel Core i9-13900K" data-product-brand="Intel" data-product-specs="24 núcleos | 5.8 GHz Turbo" data-product-stock="12 unidades" data-product-price="$599.99 USD" data-product-image="assets/images/intel-i9-13900k.jpg">
+                      Ver detalle
+                    </button>
+                    <button type="button" class="btn-add-cart">
+                      Agregar al Carrito
+                    </button>
+                  </div>
                 </div>
               </article>
               </div>
@@ -413,9 +426,14 @@
                       <li><strong>Garantía:</strong> 3 años</li>
                     </ul>
                   </details>
-                  <button type="button" class="btn-add-cart">
-                    Agregar al Carrito
-                  </button>
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#product-modal" data-product-name="NVIDIA RTX 4090" data-product-brand="NVIDIA" data-product-specs="24GB GDDR6X | 16384 CUDA" data-product-stock="5 unidades" data-product-price="$1,799.99 USD" data-product-image="assets/images/nvidia-rtx4090.jpg">
+                      Ver detalle
+                    </button>
+                    <button type="button" class="btn-add-cart">
+                      Agregar al Carrito
+                    </button>
+                  </div>
                 </div>
               </article>
               </div>
@@ -452,9 +470,14 @@
                       <li><strong>Garantía:</strong> Lifetime</li>
                     </ul>
                   </details>
-                  <button type="button" class="btn-add-cart">
-                    Agregar al Carrito
-                  </button>
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#product-modal" data-product-name="Corsair Vengeance DDR5 32GB" data-product-brand="Corsair" data-product-specs="32GB (2x16GB) | 5600MHz" data-product-stock="28 unidades" data-product-price="$249.99 USD" data-product-image="assets/images/corsair-vengeance-ddr5.jpg">
+                      Ver detalle
+                    </button>
+                    <button type="button" class="btn-add-cart">
+                      Agregar al Carrito
+                    </button>
+                  </div>
                 </div>
               </article>
               </div>
@@ -491,9 +514,14 @@
                       <li><strong>Garantía:</strong> 3 años</li>
                     </ul>
                   </details>
-                  <button type="button" class="btn-add-cart">
-                    Agregar al Carrito
-                  </button>
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#product-modal" data-product-name="Kingston NV2 1TB SSD" data-product-brand="Kingston" data-product-specs="1TB NVMe M.2 | 3500 MB/s" data-product-stock="45 unidades" data-product-price="$89.99 USD" data-product-image="assets/images/kingston-nv2-1tb.jpg">
+                      Ver detalle
+                    </button>
+                    <button type="button" class="btn-add-cart">
+                      Agregar al Carrito
+                    </button>
+                  </div>
                 </div>
               </article>
               </div>
@@ -530,9 +558,14 @@
                       <li><strong>Garantía:</strong> 10 años</li>
                     </ul>
                   </details>
-                  <button type="button" class="btn-add-cart">
-                    Agregar al Carrito
-                  </button>
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#product-modal" data-product-name="Corsair RM850x Gold" data-product-brand="Corsair" data-product-specs="850W | 80+ Gold | Modular" data-product-stock="19 unidades" data-product-price="$179.99 USD" data-product-image="assets/images/corsair-rm850x.jpg">
+                      Ver detalle
+                    </button>
+                    <button type="button" class="btn-add-cart">
+                      Agregar al Carrito
+                    </button>
+                  </div>
                 </div>
               </article>
               </div>
@@ -569,9 +602,14 @@
                       <li><strong>Garantía:</strong> 5 años</li>
                     </ul>
                   </details>
-                  <button type="button" class="btn-add-cart">
-                    Agregar al Carrito
-                  </button>
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#product-modal" data-product-name="Corsair H150i ELITE" data-product-brand="Corsair" data-product-specs="360mm AIO | RGB iCUE" data-product-stock="8 unidades" data-product-price="$159.99 USD" data-product-image="assets/images/corsair-h150i.jpg">
+                      Ver detalle
+                    </button>
+                    <button type="button" class="btn-add-cart">
+                      Agregar al Carrito
+                    </button>
+                  </div>
                 </div>
               </article>
               </div>
@@ -790,6 +828,45 @@
         <p>&copy; 2026 PC Hardware Store. Todos los derechos reservados.</p>
       </div>
     </footer>
+
+    <!-- COMPONENTE BOOTSTRAP AVANZADO 2: Modal compartido — detalle de producto -->
+    <div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="product-modal-label" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5" id="product-modal-label">Detalle del producto</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <img id="modal-product-image" src="" alt="" class="img-fluid mb-3" />
+            <p><strong>Marca:</strong> <span id="modal-product-brand"></span></p>
+            <p><strong>Especificaciones:</strong> <span id="modal-product-specs"></span></p>
+            <p><strong>Stock:</strong> <span id="modal-product-stock"></span></p>
+            <p class="product-price"><span id="modal-product-price"></span></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Agregar al Carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FIN COMPONENTE BOOTSTRAP AVANZADO 2 -->
+
+    <script>
+      document.getElementById('product-modal').addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const data = button.dataset;
+        document.getElementById('product-modal-label').textContent = data.productName;
+        const img = document.getElementById('modal-product-image');
+        img.src = data.productImage;
+        img.alt = data.productName;
+        document.getElementById('modal-product-brand').textContent = data.productBrand;
+        document.getElementById('modal-product-specs').textContent = data.productSpecs;
+        document.getElementById('modal-product-stock').textContent = data.productStock;
+        document.getElementById('modal-product-price').textContent = data.productPrice;
+      });
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
