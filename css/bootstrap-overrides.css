@@ -82,3 +82,68 @@
   --bs-table-striped-bg: var(--color-bg);
   margin-bottom: 0;
 }
+
+/* ============================================
+   CAROUSEL — controles, indicadores y caption
+   alineados con la paleta del proyecto
+   ============================================ */
+
+#hero-carousel {
+  margin: var(--spacing-lg) 0;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.carousel-item img {
+  height: 350px;
+  object-fit: contain;
+  background-color: var(--color-bg);
+}
+
+@media (max-width: 768px) {
+  .carousel-item img {
+    height: 220px;
+  }
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: var(--color-primary);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: drop-shadow(0 0 4px rgba(var(--color-primary-rgb), 0.6));
+}
+
+.carousel-caption {
+  background-color: rgba(30, 27, 46, 0.7);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+}
+
+/* ============================================
+   MODAL — header con paleta del proyecto
+   ============================================ */
+
+.modal-header {
+  background-color: var(--color-surface-dark);
+  color: #ffffff;
+  border-bottom: none;
+}
+
+.modal-header .btn-close {
+  filter: invert(1);
+}
+
+.modal-content {
+  border-radius: var(--border-radius);
+  border-color: var(--color-border);
+}
+
+.modal-body img {
+  max-height: 280px;
+  width: auto;
+  display: block;
+  margin: 0 auto var(--spacing-md);
+  object-fit: contain;
+}
