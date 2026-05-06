@@ -25,6 +25,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/test-case] Correccion product card.
+  PR: [#103](https://github.com/GonzaloBarbano/E-commerce/pull/103) - @LucasFUces (Desarrollador de Componentes HTML Avanzados)
+
 - [fix/test-case] Correccion de test-case 6 al 10, testing-doc.md y Range en index.html
   PR: [#100](https://github.com/GonzaloBarbano/E-commerce/pull/100) - @GonzaloBarbano (Coordinador / DevOps)
 
