@@ -18,6 +18,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/clean-merge-pr93] Elimino 3 líneas duplicadas en index.html introducidas por la resolución incorrecta de conflictos durante el merge del PR #93 (aperturas viejas de `.main-container`, `.sidebar` y `.products-grid` sin clases Bootstrap)
+  PR: [#PENDIENTE](https://github.com/GonzaloBarbano/E-commerce/pulls) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
+
 - [fix/close-table-wrapper-specs-table] Cierro &lt;div class="table-wrapper"&gt; faltante en la specs-table de la sección Compatibilidad — resuelve HTML inválido detectado en el TC6 (closes #87)
   PR: [#91](https://github.com/GonzaloBarbano/E-commerce/pull/91) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
 
