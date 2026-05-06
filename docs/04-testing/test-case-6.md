@@ -40,29 +40,30 @@ Verificar que la migración a Bootstrap 5.3 (instalación CDN, sistema de column
 
 ## Dispositivos obligatorios (PDF cátedra)
 
-| Dispositivo            | Viewport     | UA / Engine     | Notas                                      |
-| ---------------------- | ------------ | --------------- | ------------------------------------------ |
-| iPhone 14 Pro          | 393×852      | iOS Safari      | DPR 3, mobile=true                         |
-| Samsung Galaxy S23     | 412×915      | Chrome Android  | DPR 3.5, mobile=true                       |
-| iPad Air               | 820×1180     | iOS Safari      | DPR 2, tablet                              |
+| Dispositivo        | Viewport | UA / Engine    | Notas                |
+| ------------------ | -------- | -------------- | -------------------- |
+| iPhone 14 Pro      | 393×852  | iOS Safari     | DPR 3, mobile=true   |
+| Samsung Galaxy S23 | 412×915  | Chrome Android | DPR 3.5, mobile=true |
+| iPad Air           | 820×1180 | iOS Safari     | DPR 2, tablet        |
 
 ---
 
 ## Áreas a validar (cambios introducidos en la rama)
 
-| Cambio | Archivo(s) | Verificación esperada |
-|---|---|---|
-| Bootstrap CDN cargado | `index.html` | `bootstrap.min.css` y `bootstrap.bundle.min.js` con status 200, sin errores SRI |
-| Variables `--bs-*` mapeadas | `css/bootstrap-overrides.css` | `getComputedStyle(:root).getPropertyValue('--bs-primary')` == `#7c3aed` o equivalente |
-| Layout `.main-container` migrado | `index.html`, `css/styles.css` | `.main-container` tiene clases `container-fluid`; el sidebar es `col-lg-3 d-none d-lg-block`; el main-content es `col-lg-9` |
-| Hero `.featured-gallery` migrado | `index.html`, `css/styles.css` | Es `row g-3`; las 3 figures tienen `col-12 col-md-6 col-lg-4` |
-| `.products-grid` migrado | `index.html`, `css/styles.css` | Es `row g-3 g-md-4`; las 6 cards están envueltas en `col-12 col-sm-6 col-lg-4` |
-| Footer `.footer-container` migrado | `index.html`, `css/styles.css` | Tiene `container-fluid`; las 2 secciones son `col-12 col-md-6` dentro de un `.row` |
-| Tablas con `.table-responsive` | `index.html`, `css/bootstrap-overrides.css` | Las 3 tablas tienen clase `table align-middle`; los wrappers tienen `.table-wrapper.table-responsive` |
+| Cambio                             | Archivo(s)                                  | Verificación esperada                                                                                                       |
+| ---------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Bootstrap CDN cargado              | `index.html`                                | `bootstrap.min.css` y `bootstrap.bundle.min.js` con status 200, sin errores SRI                                             |
+| Variables `--bs-*` mapeadas        | `css/bootstrap-overrides.css`               | `getComputedStyle(:root).getPropertyValue('--bs-primary')` == `#7c3aed` o equivalente                                       |
+| Layout `.main-container` migrado   | `index.html`, `css/styles.css`              | `.main-container` tiene clases `container-fluid`; el sidebar es `col-lg-3 d-none d-lg-block`; el main-content es `col-lg-9` |
+| Hero `.featured-gallery` migrado   | `index.html`, `css/styles.css`              | Es `row g-3`; las 3 figures tienen `col-12 col-md-6 col-lg-4`                                                               |
+| `.products-grid` migrado           | `index.html`, `css/styles.css`              | Es `row g-3 g-md-4`; las 6 cards están envueltas en `col-12 col-sm-6 col-lg-4`                                              |
+| Footer `.footer-container` migrado | `index.html`, `css/styles.css`              | Tiene `container-fluid`; las 2 secciones son `col-12 col-md-6` dentro de un `.row`                                          |
+| Tablas con `.table-responsive`     | `index.html`, `css/bootstrap-overrides.css` | Las 3 tablas tienen clase `table align-middle`; los wrappers tienen `.table-wrapper.table-responsive`                       |
 
 ---
 
 ## Prompt para Playwright MCP — Iteración 1: validación general
+
 ```
 Usá Playwright MCP. Iniciá un browser headed.
 
@@ -135,18 +136,21 @@ y un resumen "veredicto" por dispositivo: PASS / PASS_WITH_WARNINGS / FAIL.
 
 ## Resultados por Dispositivo
 
+- Iphone 14 Pro![](screenshots/Tc-6-iPhone-14-Pro-Max.png) |
+- Galaxy 23![](screenshots/Tc6-Samsung-Galaxy-S20-Ultra.png) |
+- iPad![](screenshots/Tc6-iPad-Air.png) |
 
 ### Dispositivo 1 — iPhone 14 Pro (393×852)
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Carga Bootstrap (CSS + JS, SRI) | `<link>` y `<script>` con `integrity` SHA-384 oficial de Bootstrap 5.3.3 + `crossorigin="anonymous"`. Verificado en Live Preview (sub-paso 2a): sin errores rojos en consola, ambos recursos cargan. | ✅ PASS |
-| B. Sin overflow horizontal | `html` y `body` con `overflow-x: hidden; max-width: 100%`. `.main-container { max-width: 100vw; overflow-x: hidden }` en `<768px`. `.main-content { overflow-x: hidden; box-sizing: border-box }` en mobile. Sin elementos con width fijo que excedan 393px. | ✅ PASS |
-| C. Sistema de columnas | `.sidebar` con `col-lg-3 d-none d-lg-block` → 393px < 992px → `display: none` ✓. `.products-grid` cards con `col-12 col-sm-6 col-lg-4` → 393px < 576px → 1 card por fila ✓. `.featured-gallery` figures con `col-12 col-md-6 col-lg-4` → 1 figure por fila ✓. Footer con `col-12 col-md-6` → secciones apiladas ✓. | ✅ PASS |
-| D. Identidad visual | `.navbar { background-color: var(--color-surface-dark) !important }` = `#1e1b2e` ✓. `.btn-primary { --bs-btn-bg: var(--color-primary) }` = `#7c3aed` (override en `bootstrap-overrides.css`) ✓. `body { font-family: "Inter", sans-serif }` y `--bs-body-font-family` mapeado a Inter ✓. | ✅ PASS |
-| E. Hamburguesa funcional | `.hamburger-btn { display: flex }` en `@media (max-width: 768px)` → 393px → visible ✓. Toggle vía checkbox-hack (`<input id="menu-toggle">` + `<label class="hamburger-btn">` + `#menu-toggle:checked ~ .navigation { display: block }`) — verificado funcional en sub-pasos 2b–2d. | ✅ PASS |
-| F. Tabla con scroll-responsive | `.table-responsive` aplica `overflow-x: auto` (Bootstrap). `.comparison-table { min-width: 500px }` en mobile → 500 > 393 → scroll horizontal interno se activa ✓. La tabla NO genera overflow del body (wrapper aislado). | ✅ PASS |
-| G. Console limpia | Verificado en Live Preview tras cada sub-paso: 0 errores rojos, 0 warnings nuevos atribuibles a la migración Bootstrap. | ✅ PASS |
+| Aspecto                            | Resultado del análisis                                                                                                                                                                                                                                                                                             | Estado  |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| A. Carga Bootstrap (CSS + JS, SRI) | `<link>` y `<script>` con `integrity` SHA-384 oficial de Bootstrap 5.3.3 + `crossorigin="anonymous"`. Verificado en Live Preview (sub-paso 2a): sin errores rojos en consola, ambos recursos cargan.                                                                                                               | ✅ PASS |
+| B. Sin overflow horizontal         | `html` y `body` con `overflow-x: hidden; max-width: 100%`. `.main-container { max-width: 100vw; overflow-x: hidden }` en `<768px`. `.main-content { overflow-x: hidden; box-sizing: border-box }` en mobile. Sin elementos con width fijo que excedan 393px.                                                       | ✅ PASS |
+| C. Sistema de columnas             | `.sidebar` con `col-lg-3 d-none d-lg-block` → 393px < 992px → `display: none` ✓. `.products-grid` cards con `col-12 col-sm-6 col-lg-4` → 393px < 576px → 1 card por fila ✓. `.featured-gallery` figures con `col-12 col-md-6 col-lg-4` → 1 figure por fila ✓. Footer con `col-12 col-md-6` → secciones apiladas ✓. | ✅ PASS |
+| D. Identidad visual                | `.navbar { background-color: var(--color-surface-dark) !important }` = `#1e1b2e` ✓. `.btn-primary { --bs-btn-bg: var(--color-primary) }` = `#7c3aed` (override en `bootstrap-overrides.css`) ✓. `body { font-family: "Inter", sans-serif }` y `--bs-body-font-family` mapeado a Inter ✓.                           | ✅ PASS |
+| E. Hamburguesa funcional           | `.hamburger-btn { display: flex }` en `@media (max-width: 768px)` → 393px → visible ✓. Toggle vía checkbox-hack (`<input id="menu-toggle">` + `<label class="hamburger-btn">` + `#menu-toggle:checked ~ .navigation { display: block }`) — verificado funcional en sub-pasos 2b–2d.                                | ✅ PASS |
+| F. Tabla con scroll-responsive     | `.table-responsive` aplica `overflow-x: auto` (Bootstrap). `.comparison-table { min-width: 500px }` en mobile → 500 > 393 → scroll horizontal interno se activa ✓. La tabla NO genera overflow del body (wrapper aislado).                                                                                         | ✅ PASS |
+| G. Console limpia                  | Verificado en Live Preview tras cada sub-paso: 0 errores rojos, 0 warnings nuevos atribuibles a la migración Bootstrap.                                                                                                                                                                                            | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -154,15 +158,15 @@ y un resumen "veredicto" por dispositivo: PASS / PASS_WITH_WARNINGS / FAIL.
 
 ### Dispositivo 2 — Samsung Galaxy S23 (412×915)
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Carga Bootstrap | Idéntico a iPhone (recursos del CDN no varían por UA). | ✅ PASS |
-| B. Sin overflow horizontal | 412 < 576 (sm). Mismas reglas mobile aplican que en iPhone. Sin elementos que excedan 412px. | ✅ PASS |
-| C. Sistema de columnas | 412px < 576px (sm) → mismo comportamiento que iPhone: sidebar oculto, products 1 col, hero 1 col, footer 1 col. | ✅ PASS |
-| D. Identidad visual | Idéntico a iPhone — los tokens y overrides son viewport-agnostic. | ✅ PASS |
-| E. Hamburguesa funcional | 412 < 768 (md) → `display: flex` activo. Checkbox-hack funcional. | ✅ PASS |
-| F. Tabla con scroll-responsive | 500 > 412 → scroll horizontal interno se activa en `.comparison-table`. | ✅ PASS |
-| G. Console limpia | Sin diferencias respecto a iPhone. | ✅ PASS |
+| Aspecto                        | Resultado del análisis                                                                                          | Estado  |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------- |
+| A. Carga Bootstrap             | Idéntico a iPhone (recursos del CDN no varían por UA).                                                          | ✅ PASS |
+| B. Sin overflow horizontal     | 412 < 576 (sm). Mismas reglas mobile aplican que en iPhone. Sin elementos que excedan 412px.                    | ✅ PASS |
+| C. Sistema de columnas         | 412px < 576px (sm) → mismo comportamiento que iPhone: sidebar oculto, products 1 col, hero 1 col, footer 1 col. | ✅ PASS |
+| D. Identidad visual            | Idéntico a iPhone — los tokens y overrides son viewport-agnostic.                                               | ✅ PASS |
+| E. Hamburguesa funcional       | 412 < 768 (md) → `display: flex` activo. Checkbox-hack funcional.                                               | ✅ PASS |
+| F. Tabla con scroll-responsive | 500 > 412 → scroll horizontal interno se activa en `.comparison-table`.                                         | ✅ PASS |
+| G. Console limpia              | Sin diferencias respecto a iPhone.                                                                              | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -170,15 +174,15 @@ y un resumen "veredicto" por dispositivo: PASS / PASS_WITH_WARNINGS / FAIL.
 
 ### Dispositivo 3 — iPad Air (820×1180)
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Carga Bootstrap | Idéntico al resto. | ✅ PASS |
-| B. Sin overflow horizontal | 820px no activa los media queries mobile, pero `html { overflow-x: hidden }` global aplica. Layout cómodo en este viewport. | ✅ PASS |
-| C. Sistema de columnas | 820 ≥ 576 (sm) → `col-sm-6` en products → 2 cards por fila ✓. 820 ≥ 768 (md) → `col-md-6` en hero y footer → 2 figures/secciones por fila ✓. 820 < 992 (lg) → `col-lg-3` no aplica → sidebar oculto por `d-none d-lg-block` ✓. | ✅ PASS |
-| D. Identidad visual | Tokens, overrides y `.btn-primary` violeta intactos. | ✅ PASS |
-| E. Hamburguesa funcional | No aplica — 820 > 768, hamburguesa oculta y `.navigation` (nav horizontal) visible por default del navbar. Comportamiento esperado para tablet. | ✅ N/A |
-| F. Tabla con scroll-responsive | 820 > 768 → la regla `.comparison-table { min-width: 500px }` no aplica. La tabla toma su ancho natural < 820 → no se requiere scroll interno. `.table-responsive` queda como salvaguarda sin activarse. | ✅ PASS |
-| G. Console limpia | Sin errores nuevos. | ✅ PASS |
+| Aspecto                        | Resultado del análisis                                                                                                                                                                                                         | Estado  |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| A. Carga Bootstrap             | Idéntico al resto.                                                                                                                                                                                                             | ✅ PASS |
+| B. Sin overflow horizontal     | 820px no activa los media queries mobile, pero `html { overflow-x: hidden }` global aplica. Layout cómodo en este viewport.                                                                                                    | ✅ PASS |
+| C. Sistema de columnas         | 820 ≥ 576 (sm) → `col-sm-6` en products → 2 cards por fila ✓. 820 ≥ 768 (md) → `col-md-6` en hero y footer → 2 figures/secciones por fila ✓. 820 < 992 (lg) → `col-lg-3` no aplica → sidebar oculto por `d-none d-lg-block` ✓. | ✅ PASS |
+| D. Identidad visual            | Tokens, overrides y `.btn-primary` violeta intactos.                                                                                                                                                                           | ✅ PASS |
+| E. Hamburguesa funcional       | No aplica — 820 > 768, hamburguesa oculta y `.navigation` (nav horizontal) visible por default del navbar. Comportamiento esperado para tablet.                                                                                | ✅ N/A  |
+| F. Tabla con scroll-responsive | 820 > 768 → la regla `.comparison-table { min-width: 500px }` no aplica. La tabla toma su ancho natural < 820 → no se requiere scroll interno. `.table-responsive` queda como salvaguarda sin activarse.                       | ✅ PASS |
+| G. Console limpia              | Sin errores nuevos.                                                                                                                                                                                                            | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -234,17 +238,17 @@ El análisis estático detectó **2 hallazgos no bloqueantes** que conviene reso
 
 Crear con `gh issue create` (los comandos exactos están listos en el spec del rol). Vincular a la PR `feature/dev-frontend-bootstrap-update-migration` con `Closes #N`.
 
-| # | Título | Severidad | Labels | Estado |
-|---|---|---|---|---|
-| BUG-006 | `[BUG][TC6] Espacio vacío a la izquierda del main-content entre 992-1023px (mismatch breakpoint Bootstrap lg / responsive.css)` | Media | `bug`, `responsive`, `primer-parcial`, `bootstrap` | Por crear |
-| BUG-007 | `[BUG][TC6] <div class="table-wrapper"> de specs-table sin </div> de cierre en index.html` | Media | `bug`, `html`, `primer-parcial` | Por crear |
+| #                                                                 | Título                                                                                                                          | Severidad | Labels                                             | Estado    |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------- | --------- |
+| [BUG-006](https://github.com/GonzaloBarbano/E-commerce/issues/86) | `[BUG][TC6] Espacio vacío a la izquierda del main-content entre 992-1023px (mismatch breakpoint Bootstrap lg / responsive.css)` | Media     | `bug`, `responsive`, `primer-parcial`, `bootstrap` | Por crear |
+| [BUG-007](https://github.com/GonzaloBarbano/E-commerce/issues/87) | `[BUG][TC6] <div class="table-wrapper"> de specs-table sin </div> de cierre en index.html`                                      | Media     | `bug`, `html`, `primer-parcial`                    | Por crear |
 
 **Estrategia de resolución:** una rama `fix/<nombre>` por cada bug, contra `develop`, con entrada en `[Fixed]` del `changelog.md`.
 
-| Bug | Rama de fix sugerida |
-|---|---|
+| Bug     | Rama de fix sugerida                     |
+| ------- | ---------------------------------------- |
 | BUG-006 | `fix/align-breakpoint-sidebar-bootstrap` |
-| BUG-007 | `fix/close-table-wrapper-specs-table` |
+| BUG-007 | `fix/close-table-wrapper-specs-table`    |
 
 ---
 
@@ -270,16 +274,16 @@ La migración a Bootstrap 5.3 es **funcionalmente correcta en los 3 dispositivos
 
 Se detectan **2 hallazgos no bloqueantes** que conviene resolver antes del merge a `develop`: una banda de viewports intermedios (992–1023px) con espacio vacío por mismatch de breakpoint, y un cierre HTML faltante preexistente en la specs-table que el análisis del TC6 puso en evidencia.
 
-| Categoría                                | Resultado |
-|------------------------------------------|-----------|
-| Carga de Bootstrap (CSS + JS, SRI)       | ✅ PASS |
-| Sistema de columnas                      | ✅ PASS en los 3 dispositivos del PDF |
-| Identidad visual (paleta, tipografía)    | ✅ PASS |
-| Sin regresiones de responsive            | ✅ PASS |
-| Tablas con scroll-responsive             | ✅ PASS |
-| Hamburguesa funcional en mobile          | ✅ PASS |
-| Layout en viewports 992–1023px           | ⚠️ BUG-006 (espacio vacío izquierdo) |
-| Validación HTML estructural              | ⚠️ BUG-007 (table-wrapper sin cerrar — preexistente) |
+| Categoría                             | Resultado                                            |
+| ------------------------------------- | ---------------------------------------------------- |
+| Carga de Bootstrap (CSS + JS, SRI)    | ✅ PASS                                              |
+| Sistema de columnas                   | ✅ PASS en los 3 dispositivos del PDF                |
+| Identidad visual (paleta, tipografía) | ✅ PASS                                              |
+| Sin regresiones de responsive         | ✅ PASS                                              |
+| Tablas con scroll-responsive          | ✅ PASS                                              |
+| Hamburguesa funcional en mobile       | ✅ PASS                                              |
+| Layout en viewports 992–1023px        | ⚠️ BUG-006 (espacio vacío izquierdo)                 |
+| Validación HTML estructural           | ⚠️ BUG-007 (table-wrapper sin cerrar — preexistente) |
 
 **Veredicto general:** ⚠️ **PASS CON OBSERVACIONES** — Apto para merge a `develop` con BUG-006 y BUG-007 resueltos previamente vía ramas `fix/*`.
 

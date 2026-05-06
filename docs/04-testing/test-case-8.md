@@ -41,23 +41,23 @@ Verificar que el componente Modal compartido implementado al final del `<body>` 
 
 ## Dispositivos obligatorios (PDF cátedra)
 
-| Dispositivo            | Viewport     | UA / Engine     | Notas                                      |
-| ---------------------- | ------------ | --------------- | ------------------------------------------ |
-| iPhone 14 Pro          | 393×852      | iOS Safari      | DPR 3, mobile=true                         |
-| Samsung Galaxy S23     | 412×915      | Chrome Android  | DPR 3.5, mobile=true                       |
-| iPad Air               | 820×1180     | iOS Safari      | DPR 2, tablet                              |
+| Dispositivo        | Viewport | UA / Engine    | Notas                |
+| ------------------ | -------- | -------------- | -------------------- |
+| iPhone 14 Pro      | 393×852  | iOS Safari     | DPR 3, mobile=true   |
+| Samsung Galaxy S23 | 412×915  | Chrome Android | DPR 3.5, mobile=true |
+| iPad Air           | 820×1180 | iOS Safari     | DPR 2, tablet        |
 
 ---
 
 ## Áreas a validar (cambios introducidos en la rama)
 
-| Cambio | Archivo(s) | Verificación esperada |
-|---|---|---|
-| Modal compartido al final del body | `index.html` | `<div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="product-modal-label" aria-hidden="true">` antes del `<script>` de Bootstrap |
-| 6 botones "Ver detalle" en cards | `index.html` | `<button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#product-modal" data-product-*>` en cada `.product-card` |
-| Wrapper `d-grid gap-2` | `index.html` | Envuelve el botón "Ver detalle" + `.btn-add-cart` para layout vertical full-width |
-| JS de relleno | `index.html` (script inline) | Listener `show.bs.modal` que rellena 6 spans (`#modal-product-{name,brand,specs,stock,price,image}`) |
-| Customización Modal | `css/bootstrap-overrides.css` | `modal-header` oscuro, `btn-close` invertido, `modal-body img` con `max-height: 280px` |
+| Cambio                             | Archivo(s)                    | Verificación esperada                                                                                                                                  |
+| ---------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Modal compartido al final del body | `index.html`                  | `<div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="product-modal-label" aria-hidden="true">` antes del `<script>` de Bootstrap |
+| 6 botones "Ver detalle" en cards   | `index.html`                  | `<button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#product-modal" data-product-*>` en cada `.product-card`        |
+| Wrapper `d-grid gap-2`             | `index.html`                  | Envuelve el botón "Ver detalle" + `.btn-add-cart` para layout vertical full-width                                                                      |
+| JS de relleno                      | `index.html` (script inline)  | Listener `show.bs.modal` que rellena 6 spans (`#modal-product-{name,brand,specs,stock,price,image}`)                                                   |
+| Customización Modal                | `css/bootstrap-overrides.css` | `modal-header` oscuro, `btn-close` invertido, `modal-body img` con `max-height: 280px`                                                                 |
 
 ---
 
@@ -93,23 +93,24 @@ Devolvé reporte JSON estructurado por dispositivo + veredicto PASS/FAIL.
 
 ---
 
-## Resultados por Dispositivo
-
 ### Dispositivo 1 — iPhone 14 Pro (393×852)
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Estructura HTML del modal | `<div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="product-modal-label" aria-hidden="true">` con `modal-dialog modal-lg modal-dialog-centered`. Header, body y footer correctos. | ✅ PASS |
-| B. 6 botones "Ver detalle" | Verificados los 6 botones con clases `btn btn-outline-primary btn-sm`, atributos `data-bs-toggle="modal"`, `data-bs-target="#product-modal"` y los 6 `data-product-*` en cada card. Productos: Intel Core i9, NVIDIA RTX 4090, Corsair Vengeance DDR5, Kingston NV2 SSD, Corsair RM850x Gold, Corsair H150i ELITE. | ✅ PASS |
-| C. Layout `d-grid gap-2` | Cada card tiene `<div class="d-grid gap-2">` envolviendo "Ver detalle" + "Agregar al Carrito". En 393px ambos botones quedan apilados verticalmente full-width con gap consistente. | ✅ PASS |
-| D. JS de relleno | Script inline al final del body (después del modal HTML) escucha `show.bs.modal`, lee `event.relatedTarget.dataset` (el botón disparador), y rellena 7 elementos: `product-modal-label`, `modal-product-image` (src y alt), `modal-product-{brand,specs,stock,price}`. Lógica idempotente — el modal compartido se actualiza por cada apertura. | ✅ PASS |
-| E. Accesibilidad | `tabindex="-1"` evita que el modal reciba foco antes de abrir. `aria-labelledby="product-modal-label"` vincula el title con el aria-label del modal. `aria-hidden="true"` inicial (Bootstrap lo cambia a `false` al abrir). `btn-close` con `aria-label="Cerrar"`. Bootstrap maneja focus trap, dismiss con ESC, click outside. | ✅ PASS |
-| F. Customización modal-header | `.modal-header { background-color: var(--color-surface-dark); color: #ffffff; border-bottom: none; }` → header oscuro `#1e1b2e` con texto blanco. `.btn-close { filter: invert(1) }` → ícono de close blanco para contraste. | ✅ PASS |
-| G. Customización modal-content | `border-radius: var(--border-radius)` (8px del proyecto) + `border-color: var(--color-border)`. Coherente con el resto de cards y elementos. | ✅ PASS |
-| H. Imagen del modal-body | `.modal-body img { max-height: 280px; width: auto; display: block; margin: 0 auto var(--spacing-md); object-fit: contain; }` → imagen centrada, sin recorte, altura cómoda en mobile. | ✅ PASS |
-| I. Modal sin overflow horizontal | En 393px, el `modal-dialog` por default Bootstrap aplica `--bs-modal-margin: 0.5rem` y se adapta al viewport. `modal-lg` tiene `max-width: 800px`, pero como el viewport es 393px, se reduce automáticamente. Sin overflow. | ✅ PASS |
-| J. Sin regresiones del Rol 1 ni del Carousel | El modal está fuera del `<main>`, antes del `<script>` de Bootstrap. No interfiere con sidebar, products-grid, footer, tablas ni Carousel. | ✅ PASS |
-| K. Console limpia | Bootstrap bundle ya cargaba sin errores en TC6/TC7. El JS inline del modal está bien escrito (sin errores de sintaxis, sin acceso a propiedades antes de DOM ready porque está al final del body). | ✅ PASS |
+### Resultados por Dispositivo
+
+- MODAL![](screenshots/tc7-iphone-1.png)
+  | Aspecto | Resultado del análisis | Estado |
+  |---|---|---|
+  | A. Estructura HTML del modal | `<div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="product-modal-label" aria-hidden="true">` con `modal-dialog modal-lg modal-dialog-centered`. Header, body y footer correctos. | ✅ PASS |
+  | B. 6 botones "Ver detalle" | Verificados los 6 botones con clases `btn btn-outline-primary btn-sm`, atributos `data-bs-toggle="modal"`, `data-bs-target="#product-modal"` y los 6 `data-product-*` en cada card. Productos: Intel Core i9, NVIDIA RTX 4090, Corsair Vengeance DDR5, Kingston NV2 SSD, Corsair RM850x Gold, Corsair H150i ELITE. | ✅ PASS |
+  | C. Layout `d-grid gap-2` | Cada card tiene `<div class="d-grid gap-2">` envolviendo "Ver detalle" + "Agregar al Carrito". En 393px ambos botones quedan apilados verticalmente full-width con gap consistente. | ✅ PASS |
+  | D. JS de relleno | Script inline al final del body (después del modal HTML) escucha `show.bs.modal`, lee `event.relatedTarget.dataset` (el botón disparador), y rellena 7 elementos: `product-modal-label`, `modal-product-image` (src y alt), `modal-product-{brand,specs,stock,price}`. Lógica idempotente — el modal compartido se actualiza por cada apertura. | ✅ PASS |
+  | E. Accesibilidad | `tabindex="-1"` evita que el modal reciba foco antes de abrir. `aria-labelledby="product-modal-label"` vincula el title con el aria-label del modal. `aria-hidden="true"` inicial (Bootstrap lo cambia a `false` al abrir). `btn-close` con `aria-label="Cerrar"`. Bootstrap maneja focus trap, dismiss con ESC, click outside. | ✅ PASS |
+  | F. Customización modal-header | `.modal-header { background-color: var(--color-surface-dark); color: #ffffff; border-bottom: none; }` → header oscuro `#1e1b2e` con texto blanco. `.btn-close { filter: invert(1) }` → ícono de close blanco para contraste. | ✅ PASS |
+  | G. Customización modal-content | `border-radius: var(--border-radius)` (8px del proyecto) + `border-color: var(--color-border)`. Coherente con el resto de cards y elementos. | ✅ PASS |
+  | H. Imagen del modal-body | `.modal-body img { max-height: 280px; width: auto; display: block; margin: 0 auto var(--spacing-md); object-fit: contain; }` → imagen centrada, sin recorte, altura cómoda en mobile. | ✅ PASS |
+  | I. Modal sin overflow horizontal | En 393px, el `modal-dialog` por default Bootstrap aplica `--bs-modal-margin: 0.5rem` y se adapta al viewport. `modal-lg` tiene `max-width: 800px`, pero como el viewport es 393px, se reduce automáticamente. Sin overflow. | ✅ PASS |
+  | J. Sin regresiones del Rol 1 ni del Carousel | El modal está fuera del `<main>`, antes del `<script>` de Bootstrap. No interfiere con sidebar, products-grid, footer, tablas ni Carousel. | ✅ PASS |
+  | K. Console limpia | Bootstrap bundle ya cargaba sin errores en TC6/TC7. El JS inline del modal está bien escrito (sin errores de sintaxis, sin acceso a propiedades antes de DOM ready porque está al final del body). | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -117,16 +118,19 @@ Devolvé reporte JSON estructurado por dispositivo + veredicto PASS/FAIL.
 
 ### Dispositivo 2 — Samsung Galaxy S23 (412×915)
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Estructura HTML | Idéntica a iPhone (no varía por viewport). | ✅ PASS |
-| B. 6 botones disparadores | Idénticos. | ✅ PASS |
-| C. Layout `d-grid gap-2` | Idéntico a iPhone. | ✅ PASS |
-| D. JS de relleno | Mismo comportamiento. | ✅ PASS |
-| E-H. Accesibilidad y customización | Tokens del proyecto invariantes por viewport. | ✅ PASS |
-| I. Sin overflow | Mismo Bootstrap responsive del modal-dialog. | ✅ PASS |
-| J. Sin regresiones | Idéntico. | ✅ PASS |
-| K. Console limpia | Sin diferencias. | ✅ PASS |
+### Resultados por Dispositivo
+
+- MODAL![](screenshots/tc7-galaxy-2.png)
+  | Aspecto | Resultado del análisis | Estado |
+  |---|---|---|
+  | A. Estructura HTML | Idéntica a iPhone (no varía por viewport). | ✅ PASS |
+  | B. 6 botones disparadores | Idénticos. | ✅ PASS |
+  | C. Layout `d-grid gap-2` | Idéntico a iPhone. | ✅ PASS |
+  | D. JS de relleno | Mismo comportamiento. | ✅ PASS |
+  | E-H. Accesibilidad y customización | Tokens del proyecto invariantes por viewport. | ✅ PASS |
+  | I. Sin overflow | Mismo Bootstrap responsive del modal-dialog. | ✅ PASS |
+  | J. Sin regresiones | Idéntico. | ✅ PASS |
+  | K. Console limpia | Sin diferencias. | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -134,17 +138,20 @@ Devolvé reporte JSON estructurado por dispositivo + veredicto PASS/FAIL.
 
 ### Dispositivo 3 — iPad Air (820×1180)
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Estructura HTML | Idéntica. | ✅ PASS |
-| B. 6 botones disparadores | Idénticos. | ✅ PASS |
-| C. Layout `d-grid gap-2` | En 820px las cards ocupan `col-sm-6` (2 cards por fila) — los botones siguen apilados verticalmente full-width dentro de cada card. | ✅ PASS |
-| D. JS de relleno | Mismo comportamiento. | ✅ PASS |
-| E. Accesibilidad | Idéntico. Focus trap, ESC, click-outside funcionan. | ✅ PASS |
-| F-H. Customización | Idéntico. | ✅ PASS |
-| I. modal-lg en iPad | 820px ≥ 800px (modal-lg max-width) → el modal se ve a 800px, centrado, con espacio cómodo. La imagen `max-height: 280px` deja la información del producto bien visible. | ✅ PASS |
-| J. Sin regresiones | El Carousel (también testeado en TC7) coexiste sin conflictos: el modal se monta en el final del body, fuera del flujo del main. | ✅ PASS |
-| K. Console limpia | Sin errores. | ✅ PASS |
+### Resultados por Dispositivo
+
+- MODAL![](screenshots/tc7-ipad-2.png)
+  | Aspecto | Resultado del análisis | Estado |
+  |---|---|---|
+  | A. Estructura HTML | Idéntica. | ✅ PASS |
+  | B. 6 botones disparadores | Idénticos. | ✅ PASS |
+  | C. Layout `d-grid gap-2` | En 820px las cards ocupan `col-sm-6` (2 cards por fila) — los botones siguen apilados verticalmente full-width dentro de cada card. | ✅ PASS |
+  | D. JS de relleno | Mismo comportamiento. | ✅ PASS |
+  | E. Accesibilidad | Idéntico. Focus trap, ESC, click-outside funcionan. | ✅ PASS |
+  | F-H. Customización | Idéntico. | ✅ PASS |
+  | I. modal-lg en iPad | 820px ≥ 800px (modal-lg max-width) → el modal se ve a 800px, centrado, con espacio cómodo. La imagen `max-height: 280px` deja la información del producto bien visible. | ✅ PASS |
+  | J. Sin regresiones | El Carousel (también testeado en TC7) coexiste sin conflictos: el modal se monta en el final del body, fuera del flujo del main. | ✅ PASS |
+  | K. Console limpia | Sin errores. | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -197,15 +204,15 @@ Ninguno. Las dos observaciones (OBS-001 y OBS-002) son informativas y no se prom
 La implementación del Modal compartido + 6 botones disparadores + JS de relleno dinámico es **funcionalmente correcta, accesible y visualmente alineada** con la identidad del proyecto en los 3 dispositivos obligatorios del PDF. La estrategia de un solo modal reutilizable (en lugar de 6 modales individuales) hace al código mantenible y escalable.
 
 | Categoría                                              | Resultado |
-|--------------------------------------------------------|-----------|
-| Estructura HTML del modal compartido                   | ✅ PASS |
-| 6 botones disparadores con `data-product-*` completos  | ✅ PASS |
-| Layout `d-grid gap-2` en cards                         | ✅ PASS |
-| JS de relleno dinámico (event `show.bs.modal`)         | ✅ PASS |
-| Accesibilidad (focus trap, ESC, aria attributes)       | ✅ PASS |
-| Customización CSS (header oscuro, btn-close invertido) | ✅ PASS |
-| Imagen del modal con `max-height` y `object-fit`       | ✅ PASS |
-| Sin overflow ni regresiones del Rol 1 ni del Carousel  | ✅ PASS |
+| ------------------------------------------------------ | --------- |
+| Estructura HTML del modal compartido                   | ✅ PASS   |
+| 6 botones disparadores con `data-product-*` completos  | ✅ PASS   |
+| Layout `d-grid gap-2` en cards                         | ✅ PASS   |
+| JS de relleno dinámico (event `show.bs.modal`)         | ✅ PASS   |
+| Accesibilidad (focus trap, ESC, aria attributes)       | ✅ PASS   |
+| Customización CSS (header oscuro, btn-close invertido) | ✅ PASS   |
+| Imagen del modal con `max-height` y `object-fit`       | ✅ PASS   |
+| Sin overflow ni regresiones del Rol 1 ni del Carousel  | ✅ PASS   |
 
 **Veredicto general:** ✅ **PASS** — apto para merge a `develop` sin fixes adicionales.
 

@@ -44,20 +44,20 @@ Verificar que el componente Carousel implementado en la sección hero (reemplazo
 
 ## Dispositivos obligatorios (PDF cátedra)
 
-| Dispositivo            | Viewport     | UA / Engine     | Notas                                      |
-| ---------------------- | ------------ | --------------- | ------------------------------------------ |
-| iPhone 14 Pro          | 393×852      | iOS Safari      | DPR 3, mobile=true                         |
-| Samsung Galaxy S23     | 412×915      | Chrome Android  | DPR 3.5, mobile=true                       |
-| iPad Air               | 820×1180     | iOS Safari      | DPR 2, tablet                              |
+| Dispositivo        | Viewport | UA / Engine    | Notas                |
+| ------------------ | -------- | -------------- | -------------------- |
+| iPhone 14 Pro      | 393×852  | iOS Safari     | DPR 3, mobile=true   |
+| Samsung Galaxy S23 | 412×915  | Chrome Android | DPR 3.5, mobile=true |
+| iPad Air           | 820×1180 | iOS Safari     | DPR 2, tablet        |
 
 ---
 
 ## Áreas a validar (cambios introducidos en la rama)
 
-| Cambio | Archivo(s) | Verificación esperada |
-|---|---|---|
-| Carousel reemplaza `.featured-gallery` | `index.html` | `<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">` con 3 `<div class="carousel-item">`, indicadores y controles |
-| Customización Carousel | `css/bootstrap-overrides.css` | `#hero-carousel` con `border-radius` + `overflow: hidden`; `.carousel-item img` con `height: 350px` (desktop) y `220px` (mobile); indicadores con `--color-primary`; caption con `rgba(30, 27, 46, 0.7)` |
+| Cambio                                 | Archivo(s)                    | Verificación esperada                                                                                                                                                                                    |
+| -------------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Carousel reemplaza `.featured-gallery` | `index.html`                  | `<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">` con 3 `<div class="carousel-item">`, indicadores y controles                                                                   |
+| Customización Carousel                 | `css/bootstrap-overrides.css` | `#hero-carousel` con `border-radius` + `overflow: hidden`; `.carousel-item img` con `height: 350px` (desktop) y `220px` (mobile); indicadores con `--color-primary`; caption con `rgba(30, 27, 46, 0.7)` |
 
 ---
 
@@ -89,23 +89,25 @@ Devolvé reporte JSON estructurado por dispositivo + veredicto PASS/FAIL.
 
 ---
 
-## Resultados por Dispositivo
+## Dispositivo 1 — iPhone 14 Pro (393×852)
 
-### Dispositivo 1 — iPhone 14 Pro (393×852)
+### Resultados por Dispositivo
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Estructura HTML del carousel | `<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Productos destacados">` presente. 3 `<div class="carousel-item">` con la primera con `.active`. ✅ | ✅ PASS |
-| B. Auto-rotación activa | `data-bs-ride="carousel"` declarado en el div principal. Bootstrap inicia auto-rotación con intervalo default 5s, `pause-on-hover` heredado. | ✅ PASS |
-| C. Indicadores | 3 `<button data-bs-target="#hero-carousel" data-bs-slide-to="N">` con `aria-label="Slide N: <producto>"`. Primero con `.active` y `aria-current="true"`. | ✅ PASS |
-| D. Controles prev/next | Ambos con `<span class="carousel-control-{prev,next}-icon" aria-hidden="true">` + `<span class="visually-hidden">Anterior/Siguiente</span>`. | ✅ PASS |
-| E. Captions ocultas en mobile | Cada caption tiene `class="carousel-caption d-none d-md-block"`. 393px < 768px (md) → `display: none` aplicado por Bootstrap. ✅ Sin contaminación visual. | ✅ PASS |
-| F. Imágenes con height controlado | `.carousel-item img { height: 220px }` en `@media (max-width: 768px)` del `bootstrap-overrides.css`. 393px → 220px aplica. `object-fit: contain` evita recorte. | ✅ PASS |
-| G. Indicadores con paleta del proyecto | `.carousel-indicators [data-bs-target] { background-color: var(--color-primary) }` → `#7c3aed`. ✅ | ✅ PASS |
-| H. Controles con drop-shadow violeta | `filter: drop-shadow(0 0 4px rgba(var(--color-primary-rgb), 0.6))` aplicado a `.carousel-control-{prev,next}-icon`. | ✅ PASS |
-| I. Sin overflow horizontal | Heredado del Rol 1: `html`, `body`, `.main-container` con `overflow-x: hidden`. El `#hero-carousel` está dentro de `.main-content col-lg-9` que ya respeta el ancho. | ✅ PASS |
-| J. Sin regresiones del Rol 1 | Sidebar (`d-none d-lg-block`), products-grid (row + cols), footer (col-md-6), hamburguesa, tablas — todos intactos. | ✅ PASS |
-| K. Console limpia | Bootstrap bundle ya cargaba sin errores en TC6. La adición del Carousel no requiere JS adicional propio. | ✅ PASS |
+- CARRUSEL![](screenshots/tc7-iphone-2.png)
+
+| Aspecto                                | Resultado del análisis                                                                                                                                                                 | Estado  |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| A. Estructura HTML del carousel        | `<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Productos destacados">` presente. 3 `<div class="carousel-item">` con la primera con `.active`. ✅ | ✅ PASS |
+| B. Auto-rotación activa                | `data-bs-ride="carousel"` declarado en el div principal. Bootstrap inicia auto-rotación con intervalo default 5s, `pause-on-hover` heredado.                                           | ✅ PASS |
+| C. Indicadores                         | 3 `<button data-bs-target="#hero-carousel" data-bs-slide-to="N">` con `aria-label="Slide N: <producto>"`. Primero con `.active` y `aria-current="true"`.                               | ✅ PASS |
+| D. Controles prev/next                 | Ambos con `<span class="carousel-control-{prev,next}-icon" aria-hidden="true">` + `<span class="visually-hidden">Anterior/Siguiente</span>`.                                           | ✅ PASS |
+| E. Captions ocultas en mobile          | Cada caption tiene `class="carousel-caption d-none d-md-block"`. 393px < 768px (md) → `display: none` aplicado por Bootstrap. ✅ Sin contaminación visual.                             | ✅ PASS |
+| F. Imágenes con height controlado      | `.carousel-item img { height: 220px }` en `@media (max-width: 768px)` del `bootstrap-overrides.css`. 393px → 220px aplica. `object-fit: contain` evita recorte.                        | ✅ PASS |
+| G. Indicadores con paleta del proyecto | `.carousel-indicators [data-bs-target] { background-color: var(--color-primary) }` → `#7c3aed`. ✅                                                                                     | ✅ PASS |
+| H. Controles con drop-shadow violeta   | `filter: drop-shadow(0 0 4px rgba(var(--color-primary-rgb), 0.6))` aplicado a `.carousel-control-{prev,next}-icon`.                                                                    | ✅ PASS |
+| I. Sin overflow horizontal             | Heredado del Rol 1: `html`, `body`, `.main-container` con `overflow-x: hidden`. El `#hero-carousel` está dentro de `.main-content col-lg-9` que ya respeta el ancho.                   | ✅ PASS |
+| J. Sin regresiones del Rol 1           | Sidebar (`d-none d-lg-block`), products-grid (row + cols), footer (col-md-6), hamburguesa, tablas — todos intactos.                                                                    | ✅ PASS |
+| K. Console limpia                      | Bootstrap bundle ya cargaba sin errores en TC6. La adición del Carousel no requiere JS adicional propio.                                                                               | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -113,16 +115,20 @@ Devolvé reporte JSON estructurado por dispositivo + veredicto PASS/FAIL.
 
 ### Dispositivo 2 — Samsung Galaxy S23 (412×915)
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Estructura HTML | Idéntica a iPhone (no varía por viewport). | ✅ PASS |
-| B-D. Auto-rotación, indicadores, controles | Idénticos a iPhone. | ✅ PASS |
-| E. Captions | 412px < 768px → `display: none`, mismo comportamiento que iPhone. | ✅ PASS |
-| F. Imagen height | 412px < 768px → 220px aplica. | ✅ PASS |
-| G-H. Customización visual | Tokens del proyecto invariantes por viewport. | ✅ PASS |
-| I. Sin overflow | Mismas reglas mobile. | ✅ PASS |
-| J. Sin regresiones | Idéntico a iPhone. | ✅ PASS |
-| K. Console limpia | Sin diferencias respecto a iPhone. | ✅ PASS |
+### Resultados por Dispositivo
+
+- CARRUSEL![](screenshots/tc7-galaxy-1.png)
+
+| Aspecto                                    | Resultado del análisis                                            | Estado  |
+| ------------------------------------------ | ----------------------------------------------------------------- | ------- |
+| A. Estructura HTML                         | Idéntica a iPhone (no varía por viewport).                        | ✅ PASS |
+| B-D. Auto-rotación, indicadores, controles | Idénticos a iPhone.                                               | ✅ PASS |
+| E. Captions                                | 412px < 768px → `display: none`, mismo comportamiento que iPhone. | ✅ PASS |
+| F. Imagen height                           | 412px < 768px → 220px aplica.                                     | ✅ PASS |
+| G-H. Customización visual                  | Tokens del proyecto invariantes por viewport.                     | ✅ PASS |
+| I. Sin overflow                            | Mismas reglas mobile.                                             | ✅ PASS |
+| J. Sin regresiones                         | Idéntico a iPhone.                                                | ✅ PASS |
+| K. Console limpia                          | Sin diferencias respecto a iPhone.                                | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -130,17 +136,21 @@ Devolvé reporte JSON estructurado por dispositivo + veredicto PASS/FAIL.
 
 ### Dispositivo 3 — iPad Air (820×1180)
 
-| Aspecto | Resultado del análisis | Estado |
-|---|---|---|
-| A. Estructura HTML | Idéntica. | ✅ PASS |
-| B-D. Auto-rotación, indicadores, controles | Idénticos. | ✅ PASS |
-| E. Captions VISIBLES | 820px ≥ 768px (md) → `d-md-block` se activa → caption visible con título `<h3>` y descripción `<p>`. | ✅ PASS |
-| F. Imagen height | 820px > 768px → la regla del media query no aplica → height default `350px` del bootstrap-overrides. | ✅ PASS |
+### Resultados por Dispositivo
+
+- CARRUSEL![](screenshots/tc7-ipad-1.png)
+
+| Aspecto                                      | Resultado del análisis                                                                                                                                                                                           | Estado  |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| A. Estructura HTML                           | Idéntica.                                                                                                                                                                                                        | ✅ PASS |
+| B-D. Auto-rotación, indicadores, controles   | Idénticos.                                                                                                                                                                                                       | ✅ PASS |
+| E. Captions VISIBLES                         | 820px ≥ 768px (md) → `d-md-block` se activa → caption visible con título `<h3>` y descripción `<p>`.                                                                                                             | ✅ PASS |
+| F. Imagen height                             | 820px > 768px → la regla del media query no aplica → height default `350px` del bootstrap-overrides.                                                                                                             | ✅ PASS |
 | G. Caption con fondo oscuro semitransparente | `.carousel-caption { background-color: rgba(30, 27, 46, 0.7); border-radius: var(--border-radius); padding: var(--spacing-md); }` → fondo `surface-dark` con 70% opacidad sobre la imagen. Texto blanco legible. | ✅ PASS |
-| H. Resto de customizaciones | Indicators y controles violetas, drop-shadow aplicado. | ✅ PASS |
-| I. Sin overflow | El carousel ocupa el ancho completo del `.col-lg-9` (que en 820px no aplica `lg`, ocupa el 100% del row). | ✅ PASS |
-| J. Sin regresiones | Idéntico. | ✅ PASS |
-| K. Console limpia | Sin errores nuevos. | ✅ PASS |
+| H. Resto de customizaciones                  | Indicators y controles violetas, drop-shadow aplicado.                                                                                                                                                           | ✅ PASS |
+| I. Sin overflow                              | El carousel ocupa el ancho completo del `.col-lg-9` (que en 820px no aplica `lg`, ocupa el 100% del row).                                                                                                        | ✅ PASS |
+| J. Sin regresiones                           | Idéntico.                                                                                                                                                                                                        | ✅ PASS |
+| K. Console limpia                            | Sin errores nuevos.                                                                                                                                                                                              | ✅ PASS |
 
 **Veredicto:** ✅ PASS
 
@@ -150,11 +160,11 @@ Devolvé reporte JSON estructurado por dispositivo + veredicto PASS/FAIL.
 
 Capturas manuales con DevTools → Toggle Device Toolbar (`Ctrl+Shift+M`) sobre Live Preview.
 
-| Dispositivo | Captura |
-|---|---|
-| iPhone 14 Pro (393×852) | `screenshots/tc7-iphone14pro-carousel.png` _(adjuntar manualmente)_ |
-| Samsung Galaxy S23 (412×915) | `screenshots/tc7-galaxys23-carousel.png` _(adjuntar manualmente)_ |
-| iPad Air (820×1180) | `screenshots/tc7-ipadair-carousel.png` _(adjuntar manualmente)_ |
+| Dispositivo                  | Captura                                                             |
+| ---------------------------- | ------------------------------------------------------------------- |
+| iPhone 14 Pro (393×852)      | `screenshots/tc7-iphone14pro-carousel.png` _(adjuntar manualmente)_ |
+| Samsung Galaxy S23 (412×915) | `screenshots/tc7-galaxys23-carousel.png` _(adjuntar manualmente)_   |
+| iPad Air (820×1180)          | `screenshots/tc7-ipadair-carousel.png` _(adjuntar manualmente)_     |
 
 **Pasos para reproducirlas:**
 
@@ -175,6 +185,7 @@ El análisis estático del Carousel detectó **1 observación menor** (no bloque
 
 - **Severidad:** Baja (code smell, sin impacto funcional ni visual).
 - **Descripción:** En `css/styles.css` quedan las reglas:
+
   ```css
   .featured-gallery img,
   .hero-gallery img,
@@ -190,7 +201,9 @@ El análisis estático del Carousel detectó **1 observación menor** (no bloque
     margin-bottom: var(--spacing-lg);
   }
   ```
+
   La clase `.featured-gallery` fue completamente removida del HTML al implementar el Carousel (que usa `.carousel-item img` en su lugar, con sus propias reglas en `bootstrap-overrides.css`). Las clases `.hero-gallery` y `.hero-images` tampoco existen en el HTML actual — son legacy.
+
 - **Causa probable:** Reglas legacy no limpiadas tras migrar el hero de `featured-gallery` a Carousel.
 - **Fix sugerido:** Eliminar las dos reglas `.featured-gallery img/...` y `.featured-gallery` de `styles.css`. No afecta nada visualmente porque ningún elemento del DOM tiene esas clases.
 - **Decisión:** **NO se abre issue bug ni rama `fix/*`** porque es un cleanup trivial sin impacto. Se documenta para futura limpieza si Gonza lo pide en code review. Si lo pide, el fix es 1 Edit chico de 10 líneas.
@@ -214,18 +227,17 @@ Ninguno. Solo OBS-001 (no bloqueante, no se promueve a issue).
 
 La implementación del Carousel es **funcionalmente correcta y visualmente alineada** con la identidad del proyecto en los 3 dispositivos obligatorios del PDF. Reemplaza la antigua `.featured-gallery` sin introducir regresiones en sidebar, products-grid, footer ni tablas.
 
-| Categoría                                         | Resultado |
-|---------------------------------------------------|-----------|
-| Estructura HTML del Carousel                      | ✅ PASS |
-| Auto-rotación + indicadores + controles            | ✅ PASS |
-| Captions ocultas en mobile (d-none d-md-block)    | ✅ PASS |
-| Imágenes con height controlado (350px / 220px)    | ✅ PASS |
-| Customización CSS (paleta del proyecto)           | ✅ PASS |
-| Accesibilidad (aria-label, visually-hidden)       | ✅ PASS |
-| Sin overflow ni regresiones del Rol 1             | ✅ PASS |
+| Categoría                                                          | Resultado                  |
+| ------------------------------------------------------------------ | -------------------------- |
+| Estructura HTML del Carousel                                       | ✅ PASS                    |
+| Auto-rotación + indicadores + controles                            | ✅ PASS                    |
+| Captions ocultas en mobile (d-none d-md-block)                     | ✅ PASS                    |
+| Imágenes con height controlado (350px / 220px)                     | ✅ PASS                    |
+| Customización CSS (paleta del proyecto)                            | ✅ PASS                    |
+| Accesibilidad (aria-label, visually-hidden)                        | ✅ PASS                    |
+| Sin overflow ni regresiones del Rol 1                              | ✅ PASS                    |
 | Cleanup pendiente: reglas legacy `.featured-gallery` en styles.css | ⚠️ OBS-001 (no bloqueante) |
 
 **Veredicto general:** ✅ **PASS** — apto para merge a `develop` sin fixes adicionales.
 
 ---
-
