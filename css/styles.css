@@ -129,24 +129,6 @@ main {
   padding: var(--spacing-xl);
 }
 
-/* RC11: Corrección Hero Images Desktop */
-.featured-gallery img,
-.hero-gallery img,
-.hero-images img {
-  width: 100%;
-  height: 280px;
-  object-fit: contain;
-  background-color: var(--color-bg);
-  border-radius: var(--border-radius-sm);
-}
-
-/* margin-bottom solo (en lugar de top+bottom) para no interferir con el
-   margin-inline negativo del .row de Bootstrap. El espacio superior lo aporta
-   el margin-bottom natural del <h2> que precede a la galería. */
-.featured-gallery {
-  margin-bottom: var(--spacing-lg);
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;

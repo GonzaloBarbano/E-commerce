@@ -351,7 +351,7 @@
                       class="product-image" loading="lazy" />
                   </div>
                   <div class="product-info">
-                    <h3 class="product-name">Corsair Vengeance DDR5</h3>
+                    <h3 class="product-name">Corsair Vengeance DDR5 32GB</h3>
                     <p class="product-brand">Marca: Corsair</p>
                     <p class="product-specs">32GB (2x16GB) | 5600MHz</p>
                     <p class="product-stock">Stock: 28 unidades</p>
@@ -723,13 +723,19 @@
   </div>
   <!-- FIN COMPONENTE BOOTSTRAP AVANZADO 2 -->
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
   <script>
     document.getElementById('product-modal').addEventListener('show.bs.modal', function (event) {
       const button = event.relatedTarget;
       const data = button.dataset;
       document.getElementById('product-modal-label').textContent = data.productName;
       const img = document.getElementById('modal-product-image');
-      img.src = data.productImage;
+      // Validación: solo aceptar rutas relativas del proyecto (defensa frente a inyección de URLs externas o javascript: URIs si en el futuro los data-* vienen de fuente dinámica)
+      const allowedSrc = data.productImage && data.productImage.startsWith('assets/') ? data.productImage : '';
+      img.src = allowedSrc;
       img.alt = data.productName;
       document.getElementById('modal-product-brand').textContent = data.productBrand;
       document.getElementById('modal-product-specs').textContent = data.productSpecs;
@@ -737,10 +743,6 @@
       document.getElementById('modal-product-price').textContent = data.productPrice;
     });
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>
