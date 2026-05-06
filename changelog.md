@@ -4,14 +4,17 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Recuperatorio Parcial 1] - 2026-05-05
+## [ Release Recuperatorio Parcial 1] - 2026-05-05
 
 ### Added
+
+- [feature/coord-devops-update-figma-and-readme] Actualizo spec
+  PR: [#98](https://github.com/GonzaloBarbano/E-commerce/pull/98) - @GonzaloBarbano (Coordinador / DevOps)
 
 - [feature/esp-com-bootstrap-add-component] Implemento Carousel en hero (reemplaza featured-gallery) y Modal compartido para detalle de producto en cada card + test-case-7.md (Carousel) y test-case-8.md (Modal) con análisis estático en iPhone 14 Pro, Galaxy S23 e iPad Air (closes #96)
   PR: [#97](https://github.com/GonzaloBarbano/E-commerce/pull/97) - @Naguirre0102 (Especialista en Componentes Bootstrap)
 
-- [feature/dev-comp-html-avanzados-add-components] Creacion de nueva rama y test realizados 
+- [feature/dev-comp-html-avanzados-add-components] Creacion de nueva rama y test realizados
   PR: [#85](https://github.com/GonzaloBarbano/E-commerce/pull/85) - @LucasFUces ( Desarrollador de Componentes HTML Avanzados)
 
 - [feature/dev-frontend-bootstrap-update-migration] Migración del layout a sistema de grilla Bootstrap 5.3 (CDN + bootstrap-overrides.css + sistema de columnas + tablas con .table-responsive) + test-case-6.md con análisis estático en iPhone 14 Pro, Galaxy S23 e iPad Air (closes #83)
@@ -30,8 +33,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [fix/align-breakpoint-sidebar-bootstrap] Alineo breakpoint del responsive.css con Bootstrap lg=992px — resuelve espacio vacío a la izquierda del main-content entre 992-1023px (closes #86)
   PR: [#90](https://github.com/GonzaloBarbano/E-commerce/pull/90) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
-  
-- [fix/html-avanzado] Correcciones generales 
+- [fix/html-avanzado] Correcciones generales
   PR: [#92](https://github.com/GonzaloBarbano/E-commerce/pull/92) - @LucasFUces ( Desarrollador de Componentes HTML Avanzados)
 
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
