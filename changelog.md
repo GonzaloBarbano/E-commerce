@@ -7,6 +7,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Recuperatorio Parcial 1] - 2026-05-05
 
 ### Added
+
+- [feature/esp-com-bootstrap-add-component] Implemento Carousel en hero (reemplaza featured-gallery) y Modal compartido para detalle de producto en cada card + test-case-7.md (Carousel) y test-case-8.md (Modal) con análisis estático en iPhone 14 Pro, Galaxy S23 e iPad Air (closes #96)
+  PR: [#PENDIENTE](https://github.com/GonzaloBarbano/E-commerce/pulls) - @Naguirre0102 (Especialista en Componentes Bootstrap)
+
 - [feature/dev-comp-html-avanzados-add-components] Creacion de nueva rama y test realizados 
   PR: [#85](https://github.com/GonzaloBarbano/E-commerce/pull/85) - @LucasFUces ( Desarrollador de Componentes HTML Avanzados)
 
