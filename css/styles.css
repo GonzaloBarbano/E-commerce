@@ -4,6 +4,7 @@
 
 :root {
   --color-primary: #7c3aed;
+  --color-primary-rgb: 124, 58, 237;
   --color-primary-hover: #6d28d9;
   --color-primary-light: #ede9fe;
   --color-surface-dark: #1e1b2e; /* Equivale a rgb(30, 27, 46) */
@@ -110,29 +111,21 @@ h3 {
   color: var(--color-primary-light);
 }
 
-/* LAYOUT */
-.main-container {
-  display: flex;
+/* LAYOUT — la grilla la provee Bootstrap (.container-fluid > .row > .col-lg-*).
+   Solo conservamos los estilos visuales y el offset del navbar fijo. */
+main {
   padding-top: var(--navbar-height);
   min-height: 100vh;
 }
 
 .sidebar {
-  width: var(--sidebar-width);
   background-color: var(--color-surface-card);
   border-right: 1px solid var(--color-border);
   padding: var(--spacing-lg);
-  position: fixed;
-  top: var(--navbar-height);
-  left: 0;
-  height: calc(100vh - var(--navbar-height));
   overflow-y: auto;
-  z-index: 10;
 }
 
 .main-content {
-  flex: 1;
-  margin-left: var(--sidebar-width);
   padding: var(--spacing-xl);
 }
 
@@ -147,18 +140,11 @@ h3 {
   border-radius: var(--border-radius-sm);
 }
 
+/* margin-bottom solo (en lugar de top+bottom) para no interferir con el
+   margin-inline negativo del .row de Bootstrap. El espacio superior lo aporta
+   el margin-bottom natural del <h2> que precede a la galería. */
 .featured-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-md);
-  margin: var(--spacing-lg) 0;
-}
-
-.products-grid {
-  display: grid;
-  /* RC-FIX: min() garantiza que nunca supere el ancho disponible en mobile */
-  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
 }
 
 .visually-hidden {
@@ -183,17 +169,7 @@ h3 {
   padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-md);
 }
 
-/* Desktop: ajustar para dejar espacio del sidebar fijo */
-@media (min-width: 992px) {
-  .footer {
-    margin-left: var(--sidebar-width);
-  }
-}
-
 .footer-container {
-  display: flex;
-  gap: var(--spacing-xl);
-  flex-wrap: wrap;
   margin-bottom: var(--spacing-lg);
 }
 

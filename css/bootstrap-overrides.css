@@ -1,0 +1,84 @@
+/* ============================================
+   PC-HARDWARE E-COMMERCE | BOOTSTRAP OVERRIDES
+   Mapea variables --bs-* a los tokens del proyecto
+   definidos en styles.css (:root) para mantener
+   la identidad visual del e-commerce sobre Bootstrap 5.3.
+   ============================================ */
+
+:root {
+  /* Color tokens — mapeo a la paleta del mockup.
+     --bs-primary-rgb usa la versión RGB del token expuesta en styles.css,
+     así si --color-primary cambia en el futuro, los rgba() también lo siguen. */
+  --bs-primary: var(--color-primary);
+  --bs-primary-rgb: var(--color-primary-rgb);
+  --bs-body-color: var(--color-text);
+  --bs-body-bg: var(--color-bg);
+  --bs-border-color: var(--color-border);
+  --bs-border-radius: var(--border-radius);
+  --bs-border-radius-sm: var(--border-radius-sm);
+  --bs-secondary-color: var(--color-text-muted);
+  --bs-link-color: var(--color-primary);
+  --bs-link-hover-color: var(--color-primary-hover);
+
+  /* Tipografía — la fuente Inter ya viene de Google Fonts en index.html */
+  --bs-body-font-family: "Inter", sans-serif;
+  --bs-body-font-size: var(--font-size-body);
+}
+
+/* ============================================
+   BUTTONS — alinear .btn-primary de Bootstrap
+   con el botón primario del proyecto
+   ============================================ */
+
+.btn-primary {
+  --bs-btn-bg: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-bg: var(--color-primary-hover);
+  --bs-btn-hover-border-color: var(--color-primary-hover);
+  --bs-btn-active-bg: var(--color-primary-hover);
+  --bs-btn-active-border-color: var(--color-primary-hover);
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-active-color: #ffffff;
+  font-weight: var(--font-weight-semibold);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-bg: var(--color-primary);
+  --bs-btn-hover-border-color: var(--color-primary);
+  --bs-btn-active-bg: var(--color-primary-hover);
+}
+
+/* ============================================
+   FORMS — focus y check coherentes con la paleta
+   ============================================ */
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem rgba(var(--color-primary-rgb), 0.2);
+}
+
+.form-check-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem rgba(var(--color-primary-rgb), 0.2);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ============================================
+   TABLES — mantener estilo del proyecto
+   sobre la clase .table de Bootstrap
+   ============================================ */
+
+.table {
+  --bs-table-bg: var(--color-surface-card);
+  --bs-table-border-color: var(--color-border);
+  --bs-table-striped-bg: var(--color-bg);
+  margin-bottom: 0;
+}
