@@ -25,6 +25,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/test-case] Correccion de test-case 6 al 10, testing-doc.md y Range en index.html
+  PR: [#100](https://github.com/GonzaloBarbano/E-commerce/pull/100) - @GonzaloBarbano (Coordinador / DevOps)
+
 - [fix/clean-merge-pr93] Elimino 3 líneas duplicadas en index.html introducidas por la resolución incorrecta de conflictos durante el merge del PR #93 (aperturas viejas de `.main-container`, `.sidebar` y `.products-grid` sin clases Bootstrap)
   PR: [#95](https://github.com/GonzaloBarbano/E-commerce/pull/95) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
 
