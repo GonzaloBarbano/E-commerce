@@ -25,6 +25,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/menu-mobile-compacto] Compacta el menú hamburguesa en mobile (padding del nav-link de 24px a 8px) y agrega `d-flex align-items-center h-100` al `<ul class="nav-list">` — resuelve Request Change del profesor sobre PR de release del Primer Parcial
+  PR: [#PENDIENTE](https://github.com/GonzaloBarbano/E-commerce/pulls) - @Naguirre0102 (Especialista en Componentes Bootstrap)
+
 - [fix/index-2] Fix alineado de navbar
   PR: [#105](https://github.com/GonzaloBarbano/E-commerce/pull/105) - @GonzaloBarbano (Coordinador / DevOps)
 
