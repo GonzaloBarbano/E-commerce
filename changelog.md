@@ -25,6 +25,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/index] Correccion visual en index.html
+  PR: [#104](https://github.com/GonzaloBarbano/E-commerce/pull/104) - @GonzaloBarbano (Coordinador / DevOps)
+
 - [fix/test-case] Correccion product card.
   PR: [#103](https://github.com/GonzaloBarbano/E-commerce/pull/103) - @LucasFUces (Desarrollador de Componentes HTML Avanzados)
 
