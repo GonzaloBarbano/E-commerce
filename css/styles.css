@@ -94,17 +94,41 @@ h3 {
   font-size: var(--font-size-h3);
   font-weight: var(--font-weight-bold);
   color: white;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navigation {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .nav-list {
   display: flex;
+  align-items: center;
   gap: var(--spacing-lg);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .nav-link {
   color: #cbd5e1;
   font-size: var(--font-size-nav);
   transition: var(--transition-default);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+  line-height: 1;
 }
 
 .nav-link:hover {
