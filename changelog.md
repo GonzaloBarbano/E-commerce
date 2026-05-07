@@ -25,6 +25,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/menu-mobile-compacto] Compacta el menú hamburguesa en mobile
+  PR: [#106](https://github.com/GonzaloBarbano/E-commerce/pull/106) - @Naguirre0102 (Especialista en Componentes Bootstrap)
+
 - [fix/index-2] Fix alineado de navbar
   PR: [#105](https://github.com/GonzaloBarbano/E-commerce/pull/105) - @GonzaloBarbano (Coordinador / DevOps)
 
