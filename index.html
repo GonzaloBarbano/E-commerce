@@ -39,7 +39,7 @@
   <body>
     <a href="#inicio" class="skip-link">Saltar al contenido principal</a>
 
-    <header role="banner" class="navbar">
+    <header role="banner" class="navbar d-flex align-items-center">
       <h1 class="visually-hidden">PC Hardware — Tienda de Componentes</h1>
 
       <div class="logo-container">
@@ -62,7 +62,7 @@
         <span></span><span></span><span></span>
       </label>
       <nav class="navigation" id="main-nav" aria-label="Navegación Principal">
-        <ul class="nav-list">
+        <ul class="nav-list d-flex align-items-center h-100">
           <li class="nav-item">
             <a href="#inicio" class="nav-link">Inicio</a>
           </li>
@@ -111,7 +111,6 @@
               </datalist>
             </div>
             <!-- FIN COMPONENTE HTML AVANZADO 2 (Parte A) -->
-
             <nav
               class="categories-section"
               aria-label="Categorías de Productos"
@@ -151,7 +150,6 @@
                 </li>
               </ul>
             </nav>
-
             <section class="filters-section" aria-label="Filtros de Productos">
               <h3 class="sidebar-title">FILTROS</h3>
               <form id="filters-form" class="filters-form">
@@ -203,7 +201,6 @@
                   </div>
                 </fieldset>
                 <!-- FIN COMPONENTE HTML AVANZADO 2 (Parte B) -->
-
                 <fieldset class="filter-group">
                   <legend>Marca</legend>
                   <div class="checkbox-list">
@@ -254,7 +251,6 @@
                     </div>
                   </div>
                 </fieldset>
-
                 <fieldset class="filter-group">
                   <legend>Especificaciones Clave</legend>
                   <div class="checkbox-list">
@@ -287,8 +283,7 @@
                     </div>
                   </div>
                 </fieldset>
-
-                <div class="filter-actions">
+                <div class="filter-actions mt-3 pt-2">
                   <button type="submit" class="btn-apply-filters">
                     Aplicar Filtros
                   </button>
@@ -298,7 +293,6 @@
                 </div>
               </form>
             </section>
-
             <nav class="quick-links-section" aria-label="Enlaces Rápidos">
               <h3 class="sidebar-title">ENLACES RÁPIDOS</h3>
               <ul class="quick-links-list">
@@ -307,7 +301,6 @@
               </ul>
             </nav>
           </aside>
-
           <div
             class="main-content col-lg-9"
             style="padding-bottom: var(--spacing-2xl)"
@@ -322,7 +315,6 @@
                 asesoramiento técnico, garantía de calidad y envío rápido a todo
                 el país.
               </p>
-
               <!-- COMPONENTE BOOTSTRAP AVANZADO 1: Carousel — productos destacados -->
               <div
                 id="hero-carousel"
@@ -423,12 +415,10 @@
                 </button>
               </div>
               <!-- FIN COMPONENTE BOOTSTRAP AVANZADO 1 -->
-
-              <div class="cta-section">
+              <div class="cta-section mb-4">
                 <a href="#tienda" class="btn-primary">COMPRAR AHORA</a>
               </div>
             </section>
-
             <section id="tienda" class="products-section">
               <h2>PRODUCTOS PRESENTADOS</h2>
               <div class="products-grid row g-3 g-md-4">
@@ -489,7 +479,6 @@
                     </div>
                   </article>
                 </div>
-
                 <div class="col-12 col-sm-6 col-lg-4">
                   <!-- Producto 2: NVIDIA RTX 4090 -->
                   <article
@@ -547,7 +536,6 @@
                     </div>
                   </article>
                 </div>
-
                 <div class="col-12 col-sm-6 col-lg-4">
                   <!-- Producto 3: Corsair Vengeance DDR5 -->
                   <article
@@ -602,7 +590,6 @@
                     </div>
                   </article>
                 </div>
-
                 <div class="col-12 col-sm-6 col-lg-4">
                   <!-- Producto 4: Kingston NV2 1TB -->
                   <article
@@ -657,7 +644,6 @@
                     </div>
                   </article>
                 </div>
-
                 <div class="col-12 col-sm-6 col-lg-4">
                   <!-- Producto 5: Corsair RM850x -->
                   <article
@@ -712,7 +698,6 @@
                     </div>
                   </article>
                 </div>
-
                 <div class="col-12 col-sm-6 col-lg-4">
                   <!-- Producto 6: Corsair H150i ELITE -->
                   <article
@@ -770,8 +755,10 @@
                   </article>
                 </div>
               </div>
-
-              <nav class="pagination" aria-label="Paginación de productos">
+              <nav
+                class="pagination d-flex justify-content-center py-3 mt-3"
+                aria-label="Paginación de productos"
+              >
                 <ul class="pagination-list">
                   <li><a href="#" class="page-link page-active">1</a></li>
                   <li><a href="#" class="page-link">2</a></li>
@@ -782,13 +769,11 @@
                 </ul>
               </nav>
             </section>
-
             <section id="carrito" class="cart-section">
               <h2>Mi Carrito</h2>
               <p class="cart-empty-message">
                 Tu carrito está vacío. Selecciona productos para comenzar.
               </p>
-
               <div class="table-wrapper table-responsive">
                 <table
                   class="cart-table table align-middle"
@@ -809,7 +794,6 @@
                   <tbody id="cart-items"></tbody>
                 </table>
               </div>
-
               <div class="cart-summary" style="display: none">
                 <p class="cart-total">
                   <strong>Total:</strong> <span id="cart-total">$0.00</span>
@@ -817,7 +801,6 @@
                 <button class="btn-checkout">Proceder al Pago</button>
               </div>
             </section>
-
             <section id="nosotros" class="about-section">
               <div class="container-inner">
                 <h2>Sobre Nosotros</h2>
@@ -826,7 +809,6 @@
                   componentes de calidad superior para computadoras
                   personales...
                 </p>
-
                 <section aria-label="Comparativa de Productos Estrella">
                   <h3>Productos Estrella - Comparativa</h3>
                   <div class="table-wrapper table-responsive">
@@ -878,7 +860,6 @@
                 </section>
               </div>
             </section>
-
             <section id="compatibilidad" class="compatibility-section">
               <div class="container-inner">
                 <h2>Guías de Compatibilidad</h2>
@@ -892,7 +873,6 @@
                       <li><strong>AM5:</strong> AMD Ryzen 7000 series</li>
                     </ul>
                   </article>
-
                   <article class="guide-card">
                     <h3>Fuente de Alimentación</h3>
                     <div class="table-wrapper">
@@ -915,47 +895,63 @@
                 </div>
               </div>
             </section>
-
             <section id="ayuda" class="contact-section">
               <div class="container-inner">
                 <h2>Centro de Ayuda y Suscripción</h2>
                 <form id="newsletter-form" class="newsletter-form">
                   <fieldset>
                     <legend>Formulario de Suscripción</legend>
-                    <div class="form-group">
-                      <label for="input-nombre">Nombre Completo:</label>
-                      <input
-                        type="text"
-                        id="input-nombre"
-                        name="nombre"
-                        required
-                        placeholder="Tu nombre"
-                      />
+                    <div class="row g-3">
+                      <div class="col-12 col-md-6">
+                        <div class="form-group">
+                          <label for="input-nombre" class="form-label"
+                            >Nombre Completo:</label
+                          >
+                          <input
+                            type="text"
+                            id="input-nombre"
+                            name="nombre"
+                            class="form-control"
+                            required
+                            placeholder="Tu nombre"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-group">
+                          <label for="input-email" class="form-label"
+                            >Correo Electrónico:</label
+                          >
+                          <input
+                            type="email"
+                            id="input-email"
+                            name="email"
+                            class="form-control"
+                            required
+                            placeholder="tu@email.com"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-check">
+                          <input
+                            type="checkbox"
+                            id="input-terminos"
+                            name="terminos"
+                            class="form-check-input"
+                            required
+                          />
+                          <label for="input-terminos" class="form-check-label"
+                            >Acepto los términos y condiciones</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary">
+                          Suscribirse
+                        </button>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label for="input-email">Correo Electrónico:</label>
-                      <input
-                        type="email"
-                        id="input-email"
-                        name="email"
-                        required
-                        placeholder="tu@email.com"
-                      />
-                    </div>
-                    <div class="form-group checkbox">
-                      <input
-                        type="checkbox"
-                        id="input-terminos"
-                        name="terminos"
-                        required
-                      />
-                      <label for="input-terminos"
-                        >Acepto los términos y condiciones</label
-                      >
-                    </div>
-                    <button type="submit" class="btn-submit">
-                      Suscribirse
-                    </button>
                   </fieldset>
                 </form>
               </div>
@@ -964,7 +960,6 @@
         </div>
       </div>
     </main>
-
     <footer role="contentinfo" class="footer">
       <div class="footer-container container-fluid">
         <div class="row">
@@ -993,7 +988,6 @@
         <p>&copy; 2026 PC Hardware Store. Todos los derechos reservados.</p>
       </div>
     </footer>
-
     <!-- COMPONENTE BOOTSTRAP AVANZADO 2: Modal compartido — detalle de producto -->
     <div
       class="modal fade"
@@ -1050,13 +1044,11 @@
       </div>
     </div>
     <!-- FIN COMPONENTE BOOTSTRAP AVANZADO 2 -->
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-
     <script>
       document
         .getElementById("product-modal")
