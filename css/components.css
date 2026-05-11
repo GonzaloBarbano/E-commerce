@@ -46,6 +46,10 @@
   /* RC-FIX: evitar que la card desborde su columna de grid */
   max-width: 100%;
   box-sizing: border-box;
+  /* RC16-FIX: igual altura entre tarjetas */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* RC-FIX: Cambiado object-fit de cover a contain para no recortar las imágenes */
@@ -58,6 +62,10 @@
 
 .product-info {
   padding: var(--spacing-md);
+  /* RC16-FIX: flex para empujar botón al fondo */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .product-price {
@@ -65,6 +73,16 @@
   color: var(--color-primary);
   font-weight: 700;
   margin: var(--spacing-sm) 0;
+}
+
+/* RC16-FIX: nombre con altura mínima para uniformar tarjetas */
+.product-name {
+  min-height: 2.8em;
+}
+
+/* RC16-FIX: botón siempre al fondo de la tarjeta */
+.btn-add-cart {
+  margin-top: auto;
 }
 
 /* FORMULARIOS */

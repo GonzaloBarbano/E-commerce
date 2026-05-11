@@ -8,13 +8,11 @@ html {
   max-width: 100%;
 }
 
-/* TABLET */
-@media screen and (max-width: 1024px) {
+/* TABLET — alineado con breakpoint lg de Bootstrap (≥992px) para evitar
+   espacio vacío a la izquierda del main-content entre 992-1023px (BUG-006) */
+@media screen and (max-width: 991.98px) {
   :root {
     --sidebar-width: 0px;
-  }
-  .sidebar {
-    display: none;
   }
   .main-content {
     margin-left: 0;
@@ -22,9 +20,6 @@ html {
   /* RC-FIX: footer sin margin cuando no hay sidebar */
   .footer {
     margin-left: 0;
-  }
-  .featured-gallery {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -42,6 +37,10 @@ html {
     left: 0;
     right: 0;
     width: 100%;
+    /* override del `height: 100%` de styles.css (regla agregada por PR #105 para
+       el navbar desktop) — en mobile el menú debe tomar la altura del contenido,
+       no estirarse al viewport completo */
+    height: auto;
     background-color: var(--color-surface-dark);
     z-index: 999;
     padding: 0;
@@ -58,11 +57,24 @@ html {
     gap: 0;
     padding: var(--spacing-md) 0;
     width: 100%;
+    /* override de `height: 100%` y `align-items: center` de styles.css (PR #105):
+       en mobile el ul toma altura natural y los items son full-width (stretch) */
+    height: auto;
+    align-items: stretch;
+  }
+
+  /* override del `height: 100%` heredado de styles.css (PR #105) que estiraba
+     cada `<li>` a una fracción del viewport (efecto "items separados") */
+  .nav-item {
+    height: auto;
   }
 
   .nav-link {
     font-size: var(--font-size-body);
-    padding: var(--spacing-lg) var(--spacing-lg);
+    /* padding compacto y override del `height: 100%` heredado de styles.css
+       (PR #105) — feedback del profesor sobre PR de release del Primer Parcial */
+    padding: var(--spacing-sm) var(--spacing-lg);
+    height: auto;
     display: block;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: var(--transition-default);
@@ -92,15 +104,6 @@ html {
   .hero-gallery img,
   .hero-images img {
     height: 180px;
-  }
-
-  .featured-gallery {
-    grid-template-columns: 1fr;
-  }
-
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
   }
 
   /* RC-FIX: Tabla mobile - garantizar scroll horizontal */

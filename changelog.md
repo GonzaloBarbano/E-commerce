@@ -4,6 +4,53 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [ Release Recuperatorio Parcial 1] - 2026-05-05
+
+### Added
+
+- [feature/coord-devops-update-figma-and-readme] Actualizo spec
+  PR: [#98](https://github.com/GonzaloBarbano/E-commerce/pull/98) - @GonzaloBarbano (Coordinador / DevOps)
+
+- [feature/esp-com-bootstrap-add-component] Implemento Carousel en hero (reemplaza featured-gallery) y Modal compartido para detalle de producto en cada card + test-case-7.md (Carousel) y test-case-8.md (Modal) con análisis estático en iPhone 14 Pro, Galaxy S23 e iPad Air (closes #96)
+  PR: [#97](https://github.com/GonzaloBarbano/E-commerce/pull/97) - @Naguirre0102 (Especialista en Componentes Bootstrap)
+
+- [feature/dev-comp-html-avanzados-add-components] Creacion de nueva rama y test realizados
+  PR: [#85](https://github.com/GonzaloBarbano/E-commerce/pull/85) - @LucasFUces ( Desarrollador de Componentes HTML Avanzados)
+
+- [feature/dev-frontend-bootstrap-update-migration] Migración del layout a sistema de grilla Bootstrap 5.3 (CDN + bootstrap-overrides.css + sistema de columnas + tablas con .table-responsive) + test-case-6.md con análisis estático en iPhone 14 Pro, Galaxy S23 e iPad Air (closes #83)
+  PR: [#93](https://github.com/GonzaloBarbano/E-commerce/pull/93) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
+
+- [feature/coord-devops-update-figma-and-readme] Actualizo readme y mockup
+  PR: [#82](https://github.com/GonzaloBarbano/E-commerce/pull/82) - @GonzaloBarbano (Coordinador / DevOps)
+
+### Fixed
+
+- [fix/menu-mobile-compacto] Compacta el menú hamburguesa en mobile
+  PR: [#106](https://github.com/GonzaloBarbano/E-commerce/pull/106) - @Naguirre0102 (Especialista en Componentes Bootstrap)
+
+- [fix/index-2] Fix alineado de navbar
+  PR: [#105](https://github.com/GonzaloBarbano/E-commerce/pull/105) - @GonzaloBarbano (Coordinador / DevOps)
+
+- [fix/index] Correccion visual en index.html
+  PR: [#104](https://github.com/GonzaloBarbano/E-commerce/pull/104) - @GonzaloBarbano (Coordinador / DevOps)
+
+- [fix/test-case] Correccion product card.
+  PR: [#103](https://github.com/GonzaloBarbano/E-commerce/pull/103) - @LucasFUces (Desarrollador de Componentes HTML Avanzados)
+
+- [fix/test-case] Correccion de test-case 6 al 10, testing-doc.md y Range en index.html
+  PR: [#100](https://github.com/GonzaloBarbano/E-commerce/pull/100) - @GonzaloBarbano (Coordinador / DevOps)
+
+- [fix/clean-merge-pr93] Elimino 3 líneas duplicadas en index.html introducidas por la resolución incorrecta de conflictos durante el merge del PR #93 (aperturas viejas de `.main-container`, `.sidebar` y `.products-grid` sin clases Bootstrap)
+  PR: [#95](https://github.com/GonzaloBarbano/E-commerce/pull/95) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
+
+- [fix/close-table-wrapper-specs-table] Cierro &lt;div class="table-wrapper"&gt; faltante en la specs-table de la sección Compatibilidad — resuelve HTML inválido detectado en el TC6 (closes #87)
+  PR: [#91](https://github.com/GonzaloBarbano/E-commerce/pull/91) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
+
+- [fix/align-breakpoint-sidebar-bootstrap] Alineo breakpoint del responsive.css con Bootstrap lg=992px — resuelve espacio vacío a la izquierda del main-content entre 992-1023px (closes #86)
+  PR: [#90](https://github.com/GonzaloBarbano/E-commerce/pull/90) - @Naguirre0102 (Desarrollador Frontend/Bootstrap)
+- [fix/html-avanzado] Correcciones generales
+  PR: [#92](https://github.com/GonzaloBarbano/E-commerce/pull/92) - @LucasFUces ( Desarrollador de Componentes HTML Avanzados)
+
 ## [Release Actividad Obligatoria N°2] - 2026-04-19
 
 ### Fixed

@@ -19,11 +19,8 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 🎯 Objetivo del entregable
 
-- Crear una estructura HTML5 sólida y semántica para una tienda online.
-- Establecer las bases para CSS y JavaScript en futuras entregas.
-- Aplicar el enfoque Spec-Driven Development.
-- Documentar el proceso incluyendo uso de IA y prompts.
-- Mejorar accesibilidad y SEO con buenas prácticas.
+- Incorporación de Componentes Avanzados de HTML.
+- Implementación de Bootstrap para Diseño Responsivo.
 
 ---
 
@@ -35,6 +32,7 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 - **GitHub Copilot** - Asistencia en generación de código y documentación
 - **Visual Studio Code** - Editor de desarrollo
 - **Git** - Versionado de cambios
+- **Bootstrap**
 
 ---
 
@@ -69,7 +67,7 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 📂 Documentación
 
-- 📁 **[Mockup](docs/01-mockup/actividad-obligatoria-2/diseño-con-estilos.png)** - **[Figma](https://www.figma.com/design/LdjthTrqI614Fyr0M8bjF6/%22E-commerce---Mockup-Inicial--copia-?node-id=0-1&p=f)**
+- 📁 **[Mockup](docs/01-mockup/disenio-bootstrap.png.png)** - **[Figma](https://www.figma.com/design/LdjthTrqI614Fyr0M8bjF6/%22E-commerce---Mockup-Inicial--copia-?node-id=2012-5&t=ZhvMnQrrSbPoIzV3-1)**
 
 - 🧠 **[Indice de Prompts](docs/02-prompts/prompts.md)**
 - 📝 **[Changelog](changelog.md)**
@@ -82,8 +80,8 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 | Nombre completo    | N° de Matrícula | Usuario GitHub  | Carrera                                 | Materia            | Rol en esta entrega (Actividad 2) |
 | ------------------ | --------------- | --------------- | --------------------------------------- | ------------------ | --------------------------------- |
 | Nicolas Aguirre    | 153791          | @Naguirre0102   | Tecnicatura en Programación de Sistemas | Programación Web I | Coordinador / DevOps              |
-| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Documentador / QA Tester  |
-| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Frontend CSS / Responsive Design   |
+| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Coordinador / DevOps              |
+| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Frontend CSS / Responsive Design  |
 
 ---
 
