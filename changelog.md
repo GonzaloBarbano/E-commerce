@@ -4,6 +4,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Release Actividad Obligatoria N°3] - 2026-05-18
+
+### Added
+
 ## [ Release Recuperatorio Parcial 1] - 2026-05-05
 
 ### Added
