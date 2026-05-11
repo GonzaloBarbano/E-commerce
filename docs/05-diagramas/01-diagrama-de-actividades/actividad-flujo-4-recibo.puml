@@ -1,0 +1,77 @@
+@startuml flujo-4-recibo
+!define FILL_USER #E3F2FD
+!define FILL_SYSTEM #F3E5F5
+!define FILL_DECISION #FFF9C4
+
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #333333
+skinparam ActivityFontColor #000000
+skinparam ArrowColor #333333
+skinparam PartitionBorderColor #666666
+skinparam PartitionFontColor #000000
+
+start
+
+partition "Usuario" #FILL_USER {
+  :Revisa carrito final;
+  :Confirma intención\nde compra;
+  :Proporciona datos\nde envío y facturación;
+}
+
+partition "Sistema" #FILL_SYSTEM {
+  if (¿Carrito contiene\nitems?) then (sí)
+    :Valida datos de usuario\ncompletos;
+    
+    if (¿Datos válidos y\ncompletos?) then (sí)
+      :Genera número único\nde orden;
+      :Obtiene fecha/hora\nactual del sistema;
+      :Inicializa array\nde líneas de recibo;
+      
+      repeat
+        :Obtiene siguiente item\ndel carrito;
+        :Obtiene cantidad e\ninformación del producto;
+        :Calcula subtotal\n(precio × cantidad);
+        :Crea línea de recibo\ncon detalles;
+        :Agrega línea al array;
+        :Acumula en subtotal\ntotal;
+      repeat while (¿Hay más items?) is (sí)
+      
+      :Calcula impuestos\n(subtotal × 0.21);
+      :Consulta si hay\ncódigo de descuento;
+      
+      if (¿Usuario ingresó\ncódigo descuento?) then (sí)
+        :Valida código\nen base de datos;
+        
+        if (¿Código válido\ny activo?) then (sí)
+          :Obtiene porcentaje\ndel descuento;
+          :Calcula monto\ndel descuento;
+        else (no)
+          :Ignora código;
+          :Monto descuento = 0;
+        endif
+        
+      else (no)
+        :Monto descuento = 0;
+      endif
+      
+      :Suma fijo de envío\n($50);
+      :Calcula total final\n(subtotal + impuestos\n- descuento + envío);
+      :Formatea recibo\ncon todos los detalles;
+      :Registra orden\nen base de datos;
+      :Retorna número de orden\ny recibo formateado;
+      
+    else (no)
+      :Genera error:\nDatos incompletos;
+    endif
+    
+  else (vacío)
+    :Genera error:\nCarrito vacío;
+  endif
+}
+
+partition "Usuario" #FILL_USER {
+  :Recibe número de orden\ny recibo detallado\ncon confirmación;
+}
+
+stop
+@enduml

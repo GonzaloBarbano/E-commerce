@@ -9,6 +9,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ### Added
 
 - [feature/coord-devops-update-figma-and-readme] Actualizo spec
+  PR: [#](https://github.com/GonzaloBarbano/E-commerce/pull/) - @GonzaloBarbano (Arquitecto de diagramas de actividades)
+
+- [feature/coord-devops-update-figma-and-readme] Actualizo spec
   PR: [#109](https://github.com/GonzaloBarbano/E-commerce/pull/109) - @GonzaloBarbano (Coordinador / DevOps)
 
 ## [ Release Recuperatorio Parcial 1] - 2026-05-05
