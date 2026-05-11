@@ -6,43 +6,41 @@ skinparam ArrowColor #333333
 |Usuario|
 start
 :Selecciona componentes (CPU, MB, RAM, PSU);
-:Solicita validación de compatibilidad;
+:Solicita validación;
 
 |Sistema|
 :Inicializa lista de errores;
-:Obtiene specs técnicas del catálogo;
+:Obtiene specs técnicas;
 
 repeat
   :Tomar siguiente regla de validación;
-  switch ( ¿Qué validar? )
-    case ( Socket )
-      if (¿Socket CPU == Motherboard?) then (no)
-        :Agregar "Socket incompatible";
-      endif
-    case ( RAM )
-      if (¿Tipo RAM (DDR) compatible?) then (no)
-        :Agregar "RAM incompatible";
-      endif
-    case ( PSU )
-      :Calcular consumo total;
-      if (¿Potencia suficiente?) then (no)
-        :Agregar "PSU insuficiente";
-      endif
-    case ( Espacio )
-      if (¿Refrigerador cabe en Case?) then (no)
-        :Agregar "Tamaño excedido";
-      endif
-  endswitch
+  if (¿Validar Socket?) then (sí)
+    if (¿Socket CPU == Motherboard?) then (no)
+      :Agregar "Socket incompatible";
+    endif
+  elseif (¿Validar RAM?) then (sí)
+    if (¿Tipo RAM (DDR) compatible?) then (no)
+      :Agregar "RAM incompatible";
+    endif
+  elseif (¿Validar PSU?) then (sí)
+    :Calcular consumo total;
+    if (¿Potencia suficiente?) then (no)
+      :Agregar "PSU insuficiente";
+    endif
+  else (Espacio)
+    if (¿Refrigerador cabe en Case?) then (no)
+      :Agregar "Tamaño excedido";
+    endif
+  endif
 repeat while (¿Quedan reglas por validar?) is (sí)
 
-if (¿La lista de errores está vacía?) then (sí)
+if (¿Lista de errores vacía?) then (sí)
   :Generar reporte: COMPATIBLE;
 else (no)
   :Generar reporte: INCOMPATIBLE;
-  :Adjuntar detalle de errores;
 endif
 
 |Usuario|
-:Recibe y visualiza el reporte detallado;
+:Visualiza el reporte detallado;
 stop
 @enduml

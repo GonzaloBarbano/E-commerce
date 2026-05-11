@@ -14,14 +14,11 @@ start
 if (¿Stock disponible?) then (sí)
   if (¿Supera límite por usuario?) then (no)
     :Agregar producto al array 'cart';
-    
-    |Sistema|
     :Recalcular totales;
     repeat
       :Calcular subtotal de item;
       :Sumar al total general;
     repeat while (¿Hay más items en cart?) is (sí)
-    
     :Aplicar IVA (21%) y descuentos;
     :Actualizar vista del carrito;
   else (sí)

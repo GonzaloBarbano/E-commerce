@@ -363,36 +363,36 @@ Sistema:
 
 #### 🔹 **Requisito 1: Estructura de Diagramas (4 diagramas)**
 
-- [ ] **Diagrama 1: Búsqueda y Filtrado**
-  - [ ] Inicio (start node)
-  - [ ] Fin (end node)
-  - [ ] ≥3 actividades principales
-  - [ ] ≥2 decisiones if/else (marca, precio)
-  - [ ] ≥1 ciclo (iteración sobre catálogo)
-  - [ ] Swimlanes Usuario | Sistema
+- [x] **Diagrama 1: Búsqueda y Filtrado**
+  - [x] Inicio (start node)
+  - [x] Fin (end node)
+  - [x] ≥3 actividades principales
+  - [x] ≥2 decisiones if/else (marca, precio)
+  - [x] ≥1 ciclo (iteración sobre catálogo)
+  - [x] Swimlanes Usuario | Sistema
 
-- [ ] **Diagrama 2: Gestión de Carrito**
-  - [ ] Inicio y fin
-  - [ ] ≥4 actividades (seleccionar, validar, agregar, recalcular)
-  - [ ] ≥2 decisiones (stock disponible, cantidad válida)
-  - [ ] ≥1 ciclo (recalcular total para cada item)
-  - [ ] Swimlanes Usuario | Sistema
+- [x] **Diagrama 2: Gestión de Carrito**
+  - [x] Inicio y fin
+  - [x] ≥4 actividades (seleccionar, validar, agregar, recalcular)
+  - [x] ≥2 decisiones (stock disponible, cantidad válida)
+  - [x] ≥1 ciclo (recalcular total para cada item)
+  - [x] Swimlanes Usuario | Sistema
 
-- [ ] **Diagrama 3: Validación de Compatibilidad**
-  - [ ] Inicio y fin
-  - [ ] ≥5 actividades (ingresa componentes, valida cada componente, genera reporte)
-  - [ ] ≥3 decisiones (socket, RAM type, PSU watts)
-  - [ ] ≥1 ciclo (validar cada componente de array)
-  - [ ] Swimlanes Usuario | Sistema
-  - [ ] Decisiones encadenadas lógicamente
+- [x] **Diagrama 3: Validación de Compatibilidad**
+  - [x] Inicio y fin
+  - [x] ≥5 actividades (ingresa componentes, valida cada componente, genera reporte)
+  - [x] ≥3 decisiones (socket, RAM type, PSU watts)
+  - [x] ≥1 ciclo (validar cada componente de array)
+  - [x] Swimlanes Usuario | Sistema
+  - [x] Decisiones encadenadas lógicamente
 
-- [ ] **Diagrama 4: Generación de Recibo**
-  - [ ] Inicio y fin
-  - [ ] ≥5 actividades (confirma, valida, genera número, itemiza, calcula)
-  - [ ] ≥2 decisiones (carrito válido, aplicar descuento)
-  - [ ] ≥1 ciclo (iterar items para recibo)
-  - [ ] Swimlanes Usuario | Sistema
-  - [ ] Formato realista de flujo de transacción
+- [x] **Diagrama 4: Generación de Recibo**
+  - [x] Inicio y fin
+  - [x] ≥5 actividades (confirma, valida, genera número, itemiza, calcula)
+  - [x] ≥2 decisiones (carrito válido, aplicar descuento)
+  - [x] ≥1 ciclo (iterar items para recibo)
+  - [x] Swimlanes Usuario | Sistema
+  - [x] Formato realista de flujo de transacción
 
 #### 🔹 **Requisito 2: Coherencia con Especificación**
 

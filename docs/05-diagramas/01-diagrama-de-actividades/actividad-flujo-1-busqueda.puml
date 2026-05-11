@@ -18,7 +18,6 @@ repeat
     :Agrega producto a resultados;
   else (no)
   endif
-  :Pasar al siguiente producto;
 repeat while (¿Quedan productos?) is (sí)
 
 :Ordenar resultados;
