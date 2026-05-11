@@ -1,11 +1,12 @@
 # Test Case 10 — Responsive: Implementación de Componente Avanzado HTML
+
 ## `<input type="range">` + `<datalist>` — Filtro de Precio y Sugerencias de Búsqueda
 
 **Rol:** Desarrollador de Componentes HTML Avanzados  
 **Integrante:** Lucas Fischer | Matrícula: 152159  
 **Fecha de ejecución:** 2026-04-22  
 **Herramienta:** Playwright MCP (`@playwright/mcp`)  
-**URL testeada:** `http://127.0.0.1:5500/index.html`  
+**URL testeada:** `http://127.0.0.1:5500/index.html`
 
 ---
 
@@ -17,6 +18,7 @@ Se implementaron dos subcomponentes nativos de HTML5 que mejoran la experiencia 
 - **`<datalist>`:** Agrega sugerencias predefinidas al buscador existente (NVIDIA, AMD, Intel, Corsair, Kingston, RTX 4090, Core i9, DDR5, SSD NVMe) que aparecen mientras el usuario escribe.
 
 **Selectores principales:**
+
 - `#price-range-min` / `#price-range-max` — sliders de precio
 - `#price-min-display` / `#price-max-display` — spans de valor en tiempo real
 - `#search-suggestions` — datalist con sugerencias
@@ -55,31 +57,31 @@ screenshot si es posible.
 
 ## 3. Criterios de Aceptación
 
-| Criterio | Descripción |
-|---|---|
-| Range mínimo | Existe, valor inicial = 0, rango 0–2000 |
-| Range máximo | Existe, valor inicial = 2000, rango 0–2000 |
-| Actualización en tiempo real | El span de display refleja el valor al mover el slider |
-| Datalist presente | `#search-suggestions` existe con 9 opciones |
-| Vinculación datalist | `#search-input` tiene `list="search-suggestions"` |
-| Responsividad | Sliders tocables y visibles en los 3 viewports obligatorios |
+| Criterio                     | Descripción                                                 |
+| ---------------------------- | ----------------------------------------------------------- |
+| Range mínimo                 | Existe, valor inicial = 0, rango 0–2000                     |
+| Range máximo                 | Existe, valor inicial = 2000, rango 0–2000                  |
+| Actualización en tiempo real | El span de display refleja el valor al mover el slider      |
+| Datalist presente            | `#search-suggestions` existe con 9 opciones                 |
+| Vinculación datalist         | `#search-input` tiene `list="search-suggestions"`           |
+| Responsividad                | Sliders tocables y visibles en los 3 viewports obligatorios |
 
 ---
 
 ## 4. Matriz de Resultados por Prueba
 
-| # | Prueba | Selector | Esperado | Obtenido | Estado |
-|---|---|---|---|---|---|
-| 1 | Range mín existe con value=0 | `#price-range-min` | value="0" | value="0" ✅ | ✅ PASADA |
-| 2 | Range máx existe con value=2000 | `#price-range-max` | value="2000" | value="2000" ✅ | ✅ PASADA |
-| 3 | Cambiar mín a 500 → display "500" | `#price-min-display` | "500" | "500" ✅ | ✅ PASADA |
-| 4 | Cambiar máx a 1500 → display "1500" | `#price-max-display` | "1500" | "1500" ✅ | ✅ PASADA |
-| 5 | Datalist existe con 9 opciones | `#search-suggestions` | 9 opciones | 9 opciones ✅ | ✅ PASADA |
-| 6 | Input búsqueda vinculado | `#search-input[list]` | list="search-suggestions" | correcto ✅ | ✅ PASADA |
-| 7 | iPhone 14 Pro (390x844) | múltiples | visible y tocable | visible y tocable ✅ | ✅ PASADA |
-| 8 | Samsung Galaxy S23 (360x780) | múltiples | visible y tocable | visible y tocable ✅ | ✅ PASADA |
-| 9 | iPad Air (820x1180) | múltiples | visible y tocable | visible y tocable ✅ | ✅ PASADA |
-| 10 | Issues GitHub por fallos | GitHub MCP | issues creados | ver sección bugs ⬇️ | ⚠️ VER BUGS |
+| #   | Prueba                              | Selector              | Esperado                  | Obtenido             | Estado      |
+| --- | ----------------------------------- | --------------------- | ------------------------- | -------------------- | ----------- |
+| 1   | Range mín existe con value=0        | `#price-range-min`    | value="0"                 | value="0" ✅         | ✅ PASADA   |
+| 2   | Range máx existe con value=2000     | `#price-range-max`    | value="2000"              | value="2000" ✅      | ✅ PASADA   |
+| 3   | Cambiar mín a 500 → display "500"   | `#price-min-display`  | "500"                     | "500" ✅             | ✅ PASADA   |
+| 4   | Cambiar máx a 1500 → display "1500" | `#price-max-display`  | "1500"                    | "1500" ✅            | ✅ PASADA   |
+| 5   | Datalist existe con 9 opciones      | `#search-suggestions` | 9 opciones                | 9 opciones ✅        | ✅ PASADA   |
+| 6   | Input búsqueda vinculado            | `#search-input[list]` | list="search-suggestions" | correcto ✅          | ✅ PASADA   |
+| 7   | iPhone 14 Pro (390x844)             | múltiples             | visible y tocable         | visible y tocable ✅ | ✅ PASADA   |
+| 8   | Samsung Galaxy S23 (360x780)        | múltiples             | visible y tocable         | visible y tocable ✅ | ✅ PASADA   |
+| 9   | iPad Air (820x1180)                 | múltiples             | visible y tocable         | visible y tocable ✅ | ✅ PASADA   |
+| 10  | Issues GitHub por fallos            | GitHub MCP            | issues creados            | ver sección bugs ⬇️  | ⚠️ VER BUGS |
 
 ---
 
@@ -87,19 +89,20 @@ screenshot si es posible.
 
 ### 🔴 BUG #1 — CRÍTICO: Sidebar oculto en responsive
 
-| Campo | Detalle |
-|---|---|
-| **Issue GitHub** | Creado via GitHub MCP — label: `bug`, asignado: `@LucasFUces` |
-| **Severidad** | Crítica |
-| **Ubicación** | `css/responsive.css`, línea 17 |
-| **Descripción** | La clase `.sidebar { display: none; }` oculta el sidebar completo en vistas responsive, haciendo que los filtros de precio (range) sean completamente inaccesibles en mobile |
-| **Impacto** | Los componentes `<input type="range">` NO son accesibles en viewports mobile |
-| **Pasos para reproducir** | 1. Abrir en viewport 390x844. 2. Intentar acceder a los filtros de precio. 3. El sidebar no aparece. |
-| **Resultado esperado** | El sidebar debe ser accesible en mobile (colapsable o con toggle) |
-| **Resultado obtenido** | `.sidebar { display: none; }` — sidebar completamente oculto |
-| **Solución aplicada** | Crear rama `fix/sidebar-hidden-responsive` → develop |
+| Campo                     | Detalle                                                                                                                                                                      |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Issue GitHub**          | Creado via GitHub MCP — label: `bug`, asignado: `@LucasFUces`                                                                                                                |
+| **Severidad**             | Crítica                                                                                                                                                                      |
+| **Ubicación**             | `css/responsive.css`, línea 17                                                                                                                                               |
+| **Descripción**           | La clase `.sidebar { display: none; }` oculta el sidebar completo en vistas responsive, haciendo que los filtros de precio (range) sean completamente inaccesibles en mobile |
+| **Impacto**               | Los componentes `<input type="range">` NO son accesibles en viewports mobile                                                                                                 |
+| **Pasos para reproducir** | 1. Abrir en viewport 390x844. 2. Intentar acceder a los filtros de precio. 3. El sidebar no aparece.                                                                         |
+| **Resultado esperado**    | El sidebar debe ser accesible en mobile (colapsable o con toggle)                                                                                                            |
+| **Resultado obtenido**    | `.sidebar { display: none; }` — sidebar completamente oculto                                                                                                                 |
+| **Solución aplicada**     | Crear rama `fix/sidebar-hidden-responsive` → develop                                                                                                                         |
 
 **Código actual (problemático):**
+
 ```css
 /* responsive.css línea 17 */
 .sidebar {
@@ -108,6 +111,7 @@ screenshot si es posible.
 ```
 
 **Corrección aplicada:**
+
 ```css
 .sidebar {
   display: block;
@@ -118,19 +122,20 @@ screenshot si es posible.
 
 ### 🟡 BUG #2 — MEDIA: Opciones de datalist sin textContent
 
-| Campo | Detalle |
-|---|---|
-| **Issue GitHub** | Creado via GitHub MCP — label: `bug`, asignado: `@LucasFUces` |
-| **Severidad** | Media |
-| **Ubicación** | `index.html`, elemento `<datalist id="search-suggestions">` |
-| **Descripción** | Las opciones del datalist tienen el atributo `value` pero no tienen texto visible entre las etiquetas. Esto genera problemas de accesibilidad WCAG — los lectores de pantalla no pueden leer la descripción de cada opción. |
-| **Impacto** | Accesibilidad reducida para usuarios con lectores de pantalla |
-| **Pasos para reproducir** | 1. Inspeccionar `<datalist id="search-suggestions">`. 2. Ver que las opciones son `<option value="NVIDIA"></option>` (sin texto). |
-| **Resultado esperado** | `<option value="NVIDIA">NVIDIA</option>` |
-| **Resultado obtenido** | `<option value="NVIDIA"></option>` |
-| **Solución aplicada** | Crear rama `fix/datalist-empty-textcontent` → develop |
+| Campo                     | Detalle                                                                                                                                                                                                                     |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Issue GitHub**          | Creado via GitHub MCP — label: `bug`, asignado: `@LucasFUces`                                                                                                                                                               |
+| **Severidad**             | Media                                                                                                                                                                                                                       |
+| **Ubicación**             | `index.html`, elemento `<datalist id="search-suggestions">`                                                                                                                                                                 |
+| **Descripción**           | Las opciones del datalist tienen el atributo `value` pero no tienen texto visible entre las etiquetas. Esto genera problemas de accesibilidad WCAG — los lectores de pantalla no pueden leer la descripción de cada opción. |
+| **Impacto**               | Accesibilidad reducida para usuarios con lectores de pantalla                                                                                                                                                               |
+| **Pasos para reproducir** | 1. Inspeccionar `<datalist id="search-suggestions">`. 2. Ver que las opciones son `<option value="NVIDIA"></option>` (sin texto).                                                                                           |
+| **Resultado esperado**    | `<option value="NVIDIA">NVIDIA</option>`                                                                                                                                                                                    |
+| **Resultado obtenido**    | `<option value="NVIDIA"></option>`                                                                                                                                                                                          |
+| **Solución aplicada**     | Crear rama `fix/datalist-empty-textcontent` → develop                                                                                                                                                                       |
 
 **Código actual (problemático):**
+
 ```html
 <datalist id="search-suggestions">
   <option value="NVIDIA"></option>
@@ -140,6 +145,7 @@ screenshot si es posible.
 ```
 
 **Corrección aplicada:**
+
 ```html
 <datalist id="search-suggestions">
   <option value="NVIDIA">NVIDIA</option>
@@ -158,18 +164,25 @@ screenshot si es posible.
 
 ## 6. Matriz de Resultados por Viewport
 
-| Viewport | Resolución | Range visible | Range tocable | Datalist activo | Resultado |
-|---|---|---|---|---|---|
-| Desktop (default) | 1280x720 | ✅ | ✅ | ✅ | ✅ PASADA |
-| iPhone 14 Pro | 390x844 | ❌ (sidebar oculto) | ❌ (sidebar oculto) | ✅ | ⚠️ BUG #1 |
-| Samsung Galaxy S23 | 360x780 | ❌ (sidebar oculto) | ❌ (sidebar oculto) | ✅ | ⚠️ BUG #1 |
-| iPad Air | 820x1180 | ✅ | ✅ | ✅ | ✅ PASADA |
+### Capturas de Pantalla
+
+- Desktop![](screenshots/tc10-desktop.png)
+
+- ACLARACION! En responsive el sidebar es oculto
+
+| Viewport           | Resolución | Range visible       | Range tocable       | Datalist activo | Resultado |
+| ------------------ | ---------- | ------------------- | ------------------- | --------------- | --------- |
+| Desktop (default)  | 1280x720   | ✅                  | ✅                  | ✅              | ✅ PASADA |
+| iPhone 14 Pro      | 390x844    | ❌ (sidebar oculto) | ❌ (sidebar oculto) | ✅              | ⚠️ BUG #1 |
+| Samsung Galaxy S23 | 360x780    | ❌ (sidebar oculto) | ❌ (sidebar oculto) | ✅              | ⚠️ BUG #1 |
+| iPad Air           | 820x1180   | ✅                  | ✅                  | ✅              | ✅ PASADA |
 
 ---
 
 ## 7. Ramas fix/ creadas y documentadas en changelog.md
 
 ### fix/sidebar-hidden-responsive
+
 ```bash
 git checkout develop
 git pull origin develop
@@ -179,10 +192,12 @@ git add css/responsive.css
 git commit -m "fix(responsive): mostrar sidebar en mobile para acceso a filtros de precio"
 git push origin fix/sidebar-hidden-responsive
 ```
+
 PR: `fix/sidebar-hidden-responsive` → `develop`  
 Registrado en `changelog.md` bajo `[Fixed]`
 
 ### fix/datalist-empty-textcontent
+
 ```bash
 git checkout develop
 git pull origin develop
@@ -192,6 +207,7 @@ git add index.html
 git commit -m "fix(accesibilidad): agregar textContent a opciones del datalist"
 git push origin fix/datalist-empty-textcontent
 ```
+
 PR: `fix/datalist-empty-textcontent` → `develop`  
 Registrado en `changelog.md` bajo `[Fixed]`
 
@@ -199,10 +215,10 @@ Registrado en `changelog.md` bajo `[Fixed]`
 
 ## 8. Resumen de Issues GitHub
 
-| # | Título | Severidad | Label | Asignado | Estado |
-|---|---|---|---|---|---|
-| 1 | [BUG] Sidebar oculto en responsive impide acceso a filtros de precio | Crítica | `bug` | `@LucasFUces` | ✅ Cerrado (fix mergeado) |
-| 2 | [BUG] Opciones de datalist sin textContent — problema de accesibilidad WCAG | Media | `bug` | `@LucasFUces` | ✅ Cerrado (fix mergeado) |
+| #   | Título                                                                                                                              | Severidad | Label | Asignado      | Estado                    |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | ------------- | ------------------------- |
+| 1   | [BUG](https://github.com/GonzaloBarbano/E-commerce/issues/88) Sidebar oculto en responsive impide acceso a filtros de precio        | Crítica   | `bug` | `@LucasFUces` | ✅ Cerrado (fix mergeado) |
+| 2   | [BUG](https://github.com/GonzaloBarbano/E-commerce/issues/89) Opciones de datalist sin textContent — problema de accesibilidad WCAG | Media     | `bug` | `@LucasFUces` | ✅ Cerrado (fix mergeado) |
 
 ---
 
