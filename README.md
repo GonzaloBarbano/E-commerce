@@ -77,11 +77,11 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 👥 Integrantes del Grupo
 
-| Nombre completo    | N° de Matrícula | Usuario GitHub  | Carrera                                 | Materia            | Rol en esta entrega (Actividad 2) |
-| ------------------ | --------------- | --------------- | --------------------------------------- | ------------------ | --------------------------------- |
-| Nicolas Aguirre    | 153791          | @Naguirre0102   | Tecnicatura en Programación de Sistemas | Programación Web I | Coordinador / DevOps              |
-| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Coordinador / DevOps              |
-| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Frontend CSS / Responsive Design  |
+| Nombre completo    | N° de Matrícula | Usuario GitHub  | Carrera                                 | Materia            | Rol en esta entrega (Actividad 2)      |
+| ------------------ | --------------- | --------------- | --------------------------------------- | ------------------ | -------------------------------------- |
+| Nicolas Aguirre    | 153791          | @Naguirre0102   | Tecnicatura en Programación de Sistemas | Programación Web I | Tester javascript/ QA engineer         |
+| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Arquitecto de diagramas de actividades |
+| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Desarrollador javascript               |
 
 ---
 
