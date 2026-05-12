@@ -2,8 +2,8 @@
 
 **Proyecto:** E-commerce de Componentes Hardware para PC  
 **Módulo:** Diagramas UML de Actividades  
-**Fecha:** 11 de mayo de 2026  
-**Estado:** Completo - Listos para implementación
+**Fecha:** 12 de mayo de 2026  
+**Estado:** Actualizado - Con 3 Actores (Usuario | Sistema | Base de Datos)
 
 ---
 
@@ -16,6 +16,48 @@
 
 ---
 
+## 🏗️ Arquitectura de 3 Actores
+
+Todos los diagramas de actividades siguen una arquitectura de **3 swimlanes (particiones)** que representan los 3 actores principales del sistema:
+
+### 👤 **Usuario**
+
+- **Responsabilidad:** Entrada de datos e interacción con la UI
+- **Acciones:** Ingresa criterios, selecciona productos, confirma compras
+- **Comunicación:** Envía solicitudes al Sistema
+
+### ⚙️ **Sistema**
+
+- **Responsabilidad:** Lógica de negocio, orquestación, procesamiento
+- **Acciones:** Valida reglas, calcula valores, coordina solicitudes
+- **Comunicación:** Recibe del Usuario, consulta Base de Datos, retorna resultados
+
+### 🗄️ **Base de Datos**
+
+- **Responsabilidad:** Persistencia de datos, consultas y registros
+- **Acciones:** Consulta registros, retorna datos técnicos, registra transacciones
+- **Comunicación:** Responde consultas del Sistema
+
+### 📊 Flujo General de Comunicación
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  USUARIO   →   SISTEMA   ↔   BASE DE DATOS                   │
+│                                                               │
+│  (entrada)  (lógica &       (persistencia &                  │
+│             orquestación)    consultas)                       │
+└──────────────────────────────────────────────────────────────┘
+```
+
+Esta separación de responsabilidades es fundamental para:
+
+- ✅ **Claridad**: Cada actor tiene un rol bien definido
+- ✅ **Mantenibilidad**: Facilita traducción a código JavaScript
+- ✅ **Realismo**: Refleja arquitectura real de aplicaciones web modernas
+- ✅ **Educación**: Enseña separación de concerns en software
+
+---
+
 ## Flujo 1: Búsqueda y Filtrado de Productos
 
 ### 📝 Descripción
@@ -24,14 +66,16 @@
 
 **Flujo Lógico:**
 
-- El usuario ingresa criterios de búsqueda (marca, rango de precio, tipo de componente, especificaciones)
-- El sistema accede al catálogo de productos e itera sobre cada uno
-- Para cada producto, valida si coincide con:
+- 👤 **Usuario:** Ingresa criterios de búsqueda (marca, rango de precio, tipo de componente, especificaciones)
+- ⚙️ **Sistema:** Solicita el catálogo de productos a la base de datos
+- 🗄️ **Base de Datos:** Consulta registros de productos y retorna array
+- ⚙️ **Sistema:** Accede al catálogo e itera sobre cada producto
+- ⚙️ **Sistema:** Para cada producto, valida si coincide con:
   - ✅ La marca especificada
   - ✅ El rango de precio solicitado
   - ✅ Las especificaciones técnicas requeridas
-- El sistema agrupa y ordena los resultados
-- El usuario recibe la lista de productos filtrados
+- ⚙️ **Sistema:** Agrupa y ordena los resultados, renderiza en el DOM
+- 👤 **Usuario:** Recibe la lista de productos filtrados
 
 **Caso de Uso Real:**
 
@@ -57,7 +101,9 @@ Resultado: [RTX 4080, RTX 4090, RTX 5090]
 - ✅ Funciones de filtrado (filter/search)
 - ✅ Condicionales if/else
 - ✅ Ciclos for/while
-- ✅ Swimlanes Usuario | Sistema
+- ✅ Swimlanes Usuario | Sistema | Base de Datos
+- ✅ Consultas a base de datos
+- ✅ Persistencia de datos
 
 ### 📸 Visualización
 
@@ -73,19 +119,18 @@ Resultado: [RTX 4080, RTX 4090, RTX 5090]
 
 **Flujo Lógico:**
 
-- El usuario selecciona un producto y especifica la cantidad deseada
-- El sistema busca el producto en el catálogo
-- Valida que:
-  - ✅ El producto exista en el catálogo
-  - ✅ Hay stock disponible para la cantidad solicitada
+- 👤 **Usuario:** Selecciona un producto y especifica la cantidad deseada
+- ⚙️ **Sistema:** Solicita verificación de stock a la base de datos
+- 🗄️ **Base de Datos:** Consulta disponibilidad e inventario, retorna estado
+- ⚙️ **Sistema:** Valida que:
+  - ✅ El stock esté disponible para la cantidad solicitada
   - ✅ La cantidad no supera el límite de compra por usuario
-- El producto se agrega al array de carrito
-- El sistema itera sobre todos los items del carrito:
+- ⚙️ **Sistema:** Agrega el producto al array de carrito (en memoria)
+- ⚙️ **Sistema:** Itera sobre todos los items del carrito:
   - Calcula subtotal (precio × cantidad)
   - Acumula en el total
-- Calcula impuestos (21%)
-- Aplica descuentos si corresponden
-- Actualiza el resumen del carrito con el total final
+- ⚙️ **Sistema:** Calcula impuestos (21%), aplica descuentos, actualiza vista
+- 👤 **Usuario:** Visualiza el carrito actualizado con el nuevo total
 
 **Caso de Uso Real:**
 
@@ -116,7 +161,9 @@ Carrito:
 - ✅ Operadores matemáticos (+, ×, /)
 - ✅ Condicionales if (validaciones)
 - ✅ Ciclos for (calcular totales)
-- ✅ Validación de stock
+- ✅ Validación de stock desde base de datos
+- ✅ Swimlanes Usuario | Sistema | Base de Datos
+- ✅ Consultas de inventario
 
 ### 📸 Visualización
 
@@ -132,20 +179,19 @@ Carrito:
 
 **Flujo Lógico:**
 
-- El usuario especifica cada componente de su configuración PC:
-  - CPU seleccionada
-  - Motherboard
-  - RAM
-  - PSU (watts)
-  - Refrigerador
-- El sistema itera sobre cada componente y valida:
+- 👤 **Usuario:** Selecciona componentes (CPU, Motherboard, RAM, PSU, Refrigerador)
+- 👤 **Usuario:** Solicita validación de compatibilidad
+- ⚙️ **Sistema:** Identifica IDs de componentes
+- 🗄️ **Base de Datos:** Consulta especificaciones técnicas detalladas, retorna datos
+- ⚙️ **Sistema:** Itera sobre cada regla de validación y valida:
   - ✅ Socket CPU === Socket Motherboard
   - ✅ Tipo de RAM compatible con Motherboard (DDR4/DDR5)
   - ✅ Watts de PSU >= Watts requeridos
   - ✅ Tamaño de refrigerador entra en case
   - ✅ Slots PCIe compatibles
-- Si hay incompatibilidades, las agrega a un array
-- Genera un reporte detallado (COMPATIBLE o INCOMPATIBLE)
+- ⚙️ **Sistema:** Si hay incompatibilidades, las agrega a un array
+- ⚙️ **Sistema:** Genera un reporte detallado (COMPATIBLE o INCOMPATIBLE)
+- 👤 **Usuario:** Visualiza el reporte con detalles
 
 **Caso de Uso Real:**
 
@@ -181,6 +227,8 @@ Resultado: "COMPATIBLE - Construcción sin problemas"
 - ✅ Ciclos for (validar cada componente)
 - ✅ Arrays (almacenar incompatibilidades)
 - ✅ Generación de reportes
+- ✅ Swimlanes Usuario | Sistema | Base de Datos
+- ✅ Consultas de especificaciones técnicas
 
 ### 📸 Visualización
 
@@ -196,24 +244,23 @@ Resultado: "COMPATIBLE - Construcción sin problemas"
 
 **Flujo Lógico:**
 
-- El usuario revisa su carrito final y confirma la intención de compra
-- Proporciona datos de envío y facturación
-- El sistema valida que:
+- 👤 **Usuario:** Revisa carrito final, proporciona datos de envío y facturación
+- 👤 **Usuario:** Confirma la intención de compra
+- ⚙️ **Sistema:** Valida que:
   - ✅ El carrito contiene al menos un item
   - ✅ Los datos del usuario están completos
-- Genera un número único de orden (ej. PO-20260511-0847)
-- Itera sobre cada item del carrito:
-  - Obtiene cantidad y precio del catálogo
+- ⚙️ **Sistema:** Genera número único de orden (ej. PO-20260511-0847)
+- ⚙️ **Sistema:** Itera sobre cada item del carrito:
+  - Obtiene cantidad y precio
   - Calcula subtotal por línea
-  - Crea una línea de recibo detallada
-- Calcula:
-  - Subtotal acumulado
-  - Impuestos (21%)
-  - Descuentos (si aplica código válido)
-  - Costo de envío fijo ($50)
-  - **Total Final** = Subtotal + Impuestos - Descuento + Envío
-- Formatea el recibo con todos los detalles
-- Registra la orden en la base de datos
+  - Crea línea de recibo detallada
+- ⚙️ **Sistema:** Calcula subtotal acumulado e impuestos (21%)
+- ⚙️ **Sistema:** Si usuario ingresó código de descuento:
+  - 🗄️ **Base de Datos:** Valida código de descuento, retorna validez/porcentaje
+  - ⚙️ **Sistema:** Aplica descuento si es válido
+- ⚙️ **Sistema:** Suma envío fijo ($50) y calcula total final
+- 🗄️ **Base de Datos:** Registra orden y persistencia de datos
+- 👤 **Usuario:** Recibe número de orden y recibo detallado
 
 **Caso de Uso Real:**
 
@@ -252,6 +299,9 @@ Código de orden: PO-20260511-0847
 - ✅ Generación de strings formateados (recibo)
 - ✅ Ciclos for (itemizar)
 - ✅ Condicionales if (validaciones)
+- ✅ Swimlanes Usuario | Sistema | Base de Datos
+- ✅ Transacciones de datos (crear y persistir orden)
+- ✅ Validación de códigos de descuento en BD
 - ✅ Integración de todos los conceptos anteriores
 
 ### 📸 Visualización
@@ -364,10 +414,32 @@ repeat while (¿Condición?) is (sí)
 ### Swimlanes (Particiones)
 
 ```puml
-partition "Nombre del Swimlane" #FFFFFF {
-  :Actividad dentro del swimlane;
-}
+|Usuario|
+start
+:Ingresa criterios de búsqueda;
+
+|Sistema|
+:Procesa criterios;
+
+|Base de Datos|
+:Consulta registros;
+:Retorna datos;
+
+|Sistema|
+:Filtra resultados;
+
+|Usuario|
+:Visualiza resultados;
+stop
 ```
+
+**Nota sobre 3 Swimlanes:**
+
+- **|Usuario|** — Acciones del cliente (entrada de datos, visualización)
+- **|Sistema|** — Lógica de negocio, procesamiento, orquestación
+- **|Base de Datos|** — Consultas, persistencia, lecturas de registros
+
+Para cambiar de swimlane, simplemente usa `|Nombre del Swimlane|` antes de la actividad.
 
 ### Flechas con Etiquetas
 
@@ -396,11 +468,12 @@ partition "Usuario" #E3F2FD {
 Cuando edites un diagrama, verifica:
 
 - [ ] **Sintaxis válida** — El diagrama compila sin errores
-- [ ] **Swimlanes claros** — Usuario y Sistema bien diferenciados
+- [ ] **3 Swimlanes claros** — Usuario, Sistema y Base de Datos bien diferenciados
 - [ ] **Decisiones lógicas** — if/then/else representan validaciones reales
 - [ ] **Ciclos correctos** — repeat/while se usan en iteraciones sobre arrays
-- [ ] **Coherencia con HTML** — Las actividades refleja elementos del `index.html`
+- [ ] **Coherencia con HTML** — Las actividades reflejan elementos del `index.html`
 - [ ] **Flujo realista** — Entrada → Proceso → Salida tiene sentido empresarial
+- [ ] **Interacciones BD** — Las consultas a base de datos están mapeadas
 - [ ] **Etiquetas claras** — Cada actividad tiene nombre descriptivo
 - [ ] **Exportación PNG** — Se genera correctamente para documentación
 
@@ -438,6 +511,7 @@ Cuando edites un diagrama, verifica:
 
 ---
 
-**Última actualización:** 11 de mayo de 2026  
-**Autor:** Equipo de Arquitectura - Grupo N°3  
-**Estado:** ✅ Completo y Listo para Implementación
+**Última actualización:** 12 de mayo de 2026  
+**Autor:** @GonzaloBarbano - Grupo N°3  
+**Estado:** ✅ Completo con 3 Actores (Usuario | Sistema | Base de Datos)  
+**Cambios:** Incluye interacciones con Base de Datos en todos los diagramas

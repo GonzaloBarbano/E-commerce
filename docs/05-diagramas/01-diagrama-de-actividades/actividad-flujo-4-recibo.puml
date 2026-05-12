@@ -14,11 +14,6 @@ if (¿Carrito tiene items?) then (no)
   stop
 endif
 
-if (¿Datos de usuario completos?) then (no)
-  :Mostrar error: "Faltan datos";
-  stop
-endif
-
 :Generar ID único de orden;
 
 repeat
@@ -30,6 +25,10 @@ repeat while (¿Quedan items?) is (sí)
 :Calcular IVA (21%);
 
 if (¿Tiene código de descuento?) then (sí)
+  |Base de Datos|
+  :Validar código de descuento;
+  :Retornar porcentaje o validez;
+  |Sistema|
   if (¿Código válido?) then (sí)
     :Aplicar descuento al total;
   else (no)
@@ -38,7 +37,10 @@ if (¿Tiene código de descuento?) then (sí)
 endif
 
 :Sumar envío ($50) y totalizar;
-:Registrar orden en DB;
+
+|Base de Datos|
+:Registrar orden y persistir datos;
+:Confirmar almacenamiento exitoso;
 
 |Usuario|
 :Recibe número de orden y recibo;

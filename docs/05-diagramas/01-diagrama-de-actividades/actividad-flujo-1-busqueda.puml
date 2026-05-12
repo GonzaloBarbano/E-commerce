@@ -9,9 +9,14 @@ start
 :Presiona botón de filtrar;
 
 |Sistema|
-:Accede al catálogo de productos;
-:Inicializa lista de resultados;
+:Solicitar catálogo de productos;
 
+|Base de Datos|
+:Consultar registros de productos;
+:Retornar array de productos;
+
+|Sistema|
+:Inicializa lista de resultados;
 repeat
   :Evalúa producto actual;
   if (¿Cumple con los filtros?) then (sí)
@@ -19,7 +24,6 @@ repeat
   else (no)
   endif
 repeat while (¿Quedan productos?) is (sí)
-
 :Ordenar resultados;
 :Renderizar en el DOM;
 

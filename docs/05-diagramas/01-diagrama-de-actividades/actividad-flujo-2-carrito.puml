@@ -9,11 +9,16 @@ start
 :Presiona "Agregar al carrito";
 
 |Sistema|
-:Validar existencia y stock;
+:Solicitar verificación de stock;
 
+|Base de Datos|
+:Consultar disponibilidad y stock;
+:Retornar estado de inventario;
+
+|Sistema|
 if (¿Stock disponible?) then (sí)
   if (¿Supera límite por usuario?) then (no)
-    :Agregar producto al array 'cart';
+    :Agregar producto al array 'cart' en memoria;
     :Recalcular totales;
     repeat
       :Calcular subtotal de item;

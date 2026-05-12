@@ -9,9 +9,14 @@ start
 :Solicita validación;
 
 |Sistema|
-:Inicializa lista de errores;
-:Obtiene specs técnicas;
+:Identificar IDs de componentes;
 
+|Base de Datos|
+:Consultar especificaciones técnicas (Specs);
+:Retornar datos técnicos detallados;
+
+|Sistema|
+:Inicializa lista de errores;
 repeat
   :Tomar siguiente regla de validación;
   if (¿Validar Socket?) then (sí)

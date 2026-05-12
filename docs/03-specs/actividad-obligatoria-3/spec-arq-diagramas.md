@@ -224,14 +224,14 @@ Sistema:
 
 ---
 
-### 📊 Matriz de Flujos
+### 📊 Matriz de Flujos (con 3 Swimlanes)
 
-| Flujo                 | Entrada             | Proceso              | Salida                | Arrays              | Objetos         | Condicionales        | Ciclos                    |
-| --------------------- | ------------------- | -------------------- | --------------------- | ------------------- | --------------- | -------------------- | ------------------------- |
-| **1. Búsqueda**       | Criterios (texto)   | Filtrado de catálogo | Lista de productos    | ✅ Catálogo         | ✅ Producto     | ✅ if/else           | ✅ for                    |
-| **2. Carrito**        | Producto + cantidad | Validación, cálculo  | Carrito + total       | ✅ Items carrito    | ✅ Item         | ✅ if (stock)        | ✅ for (total)            |
-| **3. Compatibilidad** | Componentes         | Validación cruzada   | Reporte compatible/no | ✅ Componentes      | ✅ Componente   | ✅ if (validaciones) | ✅ for (validar cada uno) |
-| **4. Recibo**         | Carrito + datos     | Itemización, cálculo | Recibo ordenado       | ✅ Items + detalles | ✅ Línea recibo | ✅ if (validaciones) | ✅ for (itemizar)         |
+| Flujo                 | Usuario           | Sistema              | BD                       | Arrays              | Objetos         | Condicionales        | Ciclos                    |
+| --------------------- | ----------------- | -------------------- | ------------------------ | ------------------- | --------------- | -------------------- | ------------------------- |
+| **1. Búsqueda**       | Input criterios   | Filtra catálogo      | Retorna catálogo         | ✅ Catálogo         | ✅ Producto     | ✅ if/else           | ✅ for                    |
+| **2. Carrito**        | Selecciona+qty    | Valida, agrega, calc | Valida stock             | ✅ Items carrito    | ✅ Item         | ✅ if (stock)        | ✅ for (total)            |
+| **3. Compatibilidad** | Input componentes | Valida combos        | Retorna especificaciones | ✅ Componentes      | ✅ Componente   | ✅ if (validaciones) | ✅ for (validar cada uno) |
+| **4. Recibo**         | Confirma compra   | Genera recibo        | Valida integridad        | ✅ Items + detalles | ✅ Línea recibo | ✅ if (validaciones) | ✅ for (itemizar)         |
 
 ---
 
@@ -239,37 +239,50 @@ Sistema:
 
 ### 🏊 ¿Cuándo Usar Swimlanes (Particiones)?
 
-**Decisión:** Usar **swimlanes para separar responsabilidades Usuario/Sistema en TODOS los 4 flujos**, porque:
+**Decisión:** Usar **swimlanes para separar 3 responsabilidades principales en TODOS los 4 flujos:**
 
-1. **Claridad de roles:** Distingue decisiones del usuario (input) vs. lógica del sistema (processing)
+1. **Usuario** — Ingresa datos, confirma acciones, recibe resultados
+2. **Sistema** — Procesa información, aplica lógica de negocio, orquesta decisiones
+3. **Base de Datos** — Persiste datos, valida integridad, retorna información almacenada
+
+**Justificación:**
+
+1. **Claridad de roles:** Separa entrada del usuario, procesamiento del sistema, y persistencia de datos
 2. **Requisito académico:** Las consignas piden "Particiones (swimlanes): Si aplica, separar responsabilidades"
-3. **Mapeo a código:** Facilita traducción a funciones: usuario llama `prompt()`, sistema ejecuta función lógica
-4. **Realismo:** En un e-commerce real, hay acciones explícitas del usuario y respuestas del sistema
+3. **Mapeo a código:** Facilita traducción a arquitectura:
+   - Usuario swimlane → `prompt()` input
+   - Sistema swimlane → Funciones JavaScript que procesan
+   - BD swimlane → Arrays globales que simulan persistencia (no hay BD real en esta entrega)
+4. **Realismo:** En un e-commerce real, hay 3 capas: presentación (usuario), lógica (sistema), persistencia (BD)
 
 ### 📐 Estructura de Swimlanes Propuesta
 
 ```
-┌──────────────────────────────────────────────────────────┐
-│ DIAGRAMA DE ACTIVIDADES CON SWIMLANES                   │
-├─────────────────────┬──────────────────────────────────┤
-│   USUARIO           │         SISTEMA                  │
-├─────────────────────┼──────────────────────────────────┤
-│                     │                                  │
-│  [Ingresa datos]    │                                  │
-│        │            │                                  │
-│        ├──────────────► [Procesa información]         │
-│        │            │        │                         │
-│        │            │    [Decisión] ────┐             │
-│        │            │        │           │             │
-│        │            │     [Sí]        [No]            │
-│        │            │        │           │             │
-│        │            │    [Calcula]    [Error]         │
-│        │            │        │           │             │
-│        │            │◄────────────────────┤             │
-│        │            │        │                         │
-│  [Recibe resultado] │                                  │
-│        │            │                                  │
-└─────────────────────┴──────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ DIAGRAMA DE ACTIVIDADES CON 3 SWIMLANES                           │
+├─────────────────┬──────────────────────────┬───────────────────────┤
+│   USUARIO       │      SISTEMA             │   BASE DE DATOS       │
+├─────────────────┼──────────────────────────┼───────────────────────┤
+│                 │                          │                       │
+│ [Ingresa datos] │                          │                       │
+│       │         │                          │                       │
+│       ├──────────► [Procesa información]  │                       │
+│       │         │        │                 │                       │
+│       │         │    [Decisión] ────┐     │                       │
+│       │         │        │           │     │                       │
+│       │         │     [Consulta] ────────────► [Busca registro]  │
+│       │         │        │           │     │         │            │
+│       │         │        │ [Retorna]◄─────────────────┤            │
+│       │         │        │           │     │                       │
+│       │         │    [Calcula]    [Error] │                       │
+│       │         │        │           │     │                       │
+│       │         │    [Persiste] ─────────────► [Guarda cambios]  │
+│       │         │        │           │     │         │            │
+│       │◄────────────────────────────────────┤                       │
+│       │         │        │                 │                       │
+│ [Recibe resultado]                        │                       │
+│       │         │                          │                       │
+└─────────────────┴──────────────────────────┴───────────────────────┘
 ```
 
 ### 🎯 Swimlanes por Flujo
@@ -280,16 +293,24 @@ Sistema:
 
 - Ingresa marca (ej. "NVIDIA")
 - Ingresa rango de precio ($800-$1500)
+- Presiona botón buscar
 - Recibe lista de productos
 
 **Swimlane SISTEMA:**
 
-- Accede array catálogo
+- Recibe criterios del usuario
+- Solicita al catálogo (via BD)
 - Aplica filtros (if condiciones)
 - Itera y agrupa resultados
-- Retorna array filtrado
+- Formatea datos para mostrar
 
-**Justificación:** El usuario proporciona entrada, el sistema hace el trabajo pesado de búsqueda.
+**Swimlane BASE DE DATOS:**
+
+- Retorna array de productos completo
+- Valida disponibilidad de datos
+- Mantiene integridad del catálogo
+
+**Justificación:** El usuario proporciona entrada → sistema procesa → BD suministra datos. Simulada con array global.
 
 ---
 
@@ -297,20 +318,28 @@ Sistema:
 
 **Swimlane USUARIO:**
 
-- Selecciona producto
-- Especifica cantidad
+- Selecciona producto por ID
+- Especifica cantidad deseada
+- Confirma agregar al carrito
 - Revisa carrito actualizado
-- Confirma cambios
+- Puede modificar cantidades
 
 **Swimlane SISTEMA:**
 
-- Valida stock disponible
-- Busca en catálogo
-- Agrega a array carrito
-- Recalcula totales
-- Detecta errores (stock insuficiente)
+- Recibe producto ID y cantidad
+- Valida stock (consulta a BD)
+- Busca detalles de producto (via BD)
+- Agrega/actualiza en array carrito
+- Recalcula totales (subtotal, impuestos)
+- Maneja errores (stock insuficiente)
 
-**Justificación:** Usuario toma decisión de qué comprar; sistema maneja validaciones y cálculos.
+**Swimlane BASE DE DATOS:**
+
+- Proporciona información de stock
+- Retorna detalles del producto
+- Mantiene integridad de disponibilidad
+
+**Justificación:** Usuario toma decisión → Sistema valida con BD → BD confirma disponibilidad → Sistema recalcula.
 
 ---
 
@@ -318,21 +347,29 @@ Sistema:
 
 **Swimlane USUARIO:**
 
-- Ingresa CPU seleccionada
-- Ingresa Motherboard
-- Ingresa RAM
-- Ingresa PSU
+- Ingresa CPU seleccionada (prompt)
+- Ingresa Motherboard (prompt)
+- Ingresa RAM (prompt)
+- Ingresa PSU (prompt)
 - Recibe reporte de compatibilidad
 
 **Swimlane SISTEMA:**
 
-- Busca especificaciones en catálogo
-- Compara sockets (if ===)
-- Compara tipos RAM (if ===)
-- Compara wattaje (if >=)
-- Genera reporte con incompatibilidades
+- Recibe lista de componentes
+- Solicita especificaciones a BD para cada componente
+- Extrae propiedades técnicas (socket, tipo, wattaje)
+- Aplica validaciones (if sockets coinciden, if RAM compatible, if PSU suficiente)
+- Genera array de incompatibilidades
+- Formatea reporte legible
 
-**Justificación:** Usuario especifica componentes; sistema valida combinaciones complejas.
+**Swimlane BASE DE DATOS:**
+
+- Retorna especificaciones de CPU (socket, TDP)
+- Retorna especificaciones de Motherboard (socket compatible)
+- Retorna especificaciones de RAM (tipo, voltaje)
+- Retorna especificaciones de PSU (wattaje)
+
+**Justificación:** Usuario especifica componentes → Sistema consulta specs de BD → Sistema valida lógicamente → Genera reporte.
 
 ---
 
@@ -340,20 +377,31 @@ Sistema:
 
 **Swimlane USUARIO:**
 
-- Revisa carrito final
-- Confirma compra
-- Proporciona datos de envío
-- Recibe número de orden y recibo
+- Revisa carrito final con items
+- Confirma compra (prompt de confirmación)
+- Proporciona código de envío si aplica
+- Recibe número de orden y recibo formateado
 
 **Swimlane SISTEMA:**
 
+- Recibe solicitud de compra
 - Valida carrito no vacío (if)
 - Genera número de orden único
-- Itera items para crear recibo
-- Calcula subtotal, impuestos, envío
-- Formatea y muestra recibo
+- Recupera datos de items del carrito
+- Consulta BD para validar precios finales
+- Itera items para crear líneas de recibo
+- Calcula subtotal, impuestos (21%), envío
+- Aplica descuentos si código válido (consulta BD)
+- Formatea recibo en string
 
-**Justificación:** Boundary clara: usuario inicia transacción; sistema ejecuta toda la lógica de documentación.
+**Swimlane BASE DE DATOS:**
+
+- Valida integridad de items en carrito
+- Retorna precios actualizados
+- Valida y retorna descuentos aplicables
+- Podría registrar orden (en un e-commerce real)
+
+**Justificación:** Usuario confirma → Sistema valida y calcula (consultando BD) → BD asegura integridad → Sistema emite recibo documentado.
 
 ---
 
@@ -369,21 +417,21 @@ Sistema:
   - [x] ≥3 actividades principales
   - [x] ≥2 decisiones if/else (marca, precio)
   - [x] ≥1 ciclo (iteración sobre catálogo)
-  - [x] Swimlanes Usuario | Sistema
+  - [x] Swimlanes Usuario | Sistema | Base de Datos
 
 - [x] **Diagrama 2: Gestión de Carrito**
   - [x] Inicio y fin
   - [x] ≥4 actividades (seleccionar, validar, agregar, recalcular)
   - [x] ≥2 decisiones (stock disponible, cantidad válida)
   - [x] ≥1 ciclo (recalcular total para cada item)
-  - [x] Swimlanes Usuario | Sistema
+  - [x] Swimlanes Usuario | Sistema | Base de Datos
 
 - [x] **Diagrama 3: Validación de Compatibilidad**
   - [x] Inicio y fin
   - [x] ≥5 actividades (ingresa componentes, valida cada componente, genera reporte)
   - [x] ≥3 decisiones (socket, RAM type, PSU watts)
   - [x] ≥1 ciclo (validar cada componente de array)
-  - [x] Swimlanes Usuario | Sistema
+  - [x] Swimlanes Usuario | Sistema | Base de Datos
   - [x] Decisiones encadenadas lógicamente
 
 - [x] **Diagrama 4: Generación de Recibo**
@@ -391,7 +439,7 @@ Sistema:
   - [x] ≥5 actividades (confirma, valida, genera número, itemiza, calcula)
   - [x] ≥2 decisiones (carrito válido, aplicar descuento)
   - [x] ≥1 ciclo (iterar items para recibo)
-  - [x] Swimlanes Usuario | Sistema
+  - [x] Swimlanes Usuario | Sistema | Base de Datos
   - [x] Formato realista de flujo de transacción
 
 #### 🔹 **Requisito 2: Coherencia con Especificación**
@@ -400,7 +448,8 @@ Sistema:
 - [x] Entrada → Proceso → Salida visible en diagrama
 - [x] Decisiones reflejan validaciones de negocio
 - [x] Ciclos representan iteraciones sobre arrays
-- [x] Swimlanes separan responsabilidades Usuario/Sistema claramente
+- [x] Swimlanes separan responsabilidades Usuario/Sistema/BaseDatos claramente
+- [x] Base de Datos simula persistencia con arrays globales
 
 #### 🔹 **Requisito 3: Artefactos Generados**
 
@@ -437,24 +486,29 @@ Sistema:
 ```
 [Contexto: Teniendo en cuenta spec-arq-diagramas.md, index.html y el mockup de mi proyecto de E-commerce de Hardware.
 
-Tarea: Actúa como un experto en Ingeniería de Software y modelado UML. Basándote exclusivamente en el flujo lógico definido en la documentación y la estructura del HTML, genera el código PlantUML para 4 diagramas de actividades que representen los flujos principales del sistema (Busqueda y flitrado, Gestion de Carrito y Calculo de Precio, Validacion de Compatibilidad de Componentes, Generacion de Recibo y Resumen de Orden).
+Tarea: Actúa como un experto en Ingeniería de Software y modelado UML. Basándote exclusivamente en el flujo lógico definido en la documentación y la estructura del HTML, genera el código PlantUML para 4 diagramas de actividades que representen los flujos principales del sistema (Búsqueda y filtrado, Gestión de Carrito y Cálculo de Precio, Validación de Compatibilidad de Componentes, Generación de Recibo y Resumen de Orden).
 
 Reglas de Formato y Sintaxis (Estrictas):
 
-Usa exclusivamente la sintaxis moderna de PlantUML para Diagramas de Actividades.
+1. Usa exclusivamente la sintaxis moderna de PlantUML para Diagramas de Actividades.
 
-Cada flujo debe iniciar con start y terminar con stop.
+2. Cada flujo debe iniciar con start y terminar con stop.
 
-Las acciones deben estar escritas como :Nombre de la actividad;.
+3. Las acciones deben estar escritas como :Nombre de la actividad;.
 
-Utiliza Swimlanes (Particiones) para diferenciar responsabilidades: usa |Usuario| para las interacciones del cliente y |Sistema| para los procesos lógicos y de persistencia.
+4. Utiliza TRES Swimlanes (Particiones) para diferenciar responsabilidades:
+   - |Usuario| para las interacciones del cliente (entrada y salida)
+   - |Sistema| para los procesos lógicos y orquestación
+   - |BaseDatos| para persistencia y consultas de datos
 
-Implementa lógica de decisiones con la estructura:
-if (Pregunta/Condición?) then (si) ... else (no) ... endif
+5. Implementa lógica de decisiones con la estructura:
+   if (Pregunta/Condición?) then (si) ... else (no) ... endif
 
-Si el flujo lo requiere, utiliza bucles while o repeat.
+6. Si el flujo lo requiere, utiliza bucles while o repeat para iteraciones.
 
-Asegúrate de que el flujo sea coherente con los IDs y clases definidos en el index.html y los requisitos de la spec-arq-diagramas.md.
+7. Asegúrate de que el flujo sea coherente con los IDs y clases definidos en el index.html y los requisitos de la spec-arq-diagramas.md.
+
+8. Base de Datos swimlane simula persistencia: retorna datos, valida integridad, mantiene catálogo/carrito.
 
 Entregable: Proporcióname el código en bloques independientes por cada flujo para que pueda copiarlos y pegarlos en mis archivos .puml.]
 ```
@@ -607,34 +661,42 @@ stop
 
 ---
 
-### 🎯 Decisión 2: Swimlanes en TODOS los Flujos
+### 🎯 Decisión 2: Swimlanes de 3 Capas en TODOS los Flujos
 
-**Por qué swimlanes:**
+**Por qué 3 swimlanes (Usuario | Sistema | Base de Datos):**
 
 - **Consigna académica:** Especifica "Particiones (swimlanes): Si aplica, separar responsabilidades"
-- **Claridad didáctica:** El estudiante visualiza qué es responsabilidad del código JavaScript vs. entrada del usuario
+- **Arquitectura en capas:** Refleja patrón MVC simplificado:
+  - **Capa Presentación** (Usuario): Entrada/salida via prompt() y alert()
+  - **Capa Lógica** (Sistema): Procesamiento, orquestación, toma de decisiones
+  - **Capa Datos** (Base de Datos): Persistencia y consultas (simulada con arrays globales)
+
 - **Mapeo código-diagrama:**
-  - Swimlane Usuario → prompt() entrada
-  - Swimlane Sistema → función JavaScript que procesa
-  - Resultado → alert() o console.log() salida
+  - Swimlane Usuario → `prompt()` entrada, `alert()` salida
+  - Swimlane Sistema → Funciones JavaScript que procesan lógica
+  - Swimlane BD → Arrays globales que simulan persistencia
 
 **Estructura consistente en todos:**
 
 ```
-┌─ Inicio ─┐
-│          │
-│ [USUARIO: Input via prompt()]
-│          │
-├─────────────────────────┤
-│ [SISTEMA: Procesa datos]│
-│ [if/else decisiones]    │
-│ [for ciclos]            │
-│ [Calcula resultado]     │
-├─────────────────────────┤
-│ [USUARIO: Recibe output]│
-│          │
-└─ Final ─┘
+┌─ Inicio ─┬───────────────────────────────────────────────┐
+│          │                                               │
+│ [USUARIO: Input via prompt()]                           │
+│          │                                               │
+├──────────┼─────────────┬──────────────┐                 │
+│          │ [SISTEMA:   │ [BD: Persiste]│                 │
+│          │ Procesa]    │ Valida       │                 │
+│          │ [if/else]   │ Retorna      │                 │
+│          │ [for ciclos]│              │                 │
+│          │ [Calcula]   │              │                 │
+├──────────┼─────────────┴──────────────┘                 │
+│          │                                               │
+│ [USUARIO: Recibe output via alert()]                    │
+│          │                                               │
+└─ Final ─┴───────────────────────────────────────────────┘
 ```
+
+**Nota importante:** En esta entrega, la BD es simulada (arrays globales en memoria). En entregas futuras con backend real, esto sería API REST o base de datos relacional.
 
 ---
 
@@ -681,16 +743,26 @@ stop
 
 ---
 
-### 🎯 Decisión 5: Mapeo Diagramas → Código JavaScript
+### 🎯 Decisión 5: Mapeo Diagramas → Código JavaScript (3 Capas)
 
 **Cómo cada diagrama se traduce a código (próxima entrega del Desarrollador):**
 
-| Flujo | Diagrama       | Funciones JavaScript                            | Estructura de Datos                    |
-| ----- | -------------- | ----------------------------------------------- | -------------------------------------- |
-| 1     | Búsqueda       | `filterProducts(marca, precioMin, precioMax)`   | Array catálogo → Array filtrado        |
-| 2     | Carrito        | `addToCart(productId, qty)`, `calculateTotal()` | Array carrito con objetos item         |
-| 3     | Compatibilidad | `validateCompatibility(cpu, mb, ram, psu)`      | Objeto con propiedades técnicas        |
-| 4     | Recibo         | `generateReceipt(cart, userData)`               | Array items → String recibo formateado |
+| Flujo              | Usuario (prompt)                    | Sistema (funciones)                           | Base de Datos (arrays)                  |
+| ------------------ | ----------------------------------- | --------------------------------------------- | --------------------------------------- |
+| 1 - Búsqueda       | `Ingresa marca, precio`             | `filterProducts(marca, precioMin, precioMax)` | `catalogoProductos[]` retorna datos     |
+| 2 - Carrito        | `Selecciona producto, qty`          | `addToCart()`, `calculateTotal()`             | `carritoItems[]`, `catalogoStock[]`     |
+| 3 - Compatibilidad | `Ingresa CPU, MB, RAM, PSU`         | `validateCompatibility()`                     | `especificacionesComponentes{}`         |
+| 4 - Recibo         | `Confirma compra, código descuento` | `generateReceipt()`, `applyDiscount()`        | `descuentosCodigos{}`, `carritoItems[]` |
+
+**Estructura de BD simulada:**
+
+```javascript
+// BaseDatos = Arrays globales que persisten datos
+const catalogoProductos = [...]; // Array de productos
+const carritoItems = [];          // Array de items en carrito (se modifica)
+const especificacionesComponentes = {...}; // Objeto con specs técnicas
+const descuentosCodigos = {...};  // Objeto con códigos de descuento válidos
+```
 
 ---
 
@@ -729,14 +801,15 @@ stop
 
 Antes de ejecutar Copilot Agent:
 
-- [x] Especificación clara de 4 flujos principal (arriba completada)
-- [x] Swimlanes definidas para cada flujo
-- [x] Criterios de aceptación documentados
+- [x] Especificación clara de 4 flujos principales (arriba completada)
+- [x] 3 Swimlanes definidas para cada flujo: Usuario | Sistema | BaseDatos
+- [x] Criterios de aceptación documentados (con 3 swimlanes)
 - [x] Contexto preparado (plan.md, index.html, mockups)
 - [x] Plantilla para capturar prompts y ajustes
-- [x] Estructura lista para recibir outputs
+- [x] Estructura lista para recibir outputs (.puml + .png)
+- [x] BD simulada con arrays globales especificada
 
-**Estado:** ✅ Listo para ejecutar Copilot Agent
+**Estado:** ✅ Listo para ejecutar Copilot Agent con 3 Swimlanes (Usuario | Sistema | BaseDatos)
 
 ---
 
@@ -760,6 +833,6 @@ _La siguiente sección se completa AL CERRAR la tarea:_
 
 ---
 
-**Creado por:** Arquitecto de Diagramas  
-**Versión:** 1.0 (Estructura pre-generación)  
-**Fecha de actualización:** (por completar AL CERRAR)
+**Creado por:** @GonzaloBarbano
+**Versión:** 1.1 (Actualizado con 3 Swimlanes: Usuario | Sistema | BaseDatos)  
+**Fecha de actualización:** 12 de mayo de 2026
