@@ -639,3 +639,6 @@ function iniciarMenu() {
     }
   }
 }
+
+// Iniciar aplicación al cargar el script
+iniciarMenu();
