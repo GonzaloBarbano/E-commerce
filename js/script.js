@@ -98,7 +98,7 @@ var fuentesRecomendadas = [
 ];
 
 // =============================================================================
-// FLUJO 1 — COTIZADOR DE PRODUCTOS
+// FLUJO 4 — COTIZADOR DE PRODUCTOS
 // =============================================================================
 
 /**
@@ -159,13 +159,16 @@ function calcularSubtotal(precioUnitario, cantidad) {
 function generarResumenCotizacion(categoria, cantidad, precioUnitario) {
   var descuento = calcularDescuento(cantidad);
   var subtotal = calcularSubtotal(precioUnitario, cantidad);
+  var totalConIva = aplicarIva(subtotal);
   return (
     "=== COTIZACIÓN PC HARDWARE ===\n" +
     "Categoría: " + categoria.toUpperCase() + "\n" +
     "Precio unitario: $" + precioUnitario.toFixed(2) + "\n" +
     "Cantidad: " + cantidad + " unidades\n" +
     "Descuento por volumen: " + descuento + "%\n" +
-    "SUBTOTAL: $" + subtotal.toFixed(2)
+    "Subtotal s/IVA: $" + subtotal.toFixed(2) + "\n" +
+    "IVA (21%): $" + (totalConIva - subtotal).toFixed(2) + "\n" +
+    "TOTAL: $" + totalConIva.toFixed(2)
   );
 }
 
@@ -206,7 +209,7 @@ function flujo1Cotizador() {
 }
 
 // =============================================================================
-// FLUJO 2 — VERIFICADOR DE COMPATIBILIDAD
+// FLUJO 3 — VERIFICADOR DE COMPATIBILIDAD
 // =============================================================================
 
 /**
@@ -313,7 +316,7 @@ function flujo2Compatibilidad() {
 }
 
 // =============================================================================
-// FLUJO 3 — SIMULADOR DE CARRITO
+// FLUJO 2 — SIMULADOR DE CARRITO
 // =============================================================================
 
 /**
@@ -430,19 +433,11 @@ function flujo3Carrito() {
   var continuar = true;
 
   while (continuar) {
-    var menuProductos =
-      "=== SIMULADOR DE CARRITO ===\n\n" +
-      "Productos disponibles:\n" +
-      "1. Intel Core i9-13900K — $599.99\n" +
-      "2. NVIDIA RTX 4090 — $1799.99\n" +
-      "3. Corsair Vengeance DDR5 32GB — $249.99\n" +
-      "4. Kingston NV2 1TB SSD — $89.99\n" +
-      "5. Corsair RM850x Gold — $179.99\n" +
-      "6. Corsair H150i ELITE — $159.99\n\n" +
-      "Items en carrito: " + carrito.length + "\n" +
-      "0. Ver resumen y finalizar\n\n" +
-      "Elegí un producto (0-6):";
-
+    var menuProductos = "=== SIMULADOR DE CARRITO ===\n\nProductos disponibles:\n";
+for (var i = 0; i < catalogo.length; i++) {
+  menuProductos += (i + 1) + ". " + catalogo[i].nombre + " — $" + catalogo[i].precio.toFixed(2) + "\n";
+}
+menuProductos += "\nItems en carrito: " + carrito.length + "\n0. Ver resumen y finalizar\n\nElegí un producto (0-" + catalogo.length + "):";
     var opcionStr = prompt(menuProductos);
 
     if (opcionStr === null || opcionStr === "0") {
@@ -475,7 +470,7 @@ function flujo3Carrito() {
 }
 
 // =============================================================================
-// FLUJO 4 — BUSCADOR DE PRODUCTOS
+// FLUJO 1 — BUSCADOR DE PRODUCTOS
 // =============================================================================
 
 /**
