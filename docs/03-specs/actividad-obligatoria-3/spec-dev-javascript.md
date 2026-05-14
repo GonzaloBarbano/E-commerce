@@ -61,16 +61,16 @@ function flujo1Cotizador() {
 
 ### Criterios de aceptación — Checklist
 
-- [ ] 4 flujos completos con validación de entrada
-- [ ] Funciones con nombres descriptivos en camelCase, parámetros y retornos explícitos
-- [ ] Lógica de negocio separada de UI: las funciones puras no llaman a `prompt()` ni `alert()`
-- [ ] Funciones expuestas globalmente para testing (no encapsuladas en IIFE)
-- [ ] Arrays de productos definidos como datos del catálogo
-- [ ] Objetos con propiedades relevantes al contexto del proyecto
-- [ ] Uso de `if/else if`, `switch`, `for`, `while` según corresponda
-- [ ] Comentarios JSDoc en todas las funciones de negocio
-- [ ] Código referenciado correctamente desde `index.html`
-- [ ] Sin manipulación del DOM ni uso de eventos
+- [x] 4 flujos completos con validación de entrada
+- [x] Funciones con nombres descriptivos en camelCase, parámetros y retornos explícitos
+- [x] Lógica de negocio separada de UI: las funciones puras no llaman a `prompt()` ni `alert()`
+- [x] Funciones expuestas globalmente para testing (no encapsuladas en IIFE)
+- [x] Arrays de productos definidos como datos del catálogo
+- [x] Objetos con propiedades relevantes al contexto del proyecto
+- [x] Uso de `if/else if`, `switch`, `for`, `while` según corresponda
+- [x] Comentarios JSDoc en todas las funciones de negocio
+- [x] Código referenciado correctamente desde `index.html`
+- [x] Sin manipulación del DOM ni uso de eventos
 
 ---
 
