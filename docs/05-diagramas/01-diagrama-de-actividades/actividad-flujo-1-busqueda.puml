@@ -1,0 +1,33 @@
+@startuml flujo-1-busqueda
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #333333
+skinparam ArrowColor #333333
+
+|Usuario|
+start
+:Ingresa criterios de búsqueda;
+:Presiona botón de filtrar;
+
+|Sistema|
+:Solicitar catálogo de productos;
+
+|Base de Datos|
+:Consultar registros de productos;
+:Retornar array de productos;
+
+|Sistema|
+:Inicializa lista de resultados;
+repeat
+  :Evalúa producto actual;
+  if (¿Cumple con los filtros?) then (sí)
+    :Agrega producto a resultados;
+  else (no)
+  endif
+repeat while (¿Quedan productos?) is (sí)
+:Ordenar resultados;
+:Renderizar en el DOM;
+
+|Usuario|
+:Visualiza productos filtrados;
+stop
+@enduml

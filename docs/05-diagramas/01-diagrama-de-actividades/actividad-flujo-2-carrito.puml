@@ -1,0 +1,41 @@
+@startuml flujo-2-carrito
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #333333
+skinparam ArrowColor #333333
+
+|Usuario|
+start
+:Selecciona producto y cantidad;
+:Presiona "Agregar al carrito";
+
+|Sistema|
+:Solicitar verificación de stock;
+
+|Base de Datos|
+:Consultar disponibilidad y stock;
+:Retornar estado de inventario;
+
+|Sistema|
+if (¿Stock disponible?) then (sí)
+  if (¿Supera límite por usuario?) then (no)
+    :Agregar producto al array 'cart' en memoria;
+    :Recalcular totales;
+    repeat
+      :Calcular subtotal de item;
+      :Sumar al total general;
+    repeat while (¿Hay más items en cart?) is (sí)
+    :Aplicar IVA (21%) y descuentos;
+    :Actualizar vista del carrito;
+  else (sí)
+    :Mostrar error: "Excede límite";
+    stop
+  endif
+else (no)
+  :Mostrar error: "Sin stock";
+  stop
+endif
+
+|Usuario|
+:Visualiza el carrito con el nuevo total;
+stop
+@enduml

@@ -1,0 +1,48 @@
+@startuml flujo-4-recibo
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #333333
+skinparam ArrowColor #333333
+
+|Usuario|
+start
+:Proporciona datos de envío y facturación;
+:Confirma la compra;
+
+|Sistema|
+if (¿Carrito tiene items?) then (no)
+  :Mostrar error: "Carrito vacío";
+  stop
+endif
+
+:Generar ID único de orden;
+
+repeat
+  :Obtener item del carrito;
+  :Calcular subtotal de línea;
+  :Agregar línea al objeto recibo;
+repeat while (¿Quedan items?) is (sí)
+
+:Calcular IVA (21%);
+
+if (¿Tiene código de descuento?) then (sí)
+  |Base de Datos|
+  :Validar código de descuento;
+  :Retornar porcentaje o validez;
+  |Sistema|
+  if (¿Código válido?) then (sí)
+    :Aplicar descuento al total;
+  else (no)
+    :Ignorar código;
+  endif
+endif
+
+:Sumar envío ($50) y totalizar;
+
+|Base de Datos|
+:Registrar orden y persistir datos;
+:Confirmar almacenamiento exitoso;
+
+|Usuario|
+:Recibe número de orden y recibo;
+stop
+@enduml
