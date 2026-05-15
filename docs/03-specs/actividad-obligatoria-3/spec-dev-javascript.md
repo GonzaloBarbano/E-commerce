@@ -95,6 +95,24 @@ El código debe:
 
 ### Fragmento generado por Copilot y ajustes manuales
 
+Copilot generó la estructura base de `calcularSubtotal()` y `flujo1Cotizador()`.
+Se realizaron los siguientes ajustes manuales:
+
+- Se agregó la invocación de `iniciarMenu()` al final del archivo (Copilot no la incluyó)
+- Se corrigió `generarResumenCotizacion()` para mostrar IVA (21%) consistente con el flujo del carrito
+- Se reemplazó el menú hardcodeado del carrito por generación dinámica desde el array `catalogo`
+- Se corrigió la numeración de los flujos en los comentarios del archivo
+
+### Decisiones finales de estructura
+
+- `agregarAlCarrito()` devuelve un nuevo array en lugar de mutar el original,
+  facilitando el testing con Jasmine sin efectos secundarios
+- Todas las funciones de negocio están en scope global para que el Tester pueda
+  accederlas directamente desde `script.spec.js`
+- La lógica de negocio no llama a `prompt()` ni `alert()`, solo las funciones
+  de flujo interactivo lo hacen, permitiendo testear la lógica de forma aislada
+
+
 *(Completar al finalizar — incluir fragmento del flujo 1 generado y los cambios aplicados)*
 
 ### Decisiones finales de estructura
