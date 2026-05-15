@@ -8,8 +8,13 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
+ - [feature/dev-javascript-logica-negocio] Implementación lógica JavaScript: 4 flujos testeables (cotizador, compatibilidad, carrito, buscador) + funciones puras expuestas para Jasmine.
+  PR: [#115](https://github.com/GonzaloBarbano/E-commerce/pull/115) - @LucasFUces (Desarrollador JavaScript)
+
+
 - [feature/arq-diagramas-actividades] Actualizo spec, agrego 4 diagramas de actividades
   PR: [#112](https://github.com/GonzaloBarbano/E-commerce/pull/112) - @GonzaloBarbano (Arquitecto de diagramas de actividades)
+
 
 - [feature/coord-devops-update-figma-and-readme] Actualizo spec
   PR: [#109](https://github.com/GonzaloBarbano/E-commerce/pull/109) - @GonzaloBarbano (Coordinador / DevOps)
