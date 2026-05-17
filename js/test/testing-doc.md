@@ -134,90 +134,81 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests | [XX] |
-| Tests Pasando | [XX] ✅ |
-| Tests Fallando | [XX] ❌ |
-| Porcentaje de Éxito | [XX]% |
+| Total de specs (it) | **59** |
+| Tests Pasando | **59** ✅ |
+| Tests Fallando | **0** ❌ |
+| Porcentaje de Éxito | **100%** |
 
-### Cobertura por Tipo de Test
+### Cobertura por Suite
 
-| Tipo | Cantidad | Porcentaje |
-|------|----------|------------|
-| Happy Path | [XX] | [XX]% |
-| Casos Borde | [XX] | [XX]% |
-| Validación de Errores | [XX] | [XX]% |
-| Operaciones Arrays/Objetos | [XX] | [XX]% |
+| Suite | Flujo | Specs | Estado |
+|-------|-------|-------|--------|
+| 1 | Cotizador de Productos | 14 | ✅ Todos PASS |
+| 2 | Verificador de Compatibilidad | 13 | ✅ Todos PASS |
+| 3 | Simulador de Carrito | 15 | ✅ Todos PASS |
+| 4 | Buscador de Productos | 10 | ✅ Todos PASS |
 
-### Análisis de Cobertura de Código
+### Funciones puras cubiertas por suite
 
-**Metodología:** Se revisó manualmente cada función de `js/script.js` y se verificó qué líneas son ejecutadas por los tests implementados en `js/test/script.spec.js`.
+| Suite | Funciones de `js/script.js` testeadas |
+|-------|-----------------------------------------|
+| 1. Cotizador | `validarCategoria()`, `validarCantidad()`, `calcularDescuento()`, `calcularSubtotal()`, `generarResumenCotizacion()` |
+| 2. Compatibilidad | `calcularConsumoTotal()`, `recomendarFuente()`, `validarTdp()`, `generarInformeCompatibilidad()` |
+| 3. Carrito | `agregarAlCarrito()`, `calcularTotalCarrito()`, `aplicarIva()`, `generarResumenCarrito()`, `obtenerProductoPorOpcion()` |
+| 4. Buscador | `filtrarProductos()`, `ordenarPorPrecio()`, `generarResultadosBusqueda()` |
 
-| Función | Líneas Totales | Tests | Líneas Cubiertas | Cobertura |
-|---------|----------------|-------|------------------|-----------|
-| `filtrarProductos()` | [XX] | [X] | [XX] | [XX]% |
-| `validarCriteriosBusqueda()` | [XX] | [X] | [XX] | [XX]% |
-| `ordenarResultados()` | [XX] | [X] | [XX] | [XX]% |
-| `validarStock()` | [XX] | [X] | [XX] | [XX]% |
-| `agregarAlCarrito()` | [XX] | [X] | [XX] | [XX]% |
-| `calcularTotalCarrito()` | [XX] | [X] | [XX] | [XX]% |
-| `aplicarIVA()` | [XX] | [X] | [XX] | [XX]% |
-| `validarSocket()` | [XX] | [X] | [XX] | [XX]% |
-| `validarTipoRAM()` | [XX] | [X] | [XX] | [XX]% |
-| `calcularConsumoTotal()` | [XX] | [X] | [XX] | [XX]% |
-| `validarPSU()` | [XX] | [X] | [XX] | [XX]% |
-| `generarReporteCompatibilidad()` | [XX] | [X] | [XX] | [XX]% |
-| `generarIdOrden()` | [XX] | [X] | [XX] | [XX]% |
-| `validarCodigoDescuento()` | [XX] | [X] | [XX] | [XX]% |
-| `aplicarDescuento()` | [XX] | [X] | [XX] | [XX]% |
-| `generarRecibo()` | [XX] | [X] | [XX] | [XX]% |
+Total: **17 funciones puras testeadas** sobre las 17 expuestas globalmente en el módulo. Los orquestadores `flujo1Cotizador()` / `flujo2Compatibilidad()` / `flujo3Carrito()` / `flujo4Buscador()` y `iniciarMenu()` no se testean porque dependen de `prompt`/`alert` — capa de UI fuera del alcance unitario.
 
-**Cobertura Total Estimada:** [XX]% ([XX]/[XX] líneas ejecutables)
+### Tipos de tests aplicados
 
-#### Líneas NO Cubiertas
+Cada suite incluye los **4 tipos obligatorios** definidos en la consigna:
 
-> Por completar tras ejecución final. Se documentan acá las líneas de `js/script.js` que no son alcanzadas por ningún test, junto a la justificación (ej.: rama muerta, manejo de error difícil de simular, interacción con `prompt()` excluida del scope).
+| Tipo | Ejemplo aplicado |
+|------|------------------|
+| Happy Path | `expect(calcularSubtotal(100, 5)).toBe(450)` — caso normal con descuento 10% |
+| Casos Borde | `expect(calcularTotalCarrito([])).toBe(0)` — carrito vacío |
+| Validación de Errores | `expect(() => aplicarIva(-50)).toThrow()` — monto negativo |
+| Operaciones Arrays/Objetos | Inmutabilidad: `filtrarProductos()` no muta el catálogo original |
+
+### Tipos de assertions Jasmine usadas
+
+8 tipos distintos (la consigna pide ≥4): `toBe`, `toEqual`, `toBeTruthy`, `toBeFalsy`, `toContain`, `toThrow`, `toBeNull`, `jasmine.objectContaining` + `jasmine.any`.
 
 ---
 
 ## Capturas de Pantalla
 
-### Tests Pasando
+Capturas tomadas con Playwright contra `http://localhost:5501/js/test/test-runner.html` (Live Server de VS Code).
 
-![Tests Exitosos](./screenshots/tests-passing.png)
-*Todos los tests ejecutándose correctamente*
+### 1. Resumen global — 59 specs, 0 failures
 
-### Vista Detallada de Suites
+![Resumen global](./screenshots/01-overview.png)
 
-![Suite Detalle](./screenshots/suite-detail.png)
-*Expansión de una suite mostrando tests individuales*
+### 2. Suite 1 — Cotizador de Productos
+
+![Suite Cotizador](./screenshots/02-flujo1-cotizador.png)
+
+### 3. Suite 2 — Verificador de Compatibilidad
+
+![Suite Compatibilidad](./screenshots/03-flujo2-compatibilidad.png)
+
+### 4. Suite 3 — Simulador de Carrito
+
+![Suite Carrito](./screenshots/04-flujo3-carrito.png)
+
+### 5. Suite 4 — Buscador de Productos
+
+![Suite Buscador](./screenshots/05-flujo4-buscador.png)
 
 ---
 
 ## Issues Conocidos
 
-> Esta sección se completa con cada bug detectado durante la ejecución de la suite, replicando el bloque siguiente por cada issue abierto en GitHub.
+**No se reportaron bugs durante la ejecución.** Las 59 specs pasaron en el primer intento contra `js/script.js` (PR #115, @LucasFUces). La coordinación con el Desarrollador JavaScript se realizó vía Slack durante la fase de planificación; el código quedó estructurado de forma testeable (funciones puras, expuestas globalmente, sin dependencia de `prompt`/`alert` para la lógica de negocio).
 
-### Issue #[X]: [Título del Issue]
+### Punto de fricción resuelto sin bug-report
 
-- **Severidad:** Alta / Media / Baja
-- **Suite Afectada:** `describe("[Nombre Suite]")`
-- **Test Afectado:** `it("[descripción test]")`
-- **Comportamiento Esperado:** [Descripción]
-- **Comportamiento Obtenido:** [Descripción]
-- **Pasos para Reproducir:**
-  1. [Paso 1]
-  2. [Paso 2]
-  3. [Paso 3]
-- **Código del Test que Falla:**
-
-  ```javascript
-  it("descripción", function() {
-    expect(resultado).toBe(esperado);
-  });
-  ```
-
-- **GitHub Issue:** #[número]
-- **Estado:** Abierto / Resuelto
+Durante la integración del runner se detectó que `js/script.js:639` invoca `iniciarMenu()` al cargar el script, lo que disparaba `prompt()` infinitos al abrir `test-runner.html` y bloqueaba la ejecución de Jasmine. **No se abrió un issue** porque la solución se aplicó del lado del Tester sin requerir modificar `js/script.js`: se sobreescribieron `window.prompt` y `window.alert` en `test-runner.html` antes de cargar el script bajo prueba. Ver detalle en [`docs/03-specs/actividad-obligatoria-3/spec-tester.md`](../../docs/03-specs/actividad-obligatoria-3/spec-tester.md) sección **AL CIERRE — Ajustes Manuales y Coordinación**.
 
 ---
 
@@ -232,6 +223,7 @@
 
 ---
 
-**Última Actualización:** [Fecha de ejecución final]
+**Última Actualización:** 15 de mayo de 2026
 **Tester/QA Engineer:** Nicolás Aguirre (@Naguirre0102)
 **Colaboración con:** Lucas Fischer (@LucasFUces) — Desarrollador JavaScript
+**Resultado final:** 59 specs / 59 PASS / 0 FAIL / 0 issues abiertos

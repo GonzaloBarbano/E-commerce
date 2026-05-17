@@ -8,6 +8,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
+- [feature/tester-javascript-jasmine] Suite Jasmine 5.10 con 59 specs sobre los 4 flujos principales (cotizador, compatibilidad, carrito, buscador). 17 funciones puras cubiertas con happy path, casos borde, validación de errores y operaciones array/objeto. Ejecución en browser real vía Playwright con 5 screenshots PASS/FAIL. spec-tester.md (BEFORE + AL CIERRE), test-runner.html con stubs de prompt/alert, script.spec.js y testing-doc.md actualizado.
+  PR: [#TODO](https://github.com/GonzaloBarbano/E-commerce/pull/TODO) - @Naguirre0102 (Tester JavaScript / QA Engineer)
+
  - [feature/dev-javascript-logica-negocio] Implementación lógica JavaScript: 4 flujos testeables (cotizador, compatibilidad, carrito, buscador) + funciones puras expuestas para Jasmine.
   PR: [#115](https://github.com/GonzaloBarbano/E-commerce/pull/115) - @LucasFUces (Desarrollador JavaScript)
 

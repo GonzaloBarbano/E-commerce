@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Prueba Jasmine</title>
+  <meta charset="UTF-8">
+  <title>Test Runner Jasmine — PC Hardware</title>
+
   <!-- Jasmine CSS -->
   <link rel="shortcut icon" type="image/png" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/jasmine_favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/jasmine.min.css">
@@ -11,12 +13,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/jasmine-html.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/boot0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/boot1.min.js"></script>
+
+  <!--
+    Stub de window.prompt y window.alert ANTES de cargar script.js.
+    Motivo: js/script.js invoca iniciarMenu() al final del archivo, lo que dispararía
+    un loop infinito de prompts() al abrir esta página y bloquearía la ejecución
+    de los tests. Devolver null hace que iniciarMenu() salga inmediatamente en la
+    primera iteración (script.js:614 → `if (opcion === null || opcion === "0")`).
+    Esto NO afecta a los tests: las funciones puras del catálogo no usan prompt/alert.
+  -->
+  <script>
+    window.prompt = function () { return null; };
+    window.alert = function () { /* no-op durante tests */ };
+  </script>
 </head>
 <body>
-  <!-- Tu código fuente -->
+  <!-- Código fuente bajo prueba -->
   <script src="../script.js"></script>
 
-  <!-- Tus tests -->
+  <!-- Suites de tests Jasmine -->
   <script src="./script.spec.js"></script>
 </body>
 </html>
