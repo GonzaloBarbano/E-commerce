@@ -8,13 +8,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
- - [feature/dev-javascript-logica-negocio] Implementación lógica JavaScript: 4 flujos testeables (cotizador, compatibilidad, carrito, buscador) + funciones puras expuestas para Jasmine.
-  PR: [#115](https://github.com/GonzaloBarbano/E-commerce/pull/115) - @LucasFUces (Desarrollador JavaScript)
+- [feature/tester-javascript-jasmine] Suite Jasmine 5.10 con 68 specs (59 iniciales + 9 agregados tras el code review de @GonzaloBarbano) sobre los 4 flujos principales (cotizador, compatibilidad, carrito, buscador). 17 funciones puras cubiertas con happy path, casos borde, validación de errores y operaciones array/objeto. Ejecución en browser real vía Playwright con 5 screenshots PASS/FAIL de la corrida inicial. spec-tester.md (BEFORE + AL CIERRE + checklist marcado), test-runner.html con stubs de prompt/alert + advertencia de extensibilidad, script.spec.js y testing-doc.md actualizado con trazabilidad diagrama-código.
+  PR: [#117](https://github.com/GonzaloBarbano/E-commerce/pull/117) - @Naguirre0102 (Tester JavaScript / QA Engineer)
 
+- [feature/dev-javascript-logica-negocio] Implementación lógica JavaScript: 4 flujos testeables (cotizador, compatibilidad, carrito, buscador) + funciones puras expuestas para Jasmine.
+  PR: [#115](https://github.com/GonzaloBarbano/E-commerce/pull/115) - @LucasFUces (Desarrollador JavaScript)
 
 - [feature/arq-diagramas-actividades] Actualizo spec, agrego 4 diagramas de actividades
   PR: [#112](https://github.com/GonzaloBarbano/E-commerce/pull/112) - @GonzaloBarbano (Arquitecto de diagramas de actividades)
-
 
 - [feature/coord-devops-update-figma-and-readme] Actualizo spec
   PR: [#109](https://github.com/GonzaloBarbano/E-commerce/pull/109) - @GonzaloBarbano (Coordinador / DevOps)
