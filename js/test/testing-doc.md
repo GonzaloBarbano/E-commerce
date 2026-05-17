@@ -33,13 +33,15 @@
 
 ## Suites de Tests
 
-> Las 4 suites del runner corresponden a las 4 opciones del menú principal de `js/script.js` (en el orden 1-2-3-4 que ve el usuario). Para cada una se referencia el diagrama de actividad más cercano de los entregados por el Arquitecto de Diagramas.
+> Las 4 suites del runner corresponden a las 4 opciones del menú principal de `js/script.js` (en el orden 1-2-3-4 que ve el usuario).
+>
+> ⚠️ **Nota sobre la trazabilidad diagrama → código:** los diagramas entregados por el Arquitecto (`actividad-flujo-1-busqueda`, `actividad-flujo-2-carrito`, `actividad-flujo-3-compatibilidad`, `actividad-flujo-4-recibo`) y los flujos implementados por el Desarrollador JavaScript (`Cotizador`, `Compatibilidad`, `Carrito`, `Buscador`) **no quedaron 100 % alineados nominalmente** entre roles. La correspondencia real es: Buscador ↔ `flujo-1-busqueda`, Carrito ↔ `flujo-2-carrito`, Compatibilidad ↔ `flujo-3-compatibilidad`, y Cotizador es el flujo más cercano a `flujo-4-recibo` (ambos calculan total + descuento + IVA, aunque el Cotizador no genera un recibo formal). Esto se documenta acá por transparencia para que el evaluador pueda seguir la trazabilidad.
 
 ### Suite 1 — Cotizador de Productos
 
 **Función orquestadora:** `flujo1Cotizador()` (no se testea, depende de `prompt`/`alert`).
 
-**Diagrama de referencia más cercano:** [`actividad-flujo-4-recibo.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-4-recibo.puml) — el diagrama modela el cálculo de un total con descuento e IVA, equivalente al flujo del Cotizador implementado.
+**Diagrama de referencia:** No existe un diagrama equivalente exacto para el Cotizador. El flujo más cercano es [`actividad-flujo-4-recibo.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-4-recibo.puml) — modela el cálculo de un total con descuento e IVA, paralelo a lo que hace el Cotizador. La desalineación parcial entre los flujos modelados y los implementados está documentada en la nota al inicio de esta sección (CR Hallazgo #5).
 
 **Funciones puras testeadas:**
 
@@ -166,19 +168,21 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Total de specs (it) | **59** |
-| Tests Pasando | **59** ✅ |
+| Total de specs (it) | **68** |
+| Tests Pasando (verificación local post-CR) | **68** ✅ |
 | Tests Fallando | **0** ❌ |
 | Porcentaje de Éxito | **100%** |
+
+> ℹ️ **Nota sobre las screenshots:** las imágenes adjuntas en este documento muestran la ejecución de la **versión inicial de la suite (59 specs)** capturada con Playwright antes del code review de @GonzaloBarbano. Tras aplicar los 7 hallazgos del code review se agregaron 9 specs adicionales (separación de tests con assertions distintas + casos borde de la Suite 4), llegando al total de **68 specs**. Todos pasan localmente en `test-runner.html`. Las screenshots no se re-capturaron para evitar reagendar la corrida con Antigravity Agent.
 
 ### Cobertura por Suite
 
 | Suite | Flujo | Specs | Estado |
 |-------|-------|-------|--------|
-| 1 | Cotizador de Productos | 14 | ✅ Todos PASS |
-| 2 | Verificador de Compatibilidad | 13 | ✅ Todos PASS |
-| 3 | Simulador de Carrito | 15 | ✅ Todos PASS |
-| 4 | Buscador de Productos | 10 | ✅ Todos PASS |
+| 1 | Cotizador de Productos | 23 | ✅ Todos PASS |
+| 2 | Verificador de Compatibilidad | 14 | ✅ Todos PASS |
+| 3 | Simulador de Carrito | 16 | ✅ Todos PASS |
+| 4 | Buscador de Productos | 15 | ✅ Todos PASS |
 
 ### Funciones puras cubiertas por suite
 

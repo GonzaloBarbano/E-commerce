@@ -14,9 +14,17 @@
 describe("Flujo 1 — Cotizador de Productos", function () {
 
   describe("validarCategoria()", function () {
-    it("acepta una categoría existente en mayúsculas o minúsculas", function () {
+    // Tests separados por condición distinta para que Jasmine reporte
+    // exactamente cuál normalización falla si algo se rompe (CR Hallazgo #4).
+    it("acepta categorías existentes en minúsculas", function () {
       expect(validarCategoria("cpu")).toBe(true);
+    });
+
+    it("acepta categorías en mayúsculas (normaliza case)", function () {
       expect(validarCategoria("GPU")).toBe(true);
+    });
+
+    it("acepta categorías con espacios en blanco (normaliza trim)", function () {
       expect(validarCategoria("  ram  ")).toBe(true);
     });
 
@@ -43,9 +51,16 @@ describe("Flujo 1 — Cotizador de Productos", function () {
       expect(validarCantidad(100)).toBe(true);
     });
 
-    it("rechaza valores fuera de rango (0, negativos, > 100)", function () {
+    // Separado por borde distinto para reporte explícito en caso de falla (CR #4).
+    it("rechaza el valor cero (borde inferior)", function () {
       expect(validarCantidad(0)).toBe(false);
+    });
+
+    it("rechaza valores negativos", function () {
       expect(validarCantidad(-5)).toBe(false);
+    });
+
+    it("rechaza valores mayores a 100 (borde superior)", function () {
       expect(validarCantidad(101)).toBe(false);
     });
 
@@ -82,8 +97,11 @@ describe("Flujo 1 — Cotizador de Productos", function () {
       expect(calcularSubtotal(100, 5)).toBe(450);
     });
 
-    it("redondea a 2 decimales", function () {
-      // 99.99 * 3 * 0.95 = 284.9715 → 284.97
+    it("redondea a 2 decimales absorbiendo imprecisión IEEE-754", function () {
+      // 99.99 × 3 × 0.95 ≈ 284.9715 en aritmética exacta.
+      // En IEEE-754 puede dar 284.97150000000003 por la representación
+      // binaria de 99.99; Math.round(... * 100) / 100 absorbe la imprecisión
+      // y devuelve 284.97 de forma estable (CR Hallazgo #3).
       expect(calcularSubtotal(99.99, 3)).toBe(284.97);
     });
 
@@ -103,7 +121,22 @@ describe("Flujo 1 — Cotizador de Productos", function () {
       expect(typeof resumen).toBe("string");
       expect(resumen).toContain("CPU");
       expect(resumen).toContain("$599.99");
-      expect(resumen).toContain("TOTAL");
+    });
+
+    it("incluye la línea final 'TOTAL: $...' con el monto correcto con IVA", function () {
+      // El resumen contiene 3 líneas con cifras:
+      //   "Subtotal s/IVA: $...", "IVA (21%): $..." y "TOTAL: $..." (final).
+      // Validamos la línea final exacta para evitar falso positivo por
+      // subcadena con la línea de subtotal (CR Hallazgo #2). En JS includes()
+      // es case-sensitive: "Subtotal" (minúscula) no matchea "TOTAL".
+      // 599.99 × 2 = 1199.98 → IVA 21% → 1451.98
+      var resumen = generarResumenCotizacion("cpu", 2, 599.99);
+      expect(resumen).toContain("TOTAL: $1451.98");
+    });
+
+    it("incluye la línea explícita de IVA al 21%", function () {
+      var resumen = generarResumenCotizacion("cpu", 2, 599.99);
+      expect(resumen).toContain("IVA (21%):");
     });
 
     it("incluye el porcentaje de descuento cuando aplica", function () {
@@ -130,8 +163,11 @@ describe("Flujo 2 — Verificador de Compatibilidad", function () {
       expect(Number.isInteger(resultado)).toBeTruthy();
     });
 
-    it("lanza Error si algún TDP es negativo", function () {
+    it("lanza Error si el TDP de CPU es negativo", function () {
       expect(function () { calcularConsumoTotal(-10, 100); }).toThrow();
+    });
+
+    it("lanza Error si el TDP de GPU es negativo", function () {
       expect(function () { calcularConsumoTotal(100, -50); }).toThrow();
     });
 
@@ -380,6 +416,15 @@ describe("Flujo 4 — Buscador de Productos", function () {
       var resultado = filtrarProductos(miniCatalogo, "cpu", 100);
       expect(resultado).toContain(jasmine.objectContaining({ id: 1 }));
     });
+
+    it("trata null/undefined como categoría 'todas' (caso borde — CR #7)", function () {
+      // filtrarProductos() normaliza con: categoria ? categoria.trim().toLowerCase() : "todas"
+      // null y undefined son falsy → cae en la rama "todas".
+      var resNull = filtrarProductos(miniCatalogo, null, 1000);
+      var resUndef = filtrarProductos(miniCatalogo, undefined, 1000);
+      expect(resNull.length).toBe(4);
+      expect(resUndef.length).toBe(4);
+    });
   });
 
   describe("ordenarPorPrecio()", function () {
@@ -416,6 +461,18 @@ describe("Flujo 4 — Buscador de Productos", function () {
       var texto = generarResultadosBusqueda(miniCatalogo, "todas", 1000);
       expect(texto).toContain("Marca: X");
       expect(texto).toContain("Stock:");
+    });
+
+    it("muestra los resultados ordenados de menor a mayor precio (CR #7)", function () {
+      // generarResultadosBusqueda() llama internamente a ordenarPorPrecio()
+      // antes de armar el texto. Verificamos que en el output el producto
+      // más barato ($80) aparezca ANTES que el más caro ($500).
+      var texto = generarResultadosBusqueda(miniCatalogo, "todas", 1000);
+      var idx80 = texto.indexOf("$80.00");
+      var idx500 = texto.indexOf("$500.00");
+      expect(idx80).toBeGreaterThan(-1);
+      expect(idx500).toBeGreaterThan(-1);
+      expect(idx80).toBeLessThan(idx500);
     });
   });
 });

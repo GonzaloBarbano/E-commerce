@@ -20,7 +20,20 @@
     un loop infinito de prompts() al abrir esta página y bloquearía la ejecución
     de los tests. Devolver null hace que iniciarMenu() salga inmediatamente en la
     primera iteración (script.js:614 → `if (opcion === null || opcion === "0")`).
-    Esto NO afecta a los tests: las funciones puras del catálogo no usan prompt/alert.
+    Esto NO afecta a los tests actuales: las funciones puras del catálogo no usan
+    prompt/alert.
+
+    ⚠️ ADVERTENCIA DE EXTENSIBILIDAD: estos stubs son globales y permanecen
+    activos durante toda la sesión del runner. Si en el futuro se necesita
+    simular una entrada específica de prompt() en algún test (por ejemplo
+    para testear un orquestador de flujo), hay que sobreescribir el stub
+    dentro de un beforeEach/afterEach en el spec correspondiente. Ejemplo:
+
+      describe("flujo1Cotizador con entrada simulada", function () {
+        beforeEach(function () { window.prompt = function () { return "cpu"; }; });
+        afterEach(function ()  { window.prompt = function () { return null;  }; });
+        it("...", function () { ... });
+      });
   -->
   <script>
     window.prompt = function () { return null; };
