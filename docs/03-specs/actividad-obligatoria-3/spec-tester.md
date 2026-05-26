@@ -34,73 +34,76 @@ Los tests cubrirán **únicamente las funciones puras de lógica de negocio** ex
 - Manipulación del DOM (no permitido por consigna).
 - Persistencia real en base de datos (no existe en esta entrega; los flujos del Arquitecto la modelan como swimlane pero la implementación JS la simula con arrays en memoria).
 
-### 🔢 Funciones planificadas por flujo
+### 🔢 Plan de cobertura — versión inicial (REVISADA — RC29 + RC30)
 
-Este es el plan de cobertura. Los nombres exactos pueden ajustarse al ver el código final de `js/script.js`; lo importante es que la **superficie funcional** quede testeada.
+> 🔴 **Aclaración post-revisión del docente (17 de mayo de 2026):**
+>
+> La versión original de esta sección fue redactada con asistencia de IA **antes** de tener el código real de `js/script.js`, usando como única referencia los diagramas del Arquitecto. Esto generó dos problemas serios señalados en la revisión:
+>
+> 1. **Funciones planificadas que nunca existieron** (`validarSocket`, `validarTipoRAM`, `validarPSU`, `validarTamanoRefrigerador`, `generarReporteCompatibilidad`, `generarIdOrden`, `calcularSubtotalLinea`, `validarCodigoDescuento`, `aplicarDescuento`, `generarRecibo`, `validarStock`, `validarLimitePorUsuario`, `validarCriteriosBusqueda`, `ordenarResultados`). Ninguna de ellas está implementada en `js/script.js`.
+> 2. **Un flujo completo planificado que no se implementó:** "Generación de Recibo" (era el Flujo 4 según los diagramas). Lucas implementó "Cotizador" en su lugar y nadie verificó el cambio antes de testear.
+>
+> **El error conceptual:** confié en la salida de IA + los diagramas como fuente de verdad para diseñar el plan de testing, sin validar contra la implementación real cuando estuvo disponible. **El plan de testing se valida contra el código, no contra el plan del Arquitecto.** La cobertura útil se mide en funciones reales que pasen tests reales.
+>
+> A continuación quedan las dos versiones para evidenciar el aprendizaje: el **plan inicial (ficción IA — INVÁLIDO)** y el **plan final ejecutado (validado contra `js/script.js`)**.
 
-#### Flujo 1 — Búsqueda y Filtrado
+#### ❌ Plan inicial (INVÁLIDO — funciones ficticias generadas por IA)
 
-| Función esperada | Qué valida el test |
+Lista de funciones que se planificaron antes de leer `js/script.js`. **Ninguna de estas funciones existe** en el código entregado por Lucas. Se preservan tachadas como evidencia del error de método:
+
+- ~~`filtrarProductos(catalogo, criterios)`~~ — la firma real de Lucas es `filtrarProductos(productos, categoria, precioMaximo)` (sí existe, pero con otra firma).
+- ~~`validarCriteriosBusqueda(criterios)`~~ — no existe.
+- ~~`ordenarResultados(productos, criterio)`~~ — la firma real es `ordenarPorPrecio(productos)` (sí existe, otro nombre).
+- ~~`validarStock(producto, cantidad)`~~ — no existe (la validación de stock se hace inline en el orquestador, ver RC17).
+- ~~`validarLimitePorUsuario(item, cantidad)`~~ — no existe.
+- ~~`calcularSubtotal(precio, cantidad)`~~ — sí existe (con throw en negativos).
+- ~~`aplicarIVA(monto, alicuota = 0.21)`~~ — la firma real es `aplicarIva(monto)` (alícuota hardcodeada).
+- ~~`calcularTotalCarrito(carrito)`~~ — sí existe.
+- ~~`validarSocket`, `validarTipoRAM`, `validarPSU`, `validarTamanoRefrigerador`, `generarReporteCompatibilidad`~~ — **ninguna existe**. El flujo de compatibilidad real usa `calcularConsumoTotal`, `recomendarFuente`, `validarTdp` y `generarInformeCompatibilidad`.
+- ~~`generarIdOrden`, `calcularSubtotalLinea`, `validarCodigoDescuento`, `aplicarDescuento`, `generarRecibo`~~ — **ninguna existe**. El "Flujo 4 — Recibo" del Arquitecto nunca se implementó.
+
+#### ✅ Plan final ejecutado (validado contra `js/script.js`, post-implementación)
+
+Plan reconstruido el día de la integración tras leer las 639 líneas del código real. Esto es lo que **realmente se testeó**:
+
+##### Flujo 1 — Cotizador de Productos (función orquestadora: `flujo1Cotizador()`)
+
+| Función pura real | Qué valida el test |
 |---|---|
-| `filtrarProductos(catalogo, criterios)` | Devuelve subset correcto del catálogo según marca/precio/specs |
-| `validarCriteriosBusqueda(criterios)` | Rechaza criterios mal formados (string en precio, rangos invertidos) |
-| `ordenarResultados(productos, criterio)` | Orden estable por precio asc/desc, alfabético, etc. |
+| `validarCategoria(categoria)` | Normaliza trim + lowercase y verifica que esté en `preciosPorCategoria`. |
+| `validarCantidad(cantidad)` | Acepta enteros en el rango 1–100. |
+| `calcularDescuento(cantidad)` | Devuelve 0/5/10/15 % según tramos de volumen. |
+| `calcularSubtotal(precioUnitario, cantidad)` | Multiplica con descuento y redondea a 2 decimales. Throws con valores inválidos. |
+| `generarResumenCotizacion(categoria, cantidad, precioUnitario)` | Construye el texto del resumen con IVA 21 %. |
 
-**Tipos de tests:**
-- Happy path: catálogo válido + criterios válidos → array filtrado.
-- Casos borde: catálogo vacío, ningún producto coincide, todos coinciden.
-- Errores: `null`/`undefined` como catálogo, criterios faltantes.
-- Operaciones array: verificar inmutabilidad del catálogo original.
+##### Flujo 2 — Verificador de Compatibilidad (función orquestadora: `flujo2Compatibilidad()`)
 
-#### Flujo 2 — Carrito de Compras
-
-| Función esperada | Qué valida el test |
+| Función pura real | Qué valida el test |
 |---|---|
-| `validarStock(producto, cantidad)` | `true` si hay stock suficiente, `false` si no |
-| `validarLimitePorUsuario(item, cantidad)` | Respeta el límite máximo configurado por producto |
-| `agregarAlCarrito(carrito, producto, cantidad)` | Devuelve carrito con item agregado o cantidad incrementada |
-| `calcularSubtotal(precio, cantidad)` | Producto correcto, rechaza negativos |
-| `aplicarIVA(monto, alicuota = 0.21)` | IVA 21% según consigna del Arquitecto |
-| `calcularTotalCarrito(carrito)` | Suma de subtotales + IVA |
+| `calcularConsumoTotal(tdpCpu, tdpGpu)` | `(tdpCpu + tdpGpu + 100) × 1.2`, `Math.ceil`. Throws con negativos. |
+| `recomendarFuente(consumoWatts)` | Devuelve la primera fuente de `fuentesRecomendadas` con `potencia ≥ consumo`, o `null`. |
+| `validarTdp(valor)` | Acepta enteros en el rango 1–1000. |
+| `generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente)` | Construye el informe (incluye recomendación o advertencia). |
 
-**Tipos de tests:**
-- Happy path: carrito con 2-3 productos, cálculo correcto del total con IVA.
-- Casos borde: carrito vacío (total 0), un solo item, cantidad 1.
-- Errores: stock insuficiente, cantidad negativa, precio negativo (debe lanzar o devolver false).
-- Operaciones objeto/array: estructura del item del carrito (`{id, nombre, precio, cantidad}`).
+##### Flujo 3 — Simulador de Carrito (función orquestadora: `flujo3Carrito()`)
 
-#### Flujo 3 — Validación de Compatibilidad
-
-| Función esperada | Qué valida el test |
+| Función pura real | Qué valida el test |
 |---|---|
-| `validarSocket(cpu, motherboard)` | `cpu.socket === motherboard.socket` |
-| `validarTipoRAM(ram, motherboard)` | DDR4/DDR5 compatible con MB |
-| `calcularConsumoTotal(componentes)` | Suma de TDPs de cada componente |
-| `validarPSU(consumoTotal, psu)` | `psu.watts >= consumoTotal` |
-| `validarTamanoRefrigerador(cooler, case)` | Cooler entra en el case |
-| `generarReporteCompatibilidad(componentes)` | Devuelve `{ compatible: boolean, errores: string[] }` |
+| `agregarAlCarrito(carrito, producto, cantidad)` | Agrega item nuevo o incrementa cantidad. **No muta** el array de entrada. Throws con producto null o cantidad ≤ 0. |
+| `calcularTotalCarrito(carrito)` | Suma `precio × cantidad` por item, redondeado a 2 decimales. |
+| `aplicarIva(monto)` | IVA 21 % redondeado a 2 decimales. Throws con monto negativo. |
+| `generarResumenCarrito(carrito)` | Texto del resumen con líneas, subtotal, IVA, total. |
+| `obtenerProductoPorOpcion(opcion)` | Busca en `catalogo` por número de opción 1–6, devuelve `null` fuera de rango. |
 
-**Tipos de tests:**
-- Happy path: build válido (AM5 + DDR5 + PSU suficiente) → reporte `compatible: true`.
-- Casos borde: justo en el límite (PSU = consumo exacto), una sola incompatibilidad.
-- Errores: componentes faltantes, datos malformados.
-- Operaciones array: el array `errores` se construye correctamente (vacío si compatible, con N entradas si no).
+##### Flujo 4 — Buscador de Productos (función orquestadora: `flujo4Buscador()`)
 
-#### Flujo 4 — Generación de Recibo
-
-| Función esperada | Qué valida el test |
+| Función pura real | Qué valida el test |
 |---|---|
-| `generarIdOrden()` | Devuelve string único (formato esperado) |
-| `calcularSubtotalLinea(item)` | `precio × cantidad` correcto |
-| `validarCodigoDescuento(codigo)` | `{ valido: bool, porcentaje: number }` |
-| `aplicarDescuento(total, porcentaje)` | Resta porcentaje correctamente |
-| `generarRecibo(carrito, codigoDescuento)` | Objeto recibo con id, items, subtotal, IVA, descuento, envío $50, total |
+| `filtrarProductos(productos, categoria, precioMaximo)` | Filtra por categoría (acepta `"todas"`) y precio máximo. No muta. Throws con inputs inválidos. |
+| `ordenarPorPrecio(productos)` | Orden ascendente. No muta el array original. |
+| `generarResultadosBusqueda(resultados, categoria, precioMaximo)` | Texto de resultados con encabezado, lista (marca/precio/stock) y mensaje "No se encontraron" si vacío. |
 
-**Tipos de tests:**
-- Happy path: carrito con items + código de descuento válido → recibo completo.
-- Casos borde: sin código de descuento, descuento 0%, descuento 100%.
-- Errores: carrito vacío debe rechazar la generación de recibo.
-- Operaciones objeto: estructura del recibo y sus líneas.
+**Cobertura final ejecutada (post code review):** 68 specs, 100 % PASS (ver sección AL CIERRE → Resumen de Resultados).
 
 ### 📊 Cobertura mínima por suite
 

@@ -33,9 +33,25 @@
 
 ## Suites de Tests
 
-> Las 4 suites del runner corresponden a las 4 opciones del menú principal de `js/script.js` (en el orden 1-2-3-4 que ve el usuario).
->
-> ⚠️ **Nota sobre la trazabilidad diagrama → código:** los diagramas entregados por el Arquitecto (`actividad-flujo-1-busqueda`, `actividad-flujo-2-carrito`, `actividad-flujo-3-compatibilidad`, `actividad-flujo-4-recibo`) y los flujos implementados por el Desarrollador JavaScript (`Cotizador`, `Compatibilidad`, `Carrito`, `Buscador`) **no quedaron 100 % alineados nominalmente** entre roles. La correspondencia real es: Buscador ↔ `flujo-1-busqueda`, Carrito ↔ `flujo-2-carrito`, Compatibilidad ↔ `flujo-3-compatibilidad`, y Cotizador es el flujo más cercano a `flujo-4-recibo` (ambos calculan total + descuento + IVA, aunque el Cotizador no genera un recibo formal). Esto se documenta acá por transparencia para que el evaluador pueda seguir la trazabilidad.
+Las 4 suites del runner corresponden a las 4 opciones del menú principal de `js/script.js` en el orden 1-2-3-4 que ve el usuario: **Cotizador, Verificador de Compatibilidad, Simulador de Carrito, Buscador**.
+
+### 🔴 Post-mortem del rol Tester: desalineación diagramas ↔ código (RC22 + RC30)
+
+Durante la integración detecté que los diagramas entregados por el Arquitecto y los flujos implementados por el Desarrollador JavaScript **no estaban alineados**:
+
+| # del menú | Implementado | Diagrama numerado por Arquitecto | Diagrama temáticamente equivalente |
+|---|---|---|---|
+| 1 | Cotizador | `actividad-flujo-1-busqueda.puml` | ❌ No existe — se cambió alcance: "Recibo" se reemplazó por "Cotizador" |
+| 2 | Compatibilidad | `actividad-flujo-2-carrito.puml` | `actividad-flujo-3-compatibilidad.puml` |
+| 3 | Carrito | `actividad-flujo-3-compatibilidad.puml` | `actividad-flujo-2-carrito.puml` |
+| 4 | Buscador | `actividad-flujo-4-recibo.puml` | `actividad-flujo-1-busqueda.puml` |
+
+
+**Acción correctiva ejecutada en este `fix/`:**
+
+- Abrí el **issue post-mortem** correspondiente en GitHub describiendo la desalineación.
+- Reescribí la sección "Funciones planificadas por flujo" del `spec-tester.md` con autocrítica y el plan **real** de cobertura validado contra el código de Lucas (no contra los diagramas).
+- Esta nota se mantiene como evidencia del aprendizaje: **el plan de testing se valida contra la implementación, no contra el plan previo del Arquitecto**.
 
 ### Suite 1 — Cotizador de Productos
 
