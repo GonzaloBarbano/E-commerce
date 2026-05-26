@@ -20,6 +20,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/coord-devops-update-figma-and-readme] Actualizo spec
   PR: [#109](https://github.com/GonzaloBarbano/E-commerce/pull/109) - @GonzaloBarbano (Coordinador / DevOps)
 
+### Fixed
+
+- [fix/tester-correcciones] Resolución de RC3, RC22, RC29 y RC30.
+  PR: [#120](https://github.com/GonzaloBarbano/E-commerce/pull/120) - @Naguirre0102 (Tester JavaScript / QA Engineer)
+
 ## [ Release Recuperatorio Parcial 1] - 2026-05-05
 
 ### Added
