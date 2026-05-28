@@ -8,7 +8,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
-- [feature/tester-javascript-jasmine] Suite Jasmine 5.10 con 68 specs (59 iniciales + 9 agregados tras el code review de @GonzaloBarbano) sobre los 4 flujos principales (cotizador, compatibilidad, carrito, buscador). 17 funciones puras cubiertas con happy path, casos borde, validación de errores y operaciones array/objeto. Ejecución en browser real vía Playwright con 5 screenshots PASS/FAIL de la corrida inicial. spec-tester.md (BEFORE + AL CIERRE + checklist marcado), test-runner.html con stubs de prompt/alert + advertencia de extensibilidad, script.spec.js y testing-doc.md actualizado con trazabilidad diagrama-código.
+- [feature/tester-javascript-jasmine] Suite Jasmine 5.10 con 68 specs sobre las funciones puras de los 4 flujos del menú. Test-runner, spec-tester (BEFORE + AL CIERRE) y testing-doc completos.
   PR: [#117](https://github.com/GonzaloBarbano/E-commerce/pull/117) - @Naguirre0102 (Tester JavaScript / QA Engineer)
 
 - [feature/dev-javascript-logica-negocio] Implementación lógica JavaScript: 4 flujos testeables (cotizador, compatibilidad, carrito, buscador) + funciones puras expuestas para Jasmine.
@@ -19,6 +19,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [feature/coord-devops-update-figma-and-readme] Actualizo spec
   PR: [#109](https://github.com/GonzaloBarbano/E-commerce/pull/109) - @GonzaloBarbano (Coordinador / DevOps)
+
+### Fixed
+
+- [fix/tester-correcciones] Resolución de RC3, RC22, RC29 y RC30.
+  PR: [#120](https://github.com/GonzaloBarbano/E-commerce/pull/120) - @Naguirre0102 (Tester JavaScript / QA Engineer)
 
 ## [ Release Recuperatorio Parcial 1] - 2026-05-05
 
