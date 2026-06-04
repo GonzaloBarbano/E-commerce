@@ -1,4 +1,5 @@
 @startuml flujo-1-busqueda
+title Flujo 1: Búsqueda y Filtrado de Productos
 skinparam ActivityBackgroundColor #FFFFFF
 skinparam ActivityBorderColor #333333
 skinparam ArrowColor #333333

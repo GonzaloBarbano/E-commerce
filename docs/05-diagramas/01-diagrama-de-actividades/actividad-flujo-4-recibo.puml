@@ -1,4 +1,5 @@
 @startuml flujo-4-recibo
+title Flujo 4: Generación de Recibo y Resumen de Orden
 skinparam ActivityBackgroundColor #FFFFFF
 skinparam ActivityBorderColor #333333
 skinparam ArrowColor #333333
