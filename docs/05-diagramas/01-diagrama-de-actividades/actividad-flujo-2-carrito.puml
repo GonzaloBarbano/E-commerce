@@ -6,37 +6,37 @@ skinparam ArrowColor #333333
 
 |Usuario|
 start
-:Selecciona producto y cantidad;
-:Presiona "Agregar al carrito";
+:Elige producto del menú con prompt() (opción 1-6);
+:Ingresa cantidad con prompt();
 
 |Sistema|
-:Solicitar verificación de stock;
+:obtenerProductoPorOpcion(opcion);
+note right
+  Busca en `catalogo` (array en memoria).
+  Devuelve null si la opción es inválida.
+end note
 
-|Base de Datos|
-:Consultar disponibilidad y stock;
-:Retornar estado de inventario;
-
-|Sistema|
-if (¿Stock disponible?) then (sí)
-  if (¿Supera límite por usuario?) then (no)
-    :Agregar producto al array 'cart' en memoria;
-    :Recalcular totales;
-    repeat
-      :Calcular subtotal de item;
-      :Sumar al total general;
-    repeat while (¿Hay más items en cart?) is (sí)
-    :Aplicar IVA (21%) y descuentos;
-    :Actualizar vista del carrito;
-  else (sí)
-    :Mostrar error: "Excede límite";
-    stop
+if (¿Producto válido y cantidad entre 1 y 10?) then (sí)
+  if (¿cantidad <= producto.stock del catálogo?) then (sí)
+    :agregarAlCarrito(carrito, producto, cantidad);
+    note right
+      Devuelve nuevo array; si el producto ya
+      existía, incrementa cantidad. No muta el original.
+    end note
+    :calcularTotalCarrito(carrito);
+    :aplicarIva(total) — alícuota 21%;
+    :generarResumenCarrito(carrito);
+    :Mostrar resumen con alert() y console.log();
+  else (no)
+    :Mostrar error con alert(): "Stock insuficiente";
+    end
   endif
 else (no)
-  :Mostrar error: "Sin stock";
-  stop
+  :Mostrar error con alert(): "Producto u cantidad inválidos";
+  end
 endif
 
 |Usuario|
-:Visualiza el carrito con el nuevo total;
+:Visualiza el resumen del carrito con total e IVA;
 stop
 @enduml

@@ -6,27 +6,34 @@ skinparam ArrowColor #333333
 
 |Usuario|
 start
-:Ingresa criterios de búsqueda;
-:Presiona botón de filtrar;
+:Ingresa categoría con prompt();
+note right
+  Criterios admitidos por `validarCategoria(categoria)`:
+  "cpu", "gpu", "ram", "storage", "psu", "cooling"
+  o "todas" como wildcard.
+end note
+:Ingresa precio máximo con prompt();
+note right
+  Validado con parseFloat() > 0
+  en `flujo4Buscador()` (js/script.js).
+end note
 
 |Sistema|
-:Solicitar catálogo de productos;
-
-|Base de Datos|
-:Consultar registros de productos;
-:Retornar array de productos;
-
-|Sistema|
-:Inicializa lista de resultados;
+:Lee `catalogo` (array en memoria);
+:Inicializa array `resultado` vacío;
 repeat
-  :Evalúa producto actual;
-  if (¿Cumple con los filtros?) then (sí)
-    :Agrega producto a resultados;
+  :Toma producto[i] del catálogo;
+  if (¿categoria === "todas" o coincide?) then (sí)
+    if (¿precio <= precioMaximo?) then (sí)
+      :resultado.push(producto);
+    else (no)
+    endif
   else (no)
   endif
-repeat while (¿Quedan productos?) is (sí)
-:Ordenar resultados;
-:Renderizar en el DOM;
+repeat while (¿Quedan productos en el catálogo?) is (sí)
+:ordenarPorPrecio(resultado) — ascendente;
+:generarResultadosBusqueda(resultado, ...);
+:Mostrar resumen con alert() y console.log();
 
 |Usuario|
 :Visualiza productos filtrados;
