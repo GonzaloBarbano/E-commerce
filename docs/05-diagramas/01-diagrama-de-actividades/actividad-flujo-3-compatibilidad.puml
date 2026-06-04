@@ -11,12 +11,9 @@ start
 
 |Sistema|
 :Identificar IDs de componentes;
+:Leer especificaciones técnicas (Specs)
+del array `componentes` en memoria;
 
-|Base de Datos|
-:Consultar especificaciones técnicas (Specs);
-:Retornar datos técnicos detallados;
-
-|Sistema|
 :Inicializa lista de errores;
 repeat
   :Tomar siguiente regla de validación;
