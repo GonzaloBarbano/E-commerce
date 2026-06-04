@@ -21,12 +21,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#109](https://github.com/GonzaloBarbano/E-commerce/pull/109) - @GonzaloBarbano (Coordinador / DevOps)
 
 ### Fixed
+- [fix/coord-devops-puml] Resolución de RC11, RC12, RC13, RC18, RC19, RC25 y RC26
+  PR: [#122](https://github.com/GonzaloBarbano/E-commerce/pull/122) - @Naguirre0102 (Coordinador / DevOps)
 
 - [fix/coord-devops-readme-y-titles] Resolución de RC1, RC4, RC9, RC14, RC21, RC31 y RC32
   PR: [#121](https://github.com/GonzaloBarbano/E-commerce/pull/121) - @Naguirre0102 (Coordinador / DevOps)
-
-- [fix/coord-devops-puml-sin-dom-ni-bd] Resolución de RC11, RC12, RC13, RC18, RC19, RC25 y RC26: diagramas .puml alineados con la consigna (sin DOM, sin Base de Datos, criterios reales del código y stop→end en flujos alternativos).
-  PR: [#XXX](https://github.com/GonzaloBarbano/E-commerce/pull/XXX) - @Naguirre0102 (Coordinador / DevOps)
 
 - [fix/tester-correcciones] Resolución de RC3, RC22, RC29 y RC30
   PR: [#120](https://github.com/GonzaloBarbano/E-commerce/pull/120) - @Naguirre0102 (Tester JavaScript / QA Engineer)
