@@ -1,4 +1,5 @@
 @startuml flujo-2-carrito
+title Flujo 2: Gestión de Carrito y Cálculo de Precio
 skinparam ActivityBackgroundColor #FFFFFF
 skinparam ActivityBorderColor #333333
 skinparam ArrowColor #333333
