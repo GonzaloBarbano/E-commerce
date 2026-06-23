@@ -176,7 +176,7 @@ function generarResumenCotizacion(categoria, cantidad, precioUnitario) {
  * Flujo 1 — Cotizador interactivo con prompt/alert.
  * Entrada → proceso → salida usando las funciones puras del flujo.
  */
-function flujo1Cotizador() {
+function cotizadorInteractivo() {
   var categorias = "cpu | gpu | ram | storage | psu | cooling";
   var categoria = prompt(
     "=== COTIZADOR PC HARDWARE ===\n" +
@@ -280,7 +280,7 @@ function generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente) {
 /**
  * Flujo 2 — Verificador de compatibilidad interactivo.
  */
-function flujo2Compatibilidad() {
+function verificadorCompatibilidad() {
   var tdpCpuStr = prompt(
     "=== VERIFICADOR DE COMPATIBILIDAD ===\n" +
     "Ingresá el TDP de tu CPU en watts\n" +
@@ -321,6 +321,7 @@ function flujo2Compatibilidad() {
 
 /**
  * Agrega un producto al carrito. Si ya existe, incrementa la cantidad.
+ * Decrementa el stock del producto en el catálogo cuando se agrega.
  * @param {Array} carrito - Array actual del carrito.
  * @param {object} producto - Producto a agregar (debe tener id, nombre, precio).
  * @param {number} cantidad - Cantidad a agregar.
@@ -355,6 +356,9 @@ function agregarAlCarrito(carrito, producto, cantidad) {
       cantidad: cantidad,
     });
   }
+
+  // Decrementar stock del producto en el catálogo (efecto real)
+  producto.stock -= cantidad;
 
   return carritoActualizado;
 }
@@ -428,7 +432,7 @@ function obtenerProductoPorOpcion(opcion) {
 /**
  * Flujo 3 — Simulador de carrito interactivo.
  */
-function flujo3Carrito() {
+function carritoSimulador() {
   var carrito = [];
   var continuar = true;
 
@@ -549,7 +553,7 @@ function generarResultadosBusqueda(resultados, categoria, precioMaximo) {
 /**
  * Flujo 4 — Buscador de productos interactivo.
  */
-function flujo4Buscador() {
+function buscadorProductos() {
   var categorias = "cpu | gpu | ram | storage | psu | cooling | todas";
   var categoria = prompt(
     "=== BUSCADOR DE PRODUCTOS ===\n" +
@@ -617,16 +621,16 @@ function iniciarMenu() {
     } else {
       switch (opcion) {
         case "1":
-          flujo1Cotizador();
+          cotizadorInteractivo();
           break;
         case "2":
-          flujo2Compatibilidad();
+          verificadorCompatibilidad();
           break;
         case "3":
-          flujo3Carrito();
+          carritoSimulador();
           break;
         case "4":
-          flujo4Buscador();
+          buscadorProductos();
           break;
         default:
           alert("Opción inválida. Elegí entre 0 y 4.");
@@ -635,5 +639,48 @@ function iniciarMenu() {
   }
 }
 
-// Iniciar aplicación al cargar el script
+// =============================================================================
+// INICIALIZACIÓN DEL MODAL
+// =============================================================================
+
+/**
+ * Inicializa el event listener para el modal de detalle de producto.
+ * Actualiza los campos del modal cuando se abre, basándose en los data-attributes
+ * del botón que lo dispara.
+ */
+function inicializarModalProducto() {
+  var modalElement = document.getElementById("product-modal");
+  if (!modalElement) return; // El modal no existe en el DOM
+
+  modalElement.addEventListener("show.bs.modal", function (event) {
+    var button = event.relatedTarget;
+    var data = button.dataset;
+
+    // Actualizar título del modal
+    document.getElementById("product-modal-label").textContent =
+      data.productName;
+
+    // Actualizar imagen con validación de seguridad
+    var img = document.getElementById("modal-product-image");
+    var allowedSrc =
+      data.productImage && data.productImage.startsWith("assets/")
+        ? data.productImage
+        : "";
+    img.src = allowedSrc;
+    img.alt = data.productName;
+
+    // Actualizar datos del producto
+    document.getElementById("modal-product-brand").textContent =
+      data.productBrand;
+    document.getElementById("modal-product-specs").textContent =
+      data.productSpecs;
+    document.getElementById("modal-product-stock").textContent =
+      data.productStock;
+    document.getElementById("modal-product-price").textContent =
+      data.productPrice;
+  });
+}
+
+// Inicializar modal y menú al cargar el script
+inicializarModalProducto();
 iniciarMenu();
