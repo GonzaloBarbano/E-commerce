@@ -1050,31 +1050,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/script.js"></script>
-    <script>
-      document
-        .getElementById("product-modal")
-        .addEventListener("show.bs.modal", function (event) {
-          const button = event.relatedTarget;
-          const data = button.dataset;
-          document.getElementById("product-modal-label").textContent =
-            data.productName;
-          const img = document.getElementById("modal-product-image");
-          // Validación: solo aceptar rutas relativas del proyecto (defensa frente a inyección de URLs externas o javascript: URIs si en el futuro los data-* vienen de fuente dinámica)
-          const allowedSrc =
-            data.productImage && data.productImage.startsWith("assets/")
-              ? data.productImage
-              : "";
-          img.src = allowedSrc;
-          img.alt = data.productName;
-          document.getElementById("modal-product-brand").textContent =
-            data.productBrand;
-          document.getElementById("modal-product-specs").textContent =
-            data.productSpecs;
-          document.getElementById("modal-product-stock").textContent =
-            data.productStock;
-          document.getElementById("modal-product-price").textContent =
-            data.productPrice;
-        });
-    </script>
   </body>
 </html>
