@@ -1,517 +1,250 @@
-# 📊 Diagramas de Actividades - E-commerce de Hardware
+# 📊 Diagramas de Actividades — E-commerce de Hardware
 
-**Proyecto:** E-commerce de Componentes Hardware para PC  
-**Módulo:** Diagramas UML de Actividades  
-**Fecha:** 12 de mayo de 2026  
-**Estado:** Actualizado - Con 3 Actores (Usuario | Sistema | Base de Datos)
+**Proyecto:** E-commerce de Componentes Hardware para PC
+**Módulo:** Diagramas UML de Actividades
+**Última actualización:** 23 de junio de 2026
+**Estado:** Numeración alineada con el menú real de `js/script.js` (post revisión del docente)
 
 ---
 
 ## 📑 Índice de Diagramas
 
-1. [Flujo 1: Búsqueda y Filtrado de Productos](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-1-busqueda.puml)
-2. [Flujo 2: Gestión de Carrito y Cálculo de Precio](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-2-carrito.puml)
-3. [Flujo 3: Validación de Compatibilidad de Componentes](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-3-compatibilidad.puml)
-4. [Flujo 4: Generación de Recibo y Resumen de Orden](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-4-recibo.puml)
+Los 4 diagramas corresponden uno a uno con las 4 opciones del menú principal de `js/script.js` (`iniciarMenu()`). El número del archivo coincide con el número de la opción del menú que ve el usuario.
+
+| # | Flujo | Archivo `.puml` | Imagen `.png` |
+|---|---|---|---|
+| 1 | Cotizador de Productos | [actividad-flujo-1-cotizador.puml](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-1-cotizador.puml) | [.png](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-1-cotizador.png) |
+| 2 | Verificador de Compatibilidad | [actividad-flujo-2-compatibilidad.puml](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-2-compatibilidad.puml) | [.png](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-2-compatibilidad.png) |
+| 3 | Simulador de Carrito | [actividad-flujo-3-carrito.puml](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-3-carrito.puml) | [.png](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-3-carrito.png) |
+| 4 | Buscador y Filtrado de Productos | [actividad-flujo-4-buscador.puml](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-4-buscador.puml) | [.png](/docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-4-buscador.png) |
 
 ---
 
-## 🏗️ Arquitectura de 3 Actores
+## 🏗️ Arquitectura de 2 Actores
 
-Todos los diagramas de actividades siguen una arquitectura de **3 swimlanes (particiones)** que representan los 3 actores principales del sistema:
+Todos los diagramas usan **2 swimlanes (particiones)** que representan los actores reales del sistema en esta entrega. La consigna prohíbe DOM/eventos y la materia no contempla backend ni base de datos.
 
-### 👤 **Usuario**
+### 👤 Usuario
 
-- **Responsabilidad:** Entrada de datos e interacción con la UI
-- **Acciones:** Ingresa criterios, selecciona productos, confirma compras
-- **Comunicación:** Envía solicitudes al Sistema
+- **Responsabilidad:** entrada de datos vía `prompt()` y visualización de resultados vía `alert()` / `console.log()`.
+- **Acciones:** elige opción del menú, ingresa categoría / cantidad / TDP / precio máximo según el flujo.
 
-### ⚙️ **Sistema**
+### ⚙️ Sistema
 
-- **Responsabilidad:** Lógica de negocio, orquestación, procesamiento
-- **Acciones:** Valida reglas, calcula valores, coordina solicitudes
-- **Comunicación:** Recibe del Usuario, consulta Base de Datos, retorna resultados
+- **Responsabilidad:** lógica de negocio, validaciones, cálculos y orquestación.
+- **Acciones:** valida entradas, aplica reglas (descuentos, IVA, compatibilidad), lee arrays y objetos en memoria (`catalogo`, `preciosPorCategoria`, `fuentesRecomendadas`), construye textos de salida.
 
-### 🗄️ **Base de Datos**
-
-- **Responsabilidad:** Persistencia de datos, consultas y registros
-- **Acciones:** Consulta registros, retorna datos técnicos, registra transacciones
-- **Comunicación:** Responde consultas del Sistema
-
-### 📊 Flujo General de Comunicación
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│  USUARIO   →   SISTEMA   ↔   BASE DE DATOS                   │
-│                                                               │
-│  (entrada)  (lógica &       (persistencia &                  │
-│             orquestación)    consultas)                       │
-└──────────────────────────────────────────────────────────────┘
-```
-
-Esta separación de responsabilidades es fundamental para:
-
-- ✅ **Claridad**: Cada actor tiene un rol bien definido
-- ✅ **Mantenibilidad**: Facilita traducción a código JavaScript
-- ✅ **Realismo**: Refleja arquitectura real de aplicaciones web modernas
-- ✅ **Educación**: Enseña separación de concerns en software
+> ⚠️ **No hay swimlane "Base de Datos"** en esta entrega. La persistencia se simula con arrays JavaScript en memoria. Las versiones previas de los diagramas incluían un actor `|Base de Datos|` que fue eliminado tras la revisión del docente (RC13, RC18, RC26).
 
 ---
 
-## Flujo 1: Búsqueda y Filtrado de Productos
+## Flujo 1: Cotizador de Productos
 
-### 📝 Descripción
+**Función orquestadora:** `flujo1Cotizador()` en `js/script.js`.
 
-**Propósito:** Permitir al usuario buscar productos en el catálogo aplicando múltiples criterios de filtrado (marca, rango de precio, especificaciones).
+### Descripción
 
-**Flujo Lógico:**
+Permite al usuario cotizar la compra de una cantidad de unidades de una categoría de producto, aplicando un descuento por volumen y el IVA del 21 %.
 
-- 👤 **Usuario:** Ingresa criterios de búsqueda (marca, rango de precio, tipo de componente, especificaciones)
-- ⚙️ **Sistema:** Solicita el catálogo de productos a la base de datos
-- 🗄️ **Base de Datos:** Consulta registros de productos y retorna array
-- ⚙️ **Sistema:** Accede al catálogo e itera sobre cada producto
-- ⚙️ **Sistema:** Para cada producto, valida si coincide con:
-  - ✅ La marca especificada
-  - ✅ El rango de precio solicitado
-  - ✅ Las especificaciones técnicas requeridas
-- ⚙️ **Sistema:** Agrupa y ordena los resultados, renderiza en el DOM
-- 👤 **Usuario:** Recibe la lista de productos filtrados
+**Comportamiento del flujo:**
 
-**Caso de Uso Real:**
-
-```
-Usuario: "Quiero GPUs NVIDIA entre $800 y $1500"
-↓
-Sistema: Filtra catálogo → Socket === NVIDIA && precio >= 800 && precio <= 1500
-↓
-Resultado: [RTX 4080, RTX 4090, RTX 5090]
-```
-
-**Componentes HTML Relacionados:**
-
-- `#search-input` — Campo de búsqueda con datalist
-- `#price-range-min` / `#price-range-max` — Sliders de rango de precio
-- `.categories-list` — Selector de categorías
-- `#filters-form` — Checkboxes de marca y especificaciones
-- `.btn-apply-filters` — Botón aplicar filtros
-
-**Conceptos Técnicos Practicados:**
-
-- ✅ Arrays (catálogo de productos)
-- ✅ Funciones de filtrado (filter/search)
-- ✅ Condicionales if/else
-- ✅ Ciclos for/while
-- ✅ Swimlanes Usuario | Sistema | Base de Datos
-- ✅ Consultas a base de datos
-- ✅ Persistencia de datos
+- 👤 El usuario elige una categoría con `prompt()` (`cpu`, `gpu`, `ram`, `storage`, `psu`, `cooling`).
+- ⚙️ El sistema valida la categoría con `validarCategoria(categoria)`. Si es inválida, muestra error con `alert()` y termina.
+- 👤 El usuario ingresa la cantidad de unidades (1–100) con `prompt()`.
+- ⚙️ El sistema valida la cantidad con `validarCantidad(cantidad)`. Si es inválida, muestra error y termina.
+- ⚙️ El sistema lee el precio unitario desde `preciosPorCategoria[categoria]` (objeto en memoria).
+- ⚙️ Calcula el descuento por volumen con `calcularDescuento(cantidad)` (tramos: 1→0 %, 3→5 %, 5→10 %, 10→15 %).
+- ⚙️ Calcula el subtotal con `calcularSubtotal(precioUnitario, cantidad)`.
+- ⚙️ Aplica IVA con `aplicarIva(subtotal)` (alícuota 21 %).
+- ⚙️ Construye el texto con `generarResumenCotizacion(...)`.
+- 👤 Visualiza el resumen vía `alert()` y `console.log()`.
 
 ### 📸 Visualización
 
-![Diagrama de Actividades - Flujo 1: Búsqueda y Filtrado](./actividad-flujo-1-busqueda.png)
+![Diagrama de Actividades — Flujo 1: Cotizador](./actividad-flujo-1-cotizador.png)
 
 ---
 
-## Flujo 2: Gestión de Carrito y Cálculo de Precio
+## Flujo 2: Verificador de Compatibilidad de Componentes
 
-### 📝 Descripción
+**Función orquestadora:** `flujo2Compatibilidad()` en `js/script.js`.
 
-**Propósito:** Gestionar la adición de productos al carrito, validar stock disponible y calcular el total con impuestos y descuentos.
+### Descripción
 
-**Flujo Lógico:**
+Recibe los TDP (consumo) de CPU y GPU del usuario, calcula el consumo total con margen de seguridad y recomienda una fuente de alimentación del array `fuentesRecomendadas`.
 
-- 👤 **Usuario:** Selecciona un producto y especifica la cantidad deseada
-- ⚙️ **Sistema:** Solicita verificación de stock a la base de datos
-- 🗄️ **Base de Datos:** Consulta disponibilidad e inventario, retorna estado
-- ⚙️ **Sistema:** Valida que:
-  - ✅ El stock esté disponible para la cantidad solicitada
-  - ✅ La cantidad no supera el límite de compra por usuario
-- ⚙️ **Sistema:** Agrega el producto al array de carrito (en memoria)
-- ⚙️ **Sistema:** Itera sobre todos los items del carrito:
-  - Calcula subtotal (precio × cantidad)
-  - Acumula en el total
-- ⚙️ **Sistema:** Calcula impuestos (21%), aplica descuentos, actualiza vista
-- 👤 **Usuario:** Visualiza el carrito actualizado con el nuevo total
+**Comportamiento del flujo:**
 
-**Caso de Uso Real:**
-
-```
-Usuario: Agrega "RTX 4090" (cantidad: 2)
-↓
-Sistema: Valida stock (2 >= disponible) → OK
-↓
-Carrito:
-  - 2x NVIDIA RTX 4090 @ $1699 = $3398
-  - Subtotal: $3398
-  - Impuestos (21%): $713.58
-  - Total: $4111.58
-```
-
-**Componentes HTML Relacionados:**
-
-- `.product-item` — Tarjetas de productos
-- `#search-input` — Búsqueda de productos
-- `.add-to-cart-btn` — Botón agregar al carrito
-- `#carrito` — Sección del carrito
-- Cantidad input — Selector de cantidad
-
-**Conceptos Técnicos Practicados:**
-
-- ✅ Arrays (items en carrito)
-- ✅ Objetos (estructura de item)
-- ✅ Operadores matemáticos (+, ×, /)
-- ✅ Condicionales if (validaciones)
-- ✅ Ciclos for (calcular totales)
-- ✅ Validación de stock desde base de datos
-- ✅ Swimlanes Usuario | Sistema | Base de Datos
-- ✅ Consultas de inventario
+- 👤 El usuario ingresa el TDP de la CPU con `prompt()`.
+- ⚙️ El sistema valida con `validarTdp(valor)` (rango 1–1000).
+- 👤 El usuario ingresa el TDP de la GPU con `prompt()`.
+- ⚙️ El sistema valida con `validarTdp(valor)`.
+- ⚙️ Calcula el consumo total con `calcularConsumoTotal(tdpCpu, tdpGpu)` aplicando `(tdpCpu + tdpGpu + 100) × 1.2`.
+- ⚙️ Llama a `recomendarFuente(consumoWatts)` que busca en `fuentesRecomendadas` la primera fuente con `potencia >= consumo`. Si supera 1000 W devuelve `null`.
+- ⚙️ Construye el informe con `generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente)`.
+- 👤 Visualiza el informe vía `alert()` y `console.log()`.
 
 ### 📸 Visualización
 
-![Diagrama de Actividades - Flujo 2: Gestión de Carrito](./actividad-flujo-2-carrito.png)
+![Diagrama de Actividades — Flujo 2: Compatibilidad](./actividad-flujo-2-compatibilidad.png)
 
 ---
 
-## Flujo 3: Validación de Compatibilidad de Componentes
+## Flujo 3: Simulador de Carrito y Cálculo de Precio
 
-### 📝 Descripción
+**Función orquestadora:** `flujo3Carrito()` en `js/script.js`.
 
-**Propósito:** Validar que los componentes de hardware seleccionados sean compatibles entre sí (socket, RAM, PSU, tamaño físico).
+### Descripción
 
-**Flujo Lógico:**
+Permite al usuario agregar productos al carrito eligiendo del catálogo, valida cantidad y stock, y al cerrar muestra el resumen del carrito con subtotal, IVA y total.
 
-- 👤 **Usuario:** Selecciona componentes (CPU, Motherboard, RAM, PSU, Refrigerador)
-- 👤 **Usuario:** Solicita validación de compatibilidad
-- ⚙️ **Sistema:** Identifica IDs de componentes
-- 🗄️ **Base de Datos:** Consulta especificaciones técnicas detalladas, retorna datos
-- ⚙️ **Sistema:** Itera sobre cada regla de validación y valida:
-  - ✅ Socket CPU === Socket Motherboard
-  - ✅ Tipo de RAM compatible con Motherboard (DDR4/DDR5)
-  - ✅ Watts de PSU >= Watts requeridos
-  - ✅ Tamaño de refrigerador entra en case
-  - ✅ Slots PCIe compatibles
-- ⚙️ **Sistema:** Si hay incompatibilidades, las agrega a un array
-- ⚙️ **Sistema:** Genera un reporte detallado (COMPATIBLE o INCOMPATIBLE)
-- 👤 **Usuario:** Visualiza el reporte con detalles
+**Comportamiento del flujo:**
 
-**Caso de Uso Real:**
-
-```
-Usuario: Ingresa configuración:
-  - CPU: AMD Ryzen 9 (Socket AM5)
-  - Motherboard: ASUS TUF (Socket AM5)
-  - RAM: DDR5 64GB
-  - PSU: 1000W Gold
-
-↓
-Sistema: Valida cada componente
-  1. Socket: AM5 === AM5 ✅
-  2. RAM: DDR5 compatible ✅
-  3. PSU: 1000W >= requerido ✅
-  4. Tamaño: Entra en case ✅
-
-Resultado: "COMPATIBLE - Construcción sin problemas"
-```
-
-**Componentes HTML Relacionados:**
-
-- `.categories-list` — Selector de categoría (CPU, GPU, RAM, etc.)
-- `#search-input` — Búsqueda de componentes específicos
-- `.product-specs` — Especificaciones técnicas del producto
-- `#compatibilidad` — Sección de validación de compatibilidad
-
-**Conceptos Técnicos Practicados:**
-
-- ✅ Objetos complejos (componentes con múltiples propiedades)
-- ✅ Comparadores (===, >, <, >=)
-- ✅ Operadores lógicos (&&, ||)
-- ✅ Ciclos for (validar cada componente)
-- ✅ Arrays (almacenar incompatibilidades)
-- ✅ Generación de reportes
-- ✅ Swimlanes Usuario | Sistema | Base de Datos
-- ✅ Consultas de especificaciones técnicas
+- 👤 El usuario elige un producto del menú con `prompt()` (opción 1–6 del catálogo).
+- ⚙️ El sistema busca el producto con `obtenerProductoPorOpcion(opcion)` (lectura del array `catalogo`).
+- 👤 El usuario ingresa la cantidad (1–10).
+- ⚙️ El sistema valida que la cantidad sea válida y no supere el stock del producto.
+- ⚙️ Llama a `agregarAlCarrito(carrito, producto, cantidad)` (devuelve un nuevo array sin mutar el original; si el producto ya estaba, incrementa cantidad).
+- ⚙️ Calcula el total con `calcularTotalCarrito(carrito)` y aplica IVA con `aplicarIva(total)`.
+- ⚙️ Construye el resumen con `generarResumenCarrito(carrito)`.
+- 👤 Visualiza el resumen vía `alert()` y `console.log()`.
 
 ### 📸 Visualización
 
-![Diagrama de Actividades - Flujo 3: Validación de Compatibilidad](./actividad-flujo-3-compatibilidad.png)
+![Diagrama de Actividades — Flujo 3: Carrito](./actividad-flujo-3-carrito.png)
 
 ---
 
-## Flujo 4: Generación de Recibo y Resumen de Orden
+## Flujo 4: Buscador y Filtrado de Productos
 
-### 📝 Descripción
+**Función orquestadora:** `flujo4Buscador()` en `js/script.js`.
 
-**Propósito:** Generar un recibo detallado y número de orden única cuando el usuario confirma la compra.
+### Descripción
 
-**Flujo Lógico:**
+Permite al usuario buscar productos del catálogo filtrando por categoría y precio máximo, devolviendo los resultados ordenados de menor a mayor precio.
 
-- 👤 **Usuario:** Revisa carrito final, proporciona datos de envío y facturación
-- 👤 **Usuario:** Confirma la intención de compra
-- ⚙️ **Sistema:** Valida que:
-  - ✅ El carrito contiene al menos un item
-  - ✅ Los datos del usuario están completos
-- ⚙️ **Sistema:** Genera número único de orden (ej. PO-20260511-0847)
-- ⚙️ **Sistema:** Itera sobre cada item del carrito:
-  - Obtiene cantidad y precio
-  - Calcula subtotal por línea
-  - Crea línea de recibo detallada
-- ⚙️ **Sistema:** Calcula subtotal acumulado e impuestos (21%)
-- ⚙️ **Sistema:** Si usuario ingresó código de descuento:
-  - 🗄️ **Base de Datos:** Valida código de descuento, retorna validez/porcentaje
-  - ⚙️ **Sistema:** Aplica descuento si es válido
-- ⚙️ **Sistema:** Suma envío fijo ($50) y calcula total final
-- 🗄️ **Base de Datos:** Registra orden y persistencia de datos
-- 👤 **Usuario:** Recibe número de orden y recibo detallado
+**Comportamiento del flujo:**
 
-**Caso de Uso Real:**
-
-```
-Usuario: Confirma compra
-↓
-Sistema: Genera Orden #PO-20260511-0847
-
-Itemización:
-  2x NVIDIA RTX 4090 @ $1699 = $3398
-  1x AMD Ryzen 9 @ $749 = $749
-  1x Corsair DDR5 64GB @ $349 = $349
-  ─────────────────────────────────
-  Subtotal:      $4,496.00
-  Impuestos (21%): $944.16
-  Descuento:     -$0.00
-  Envío:         $50.00
-  ─────────────────────────────────
-  TOTAL FINAL:   $5,490.16
-
-Código de orden: PO-20260511-0847
-```
-
-**Componentes HTML Relacionados:**
-
-- `#carrito` — Sección del carrito
-- `.cart-items` — Lista de items en carrito
-- `.btn-checkout` — Botón confirmar compra
-- Formulario de datos de envío
-- Resumen de orden (total, impuestos, etc.)
-
-**Conceptos Técnicos Practicados:**
-
-- ✅ Arrays y Objetos combinados (carrito → items)
-- ✅ Funciones para cálculos complejos
-- ✅ Generación de strings formateados (recibo)
-- ✅ Ciclos for (itemizar)
-- ✅ Condicionales if (validaciones)
-- ✅ Swimlanes Usuario | Sistema | Base de Datos
-- ✅ Transacciones de datos (crear y persistir orden)
-- ✅ Validación de códigos de descuento en BD
-- ✅ Integración de todos los conceptos anteriores
+- 👤 El usuario ingresa la categoría con `prompt()` (acepta `cpu`/`gpu`/`ram`/`storage`/`psu`/`cooling` o `todas` como wildcard).
+- 👤 El usuario ingresa el precio máximo con `prompt()` (validado con `parseFloat() > 0`).
+- ⚙️ El sistema lee el array `catalogo` en memoria.
+- ⚙️ Itera sobre el catálogo, evaluando para cada producto si coincide con la categoría y si su precio es menor o igual al máximo. Acumula los matches en un array `resultado`.
+- ⚙️ Llama a `ordenarPorPrecio(resultado)` para ordenar ascendentemente sin mutar el array original.
+- ⚙️ Construye el texto con `generarResultadosBusqueda(resultado, categoria, precioMaximo)`.
+- 👤 Visualiza los resultados vía `alert()` y `console.log()`.
 
 ### 📸 Visualización
 
-![Diagrama de Actividades - Flujo 4: Generación de Recibo](./actividad-flujo-4-recibo.png)
+![Diagrama de Actividades — Flujo 4: Buscador](./actividad-flujo-4-buscador.png)
 
 ---
 
-## 🛠️ Instrucciones para Editar Diagramas PlantUML
+## 🛠️ Cómo regenerar los `.png`
 
-### Opción 1: PlantUML Editor Online (Recomendado para rápidas visualizaciones)
+Después de editar un `.puml` hay que regenerar la imagen para que el `.png` coincida con el contenido actual.
 
-1. **Accede a:** https://www.plantumleditor.com
-2. **Abre el diagrama:**
-   - Copia el contenido del archivo `.puml` (ej. `actividad-flujo-1-busqueda.puml`)
-   - Pégalo en la sección izquierda del editor
-3. **Visualiza en tiempo real:**
-   - El diagrama se renderiza automáticamente en la sección derecha
-4. **Realiza cambios:**
-   - Edita el código PlantUML directamente
-   - Cambia nombres de actividades, decisiones, colores, swimlanes
-5. **Exporta:**
-   - Botón "Export" → Descarga como PNG, SVG o PDF
+### Opción 1 — Extensión PlantUML en VS Code (recomendada)
 
-### Opción 2: Extensión VS Code PlantUML (Recomendado para desarrollo local)
+1. Instalá la extensión `jebbs.plantuml` desde el marketplace de VS Code.
+2. Abrí el archivo `.puml` que quieras regenerar.
+3. `Alt + D` para abrir el preview.
+4. Click derecho sobre el archivo → `PlantUML: Export Current File` → elegí `png`.
+5. El archivo se guarda en la misma carpeta.
 
-#### Instalación:
-
-1. **Abre VS Code**
-2. **Accede a Extensiones** (Ctrl+Shift+X / Cmd+Shift+X en Mac)
-3. **Busca:** `PlantUML`
-4. **Instala:** La extensión oficial de PlantUML (es.kiviok.diagrams o jebbs.plantuml)
-
-#### Uso:
-
-1. **Abre un archivo `.puml`** en VS Code
-2. **Vista Previa:**
-   - Haz clic en el icono "Preview" (esquina superior derecha)
-   - O presiona: `Alt+D`
-3. **Edición en tiempo real:**
-   - El preview se actualiza mientras escribes
-4. **Exportar:**
-   - Click derecho en el archivo → "PlantUML: Export Current File"
-   - Elige formato (PNG, SVG, PDF)
-   - Se guarda automáticamente en la misma carpeta
-
-### Opción 3: Línea de Comandos con PlantUML CLI
-
-#### Instalación:
+### Opción 2 — PlantUML CLI (para automatizar)
 
 ```bash
-# Con Homebrew (Mac)
-brew install plantuml
-
-# O descargar desde: https://plantuml.com/download
-```
-
-#### Uso:
-
-```bash
-# Generar PNG desde archivo .puml
-plantuml -Tpng actividad-flujo-1-busqueda.puml
-
-# Generar SVG (vectorial, mejor para zoom)
-plantuml -Tsvg actividad-flujo-1-busqueda.puml
-
-# Generar PDF
-plantuml -Tpdf actividad-flujo-1-busqueda.puml
-
-# Observar cambios en tiempo real
-plantuml -Tpng -o ./output/ *.puml -watch
+plantuml -Tpng docs/05-diagramas/01-diagrama-de-actividades/*.puml
 ```
 
 ---
 
-## 📋 Sintaxis Básica de PlantUML para Diagramas de Actividades
+## 📋 Sintaxis básica usada
 
-### Estructura Fundamental
+### Estructura general
 
-```puml
+```plantuml
 @startuml nombre-del-diagrama
-' Configuración visual
+title Título visible del diagrama
 skinparam ActivityBackgroundColor #FFFFFF
 
 start
-:Actividad 1;
-:Actividad 2;
+:Actividad;
 stop
 @enduml
 ```
 
-### Decisiones (If/Then/Else)
+### Decisiones
 
-```puml
-if (¿Pregunta/Condición?) then (sí)
-  :Acción si verdadero;
+```plantuml
+if (¿Pregunta?) then (sí)
+  :Camino verdadero;
 else (no)
-  :Acción si falso;
+  :Camino falso;
+  end
 endif
 ```
 
-### Ciclos (Repeat/While)
+### Ciclos
 
-```puml
+```plantuml
 repeat
-  :Acción dentro del ciclo;
-repeat while (¿Condición?) is (sí)
+  :Iteración;
+repeat while (¿Continuar?) is (sí)
 ```
 
-### Swimlanes (Particiones)
+### Swimlanes (2 actores)
 
-```puml
+```plantuml
 |Usuario|
-start
-:Ingresa criterios de búsqueda;
+:Entrada con prompt();
 
 |Sistema|
-:Procesa criterios;
-
-|Base de Datos|
-:Consulta registros;
-:Retorna datos;
-
-|Sistema|
-:Filtra resultados;
+:Validación y cálculo;
 
 |Usuario|
-:Visualiza resultados;
-stop
+:Visualización con alert();
 ```
 
-**Nota sobre 3 Swimlanes:**
+### Notas explicativas
 
-- **|Usuario|** — Acciones del cliente (entrada de datos, visualización)
-- **|Sistema|** — Lógica de negocio, procesamiento, orquestación
-- **|Base de Datos|** — Consultas, persistencia, lecturas de registros
-
-Para cambiar de swimlane, simplemente usa `|Nombre del Swimlane|` antes de la actividad.
-
-### Flechas con Etiquetas
-
-```puml
-:Actividad A;
---> :Actividad B;
-' O con etiqueta
---> "Etiqueta en flecha" :Actividad C;
+```plantuml
+:agregarAlCarrito(carrito, producto, cantidad);
+note right
+  No muta el array original.
+  Si el producto ya existe, incrementa cantidad.
+end note
 ```
 
-### Colores Personalizados
+### Fin de flujos alternativos (`stop` vs `end`)
 
-```puml
-!define COLOR_USUARIO #E3F2FD
-!define COLOR_SISTEMA #F3E5F5
-
-partition "Usuario" #E3F2FD {
-  :Acción del usuario;
-}
-```
+- `stop` cierra el flujo principal — un solo `stop` por diagrama.
+- `end` cierra ramas alternativas (early returns por validación, errores) — pueden existir varios `end`.
 
 ---
 
-## ✅ Checklist de Edición
+## ✅ Checklist al editar un diagrama
 
-Cuando edites un diagrama, verifica:
-
-- [ ] **Sintaxis válida** — El diagrama compila sin errores
-- [ ] **3 Swimlanes claros** — Usuario, Sistema y Base de Datos bien diferenciados
-- [ ] **Decisiones lógicas** — if/then/else representan validaciones reales
-- [ ] **Ciclos correctos** — repeat/while se usan en iteraciones sobre arrays
-- [ ] **Coherencia con HTML** — Las actividades reflejan elementos del `index.html`
-- [ ] **Flujo realista** — Entrada → Proceso → Salida tiene sentido empresarial
-- [ ] **Interacciones BD** — Las consultas a base de datos están mapeadas
-- [ ] **Etiquetas claras** — Cada actividad tiene nombre descriptivo
-- [ ] **Exportación PNG** — Se genera correctamente para documentación
+- [ ] Sintaxis válida (el `.puml` compila sin errores).
+- [ ] `title` coincide con el número y nombre del flujo del menú.
+- [ ] Solo 2 swimlanes (`|Usuario|` y `|Sistema|`). Sin Base de Datos.
+- [ ] Sin referencias a DOM ni eventos (la consigna lo prohíbe).
+- [ ] Solo un `stop` (final del flujo principal); usar `end` para ramas alternativas.
+- [ ] Cada función nombrada en el diagrama existe realmente en `js/script.js`.
+- [ ] `.png` regenerado tras los cambios.
 
 ---
 
-## 🔗 Referencias Rápidas
+## 🔗 Referencias
 
-| Recurso                        | URL                                                 |
-| ------------------------------ | --------------------------------------------------- |
-| Documentación oficial PlantUML | https://plantuml.com/activity-diagram-beta          |
-| Editor online                  | https://www.plantumleditor.com                      |
-| Descargar PlantUML             | https://plantuml.com/download                       |
-| Sintaxis Actividades           | https://plantuml.com/activity-diagram-beta#swimlane |
-
----
-
-## 📌 Notas Importantes
-
-1. **Naming Convention:** Los archivos `.puml` siguen patrón `actividad-flujo-[N]-[nombre].puml`
-
-2. **Versionado:** Si necesitas cambiar un diagrama:
-   - Edita el archivo `.puml` original
-   - Regenera la imagen PNG
-   - Commit a git con mensaje descriptivo
-
-3. **Sincronización:** Los diagramas deben mantenerse sincronizados con:
-   - `spec-arq-diagramas.md` (especificación de requisitos)
-   - `index.html` (estructura del proyecto)
-   - `plan.md` (roadmap del proyecto)
-
-4. **Validación:** Antes de comprometer cambios, verifica que:
-   - El `.puml` compila sin errores
-   - La PNG se genera correctamente
-   - El flujo es coherente con la especificación
+| Recurso | URL |
+|---|---|
+| Documentación oficial PlantUML | https://plantuml.com/activity-diagram-beta |
+| Editor online | https://www.plantumleditor.com |
+| Sintaxis de actividades + swimlanes | https://plantuml.com/activity-diagram-beta#swimlane |
 
 ---
 
-**Última actualización:** 12 de mayo de 2026  
-**Autor:** @GonzaloBarbano - Grupo N°3  
-**Estado:** ✅ Completo con 3 Actores (Usuario | Sistema | Base de Datos)  
-**Cambios:** Incluye interacciones con Base de Datos en todos los diagramas
+**Autor original:** @GonzaloBarbano (Arquitecto de Diagramas en la entrega inicial)
+**Mantenedor actual:** @Naguirre0102 (asumió el rol tras la baja de Gonzalo Barbano del grupo el 22 de junio de 2026)
+**Estado:** ✅ Numeración alineada con el menú real | 2 actores (Usuario + Sistema) | Sin Base de Datos

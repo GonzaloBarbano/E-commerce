@@ -1,5 +1,5 @@
-@startuml flujo-1-busqueda
-title Flujo 1: Búsqueda y Filtrado de Productos
+@startuml flujo-4-buscador
+title Flujo 4: Buscador y Filtrado de Productos
 skinparam ActivityBackgroundColor #FFFFFF
 skinparam ActivityBorderColor #333333
 skinparam ArrowColor #333333
@@ -15,7 +15,7 @@ end note
 :Ingresa precio máximo con prompt();
 note right
   Validado con parseFloat() > 0
-  en `flujo4Buscador()` (js/script.js).
+  en la función orquestadora del buscador (js/script.js).
 end note
 
 |Sistema|

@@ -1,5 +1,5 @@
-@startuml flujo-3-compatibilidad
-title Flujo 3: Validación de Compatibilidad de Componentes
+@startuml flujo-2-compatibilidad
+title Flujo 2: Verificador de Compatibilidad de Componentes
 skinparam ActivityBackgroundColor #FFFFFF
 skinparam ActivityBorderColor #333333
 skinparam ArrowColor #333333
