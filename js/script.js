@@ -98,7 +98,7 @@ var fuentesRecomendadas = [
 ];
 
 // =============================================================================
-// FLUJO 4 — COTIZADOR DE PRODUCTOS
+// FLUJO 1 — COTIZADOR DE PRODUCTOS
 // =============================================================================
 
 /**
@@ -209,7 +209,7 @@ function cotizadorInteractivo() {
 }
 
 // =============================================================================
-// FLUJO 3 — VERIFICADOR DE COMPATIBILIDAD
+// FLUJO 2 — VERIFICADOR DE COMPATIBILIDAD
 // =============================================================================
 
 /**
@@ -316,7 +316,7 @@ function verificadorCompatibilidad() {
 }
 
 // =============================================================================
-// FLUJO 2 — SIMULADOR DE CARRITO
+// FLUJO 3 — SIMULADOR DE CARRITO
 // =============================================================================
 
 /**
@@ -474,7 +474,7 @@ menuProductos += "\nItems en carrito: " + carrito.length + "\n0. Ver resumen y f
 }
 
 // =============================================================================
-// FLUJO 1 — BUSCADOR DE PRODUCTOS
+// FLUJO 4 — BUSCADOR DE PRODUCTOS
 // =============================================================================
 
 /**
