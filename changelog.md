@@ -21,6 +21,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#109](https://github.com/GonzaloBarbano/E-commerce/pull/109) - @GonzaloBarbano (Coordinador / DevOps)
 
 ### Fixed
+
+- [fix/coord-devops-renumeracion-puml] Resolución de RC10, RC10(dup), RC20 y RC23(dup): renombramiento de los `.puml` para alinear numeración con el menú real, creación del diagrama del Cotizador (no existía), eliminación del de Recibo (no implementado) y reescritura completa de `diagramas-doc.md` con 2 actores en lugar de 3.
+  PR: [#XXX](https://github.com/GonzaloBarbano/E-commerce/pull/XXX) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
 - [fix/coord-devops-puml] Resolución de RC11, RC12, RC13, RC18, RC19, RC25 y RC26
   PR: [#122](https://github.com/GonzaloBarbano/E-commerce/pull/122) - @Naguirre0102 (Coordinador / DevOps)
 

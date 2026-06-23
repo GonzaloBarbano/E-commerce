@@ -37,27 +37,29 @@ Las 4 suites del runner corresponden a las 4 opciones del menú principal de `js
 
 ### 🔴 Post-mortem del rol Tester: desalineación diagramas ↔ código (RC22 + RC30)
 
-Durante la integración detecté que los diagramas entregados por el Arquitecto y los flujos implementados por el Desarrollador JavaScript **no estaban alineados**:
+> **Estado al 23 de junio de 2026:** la desalineación quedó RESUELTA tras el fix `fix/coord-devops-renumeracion-puml` (alineación de archivos `.puml` con el menú real). Esta sección se mantiene como evidencia del aprendizaje del rol Tester.
 
-| # del menú | Implementado | Diagrama numerado por Arquitecto | Diagrama temáticamente equivalente |
+Durante la integración detecté que los diagramas entregados por el Arquitecto y los flujos implementados por el Desarrollador JavaScript **no estaban alineados**. La tabla muestra el ANTES (entrega original) y el AHORA (post correcciones):
+
+| # del menú | Implementado | Diagrama original (ANTES) | Diagrama actual (AHORA) |
 |---|---|---|---|
-| 1 | Cotizador | `actividad-flujo-1-busqueda.puml` | ❌ No existe — se cambió alcance: "Recibo" se reemplazó por "Cotizador" |
-| 2 | Compatibilidad | `actividad-flujo-2-carrito.puml` | `actividad-flujo-3-compatibilidad.puml` |
-| 3 | Carrito | `actividad-flujo-3-compatibilidad.puml` | `actividad-flujo-2-carrito.puml` |
-| 4 | Buscador | `actividad-flujo-4-recibo.puml` | `actividad-flujo-1-busqueda.puml` |
+| 1 | Cotizador | ❌ No existía (el "Recibo" se cambió de alcance) | ✅ `actividad-flujo-1-cotizador.puml` (creado) |
+| 2 | Compatibilidad | `actividad-flujo-3-compatibilidad.puml` (numeración cruzada) | ✅ `actividad-flujo-2-compatibilidad.puml` (renombrado) |
+| 3 | Carrito | `actividad-flujo-2-carrito.puml` (numeración cruzada) | ✅ `actividad-flujo-3-carrito.puml` (renombrado) |
+| 4 | Buscador | `actividad-flujo-1-busqueda.puml` (numeración cruzada) | ✅ `actividad-flujo-4-buscador.puml` (renombrado) |
 
+**Acción correctiva ejecutada:**
 
-**Acción correctiva ejecutada en este `fix/`:**
-
-- Abrí el **issue post-mortem** correspondiente en GitHub describiendo la desalineación.
-- Reescribí la sección "Funciones planificadas por flujo" del `spec-tester.md` con autocrítica y el plan **real** de cobertura validado contra el código de Lucas (no contra los diagramas).
-- Esta nota se mantiene como evidencia del aprendizaje: **el plan de testing se valida contra la implementación, no contra el plan previo del Arquitecto**.
+- Documenté la desalineación como **aprendizaje del rol Tester** (no escalé a issue de GitHub en su momento; debí hacerlo antes de testear).
+- Reescribí la sección "Funciones planificadas por flujo" del `spec-tester.md` con autocrítica y el plan **real** de cobertura validado contra el código de Lucas.
+- Tras la baja de @GonzaloBarbano del grupo, asumí los roles de Coord/DevOps + Arquitecto de Diagramas y resolví la desalineación renombrando los `.puml` y creando el del Cotizador (PR del fix de renumeración).
+- **Aprendizaje:** el plan de testing se valida contra la implementación, no contra el plan previo del Arquitecto.
 
 ### Suite 1 — Cotizador de Productos
 
 **Función orquestadora:** `flujo1Cotizador()` (no se testea, depende de `prompt`/`alert`).
 
-**Diagrama de referencia:** No existe un diagrama equivalente exacto para el Cotizador. El flujo más cercano es [`actividad-flujo-4-recibo.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-4-recibo.puml) — modela el cálculo de un total con descuento e IVA, paralelo a lo que hace el Cotizador. La desalineación parcial entre los flujos modelados y los implementados está documentada en la nota al inicio de esta sección (CR Hallazgo #5).
+**Diagrama de referencia:** [`actividad-flujo-1-cotizador.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-1-cotizador.puml)
 
 **Funciones puras testeadas:**
 
@@ -86,7 +88,7 @@ Durante la integración detecté que los diagramas entregados por el Arquitecto 
 
 **Función orquestadora:** `flujo2Compatibilidad()` (no se testea).
 
-**Diagrama de referencia:** [`actividad-flujo-3-compatibilidad.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-3-compatibilidad.puml)
+**Diagrama de referencia:** [`actividad-flujo-2-compatibilidad.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-2-compatibilidad.puml)
 
 **Funciones puras testeadas:**
 
@@ -117,7 +119,7 @@ Durante la integración detecté que los diagramas entregados por el Arquitecto 
 
 **Función orquestadora:** `flujo3Carrito()` (no se testea).
 
-**Diagrama de referencia:** [`actividad-flujo-2-carrito.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-2-carrito.puml)
+**Diagrama de referencia:** [`actividad-flujo-3-carrito.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-3-carrito.puml)
 
 **Funciones puras testeadas:**
 
@@ -153,7 +155,7 @@ Durante la integración detecté que los diagramas entregados por el Arquitecto 
 
 **Función orquestadora:** `flujo4Buscador()` (no se testea).
 
-**Diagrama de referencia:** [`actividad-flujo-1-busqueda.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-1-busqueda.puml)
+**Diagrama de referencia:** [`actividad-flujo-4-buscador.puml`](../../docs/05-diagramas/01-diagrama-de-actividades/actividad-flujo-4-buscador.puml)
 
 **Funciones puras testeadas:**
 
