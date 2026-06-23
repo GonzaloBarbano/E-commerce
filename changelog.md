@@ -23,7 +23,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ### Fixed
 
 - [fix/changelog-y-comentarios] Resolución de RC5, RC6, RC6(dup), RC7 y RC8: alineación de los comentarios `// FLUJO N —` de `js/script.js` con la numeración del menú real.
-  PR: [#XXX](https://github.com/GonzaloBarbano/E-commerce/pull/XXX) - @Naguirre0102 (Coordinador / DevOps)
+  PR: [#125](https://github.com/GonzaloBarbano/E-commerce/pull/125) - @Naguirre0102 (Coordinador / DevOps)
 
 - [fix/coord-devops-renumeracion-puml] Resolución de RC10, RC10(dup), RC20 y RC23(dup).
   PR: [#124](https://github.com/GonzaloBarbano/E-commerce/pull/124) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
