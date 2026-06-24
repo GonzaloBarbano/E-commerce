@@ -22,6 +22,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/coord-devops-spec-devops] Resolución de RC29 × 6: reescritura completa de `spec-devops.md`
+  PR: [#126](https://github.com/GonzaloBarbano/E-commerce/pull/126) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
 - [fix/changelog-y-comentarios] Resolución de RC5, RC6, RC6(dup), RC7 y RC8: alineación de los comentarios `// FLUJO N —` de `js/script.js` con la numeración del menú real.
   PR: [#125](https://github.com/GonzaloBarbano/E-commerce/pull/125) - @Naguirre0102 (Coordinador / DevOps)
 
