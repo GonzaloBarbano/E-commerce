@@ -22,6 +22,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/coord-devops-png-diagramas] Resolución de RCN1, RCN2, RCN3 y RCN4: regeneración de los 4 archivos `.png` de los diagramas de actividades con PlantUML para que el contenido visual coincida con los `.puml` actuales (renumeración + simplificación de compatibilidad + nuevo Cotizador).
+  PR: [#XXX](https://github.com/GonzaloBarbano/E-commerce/pull/XXX) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
 - [fix/coord-devops-rc23-compatibilidad] Resolución de RC23
   PR: [#127](https://github.com/GonzaloBarbano/E-commerce/pull/127) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
 
