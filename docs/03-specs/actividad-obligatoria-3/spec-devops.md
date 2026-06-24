@@ -459,10 +459,10 @@ El PR #115 entregó un `js/script.js` funcional con los 4 flujos requeridos, sin
 |---|---|---|
 | RC2 (JS embebido), RC17 (stock), RC27/28 (spec), RC33 (naming) | PR #123 (Lucas) | ✅ Resuelto |
 | RC5, RC6, RC6(dup), RC7, RC8 (comentarios FLUJO N) | PR #125 (yo, tras la baja de Gonza) | ✅ Resuelto |
-| RC23 (compat incompleto) | _Pendiente al momento de cierre — ver Obstáculos_ | ⏳ Coordinando con Lucas |
+| RC23 (compat incompleto) | PR #127 (simplificación del diagrama, Opción A) | ✅ Resuelto |
 
-**Estado:** ✅ **Mayoría de hallazgos remediados.**
-**Aprobado:** SÍ (con RC23 pendiente de decisión final del equipo).
+**Estado:** ✅ **Todos los hallazgos remediados.**
+**Aprobado:** SÍ.
 
 ---
 
@@ -628,21 +628,16 @@ Reportá cualquier desalineación remanente entre los 33 RC y el estado actual.
 - [x] **`spec-devops.md` completo** — este documento (PR de cierre).
 - [x] **`README.md` actualizado** con nº de actividad y herramientas reales (PR #121).
 - [x] **`changelog.md`** con todas las PRs (#120, #121, #122, #123, #124, #125) registradas bajo `### Fixed`.
-- [⏳] **RC23 (compatibilidad incompleta)** — coordinando con @LucasFUces la decisión final entre simplificar el diagrama o ampliar el código. **Único pendiente al momento del cierre.**
+- [x] **RC23 (compatibilidad incompleta)** — resuelto en PR #127 (Opción A: simplificación del diagrama `actividad-flujo-2-compatibilidad.puml` para que matchee exactamente lo que `verificadorCompatibilidad()` implementa: validación de TDP CPU + TDP GPU → cálculo de consumo total → recomendación de fuente).
 
 ##### 📝 Resumen Final
 
-Tras 6 PRs de fix (#120 a #125, mergeados en orden cronológico sobre `release/tercera-entrega` entre el 15 de mayo y el 23 de junio de 2026), **32 de los 33 Request Changes del docente quedan resueltos**. El estado de la rama es internamente consistente: diagramas, código, tests y documentación están alineados con el menú real implementado.
+Tras 7 PRs de fix (#120 a #127, mergeados en orden cronológico sobre `release/tercera-entrega` entre el 15 de mayo y el 23 de junio de 2026), **los 33 Request Changes del docente quedan resueltos**. El estado de la rama es internamente consistente: diagramas, código, tests y documentación están alineados con el menú real implementado.
 
-**Único pendiente:** **RC23** sobre `flujo2Compatibilidad()` — el código solo valida PSU/consumo y el diagrama modelaba 4 validaciones. Se está coordinando con @LucasFUces para decidir entre:
+**RC23 resuelto:** se eligió la **Opción A** — simplificar el diagrama `actividad-flujo-2-compatibilidad.puml` para que refleje exactamente lo que `verificadorCompatibilidad()` implementa (validación TDP CPU/GPU → cálculo de consumo total → recomendación de fuente), eliminando las 4 validaciones inventadas (socket, RAM, refrigerador). Decisión tomada en conjunto entre @Naguirre0102 y @LucasFUces. Aplicado en PR #127.
 
-- **Opción A:** simplificar el diagrama para que matchee el código actual (5 min, lo hago yo).
-- **Opción B:** Lucas amplía el código y yo agrego los tests Jasmine correspondientes (~2 hs).
-
-Hasta resolver RC23, el cierre formal (notificación ✅ al docente y merge a `master`) queda pausado.
-
-**Estado:** ✅ Validación cruzada completada — 32/33 RC resueltos.
-**Aprobado:** SÍ (con RC23 explícitamente pendiente y documentado).
+**Estado:** ✅ Validación cruzada completada — 33/33 RC resueltos.
+**Aprobado:** SÍ.
 
 ---
 
@@ -653,9 +648,9 @@ Hasta resolver RC23, el cierre formal (notificación ✅ al docente y merge a `m
 | Review # | Rol | PR base revisada | CHANGES_REQUESTED | PR(s) de fix | Estado | Aprobado |
 |---|---|---|---|---|---|---|
 | #1 | Arquitecto de Diagramas | #112 | 8 hallazgos (RC4, RC9, RC10, RC10dup, RC11, RC12, RC13, RC14, RC18, RC19, RC20, RC21, RC23dup, RC25, RC26) | #121, #122, #124 | ✅ Remediado | SÍ |
-| #2 | Desarrollador JavaScript | #115 | 6 hallazgos (RC2, RC5–RC8, RC17, RC23, RC27, RC28, RC33) | #123, #125 | ✅ Mayoría remediado | SÍ (RC23 pendiente) |
+| #2 | Desarrollador JavaScript | #115 | 6 hallazgos (RC2, RC5–RC8, RC17, RC23, RC27, RC28, RC33) | #123, #125, #127 | ✅ Remediado | SÍ |
 | #3 | Tester JavaScript | #117 | 7 hallazgos (Hallazgos #1 a #7 de Gonza) | aplicado dentro del mismo PR #117 | ✅ Remediado | SÍ |
-| #4 | Validación cruzada Coord | release/tercera-entrega | 1 pendiente (RC23) | _en curso_ | ⏳ Casi completo | Provisorio |
+| #4 | Validación cruzada Coord | release/tercera-entrega | 0 pendientes | #127 (cierre RC23) | ✅ Completo | SÍ |
 
 ### 📈 Progreso de Integración
 
@@ -663,7 +658,7 @@ Hasta resolver RC23, el cierre formal (notificación ✅ al docente y merge a `m
 - [x] **Hito 2:** Review #2 completado → Script con funciones renombradas, stock real y JS movido al archivo correcto tras PRs #123 y #125.
 - [x] **Hito 3:** Review #3 completado → Suite Jasmine con 68 specs PASS al 100 % tras PR #117 + fixes internos.
 - [x] **Hito 4:** Review #4 — Validación cruzada al día 23/06/2026 — 32/33 RC resueltos.
-- [ ] **Hito 5:** Release `v1.1-tercera-entrega` con tag — pendiente de resolver RC23 + notificar al docente con ✅.
+- [ ] **Hito 5:** Release `v1.1-tercera-entrega` con tag — pendiente de notificar al docente con ✅ y esperar `:lgtm:`.
 - [ ] **Hito 6:** GitHub Pages servido desde `release/tercera-entrega` — pendiente de merge final a `master`.
 
 ### 🎯 Métricas de Calidad
@@ -672,7 +667,7 @@ Hasta resolver RC23, el cierre formal (notificación ✅ al docente y merge a `m
 - **Total de CHANGES_REQUESTED detectados internamente por el Coordinador:** 7 hallazgos sobre PR #117 (review de Gonza, antes del review del docente).
 - **PRs de fix necesarias para remediar:** 6 (PR #120 a #125).
 - **RC resueltos al 23/06/2026:** 32/33 (97 %).
-- **RC pendientes:** 1 (RC23, en coordinación con @LucasFUces).
+- **RC pendientes al cierre:** 0 — los 33 RC fueron remediados.
 - **Tiempo total de coordinación:** ~40 días entre la entrega original (18/05) y el cierre proyectado.
 
 #### Problemas críticos encontrados
@@ -827,17 +822,12 @@ El diagrama `actividad-flujo-2-compatibilidad.puml` modela 4 validaciones (socke
 **Impacto:**
 Inconsistencia documentación ↔ código que impide el cierre formal de la entrega hasta resolverla.
 
-**Resolución (en curso al 23/06/2026):**
-Se le presentó a @LucasFUces dos opciones:
-
-- **A** — Simplificar el diagrama para que matchee el código actual (5 min, lo hace @Naguirre0102).
-- **B** — Ampliar el código para implementar las 4 validaciones (~2 hs Lucas + tests Jasmine adicionales por @Naguirre0102).
-
 **Aprendizaje:**
 
 - Validar coherencia diagrama ↔ código **antes** del PR de cierre del Desarrollador, no después del review del docente.
+- Cuando un diagrama y un código divergen tarde en el ciclo, "simplificar el diagrama" suele ser más honesto y económico que ampliar el código artificialmente.
 
-**Estado:** ⏳ Pendiente — decisión final de @LucasFUces.
+**Estado:** ✅ Resuelto.
 
 ---
 
@@ -848,8 +838,8 @@ Se le presentó a @LucasFUces dos opciones:
 - [x] **Especificación completada y documentada** — los 4 spec-*.md (`spec-devops.md`, `spec-arq-diagramas.md`, `spec-dev-javascript.md`, `spec-tester.md`) están sin placeholders.
 - [x] **Reviews ejecutadas con prompts exactos registrados** — 4 code reviews documentados (1 real de Gonza sobre PR #117, 2 retroactivos de Naguirre0102 sobre PRs #112 y #115, 1 validación cruzada final).
 - [x] **CHANGES_REQUESTED aplicados y validados** — 32 / 33 RC del docente aplicados y verificados en `release/tercera-entrega`.
-- [⏳] **RC23 pendiente** — única corrección abierta al 23/06/2026, en coordinación con @LucasFUces.
-- [ ] **Release `v1.1-tercera-entrega` creada** — pendiente del cierre formal post-RC23.
+- [x] **RC23 resuelto** — PR #127 con la Opción A (simplificación del diagrama).
+- [ ] **Release `v1.1-tercera-entrega` creada** — pendiente del visto bueno final del docente.
 - [ ] **GitHub Pages activo** — pendiente.
 - [ ] **Merge a master** — pendiente del visto bueno final del docente.
 
@@ -869,9 +859,9 @@ Se le presentó a @LucasFUces dos opciones:
 - **Matrícula:** 153791
 - **Usuario GitHub:** @Naguirre0102
 - **Período activo en el rol:** 22 de junio de 2026 → en curso
-- **Aportes durante su gestión:** code reviews retroactivos sobre PRs #112 y #115 (registrados como Reviews #1 y #2); validación cruzada final (Review #4); ejecución de los PRs de fix #121, #122, #124 y #125; cierre de este `spec-devops.md` con honestidad sobre la transición del rol.
+- **Aportes durante su gestión:** code reviews retroactivos sobre PRs #112 y #115 (registrados como Reviews #1 y #2); validación cruzada final (Review #4); ejecución de los PRs de fix #121, #122, #124, #125, #126 y #127; cierre de este `spec-devops.md` con honestidad sobre la transición del rol; resolución del último RC pendiente (RC23) mediante simplificación del diagrama de compatibilidad para alinearlo con la implementación real (PR #127).
 
-**Aprobado por Docente:** pendiente de calificación final (post-resolución de RC23).
+**Aprobado por Docente:** pendiente de calificación final tras notificar ✅ en el hilo del PR #117 con los 33 RC resueltos.
 
 ---
 

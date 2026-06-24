@@ -22,6 +22,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/coord-devops-rc23-compatibilidad] Resolución de RC23
+  PR: [#127](https://github.com/GonzaloBarbano/E-commerce/pull/127) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
 - [fix/coord-devops-spec-devops] Resolución de RC29 × 6: reescritura completa de `spec-devops.md`
   PR: [#126](https://github.com/GonzaloBarbano/E-commerce/pull/126) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
 
