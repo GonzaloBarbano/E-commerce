@@ -6,44 +6,59 @@ skinparam ArrowColor #333333
 
 |Usuario|
 start
-:Selecciona componentes (CPU, MB, RAM, PSU);
-:Solicita validación;
+:Ingresa TDP de la CPU con prompt() (en watts);
+note right
+  Ej: i9-13900K = 125 W
+       Ryzen 9 7950X = 170 W
+end note
 
 |Sistema|
-:Identificar IDs de componentes;
-:Leer especificaciones técnicas (Specs)
-del array `componentes` en memoria;
-
-:Inicializa lista de errores;
-repeat
-  :Tomar siguiente regla de validación;
-  if (¿Validar Socket?) then (sí)
-    if (¿Socket CPU == Motherboard?) then (no)
-      :Agregar "Socket incompatible";
-    endif
-  elseif (¿Validar RAM?) then (sí)
-    if (¿Tipo RAM (DDR) compatible?) then (no)
-      :Agregar "RAM incompatible";
-    endif
-  elseif (¿Validar PSU?) then (sí)
-    :Calcular consumo total;
-    if (¿Potencia suficiente?) then (no)
-      :Agregar "PSU insuficiente";
-    endif
-  else (Espacio)
-    if (¿Refrigerador cabe en Case?) then (no)
-      :Agregar "Tamaño excedido";
-    endif
-  endif
-repeat while (¿Quedan reglas por validar?) is (sí)
-
-if (¿Lista de errores vacía?) then (sí)
-  :Generar reporte: COMPATIBLE;
+if (¿validarTdp(tdpCpu) === true?) then (sí)
 else (no)
-  :Generar reporte: INCOMPATIBLE;
+  :Mostrar error con alert(): "TDP de CPU inválido (1-1000)";
+  end
 endif
 
 |Usuario|
-:Visualiza el reporte detallado;
+:Ingresa TDP de la GPU con prompt() (en watts);
+note right
+  Ej: RTX 4090 = 450 W
+       RX 7900 XTX = 355 W
+end note
+
+|Sistema|
+if (¿validarTdp(tdpGpu) === true?) then (sí)
+else (no)
+  :Mostrar error con alert(): "TDP de GPU inválido (1-1000)";
+  end
+endif
+
+:calcularConsumoTotal(tdpCpu, tdpGpu);
+note right
+  Math.ceil((tdpCpu + tdpGpu + 100) × 1.2)
+  Suma TDPs + 100W base (placa, RAM, etc)
+  Aplica margen de seguridad del 20%.
+end note
+
+:recomendarFuente(consumoWatts);
+note right
+  Recorre el array `fuentesRecomendadas`
+  y devuelve la primera fuente con
+  potencia >= consumoWatts.
+  Devuelve null si el consumo supera 1000 W.
+end note
+
+:generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente);
+
+if (¿fuente !== null?) then (sí)
+  :Informe con fuente recomendada (nombre + potencia + precio);
+else (no)
+  :Informe con advertencia: "Tu sistema supera 1000W. Consultá con un especialista";
+endif
+
+:Mostrar resumen con alert() y console.log();
+
+|Usuario|
+:Visualiza el informe de compatibilidad y la fuente recomendada;
 stop
 @enduml
