@@ -160,55 +160,57 @@ Cada PR debe cumplir:
 
 **Condición prévia:** Todas las correcciones del Primer Parcial están aplicadas en `release/primer-parcial`.
 
+> ✅ **Estado del checklist al 25 de junio de 2026** — verificado contra el estado real de `release/tercera-entrega` post 9 PRs de fix (#120 a #129). Cada `[x]` indica un ítem efectivamente cumplido y verificable en el repo.
+
 #### 🔹 **Aspecto 1: Correcciones del Primer Parcial Aplicadas**
 
-- [ ] **AO1 corregida:** HTML semántico, accesibilidad, sin errores W3C
-- [ ] **AO2 corregida:** Responsive CSS, Bootstrap bien implementado, sin conflictos de estilos
-- [ ] **Backport validado:** Los cambios de correcciones están en la rama `release/primer-parcial` (no solo en `master`)
-- [ ] **Historia limpia:** Commits son ordenados, no hay "Fix typo" fuera de contexto
+- [x] **AO1 corregida:** HTML semántico, accesibilidad. Aplicado en `release/primer-parcial` (PRs de fix del Primer Parcial mergeados antes del backport a `develop`).
+- [x] **AO2 corregida:** Responsive CSS y Bootstrap 5.3 correctamente integrados (ver entradas de PR #93 + correcciones #95, #91, #90 en la sección `[Release Recuperatorio Parcial 1]` del `changelog.md`).
+- [x] **Backport validado:** Los cambios del Primer Parcial están integrados en `develop` vía PR de backport `backport/release-primer-parcial → develop` (PR #108 mergeado previo al inicio de la AO3).
+- [x] **Historia limpia:** Los commits siguen convención `feat:` / `fix:` / `docs:`. No hay "Fix typo" sueltos fuera de contexto.
 
 #### 🔹 **Aspecto 2: Integridad Técnica de la Entrega 3**
 
-- [ ] **js/script.js existe y está referenciado** en index.html: `<script src="js/script.js"></script>`
-- [ ] **4 flujos principales implementados** con entrada → proceso → salida
-- [ ] **Menú de navegación con prompt()** que permite elegir entre flujos
-- [ ] **Sin manipulación de DOM:** No hay `document.querySelector()`, `innerHTML`, etc.
-- [ ] **Sin event listeners:** No hay `.addEventListener()`, `onclick=`, etc.
-- [ ] **4 diagramas PlantUML** (`.puml` + `.png`) documentados en `docs/05-diagramas/01-diagrama-de-actividades/diagramas-doc.md`
-- [ ] **Tests con Jasmine:** `js/test/script.spec.js` + `js/test/test-runner.html` funcionando en navegador
-- [ ] **Coverage mínimo:** Cada flujo tiene ≥3 tests (funcionalidad básica + casos borde + validaciones)
+- [x] **js/script.js existe y está referenciado** en `index.html` con `<script src="js/script.js"></script>`.
+- [x] **4 flujos principales implementados** con patrón entrada → proceso → salida: Cotizador, Verificador de Compatibilidad, Simulador de Carrito, Buscador de Productos.
+- [x] **Menú de navegación con `prompt()`** en `iniciarMenu()` (líneas 602–640 de `js/script.js`).
+- [x] **Sin manipulación de DOM en los flujos de negocio.** Única excepción justificada: el modal del Primer Parcial movido a `script.js` en PR #123 (función `inicializarModalProducto()`), que pertenece al alcance de AO2 y se preserva por compatibilidad.
+- [x] **Sin event listeners en los flujos de AO3.** Misma excepción: el modal del Primer Parcial usa `addEventListener` pero está fuera del alcance de la AO3.
+- [x] **4 diagramas PlantUML** (`.puml` + `.png`) en `docs/05-diagramas/01-diagrama-de-actividades/` (`actividad-flujo-1-cotizador`, `-2-compatibilidad`, `-3-carrito`, `-4-buscador`). Documentados en `diagramas-doc.md`.
+- [x] **Tests con Jasmine:** `js/test/script.spec.js` (68 specs) + `js/test/test-runner.html` con Jasmine 5.10 vía CDN, funcionando en navegador.
+- [x] **Coverage mínimo:** los 4 flujos tienen entre 13 y 23 specs cada uno (Cotizador 23, Compatibilidad 14, Carrito 16, Buscador 15), cubriendo happy path + casos borde + validaciones.
 
-#### 🔹 **Aspecto 3: Calidad de Código (Validado por Copilot Agent)**
+#### 🔹 **Aspecto 3: Calidad de Código (Validado por Copilot Agent y review del docente)**
 
-- [ ] **Nomenclatura:** Variables/funciones en camelCase, constructores en PascalCase
-- [ ] **Responsabilidad única:** Cada función hace UNA cosa claramente
-- [ ] **Parámetros y retornos:** Funciones reciben parámetros, devuelven resultados; no usan variables globales innecesariamente
-- [ ] **Arrays y objetos:** Usados apropiadamente; data grouping coherente con el contexto
-- [ ] **Comentarios JSDoc:** Funciones complejas documentadas con `/** ... */`
-- [ ] **Indentación y formato:** Código consistentemente indentado (2 o 4 espacios, sin tabs)
+- [x] **Nomenclatura:** Variables/funciones en camelCase, sin prefijos artificiales (`flujoN` eliminado en PR #123).
+- [x] **Responsabilidad única:** Funciones puras separadas de funciones orquestadoras (las puras NO llaman a `prompt`/`alert`).
+- [x] **Parámetros y retornos:** Funciones reciben parámetros explícitos, devuelven valores; no usan globals innecesarios.
+- [x] **Arrays y objetos:** `catalogo`, `preciosPorCategoria`, `fuentesRecomendadas` agrupan datos coherentemente con el dominio.
+- [x] **Comentarios JSDoc:** Las 17 funciones puras + las 5 orquestadoras tienen `/** ... */` con `@param` y `@returns`.
+- [x] **Indentación y formato:** 2 espacios consistentes en todo `js/script.js`.
 
 #### 🔹 **Aspecto 4: Code Review (≥4 reviews documentados)**
 
-- [ ] **Copilot Agent Review #1:** Arquitecto/Diagramas (validar .puml refleja consignas)
-- [ ] **Copilot Agent Review #2:** Desarrollador/Script (validar que script.js = diagramas)
-- [ ] **Copilot Agent Review #3:** Tester/Tests (validar cobertura en Jasmine)
-- [ ] **Coordinador Review Manual:** Validación de contexto académico + integración cruzada
-- [ ] **Documentación de reviews:** Cada review incluye prompt exacto + resumen de hallazgos
+- [x] **Review #1 — Arquitecto de Diagramas (PR #112):** Retroactivo por @Naguirre0102. Documentado más abajo en este mismo archivo con prompt exacto + 8 hallazgos.
+- [x] **Review #2 — Desarrollador JavaScript (PR #115):** Retroactivo por @Naguirre0102. Documentado con prompt + 6 hallazgos. Remediado en PRs #123, #125, #127.
+- [x] **Review #3 — Tester JavaScript (PR #117):** Ejecutado en tiempo real por @GonzaloBarbano (review original con 7 hallazgos detallados, verificable en historial del PR #117 en GitHub).
+- [x] **Review #4 — Validación Cruzada:** Ejecutado por @Naguirre0102 al 23/06/2026. Checklist 15/15 OK.
+- [x] **Documentación de reviews:** Cada review incluye prompt exacto en bloque triple-backtick + resumen de hallazgos y CHANGES_REQUESTED.
 
 #### 🔹 **Aspecto 5: Deployment y Accesibilidad**
 
-- [ ] **GitHub Pages activo:** Sitio se actualiza tras merge a `release/primer-parcial`
-- [ ] **Index.html visible** en GitHub Pages sin errores de carga
-- [ ] **js/script.js cargado** correctamente (sin errores en consola del navegador)
-- [ ] **test-runner.html accesible** en `/js/test/test-runner.html` (pueden ejecutarse tests manual o via CI)
-- [ ] **Release creada:** Tag con versión (ej. `v3.0.0-ao3`) en repositorio
+- [ ] **GitHub Pages activo en `release/tercera-entrega`** — pendiente de configurar como parte del cierre formal post `:lgtm:` del docente.
+- [ ] **Index.html visible** en GitHub Pages — dependiente del paso anterior.
+- [x] **js/script.js cargado correctamente** — verificado localmente (los 68 specs Jasmine corren en browser sin errores en consola).
+- [x] **test-runner.html accesible** localmente en `js/test/test-runner.html` con 68 specs PASS.
+- [ ] **Release `v1.1-tercera-entrega` con tag** — pendiente de cierre formal post `:lgtm:`.
 
 #### 🔹 **Aspecto 6: Documentación Completada**
 
-- [ ] **spec-diagramas.md:** Prompts exactos usados, `.puml` adjuntos, decisiones de diseño
-- [ ] **spec-dev-javascript.md:** Prompts exactos usados, flujos explicados, estructura de script.js
-- [ ] **spec-test-javascript.md:** Prompts exactos usados, cobertura de tests, cómo ejecutar
-- [ ] **spec-devops.md (este archivo):** Prompts y reviews documentados, obstáculos resueltos
+- [x] **spec-arq-diagramas.md** existe en `docs/03-specs/actividad-obligatoria-3/` con prompts y `.puml` documentados (autor original: @GonzaloBarbano, PR #112).
+- [x] **spec-dev-javascript.md** completo sin placeholders (PR #123 completó las secciones AL CIERRE).
+- [x] **spec-tester.md** completo con sección BEFORE + AL CIERRE + checklist marcado (PR #117 + #120).
+- [x] **spec-devops.md (este archivo)** — reescrito en PR #126 con doble firma del rol (Gonza inicio + Nico continuación tras la baja), 4 code reviews documentados, 4 obstáculos registrados, métricas reales.
 
 ---
 

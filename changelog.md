@@ -22,6 +22,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/coord-devops-spec-devops-checklist] Resolución de RCN1, validación completa del checklist de criterios de aceptación en `spec-devops.md`.
+  PR: [#130](https://github.com/GonzaloBarbano/E-commerce/pull/130) - @Naguirre0102 (Coordinador / DevOps)
+
 - [fix/coord-devops-puml-fonts] Resolución de RCN2, RCN3, RCN4 y RCN5: corrección del renderizado de caracteres especiales en los 4 PNGs de diagramas.
   PR: [#129](https://github.com/GonzaloBarbano/E-commerce/pull/129) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
 
