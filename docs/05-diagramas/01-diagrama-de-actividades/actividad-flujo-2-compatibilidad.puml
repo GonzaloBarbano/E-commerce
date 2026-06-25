@@ -1,5 +1,6 @@
-@startuml flujo-2-compatibilidad
+@startuml actividad-flujo-2-compatibilidad
 title Flujo 2: Verificador de Compatibilidad de Componentes
+skinparam defaultFontName "Segoe UI"
 skinparam ActivityBackgroundColor #FFFFFF
 skinparam ActivityBorderColor #333333
 skinparam ArrowColor #333333
@@ -35,7 +36,7 @@ endif
 
 :calcularConsumoTotal(tdpCpu, tdpGpu);
 note right
-  Math.ceil((tdpCpu + tdpGpu + 100) × 1.2)
+  Math.ceil((tdpCpu + tdpGpu + 100) * 1.2)
   Suma TDPs + 100W base (placa, RAM, etc)
   Aplica margen de seguridad del 20%.
 end note

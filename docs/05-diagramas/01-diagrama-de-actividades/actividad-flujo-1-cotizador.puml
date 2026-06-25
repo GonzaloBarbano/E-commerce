@@ -1,5 +1,6 @@
-@startuml flujo-1-cotizador
+@startuml actividad-flujo-1-cotizador
 title Flujo 1: Cotizador de Productos
+skinparam defaultFontName "Segoe UI"
 skinparam ActivityBackgroundColor #FFFFFF
 skinparam ActivityBorderColor #333333
 skinparam ArrowColor #333333
@@ -35,13 +36,13 @@ endif
 :calcularDescuento(cantidad);
 note right
   Tramos de descuento por volumen:
-  • cantidad >= 10 → 15%
-  • cantidad >= 5  → 10%
-  • cantidad >= 3  → 5%
-  • cantidad < 3   → 0%
+  * cantidad >= 10 -> 15%
+  * cantidad >= 5  -> 10%
+  * cantidad >= 3  -> 5%
+  * cantidad < 3   -> 0%
 end note
 :calcularSubtotal(precioUnitario, cantidad);
-:aplicarIva(subtotal) — alícuota 21%;
+:aplicarIva(subtotal) - alicuota 21%;
 :generarResumenCotizacion(categoria, cantidad, precioUnitario);
 :Mostrar resumen con alert() y console.log();
 

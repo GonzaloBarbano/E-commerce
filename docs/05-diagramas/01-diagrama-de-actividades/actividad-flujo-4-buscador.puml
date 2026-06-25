@@ -1,5 +1,6 @@
-@startuml flujo-4-buscador
+@startuml actividad-flujo-4-buscador
 title Flujo 4: Buscador y Filtrado de Productos
+skinparam defaultFontName "Segoe UI"
 skinparam ActivityBackgroundColor #FFFFFF
 skinparam ActivityBorderColor #333333
 skinparam ArrowColor #333333
@@ -31,7 +32,7 @@ repeat
   else (no)
   endif
 repeat while (¿Quedan productos en el catálogo?) is (sí)
-:ordenarPorPrecio(resultado) — ascendente;
+:ordenarPorPrecio(resultado) - ascendente;
 :generarResultadosBusqueda(resultado, ...);
 :Mostrar resumen con alert() y console.log();
 
