@@ -3,6 +3,19 @@
 Este archivo se actualiza con cada Pull Request para registrar avances y correcciones.
 
 ---
+## [Release Actividad Obligatoria N°4] - 2026-06-25
+
+### Added
+
+- [feature/dev-storage] Implementación capa de abstracción StorageUtil: funciones CRUD completas (`guardar`, `obtener`, `actualizar`, `eliminar`, `listar`, `limpiar`) para `localStorage` y `sessionStorage`, funciones auxiliares de dominio PC Hardware (`guardarCarrito`, `obtenerCarrito`, `guardarStock`, `obtenerStock`, `guardarCotizacion`, `obtenerCotizaciones`, `guardarFiltrosBusqueda`, `obtenerFiltrosBusqueda`), serialización/deserialización automática de JSON, manejo de errores con try-catch. Documentación completa en `docs/06-storage/storage-doc.md` y `spec-dev-storage.md`.
+  PR: [#132](https://github.com/GonzaloBarbano/E-commerce/pull/132) - @LucasFUces (Desarrollador JS Storage)
+
+### Fixed
+
+- [fix/dev-javascript-correcciones] RC2: JS embebido del modal movido a `script.js`. RC17: stock decrementado correctamente en `agregarAlCarrito`. RC33: funciones renombradas sin prefijo flujoN (`cotizadorInteractivo`, `verificadorCompatibilidad`, `carritoSimulador`, `buscadorProductos`). RC27/RC28: `spec-dev-javascript.md` completado. RCN1-RCN8: validaciones y manejo de errores reforzados en todas las funciones puras.
+  PR: [#131](https://github.com/GonzaloBarbano/E-commerce/pull/131) - @LucasFUces (Desarrollador JavaScript)
+
+---
 
 ## [Release Actividad Obligatoria N°3] - 2026-05-18
 
