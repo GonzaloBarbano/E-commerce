@@ -22,6 +22,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/tester-spyon-orquestadores] Resolución de RCN6 y RCN7
+  PR: [#135](https://github.com/GonzaloBarbano/E-commerce/pull/135) - @Naguirre0102 (Tester JavaScript / QA Engineer)
+
 - [fix/coord-devops-spec-devops-checklist] Resolución de RCN1, validación completa del checklist de criterios de aceptación en `spec-devops.md`.
   PR: [#130](https://github.com/GonzaloBarbano/E-commerce/pull/130) - @Naguirre0102 (Coordinador / DevOps)
 

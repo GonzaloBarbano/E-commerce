@@ -497,3 +497,252 @@ describe("Flujo 4 — Buscador de Productos", function () {
     });
   });
 });
+
+// =============================================================================
+// SUITE 5 — ORQUESTADOR: cotizadorInteractivo() con spyOn de prompt/alert
+// =============================================================================
+//
+// RCN7 R1 del 2° review del docente: cubrir la capa de UI (prompt/alert) con
+// spies de Jasmine para que las líneas de los orquestadores también queden
+// testeadas. Cada suite mockea prompt/alert/console y verifica que el flujo
+// invoque las funciones puras correctas, maneje cancelaciones y capture
+// excepciones via el try/catch global agregado por Lucas (RCN8 R2).
+
+describe("Suite 5 — Orquestador cotizadorInteractivo()", function () {
+  beforeEach(function () {
+    spyOn(window, "alert");
+    spyOn(console, "log");
+    spyOn(console, "error");
+  });
+
+  it("happy path: con categoría y cantidad válidas muestra el resumen final con alert()", function () {
+    spyOn(window, "prompt").and.returnValues("cpu", "5");
+    cotizadorInteractivo();
+    expect(window.prompt).toHaveBeenCalledTimes(2);
+    expect(window.alert).toHaveBeenCalledTimes(1);
+    var msg = window.alert.calls.mostRecent().args[0];
+    expect(msg).toContain("COTIZACIÓN");
+    expect(msg).toContain("CPU");
+    expect(msg).toContain("5 unidades");
+  });
+
+  it("sale silenciosamente si el usuario cancela el primer prompt (devuelve null)", function () {
+    spyOn(window, "prompt").and.returnValue(null);
+    cotizadorInteractivo();
+    expect(window.alert).not.toHaveBeenCalled();
+  });
+
+  it("muestra error con alert() si la categoría es inválida", function () {
+    spyOn(window, "prompt").and.returnValues("teclado", "5");
+    cotizadorInteractivo();
+    expect(window.alert).toHaveBeenCalledWith(jasmine.stringMatching(/Categoría inválida/));
+  });
+
+  it("sale silenciosamente si el usuario cancela el segundo prompt (cantidad)", function () {
+    spyOn(window, "prompt").and.returnValues("cpu", null);
+    cotizadorInteractivo();
+    expect(window.alert).not.toHaveBeenCalled();
+  });
+
+  it("muestra error con alert() si la cantidad es inválida", function () {
+    spyOn(window, "prompt").and.returnValues("cpu", "abc");
+    cotizadorInteractivo();
+    expect(window.alert).toHaveBeenCalledWith(jasmine.stringMatching(/Cantidad inválida/));
+  });
+
+  it("registra en console.log() el resumen del happy path", function () {
+    spyOn(window, "prompt").and.returnValues("gpu", "3");
+    cotizadorInteractivo();
+    expect(console.log).toHaveBeenCalledWith(
+      "[Flujo 1 - Cotizador]",
+      jasmine.stringMatching(/COTIZACIÓN/)
+    );
+  });
+
+  it("RCN8 R2: captura excepciones internas con try/catch y muestra 'Error: …'", function () {
+    spyOn(window, "prompt").and.returnValues("cpu", "5");
+    spyOn(window, "generarResumenCotizacion").and.throwError("Error simulado en resumen");
+    cotizadorInteractivo();
+    expect(window.alert).toHaveBeenCalledWith("Error: Error simulado en resumen");
+    expect(console.error).toHaveBeenCalled();
+  });
+});
+
+// =============================================================================
+// SUITE 6 — ORQUESTADOR: verificadorCompatibilidad() con spyOn de prompt/alert
+// =============================================================================
+
+describe("Suite 6 — Orquestador verificadorCompatibilidad()", function () {
+  beforeEach(function () {
+    spyOn(window, "alert");
+    spyOn(console, "log");
+    spyOn(console, "error");
+  });
+
+  it("happy path: con TDPs válidos muestra el informe con alert()", function () {
+    spyOn(window, "prompt").and.returnValues("125", "450");
+    verificadorCompatibilidad();
+    expect(window.prompt).toHaveBeenCalledTimes(2);
+    var msg = window.alert.calls.mostRecent().args[0];
+    expect(msg).toContain("VERIFICADOR DE COMPATIBILIDAD");
+    expect(msg).toContain("Corsair");
+  });
+
+  it("sale silenciosamente si el usuario cancela el primer prompt (TDP CPU)", function () {
+    spyOn(window, "prompt").and.returnValue(null);
+    verificadorCompatibilidad();
+    expect(window.alert).not.toHaveBeenCalled();
+  });
+
+  it("muestra error si el TDP de CPU es inválido (string no numérico)", function () {
+    spyOn(window, "prompt").and.returnValues("abc", "450");
+    verificadorCompatibilidad();
+    expect(window.alert).toHaveBeenCalledWith(jasmine.stringMatching(/TDP de CPU inválido/));
+  });
+
+  it("muestra error si el TDP de GPU está fuera de rango (>1000)", function () {
+    spyOn(window, "prompt").and.returnValues("125", "9999");
+    verificadorCompatibilidad();
+    expect(window.alert).toHaveBeenCalledWith(jasmine.stringMatching(/TDP de GPU inválido/));
+  });
+
+  it("muestra advertencia cuando el consumo supera 1000 W (no hay fuente disponible)", function () {
+    spyOn(window, "prompt").and.returnValues("500", "600");
+    verificadorCompatibilidad();
+    var msg = window.alert.calls.mostRecent().args[0];
+    expect(msg).toContain("supera 1000W");
+  });
+
+  it("RCN8 R2: captura excepciones internas y muestra 'Error: …' por alert", function () {
+    spyOn(window, "prompt").and.returnValues("125", "450");
+    spyOn(window, "generarInformeCompatibilidad").and.throwError("fallo del informe");
+    verificadorCompatibilidad();
+    expect(window.alert).toHaveBeenCalledWith("Error: fallo del informe");
+    expect(console.error).toHaveBeenCalled();
+  });
+});
+
+// =============================================================================
+// SUITE 7 — ORQUESTADOR: carritoSimulador() con spyOn de prompt/alert
+// =============================================================================
+
+describe("Suite 7 — Orquestador carritoSimulador()", function () {
+  beforeEach(function () {
+    spyOn(window, "alert");
+    spyOn(console, "log");
+    spyOn(console, "error");
+  });
+
+  it("salida inmediata con '0': muestra resumen 'carrito vacío'", function () {
+    spyOn(window, "prompt").and.returnValue("0");
+    carritoSimulador();
+    var ultima = window.alert.calls.mostRecent().args[0];
+    expect(ultima).toContain("vacío");
+  });
+
+  it("salida con null en el primer prompt: muestra resumen vacío", function () {
+    spyOn(window, "prompt").and.returnValue(null);
+    carritoSimulador();
+    var ultima = window.alert.calls.mostRecent().args[0];
+    expect(ultima).toContain("vacío");
+  });
+
+  it("agrega un producto válido y luego sale: aparece producto agregado + resumen con total", function () {
+    // Seleccionar producto 1 (Intel i9-13900K, stock 12), cantidad 2, luego salir
+    spyOn(window, "prompt").and.returnValues("1", "2", "0");
+    carritoSimulador();
+    var llamadas = window.alert.calls.allArgs().map(function (a) { return a[0]; });
+    expect(llamadas.some(function (m) { return /agregado al carrito/.test(m); })).toBeTruthy();
+    expect(llamadas.some(function (m) { return /TOTAL: \$/.test(m); })).toBeTruthy();
+  });
+
+  it("muestra error 'Opción inválida' con número fuera de rango", function () {
+    spyOn(window, "prompt").and.returnValues("99", "0");
+    carritoSimulador();
+    var llamadas = window.alert.calls.allArgs().map(function (a) { return a[0]; });
+    expect(llamadas.some(function (m) { return /Opción inválida/.test(m); })).toBeTruthy();
+  });
+
+  it("muestra error 'Stock insuficiente' al pedir más unidades que el stock del producto", function () {
+    // Producto 2 (RTX 4090, stock 5). Pido 10.
+    spyOn(window, "prompt").and.returnValues("2", "10", "0");
+    carritoSimulador();
+    var llamadas = window.alert.calls.allArgs().map(function (a) { return a[0]; });
+    expect(llamadas.some(function (m) { return /Stock insuficiente/.test(m); })).toBeTruthy();
+  });
+
+  it("muestra error 'Cantidad inválida' cuando se ingresa un valor no numérico", function () {
+    spyOn(window, "prompt").and.returnValues("1", "abc", "0");
+    carritoSimulador();
+    var llamadas = window.alert.calls.allArgs().map(function (a) { return a[0]; });
+    expect(llamadas.some(function (m) { return /Cantidad inválida/.test(m); })).toBeTruthy();
+  });
+
+  it("RCN8 R2: captura excepciones internas y muestra 'Error: …'", function () {
+    spyOn(window, "prompt").and.returnValues("1", "2", "0");
+    spyOn(window, "agregarAlCarrito").and.throwError("fallo en agregar");
+    carritoSimulador();
+    var llamadas = window.alert.calls.allArgs().map(function (a) { return a[0]; });
+    expect(llamadas.some(function (m) { return /^Error: fallo en agregar$/.test(m); })).toBeTruthy();
+    expect(console.error).toHaveBeenCalled();
+  });
+});
+
+// =============================================================================
+// SUITE 8 — ORQUESTADOR: buscadorProductos() con spyOn de prompt/alert
+// =============================================================================
+
+describe("Suite 8 — Orquestador buscadorProductos()", function () {
+  beforeEach(function () {
+    spyOn(window, "alert");
+    spyOn(console, "log");
+    spyOn(console, "error");
+  });
+
+  it("happy path con categoría 'cpu' y precio máx 1000: muestra resultados con alert()", function () {
+    spyOn(window, "prompt").and.returnValues("cpu", "1000");
+    buscadorProductos();
+    var msg = window.alert.calls.mostRecent().args[0];
+    expect(msg).toContain("RESULTADOS DE BÚSQUEDA");
+    expect(msg).toContain("cpu");
+  });
+
+  it("happy path con categoría 'todas': lista todos los productos bajo el precio máx", function () {
+    spyOn(window, "prompt").and.returnValues("todas", "10000");
+    buscadorProductos();
+    var msg = window.alert.calls.mostRecent().args[0];
+    expect(msg).toContain("Resultados encontrados: 6");
+  });
+
+  it("sale silenciosamente si el usuario cancela el primer prompt", function () {
+    spyOn(window, "prompt").and.returnValue(null);
+    buscadorProductos();
+    expect(window.alert).not.toHaveBeenCalled();
+  });
+
+  it("muestra error con alert() si la categoría es inválida", function () {
+    spyOn(window, "prompt").and.returnValues("teclado", "1000");
+    buscadorProductos();
+    expect(window.alert).toHaveBeenCalledWith(jasmine.stringMatching(/Categoría inválida/));
+  });
+
+  it("sale silenciosamente si el usuario cancela el segundo prompt (precio)", function () {
+    spyOn(window, "prompt").and.returnValues("cpu", null);
+    buscadorProductos();
+    expect(window.alert).not.toHaveBeenCalled();
+  });
+
+  it("muestra error con alert() si el precio máximo es 0 o negativo", function () {
+    spyOn(window, "prompt").and.returnValues("cpu", "0");
+    buscadorProductos();
+    expect(window.alert).toHaveBeenCalledWith(jasmine.stringMatching(/Precio inválido/));
+  });
+
+  it("RCN8 R2: captura excepciones internas y muestra 'Error: …'", function () {
+    spyOn(window, "prompt").and.returnValues("cpu", "1000");
+    spyOn(window, "filtrarProductos").and.throwError("fallo al filtrar");
+    buscadorProductos();
+    expect(window.alert).toHaveBeenCalledWith("Error: fallo al filtrar");
+    expect(console.error).toHaveBeenCalled();
+  });
+});

@@ -186,36 +186,53 @@ Durante la integración detecté que los diagramas entregados por el Arquitecto 
 
 | Métrica | Valor |
 |---------|-------|
-| Total de specs (it) | **68** |
-| Tests Pasando (verificación local post-CR) | **68** ✅ |
+| Total de specs (it) | **99** |
+| Tests Pasando | **99** ✅ |
 | Tests Fallando | **0** ❌ |
 | Porcentaje de Éxito | **100%** |
 
-> ℹ️ **Nota sobre las screenshots:** las imágenes adjuntas en este documento muestran la ejecución de la **versión inicial de la suite (59 specs)** capturada con Playwright antes del code review de @GonzaloBarbano. Tras aplicar los 7 hallazgos del code review se agregaron 9 specs adicionales (separación de tests con assertions distintas + casos borde de la Suite 4), llegando al total de **68 specs**. Todos pasan localmente en `test-runner.html`. Las screenshots no se re-capturaron para evitar reagendar la corrida con Antigravity Agent.
-
 ### Cobertura por Suite
 
-| Suite | Flujo | Specs | Estado |
-|-------|-------|-------|--------|
-| 1 | Cotizador de Productos | 23 | ✅ Todos PASS |
-| 2 | Verificador de Compatibilidad | 14 | ✅ Todos PASS |
-| 3 | Simulador de Carrito | 16 | ✅ Todos PASS |
-| 4 | Buscador de Productos | 15 | ✅ Todos PASS |
+| Suite | Foco | Specs | Estado |
+|-------|------|-------|--------|
+| 1 | Cotizador — funciones puras | 24 | ✅ Todos PASS |
+| 2 | Compatibilidad — funciones puras | 14 | ✅ Todos PASS |
+| 3 | Carrito — funciones puras | 18 | ✅ Todos PASS |
+| 4 | Buscador — funciones puras | 16 | ✅ Todos PASS |
+| 5 | Cotizador — orquestador con `spyOn` | 7 | ✅ Todos PASS |
+| 6 | Compatibilidad — orquestador con `spyOn` | 6 | ✅ Todos PASS |
+| 7 | Carrito — orquestador con `spyOn` | 7 | ✅ Todos PASS |
+| 8 | Buscador — orquestador con `spyOn` | 7 | ✅ Todos PASS |
 
-### Funciones puras cubiertas por suite
+### Cobertura de orquestadores (Suites 5-8) — agregada por RCN7 R1
 
-| Suite | Funciones de `js/script.js` testeadas |
-|-------|-----------------------------------------|
-| 1. Cotizador | `validarCategoria()`, `validarCantidad()`, `calcularDescuento()`, `calcularSubtotal()`, `generarResumenCotizacion()` |
-| 2. Compatibilidad | `calcularConsumoTotal()`, `recomendarFuente()`, `validarTdp()`, `generarInformeCompatibilidad()` |
-| 3. Carrito | `agregarAlCarrito()`, `calcularTotalCarrito()`, `aplicarIva()`, `generarResumenCarrito()`, `obtenerProductoPorOpcion()` |
-| 4. Buscador | `filtrarProductos()`, `ordenarPorPrecio()`, `generarResultadosBusqueda()` |
+A pedido del docente (RCN7 del 2° review), se agregaron 4 suites adicionales que cubren las **funciones orquestadoras** (`cotizadorInteractivo()`, `verificadorCompatibilidad()`, `carritoSimulador()`, `buscadorProductos()`) usando `spyOn(window, 'prompt')` y `spyOn(window, 'alert')` para mockear la capa de UI.
 
-Total: **17 funciones puras testeadas** sobre las 17 expuestas globalmente en el módulo. Los orquestadores `flujo1Cotizador()` / `flujo2Compatibilidad()` / `flujo3Carrito()` / `flujo4Buscador()` y `iniciarMenu()` no se testean porque dependen de `prompt`/`alert` — capa de UI fuera del alcance unitario.
+Cada suite verifica:
+
+- **Happy path** con inputs válidos vía `prompt`, validando el mensaje final por `alert`.
+- **Cancelaciones** (`prompt` devuelve `null`): el orquestador sale silenciosamente sin invocar `alert`.
+- **Inputs inválidos**: el orquestador muestra el mensaje de error correspondiente vía `alert`.
+- **RCN8 R2**: el `try/catch` global captura excepciones internas y muestra `"Error: …"` por `alert` + `console.error`. Se prueba forzando una excepción con `spyOn(window, 'X').and.throwError(...)` sobre una función pura que el orquestador invoca.
+
+### Funciones cubiertas por suite
+
+| Suite | Tipo | Funciones de `js/script.js` testeadas |
+|-------|------|-----------------------------------------|
+| 1. Cotizador (puras) | pura | `validarCategoria()`, `validarCantidad()`, `calcularDescuento()`, `calcularSubtotal()`, `generarResumenCotizacion()` |
+| 2. Compatibilidad (puras) | pura | `calcularConsumoTotal()`, `recomendarFuente()`, `validarTdp()`, `generarInformeCompatibilidad()` |
+| 3. Carrito (puras) | pura | `agregarAlCarrito()`, `decrementarStock()`, `calcularTotalCarrito()`, `aplicarIva()`, `generarResumenCarrito()`, `obtenerProductoPorOpcion()` |
+| 4. Buscador (puras) | pura | `filtrarProductos()`, `ordenarPorPrecio()`, `generarResultadosBusqueda()` |
+| 5. Cotizador (orquestador) | orquestador con `spyOn` | `cotizadorInteractivo()` |
+| 6. Compatibilidad (orquestador) | orquestador con `spyOn` | `verificadorCompatibilidad()` |
+| 7. Carrito (orquestador) | orquestador con `spyOn` | `carritoSimulador()` |
+| 8. Buscador (orquestador) | orquestador con `spyOn` | `buscadorProductos()` |
+
+Total: **18 funciones puras + 4 funciones orquestadoras** = todas las funciones expuestas de `js/script.js` quedan cubiertas tras la incorporación de las suites de `spyOn`. La función `iniciarMenu()` no se testea directamente porque su responsabilidad es el `while` de selección de menú; sus 4 subflujos sí están cubiertos individualmente.
 
 ### Tipos de tests aplicados
 
-Cada suite incluye los **4 tipos obligatorios** definidos en la consigna:
+Cada suite de funciones puras (1-4) incluye los **4 tipos obligatorios** definidos en la consigna; las suites de orquestadores (5-8) suman los tipos de **mocking** y **cobertura de manejo de errores**:
 
 | Tipo | Ejemplo aplicado |
 |------|------------------|
@@ -223,61 +240,68 @@ Cada suite incluye los **4 tipos obligatorios** definidos en la consigna:
 | Casos Borde | `expect(calcularTotalCarrito([])).toBe(0)` — carrito vacío |
 | Validación de Errores | `expect(() => aplicarIva(-50)).toThrow()` — monto negativo |
 | Operaciones Arrays/Objetos | Inmutabilidad: `filtrarProductos()` no muta el catálogo original |
+| **Mocking de UI (Suites 5-8)** | `spyOn(window, "prompt").and.returnValues("cpu", "5")` — simula entrada del usuario |
+| **Cobertura de `try/catch` (RCN8 R2)** | `spyOn(window, "X").and.throwError("err")` para forzar excepción + verificar `expect(window.alert).toHaveBeenCalledWith("Error: err")` |
 
 ### Tipos de assertions Jasmine usadas
 
-8 tipos distintos (la consigna pide ≥4): `toBe`, `toEqual`, `toBeTruthy`, `toBeFalsy`, `toContain`, `toThrow`, `toBeNull`, `jasmine.objectContaining` + `jasmine.any`.
+10+ tipos distintos (la consigna pide ≥4):
+
+`toBe`, `toEqual`, `toBeTruthy`, `toBeFalsy`, `toContain`, `toThrow`, `toBeNull`, `toHaveBeenCalled`, `toHaveBeenCalledTimes`, `toHaveBeenCalledWith`, `jasmine.stringMatching`, `jasmine.stringContaining`, `jasmine.objectContaining`, `jasmine.any`.
+
+Las assertions de spies (`toHaveBeenCalled*`) se incorporaron al implementar RCN7 R1 (cobertura de `prompt`/`alert` con `spyOn`).
 
 ---
 
 ## Capturas de Pantalla
 
-Capturas tomadas con Playwright contra `http://localhost:5501/js/test/test-runner.html` (Live Server de VS Code).
+Capturas tomadas contra `test-runner.html` ejecutado en navegador (Live Server de VS Code), con la suite completa de **99 specs** corriendo en milisegundos gracias a los mocks de Jasmine (`spyOn`).
 
-### 1. Resumen global — 59 specs, 0 failures
+### 1. Resumen global — 99 specs, 0 failures
 
-![Resumen global](./screenshots/01-overview.png)
+![Resumen global con 99 specs](./screenshots/01-overview.png)
 
-### 2. Suite 1 — Cotizador de Productos
+### 2. Suite 1 — Cotizador (funciones puras)
 
-![Suite Cotizador](./screenshots/02-flujo1-cotizador.png)
+![Suite 1 Cotizador puras](./screenshots/02-flujo1-cotizador.png)
 
-### 3. Suite 2 — Verificador de Compatibilidad
+### 3. Suite 2 — Verificador de Compatibilidad (funciones puras)
 
-![Suite Compatibilidad](./screenshots/03-flujo2-compatibilidad.png)
+![Suite 2 Compatibilidad puras](./screenshots/03-flujo2-compatibilidad.png)
 
-### 4. Suite 3 — Simulador de Carrito
+### 4. Suite 3 — Simulador de Carrito (funciones puras)
 
-![Suite Carrito](./screenshots/04-flujo3-carrito.png)
+![Suite 3 Carrito puras](./screenshots/04-flujo3-carrito.png)
 
-### 5. Suite 4 — Buscador de Productos
+### 5. Suite 4 — Buscador de Productos (funciones puras)
 
-![Suite Buscador](./screenshots/05-flujo4-buscador.png)
+![Suite 4 Buscador puras](./screenshots/05-flujo4-buscador.png)
+
+> ℹ️ Las suites **5–8 (orquestadores con `spyOn`)** quedan visibles en la captura `01-overview.png` (que muestra el detalle de todas las suites con los nombres de los specs y sus tiempos de ejecución).
 
 ---
 
 ## Issues Conocidos
 
-**No se reportaron bugs durante la ejecución.** Las 59 specs pasaron en el primer intento contra `js/script.js` (PR #115, @LucasFUces). El código quedó estructurado de forma testeable (funciones puras, expuestas globalmente, sin dependencia de `prompt`/`alert` para la lógica de negocio).
+**No se reportaron bugs durante la ejecución.** Las 99 specs pasan en su totalidad contra el `js/script.js` final (incluyendo los fixes RCN1–RCN8 del Round 2 aplicados por @LucasFUces). El código quedó estructurado de forma testeable: funciones puras separadas de orquestadoras, `try/catch` global en cada subflujo, y la capa de UI (`prompt`/`alert`) cubierta con `spyOn` en las suites 5–8.
 
 ### Punto de fricción resuelto sin bug-report
 
-Durante la integración del runner se detectó que `js/script.js:639` invoca `iniciarMenu()` al cargar el script, lo que disparaba `prompt()` infinitos al abrir `test-runner.html` y bloqueaba la ejecución de Jasmine. **No se abrió un issue** porque la solución se aplicó del lado del Tester sin requerir modificar `js/script.js`: se sobreescribieron `window.prompt` y `window.alert` en `test-runner.html` antes de cargar el script bajo prueba. Ver detalle en [`docs/03-specs/actividad-obligatoria-3/spec-tester.md`](../../docs/03-specs/actividad-obligatoria-3/spec-tester.md) sección **AL CIERRE — Ajustes Manuales y Coordinación**.
+Durante la integración del runner se detectó que `js/script.js` invoca `iniciarMenu()` al cargar el script, lo que disparaba `prompt()` infinitos al abrir `test-runner.html` y bloqueaba la ejecución de Jasmine. **No se abrió un issue** porque la solución se aplicó del lado del Tester sin requerir modificar `js/script.js`: se sobreescribieron `window.prompt` y `window.alert` en `test-runner.html` antes de cargar el script bajo prueba. Ver detalle en [`docs/03-specs/actividad-obligatoria-3/spec-tester.md`](../../docs/03-specs/actividad-obligatoria-3/spec-tester.md) sección **AL CIERRE — Ajustes Manuales y Coordinación**.
 
 ---
 
 ## Limitaciones del Testing
 
 - Tests síncronos únicamente (no se usan Promises ni `async/await` en esta entrega).
-- No se mide cobertura de código de forma automatizada — el cálculo se realiza manualmente por función.
+- No se mide cobertura de código de forma automatizada — el cálculo se realiza manualmente por función. La introducción de las suites 5–8 con `spyOn` permite afirmar que **todas las funciones expuestas globalmente quedan ejercidas** por al menos un test.
 - Requiere conexión a internet en la primera carga (Jasmine se sirve desde CDN `cdnjs.cloudflare.com`).
-- No incluye tests de integración con el DOM ni manejo de eventos (la consigna restringe esta entrega a lógica pura).
-- Las llamadas a `prompt()` y `alert()` no se testean — se considera que pertenecen a la capa de UI y quedan fuera del alcance unitario.
-- La "Base de Datos" modelada en los diagramas de actividades se simula con arrays en memoria; no hay persistencia real que validar.
+- No incluye tests de integración con el DOM ni manejo de eventos del modal (`inicializarModalProducto()`); esa función pertenece al alcance del modal heredado del Primer Parcial y no de la lógica de los 4 flujos de la AO3.
+- La persistencia se simula con arrays en memoria; no hay base de datos que validar (la materia no contempla backend).
 
 ---
 
-**Última Actualización:** 15 de mayo de 2026
+**Última Actualización:** 30 de junio de 2026
 **Tester/QA Engineer:** Nicolás Aguirre (@Naguirre0102)
 **Colaboración con:** Lucas Fischer (@LucasFUces) — Desarrollador JavaScript
-**Resultado final:** 59 specs / 59 PASS / 0 FAIL / 0 issues abiertos
+**Resultado final:** 99 specs / 99 PASS / 0 FAIL / 0 issues abiertos

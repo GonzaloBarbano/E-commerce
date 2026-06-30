@@ -103,7 +103,7 @@ Plan reconstruido el día de la integración tras leer las 639 líneas del códi
 | `ordenarPorPrecio(productos)` | Orden ascendente. No muta el array original. |
 | `generarResultadosBusqueda(resultados, categoria, precioMaximo)` | Texto de resultados con encabezado, lista (marca/precio/stock) y mensaje "No se encontraron" si vacío. |
 
-**Cobertura final ejecutada (post code review):** 68 specs, 100 % PASS (ver sección AL CIERRE → Resumen de Resultados).
+**Cobertura final ejecutada (post 2° review del docente):** **99 specs**, 100 % PASS — incluye 4 suites adicionales (5–8) que cubren los orquestadores con `spyOn` por pedido del docente (RCN7 R1). Ver sección AL CIERRE → Resumen de Resultados.
 
 ### 📊 Cobertura mínima por suite
 
@@ -187,7 +187,7 @@ Checklist que debe cumplirse para considerar la tarea cerrada. **Estado actualiz
 - [x] `js/test/script.spec.js` contiene **4 suites `describe()`** (una por flujo).
 - [x] Cada suite tiene **≥ 3 tests `it()`**.
 - [x] Tests cubren happy path, casos borde, validación de errores, operaciones con arrays/objetos.
-- [x] Se usan al menos 4 tipos distintos de assertions de Jasmine (`toBe`, `toEqual`, `toBeTruthy`/`toBeFalsy`, `toContain`, `toThrow`, etc.) — 8 tipos usados en total.
+- [x] Se usan al menos 4 tipos distintos de assertions de Jasmine — **10+ tipos** usados en total, incluyendo `toHaveBeenCalled`, `toHaveBeenCalledWith` y matchers `jasmine.stringMatching`/`stringContaining` introducidos al implementar `spyOn` (RCN7 R1).
 
 ### Ejecución y evidencia
 - [x] Test runner abierto exitosamente en browser vía Playwright (ejecutado a través de Antigravity Agent al no responder Playwright MCP en Copilot; ver AL CIERRE → Obstáculos).
@@ -281,37 +281,39 @@ describe("calcularSubtotal()", function () {
 
 ### Screenshots del test runner
 
-Capturadas con Playwright contra `http://localhost:5501/js/test/test-runner.html` y guardadas en `js/test/screenshots/`:
+Capturadas contra `test-runner.html` (Live Server) y guardadas en `js/test/screenshots/`. Regeneradas el 30 de junio de 2026 con la suite final de 99 specs (RCN6 R1 del 2° review del docente):
 
-| # | Imagen | Contenido (snapshot pre-code-review, 59 specs) |
+| # | Imagen | Contenido |
 |---|---|---|
-| 1 | [`01-overview.png`](../../../js/test/screenshots/01-overview.png) | Resumen global de Jasmine: 59 specs, 0 failures |
-| 2 | [`02-flujo1-cotizador.png`](../../../js/test/screenshots/02-flujo1-cotizador.png) | Suite 1 — Cotizador (14 tests, todos PASS) |
-| 3 | [`03-flujo2-compatibilidad.png`](../../../js/test/screenshots/03-flujo2-compatibilidad.png) | Suite 2 — Verificador de Compatibilidad (13 tests, todos PASS) |
-| 4 | [`04-flujo3-carrito.png`](../../../js/test/screenshots/04-flujo3-carrito.png) | Suite 3 — Simulador de Carrito (15 tests, todos PASS) |
-| 5 | [`05-flujo4-buscador.png`](../../../js/test/screenshots/05-flujo4-buscador.png) | Suite 4 — Buscador de Productos (10 tests, todos PASS) |
+| 1 | [`01-overview.png`](../../../js/test/screenshots/01-overview.png) | Resumen global de Jasmine: **99 specs, 0 failures** + listado de suites 5–8 (orquestadores con `spyOn`) |
+| 2 | [`02-flujo1-cotizador.png`](../../../js/test/screenshots/02-flujo1-cotizador.png) | Suite 1 — Cotizador (funciones puras, 24 tests, todos PASS) |
+| 3 | [`03-flujo2-compatibilidad.png`](../../../js/test/screenshots/03-flujo2-compatibilidad.png) | Suite 2 — Compatibilidad (funciones puras, 14 tests, todos PASS) |
+| 4 | [`04-flujo3-carrito.png`](../../../js/test/screenshots/04-flujo3-carrito.png) | Suite 3 — Carrito (funciones puras, 18 tests, todos PASS) |
+| 5 | [`05-flujo4-buscador.png`](../../../js/test/screenshots/05-flujo4-buscador.png) | Suite 4 — Buscador (funciones puras, 16 tests, todos PASS) |
 
-> ℹ️ Las screenshots reflejan la corrida inicial con Playwright (59 specs). Tras el code review de @GonzaloBarbano se incorporaron 9 specs adicionales por separación de assertions distintas y casos borde extra de la Suite 4. Los **68 specs** finales corren en `test-runner.html` y se verificaron localmente en el browser; no se re-capturaron screenshots para evitar reagendar la corrida de Playwright.
+> ℹ️ Las **suites 5 a 8 (orquestadores con `spyOn`)** quedan visibles en `01-overview.png` que muestra el detalle completo de las 8 describes raíz con los nombres de los specs y sus tiempos de ejecución.
 
 ---
 
 ## AL CIERRE — Resumen de Resultados
 
-| Métrica | Valor (post code review) |
+| Métrica | Valor (final, post-RCN6/RCN7 R1) |
 |---|---|
-| Tests totales (specs) | **68** (subió de 59 tras aplicar los 7 hallazgos del CR) |
-| Tests PASS | **68** ✅ |
+| Tests totales (specs) | **99** (68 post-CR Gonza + 4 nuevos de Lucas Round 2 + 27 nuevos por RCN7 R1 spyOn) |
+| Tests PASS | **99** ✅ |
 | Tests FAIL | **0** |
 | Porcentaje de éxito | **100%** |
-| Suites describe() raíz | 4 (una por flujo del menú) |
-| Sub-suites describe() (una por función pura) | 17 |
-| Cobertura por suite | Suite 1: 23 — Suite 2: 14 — Suite 3: 16 — Suite 4: 15 |
-| Tipos de assertions Jasmine usadas | 8 — `toBe`, `toEqual`, `toBeTruthy`, `toBeFalsy`, `toContain`, `toThrow`, `toBeNull`, `jasmine.objectContaining` (+ `toBeGreaterThan`/`toBeLessThan` post-CR) |
+| Suites `describe()` raíz | **8** — 4 de funciones puras (1–4) + 4 de orquestadores con `spyOn` (5–8) |
+| Sub-suites `describe()` (una por función pura) | 17 |
+| Cobertura por suite | S1: 24 · S2: 14 · S3: 18 · S4: 16 · S5: 7 · S6: 6 · S7: 7 · S8: 7 |
+| Funciones cubiertas | 18 puras + 4 orquestadoras = **22 funciones expuestas globalmente cubiertas** |
+| Tipos de assertions Jasmine usadas | 10+ — `toBe`, `toEqual`, `toBeTruthy`, `toBeFalsy`, `toContain`, `toThrow`, `toBeNull`, `toHaveBeenCalled`, `toHaveBeenCalledTimes`, `toHaveBeenCalledWith`, `jasmine.stringMatching`, `jasmine.stringContaining`, `jasmine.objectContaining`, `jasmine.any` |
+| Técnicas avanzadas | `spyOn(window, "prompt"/"alert")` para mockear UI; `spyOn(X).and.throwError(...)` para forzar excepciones y verificar el `try/catch` global (RCN8 R2) |
 | Bugs reportados como issues en GitHub | 0 (ningún test falló) |
 
 ### Bugs encontrados (issues abiertos)
 
-No se reportaron bugs. La implementación de Lucas (`js/script.js`) pasó las 59 specs en el primer intento.
+No se reportaron bugs. Tras el merge del Round 2 de @LucasFUces (que agregó validaciones estrictas + `try/catch` en los orquestadores), las 99 specs pasan al 100 % en `test-runner.html`.
 
 ---
 
