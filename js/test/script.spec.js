@@ -85,6 +85,11 @@ describe("Flujo 1 — Cotizador de Productos", function () {
     it("mantiene 15% para cantidades muy altas", function () {
       expect(calcularDescuento(1000)).toBe(15);
     });
+
+    it("lanza Error si la cantidad es 0 o negativa", function () {
+      expect(function () { calcularDescuento(0); }).toThrow();
+      expect(function () { calcularDescuento(-2); }).toThrow();
+    });
   });
 
   describe("calcularSubtotal()", function () {
@@ -292,6 +297,12 @@ describe("Flujo 3 — Simulador de Carrito", function () {
       expect(carrito).toContain(jasmine.objectContaining({ id: 1 }));
       expect(carrito).toContain(jasmine.objectContaining({ id: 2 }));
     });
+
+    it("no muta el producto original al agregarlo al carrito", function () {
+      var productoOriginal = { id: 3, nombre: "SSD", precio: 100, stock: 5 };
+      agregarAlCarrito(carritoVacio, productoOriginal, 2);
+      expect(productoOriginal.stock).toBe(5);
+    });
   });
 
   describe("calcularTotalCarrito()", function () {
@@ -312,6 +323,11 @@ describe("Flujo 3 — Simulador de Carrito", function () {
       var carrito = [{ id: 1, nombre: "X", precio: 0.1, cantidad: 3 }];
       // 0.1 * 3 = 0.30000000000000004 → 0.3
       expect(calcularTotalCarrito(carrito)).toBe(0.3);
+    });
+
+    it("lanza Error si un item tiene precio o cantidad inválido", function () {
+      expect(function () { calcularTotalCarrito([{ id: 1, precio: "100", cantidad: 2 }]); }).toThrow();
+      expect(function () { calcularTotalCarrito([{ id: 1, precio: 100, cantidad: "2" }]); }).toThrow();
     });
   });
 
@@ -410,6 +426,11 @@ describe("Flujo 4 — Buscador de Productos", function () {
 
     it("lanza Error si el precio máximo es negativo", function () {
       expect(function () { filtrarProductos(miniCatalogo, "cpu", -1); }).toThrow();
+    });
+
+    it("lanza Error si la categoría no es string ni null/undefined", function () {
+      expect(function () { filtrarProductos(miniCatalogo, 123, 100); }).toThrow();
+      expect(function () { filtrarProductos(miniCatalogo, { categoria: "cpu" }, 100); }).toThrow();
     });
 
     it("acepta precio máximo exactamente igual al precio del producto (borde)", function () {
