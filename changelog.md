@@ -22,8 +22,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
-- [fix/tester-spyon-orquestadores] Resolución de RCN6 y RCN7 (R1 del 2° review): se agregan **4 suites Jasmine** que cubren los orquestadores (`cotizadorInteractivo`, `verificadorCompatibilidad`, `carritoSimulador`, `buscadorProductos`) usando `spyOn(window, "prompt")` y `spyOn(window, "alert")` para mockear la capa de UI. Cobertura final: **99 specs / 99 PASS / 0 FAIL** (era 72). Se regeneraron las 5 capturas de pantalla con el conteo final y se actualizaron `testing-doc.md` y `spec-tester.md` AL CIERRE eliminando la nota apologética anterior sobre screenshots desactualizados.
-  PR: [#XXX](https://github.com/GonzaloBarbano/E-commerce/pull/XXX) - @Naguirre0102 (Tester JavaScript / QA Engineer)
+- [fix/tester-spyon-orquestadores] Resolución de RCN6 y RCN7
+  PR: [#135](https://github.com/GonzaloBarbano/E-commerce/pull/135) - @Naguirre0102 (Tester JavaScript / QA Engineer)
 
 - [fix/coord-devops-spec-devops-checklist] Resolución de RCN1, validación completa del checklist de criterios de aceptación en `spec-devops.md`.
   PR: [#130](https://github.com/GonzaloBarbano/E-commerce/pull/130) - @Naguirre0102 (Coordinador / DevOps)
