@@ -22,6 +22,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
+- [fix/tester-limpiar-comentario-codigo] Resolución de RCN1: eliminado el comentario con snippet de código JavaScript
+  PR: [#136](https://github.com/GonzaloBarbano/E-commerce/pull/136) - @Naguirre0102 (Tester JavaScript / QA Engineer)
+
 - [fix/tester-spyon-orquestadores] Resolución de RCN6 y RCN7
   PR: [#135](https://github.com/GonzaloBarbano/E-commerce/pull/135) - @Naguirre0102 (Tester JavaScript / QA Engineer)
 
