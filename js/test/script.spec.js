@@ -439,8 +439,6 @@ describe("Flujo 4 — Buscador de Productos", function () {
     });
 
     it("trata null/undefined como categoría 'todas' (caso borde — CR #7)", function () {
-      // filtrarProductos() normaliza con: categoria ? categoria.trim().toLowerCase() : "todas"
-      // null y undefined son falsy → cae en la rama "todas".
       var resNull = filtrarProductos(miniCatalogo, null, 1000);
       var resUndef = filtrarProductos(miniCatalogo, undefined, 1000);
       expect(resNull.length).toBe(4);
