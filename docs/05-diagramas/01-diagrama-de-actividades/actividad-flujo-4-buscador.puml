@@ -1,0 +1,42 @@
+@startuml actividad-flujo-4-buscador
+title Flujo 4: Buscador y Filtrado de Productos
+skinparam defaultFontName "Segoe UI"
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #333333
+skinparam ArrowColor #333333
+
+|Usuario|
+start
+:Ingresa categoría con prompt();
+note right
+  Criterios admitidos por `validarCategoria(categoria)`:
+  "cpu", "gpu", "ram", "storage", "psu", "cooling"
+  o "todas" como wildcard.
+end note
+:Ingresa precio máximo con prompt();
+note right
+  Validado con parseFloat() > 0
+  en la función orquestadora del buscador (js/script.js).
+end note
+
+|Sistema|
+:Lee `catalogo` (array en memoria);
+:Inicializa array `resultado` vacío;
+repeat
+  :Toma producto[i] del catálogo;
+  if (¿categoria === "todas" o coincide?) then (sí)
+    if (¿precio <= precioMaximo?) then (sí)
+      :resultado.push(producto);
+    else (no)
+    endif
+  else (no)
+  endif
+repeat while (¿Quedan productos en el catálogo?) is (sí)
+:ordenarPorPrecio(resultado) - ascendente;
+:generarResultadosBusqueda(resultado, ...);
+:Mostrar resumen con alert() y console.log();
+
+|Usuario|
+:Visualiza productos filtrados;
+stop
+@enduml

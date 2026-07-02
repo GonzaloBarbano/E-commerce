@@ -95,26 +95,97 @@ El código debe:
 
 ### Fragmento generado por Copilot y ajustes manuales
 
-Copilot generó la estructura base de `calcularSubtotal()` y `flujo1Cotizador()`.
+Copilot generó la estructura base de `calcularSubtotal()` y `cotizadorInteractivo()` (anteriormente `flujo1Cotizador()`).
 Se realizaron los siguientes ajustes manuales:
 
+**Ajustes principales realizados:**
 - Se agregó la invocación de `iniciarMenu()` al final del archivo (Copilot no la incluyó)
 - Se corrigió `generarResumenCotizacion()` para mostrar IVA (21%) consistente con el flujo del carrito
 - Se reemplazó el menú hardcodeado del carrito por generación dinámica desde el array `catalogo`
 - Se corrigió la numeración de los flujos en los comentarios del archivo
+- **RC2**: Se movió el código embebido del modal de `index.html` a una función `inicializarModalProducto()` en `script.js`
+- **RC33**: Se renombraron las funciones flujoN a nombres más descriptivos:
+  - `flujo1Cotizador()` → `cotizadorInteractivo()`
+  - `flujo2Compatibilidad()` → `verificadorCompatibilidad()`
+  - `flujo3Carrito()` → `carritoSimulador()`
+  - `flujo4Buscador()` → `buscadorProductos()`
+- **RC17**: Se agregó decremento de stock real en `agregarAlCarrito()` para que la validación tenga efecto
+
+### Ejemplo de función pura generada — Flujo 1
+
+```javascript
+/**
+ * Calcula el subtotal de una compra aplicando descuento por volumen.
+ * @param {number} precioUnitario - Precio unitario del producto.
+ * @param {number} cantidad - Cantidad de unidades.
+ * @returns {number} Subtotal con descuento aplicado, redondeado a 2 decimales.
+ */
+function calcularSubtotal(precioUnitario, cantidad) {
+  if (precioUnitario < 0 || cantidad <= 0) {
+    throw new Error("Precio y cantidad deben ser valores positivos");
+  }
+  var descuento = calcularDescuento(cantidad);
+  var subtotal = precioUnitario * cantidad * (1 - descuento / 100);
+  return Math.round(subtotal * 100) / 100;
+}
+
+/**
+ * Flujo 1 — Cotizador interactivo con prompt/alert.
+ * Entrada → proceso → salida usando las funciones puras del flujo.
+ */
+function cotizadorInteractivo() {
+  var categorias = "cpu | gpu | ram | storage | psu | cooling";
+  var categoria = prompt(
+    "=== COTIZADOR PC HARDWARE ===\n" +
+    "Categorías disponibles:\n" + categorias + "\n\n" +
+    "Ingresá la categoría que querés cotizar:"
+  );
+
+  if (categoria === null) return; // usuario canceló
+
+  if (!validarCategoria(categoria)) {
+    alert("Categoría inválida. Opciones: " + categorias);
+    return;
+  }
+
+  var categoriaNorm = categoria.trim().toLowerCase();
+  var cantidadStr = prompt("¿Cuántas unidades querés? (1-100):");
+
+  if (cantidadStr === null) return;
+
+  if (!validarCantidad(cantidadStr)) {
+    alert("Cantidad inválida. Ingresá un número entre 1 y 100.");
+    return;
+  }
+
+  var cantidad = parseInt(cantidadStr);
+  var precio = preciosPorCategoria[categoriaNorm];
+  var resumen = generarResumenCotizacion(categoriaNorm, cantidad, precio);
+  alert(resumen);
+  console.log("[Flujo 1 - Cotizador]", resumen);
+}
+```
 
 ### Decisiones finales de estructura
 
-- `agregarAlCarrito()` devuelve un nuevo array en lugar de mutar el original,
-  facilitando el testing con Jasmine sin efectos secundarios
-- Todas las funciones de negocio están en scope global para que el Tester pueda
-  accederlas directamente desde `script.spec.js`
-- La lógica de negocio no llama a `prompt()` ni `alert()`, solo las funciones
-  de flujo interactivo lo hacen, permitiendo testear la lógica de forma aislada
+La arquitectura final de `script.js` se organizó siguiendo estos principios clave:
 
+**Separación lógica/UI:**
+- Las funciones de negocio (`calcularSubtotal()`, `filtrarProductos()`, `calcularConsumoTotal()`, etc.) NO llaman a `prompt()` ni `alert()`.
+- Las funciones de flujo interactivo (`cotizadorInteractivo()`, `carritoSimulador()`, etc.) sí llaman a `prompt()` y `alert()`, pero solo para entrada/salida.
+- Esta separación facilita al Tester escribir tests con Jasmine sin necesidad de burlarse de funciones de diálogo.
 
-*(Completar al finalizar — incluir fragmento del flujo 1 generado y los cambios aplicados)*
+**Estructura de datos:**
+- El array `catalogo` contiene todos los productos con propiedades relevantes: `id`, `nombre`, `categoria`, `marca`, `precio`, `stock`, `tdp` (cuando aplica).
+- El objeto `preciosPorCategoria` permite obtener precios de referencia rápidamente sin iterar el catálogo.
+- El array `fuentesRecomendadas` está ordenado por potencia para permitir búsqueda eficiente.
 
-### Decisiones finales de estructura
+**Testabilidad:**
+- Todas las funciones están en scope global (no dentro de IIFE), permitiendo que `script.spec.js` las acceda directamente.
+- Las funciones puras no tienen efectos secundarios globales (excepto `agregarAlCarrito()` que decrementa `producto.stock`).
+- El menú principal (`iniciarMenu()`) no es testeable por naturaleza, pero toda su lógica de negocio delegada a funciones puras testea correctamente.
 
-*(Completar al finalizar — explicar por qué quedó organizado como está y cómo facilita el trabajo del Tester)*
+**Mantenibilidad:**
+- Los comentarios JSDoc explican parámetros, retornos y comportamiento de cada función.
+- Los nombres de función son descriptivos en camelCase (ej: `calcularDescuento`, `validarTdp`).
+- La estructura refleja una clara separación de responsabilidades: cálculos, validaciones, generación de reportes, y flujos de UI.

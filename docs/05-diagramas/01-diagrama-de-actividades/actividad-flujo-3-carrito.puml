@@ -1,0 +1,43 @@
+@startuml actividad-flujo-3-carrito
+title Flujo 3: Simulador de Carrito y Calculo de Precio
+skinparam defaultFontName "Segoe UI"
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #333333
+skinparam ArrowColor #333333
+
+|Usuario|
+start
+:Elige producto del menú con prompt() (opción 1-6);
+:Ingresa cantidad con prompt();
+
+|Sistema|
+:obtenerProductoPorOpcion(opcion);
+note right
+  Busca en `catalogo` (array en memoria).
+  Devuelve null si la opción es inválida.
+end note
+
+if (¿Producto válido y cantidad entre 1 y 10?) then (sí)
+  if (¿cantidad <= producto.stock del catálogo?) then (sí)
+    :agregarAlCarrito(carrito, producto, cantidad);
+    note right
+      Devuelve nuevo array; si el producto ya
+      existía, incrementa cantidad. No muta el original.
+    end note
+    :calcularTotalCarrito(carrito);
+    :aplicarIva(total) - alicuota 21%;
+    :generarResumenCarrito(carrito);
+    :Mostrar resumen con alert() y console.log();
+  else (no)
+    :Mostrar error con alert(): "Stock insuficiente";
+    end
+  endif
+else (no)
+  :Mostrar error con alert(): "Producto u cantidad inválidos";
+  end
+endif
+
+|Usuario|
+:Visualiza el resumen del carrito con total e IVA;
+stop
+@enduml

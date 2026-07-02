@@ -27,12 +27,15 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 ## 🛠️ Tecnologías
 
 - **HTML5** - Estructura semántica y accesible
+- **CSS3 / Bootstrap 5** - Estilos y diseño responsive
+- **JavaScript (ES5+)** - Lógica de negocio, validaciones y flujos interactivos con `prompt`/`alert`
+- **Jasmine 5.10** - Framework de testing unitario en navegador
+- **PlantUML** - Diagramas de actividades
 - **GitHub** - Control de versiones y colaboración
 - **Figma** - Diseño y mockups de interfaz
-- **GitHub Copilot** - Asistencia en generación de código y documentación
+- **GitHub Copilot / Antigravity Agent** - Asistencia IA en generación de código y documentación
 - **Visual Studio Code** - Editor de desarrollo
 - **Git** - Versionado de cambios
-- **Bootstrap**
 
 ---
 
@@ -44,24 +47,23 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 - ✅ Mockup de interfaz en Figma
 - ✅ Documentación y especificaciones
 
-### Entrega 2 (Actual)
+### Entrega 2 (Realizado)
 
 - ✅ Estilos CSS responsive
 - ✅ Diseño visual completo
 - ✅ Mejora de UX/UI
 
-### Entrega 3 (Próxima)
+### Entrega 3 (Actual)
 
-- 📅 Funcionalidad de carrito de compras
-- 📅 Sistema de filtrado y búsqueda
-- 📅 Interactividad con JavaScript
+- ✅ Lógica de negocio en JavaScript (4 flujos: cotizador, compatibilidad, carrito, buscador)
+- ✅ Diagramas de actividades PlantUML
+- ✅ Suite de tests automatizados con Jasmine
+- ✅ Interactividad básica con `prompt`/`alert`
 
-### Entregas Posteriores
+### Entrega 4 (Próxima)
 
-- 📅 Backend y base de datos
-- 📅 Sistema de autenticación
-- 📅 Pasarela de pagos
-- 📅 Sistema de envíos
+- 📅 Manipulación del DOM y eventos
+- 📅 Reemplazo de `prompt`/`alert` por interacción visual en la UI
 
 ---
 
@@ -77,11 +79,11 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 👥 Integrantes del Grupo
 
-| Nombre completo    | N° de Matrícula | Usuario GitHub  | Carrera                                 | Materia            | Rol en esta entrega (Actividad 2)      |
+| Nombre completo    | N° de Matrícula | Usuario GitHub  | Carrera                                 | Materia            | Rol en esta entrega (Actividad 3)      |
 | ------------------ | --------------- | --------------- | --------------------------------------- | ------------------ | -------------------------------------- |
-| Nicolas Aguirre    | 153791          | @Naguirre0102   | Tecnicatura en Programación de Sistemas | Programación Web I | Tester javascript/ QA engineer         |
-| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Arquitecto de diagramas de actividades |
-| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Desarrollador javascript               |
+| Nicolas Aguirre    | 153791          | @Naguirre0102   | Tecnicatura en Programación de Sistemas | Programación Web I | Tester JavaScript / QA Engineer        |
+| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Coordinador / DevOps + Arquitecto de Diagramas |
+| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Desarrollador JavaScript               |
 
 ---
 

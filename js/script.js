@@ -98,7 +98,7 @@ var fuentesRecomendadas = [
 ];
 
 // =============================================================================
-// FLUJO 4 — COTIZADOR DE PRODUCTOS
+// FLUJO 1 — COTIZADOR DE PRODUCTOS
 // =============================================================================
 
 /**
@@ -128,6 +128,9 @@ function validarCantidad(cantidad) {
  * @returns {number} Porcentaje de descuento (0, 5, 10 o 15).
  */
 function calcularDescuento(cantidad) {
+  if (cantidad <= 0) {
+    throw new Error("La cantidad debe ser mayor a 0");
+  }
   if (cantidad >= 10) return 15;
   if (cantidad >= 5) return 10;
   if (cantidad >= 3) return 5;
@@ -141,7 +144,7 @@ function calcularDescuento(cantidad) {
  * @returns {number} Subtotal con descuento aplicado, redondeado a 2 decimales.
  */
 function calcularSubtotal(precioUnitario, cantidad) {
-  if (precioUnitario < 0 || cantidad <= 0) {
+  if (precioUnitario <= 0 || cantidad <= 0) {
     throw new Error("Precio y cantidad deben ser valores positivos");
   }
   var descuento = calcularDescuento(cantidad);
@@ -176,40 +179,45 @@ function generarResumenCotizacion(categoria, cantidad, precioUnitario) {
  * Flujo 1 — Cotizador interactivo con prompt/alert.
  * Entrada → proceso → salida usando las funciones puras del flujo.
  */
-function flujo1Cotizador() {
-  var categorias = "cpu | gpu | ram | storage | psu | cooling";
-  var categoria = prompt(
-    "=== COTIZADOR PC HARDWARE ===\n" +
-    "Categorías disponibles:\n" + categorias + "\n\n" +
-    "Ingresá la categoría que querés cotizar:"
-  );
+function cotizadorInteractivo() {
+  try {
+    var categorias = "cpu | gpu | ram | storage | psu | cooling";
+    var categoria = prompt(
+      "=== COTIZADOR PC HARDWARE ===\n" +
+      "Categorías disponibles:\n" + categorias + "\n\n" +
+      "Ingresá la categoría que querés cotizar:"
+    );
 
-  if (categoria === null) return; // usuario canceló
+    if (categoria === null) return; // usuario canceló
 
-  if (!validarCategoria(categoria)) {
-    alert("Categoría inválida. Opciones: " + categorias);
-    return;
+    if (!validarCategoria(categoria)) {
+      alert("Categoría inválida. Opciones: " + categorias);
+      return;
+    }
+
+    var categoriaNorm = categoria.trim().toLowerCase();
+    var cantidadStr = prompt("¿Cuántas unidades querés? (1-100):");
+
+    if (cantidadStr === null) return;
+
+    if (!validarCantidad(cantidadStr)) {
+      alert("Cantidad inválida. Ingresá un número entre 1 y 100.");
+      return;
+    }
+
+    var cantidad = parseInt(cantidadStr);
+    var precio = preciosPorCategoria[categoriaNorm];
+    var resumen = generarResumenCotizacion(categoriaNorm, cantidad, precio);
+    alert(resumen);
+    console.log("[Flujo 1 - Cotizador]", resumen);
+  } catch (err) {
+    alert("Error: " + err.message);
+    console.error(err);
   }
-
-  var categoriaNorm = categoria.trim().toLowerCase();
-  var cantidadStr = prompt("¿Cuántas unidades querés? (1-100):");
-
-  if (cantidadStr === null) return;
-
-  if (!validarCantidad(cantidadStr)) {
-    alert("Cantidad inválida. Ingresá un número entre 1 y 100.");
-    return;
-  }
-
-  var cantidad = parseInt(cantidadStr);
-  var precio = preciosPorCategoria[categoriaNorm];
-  var resumen = generarResumenCotizacion(categoriaNorm, cantidad, precio);
-  alert(resumen);
-  console.log("[Flujo 1 - Cotizador]", resumen);
 }
 
 // =============================================================================
-// FLUJO 3 — VERIFICADOR DE COMPATIBILIDAD
+// FLUJO 2 — VERIFICADOR DE COMPATIBILIDAD
 // =============================================================================
 
 /**
@@ -280,47 +288,83 @@ function generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente) {
 /**
  * Flujo 2 — Verificador de compatibilidad interactivo.
  */
-function flujo2Compatibilidad() {
-  var tdpCpuStr = prompt(
-    "=== VERIFICADOR DE COMPATIBILIDAD ===\n" +
-    "Ingresá el TDP de tu CPU en watts\n" +
-    "(Ej: i9-13900K = 125, Ryzen 9 7950X = 170):"
-  );
+function verificadorCompatibilidad() {
+  try {
+    var tdpCpuStr = prompt(
+      "=== VERIFICADOR DE COMPATIBILIDAD ===\n" +
+      "Ingresá el TDP de tu CPU en watts\n" +
+      "(Ej: i9-13900K = 125, Ryzen 9 7950X = 170):"
+    );
 
-  if (tdpCpuStr === null) return;
+    if (tdpCpuStr === null) return;
 
-  if (!validarTdp(tdpCpuStr)) {
-    alert("TDP de CPU inválido. Ingresá un número entre 1 y 1000.");
-    return;
+    if (!validarTdp(tdpCpuStr)) {
+      alert("TDP de CPU inválido. Ingresá un número entre 1 y 1000.");
+      return;
+    }
+
+    var tdpGpuStr = prompt(
+      "Ingresá el TDP de tu GPU en watts\n" +
+      "(Ej: RTX 4090 = 450, RX 7900 XTX = 355):"
+    );
+
+    if (tdpGpuStr === null) return;
+
+    if (!validarTdp(tdpGpuStr)) {
+      alert("TDP de GPU inválido. Ingresá un número entre 1 y 1000.");
+      return;
+    }
+
+    var tdpCpu = parseInt(tdpCpuStr);
+    var tdpGpu = parseInt(tdpGpuStr);
+    var fuente = recomendarFuente(calcularConsumoTotal(tdpCpu, tdpGpu));
+    var informe = generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente);
+
+    alert(informe);
+    console.log("[Flujo 2 - Compatibilidad]", informe);
+  } catch (err) {
+    alert("Error: " + err.message);
+    console.error(err);
   }
-
-  var tdpGpuStr = prompt(
-    "Ingresá el TDP de tu GPU en watts\n" +
-    "(Ej: RTX 4090 = 450, RX 7900 XTX = 355):"
-  );
-
-  if (tdpGpuStr === null) return;
-
-  if (!validarTdp(tdpGpuStr)) {
-    alert("TDP de GPU inválido. Ingresá un número entre 1 y 1000.");
-    return;
-  }
-
-  var tdpCpu = parseInt(tdpCpuStr);
-  var tdpGpu = parseInt(tdpGpuStr);
-  var fuente = recomendarFuente(calcularConsumoTotal(tdpCpu, tdpGpu));
-  var informe = generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente);
-
-  alert(informe);
-  console.log("[Flujo 2 - Compatibilidad]", informe);
 }
 
 // =============================================================================
-// FLUJO 2 — SIMULADOR DE CARRITO
+// FLUJO 3 — SIMULADOR DE CARRITO
 // =============================================================================
 
 /**
  * Agrega un producto al carrito. Si ya existe, incrementa la cantidad.
+ * Decrementa el stock del producto en el catálogo cuando se agrega.
+ * @param {Array} carrito - Array actual del carrito.
+ * @param {object} producto - Producto a agregar (debe tener id, nombre, precio).
+ * @param {number} cantidad - Cantidad a agregar.
+ * @returns {Array} Nuevo array del carrito actualizado.
+ */
+function decrementarStock(catalogoArray, productoId, cantidad) {
+  if (!Array.isArray(catalogoArray)) {
+    throw new Error("El catálogo debe ser un array");
+  }
+  if (cantidad <= 0) {
+    throw new Error("La cantidad debe ser mayor a 0");
+  }
+
+  for (var i = 0; i < catalogoArray.length; i++) {
+    if (catalogoArray[i].id === productoId) {
+      var productoCatalogo = catalogoArray[i];
+      if (typeof productoCatalogo.stock !== "number") {
+        throw new Error("Stock del producto inválido");
+      }
+      productoCatalogo.stock -= cantidad;
+      return productoCatalogo;
+    }
+  }
+
+  throw new Error("Producto no encontrado en el catálogo");
+}
+
+/**
+ * Agrega un producto al carrito. Si ya existe, incrementa la cantidad.
+ * No muta el producto pasado ni el carrito original.
  * @param {Array} carrito - Array actual del carrito.
  * @param {object} producto - Producto a agregar (debe tener id, nombre, precio).
  * @param {number} cantidad - Cantidad a agregar.
@@ -367,7 +411,16 @@ function agregarAlCarrito(carrito, producto, cantidad) {
 function calcularTotalCarrito(carrito) {
   var total = 0;
   for (var i = 0; i < carrito.length; i++) {
-    total += carrito[i].precio * carrito[i].cantidad;
+    var item = carrito[i];
+    if (
+      typeof item.precio !== "number" ||
+      typeof item.cantidad !== "number" ||
+      !isFinite(item.precio) ||
+      !isFinite(item.cantidad)
+    ) {
+      throw new Error("Item con precio o cantidad inválido: " + JSON.stringify(item));
+    }
+    total += item.precio * item.cantidad;
   }
   return Math.round(total * 100) / 100;
 }
@@ -428,49 +481,55 @@ function obtenerProductoPorOpcion(opcion) {
 /**
  * Flujo 3 — Simulador de carrito interactivo.
  */
-function flujo3Carrito() {
-  var carrito = [];
-  var continuar = true;
+function carritoSimulador() {
+  try {
+    var carrito = [];
+    var continuar = true;
 
-  while (continuar) {
-    var menuProductos = "=== SIMULADOR DE CARRITO ===\n\nProductos disponibles:\n";
+    while (continuar) {
+      var menuProductos = "=== SIMULADOR DE CARRITO ===\n\nProductos disponibles:\n";
 for (var i = 0; i < catalogo.length; i++) {
   menuProductos += (i + 1) + ". " + catalogo[i].nombre + " — $" + catalogo[i].precio.toFixed(2) + "\n";
 }
 menuProductos += "\nItems en carrito: " + carrito.length + "\n0. Ver resumen y finalizar\n\nElegí un producto (0-" + catalogo.length + "):";
-    var opcionStr = prompt(menuProductos);
+      var opcionStr = prompt(menuProductos);
 
-    if (opcionStr === null || opcionStr === "0") {
-      continuar = false;
-    } else {
-      var opcion = parseInt(opcionStr);
-      var producto = obtenerProductoPorOpcion(opcion);
-
-      if (!producto) {
-        alert("Opción inválida. Elegí entre 1 y 6.");
+      if (opcionStr === null || opcionStr === "0") {
+        continuar = false;
       } else {
-        var cantStr = prompt("¿Cuántas unidades de " + producto.nombre + "? (1-10):");
-        var cant = parseInt(cantStr);
+        var opcion = parseInt(opcionStr);
+        var producto = obtenerProductoPorOpcion(opcion);
 
-        if (isNaN(cant) || cant < 1 || cant > 10) {
-          alert("Cantidad inválida. Ingresá entre 1 y 10.");
-        } else if (cant > producto.stock) {
-          alert("Stock insuficiente. Solo hay " + producto.stock + " unidades.");
+        if (!producto) {
+          alert("Opción inválida. Elegí entre 1 y 6.");
         } else {
-          carrito = agregarAlCarrito(carrito, producto, cant);
-          alert("✅ " + producto.nombre + " agregado al carrito.");
+          var cantStr = prompt("¿Cuántas unidades de " + producto.nombre + "? (1-10):");
+          var cant = parseInt(cantStr);
+
+          if (isNaN(cant) || cant < 1 || cant > 10) {
+            alert("Cantidad inválida. Ingresá entre 1 y 10.");
+          } else if (cant > producto.stock) {
+            alert("Stock insuficiente. Solo hay " + producto.stock + " unidades.");
+          } else {
+            carrito = agregarAlCarrito(carrito, producto, cant);
+            decrementarStock(catalogo, producto.id, cant);
+            alert("✅ " + producto.nombre + " agregado al carrito.");
+          }
         }
       }
     }
-  }
 
-  var resumen = generarResumenCarrito(carrito);
-  alert(resumen);
-  console.log("[Flujo 3 - Carrito]", resumen);
+    var resumen = generarResumenCarrito(carrito);
+    alert(resumen);
+    console.log("[Flujo 3 - Carrito]", resumen);
+  } catch (err) {
+    alert("Error: " + err.message);
+    console.error(err);
+  }
 }
 
 // =============================================================================
-// FLUJO 1 — BUSCADOR DE PRODUCTOS
+// FLUJO 4 — BUSCADOR DE PRODUCTOS
 // =============================================================================
 
 /**
@@ -483,6 +542,9 @@ menuProductos += "\nItems en carrito: " + carrito.length + "\n0. Ver resumen y f
 function filtrarProductos(productos, categoria, precioMaximo) {
   if (!Array.isArray(productos)) {
     throw new Error("El parámetro productos debe ser un array");
+  }
+  if (categoria != null && typeof categoria !== "string") {
+    throw new Error("La categoría debe ser un string o null/undefined");
   }
   if (precioMaximo < 0) {
     throw new Error("El precio máximo no puede ser negativo");
@@ -549,41 +611,46 @@ function generarResultadosBusqueda(resultados, categoria, precioMaximo) {
 /**
  * Flujo 4 — Buscador de productos interactivo.
  */
-function flujo4Buscador() {
-  var categorias = "cpu | gpu | ram | storage | psu | cooling | todas";
-  var categoria = prompt(
-    "=== BUSCADOR DE PRODUCTOS ===\n" +
-    "Categorías: " + categorias + "\n\n" +
-    "Ingresá una categoría (o 'todas' para ver todo):"
-  );
+function buscadorProductos() {
+  try {
+    var categorias = "cpu | gpu | ram | storage | psu | cooling | todas";
+    var categoria = prompt(
+      "=== BUSCADOR DE PRODUCTOS ===\n" +
+      "Categorías: " + categorias + "\n\n" +
+      "Ingresá una categoría (o 'todas' para ver todo):"
+    );
 
-  if (categoria === null) return;
+    if (categoria === null) return;
 
-  var categoriaNorm = categoria.trim().toLowerCase();
-  var categoriaValida =
-    categoriaNorm === "todas" || validarCategoria(categoriaNorm);
+    var categoriaNorm = categoria.trim().toLowerCase();
+    var categoriaValida =
+      categoriaNorm === "todas" || validarCategoria(categoriaNorm);
 
-  if (!categoriaValida) {
-    alert("Categoría inválida. Opciones: " + categorias);
-    return;
+    if (!categoriaValida) {
+      alert("Categoría inválida. Opciones: " + categorias);
+      return;
+    }
+
+    var precioMaxStr = prompt("Ingresá el precio máximo en USD (ej: 500):");
+
+    if (precioMaxStr === null) return;
+
+    var precioMax = parseFloat(precioMaxStr);
+
+    if (isNaN(precioMax) || precioMax <= 0) {
+      alert("Precio inválido. Ingresá un número mayor a 0.");
+      return;
+    }
+
+    var resultados = filtrarProductos(catalogo, categoriaNorm, precioMax);
+    var texto = generarResultadosBusqueda(resultados, categoriaNorm, precioMax);
+
+    alert(texto);
+    console.log("[Flujo 4 - Buscador]", texto);
+  } catch (err) {
+    alert("Error: " + err.message);
+    console.error(err);
   }
-
-  var precioMaxStr = prompt("Ingresá el precio máximo en USD (ej: 500):");
-
-  if (precioMaxStr === null) return;
-
-  var precioMax = parseFloat(precioMaxStr);
-
-  if (isNaN(precioMax) || precioMax <= 0) {
-    alert("Precio inválido. Ingresá un número mayor a 0.");
-    return;
-  }
-
-  var resultados = filtrarProductos(catalogo, categoriaNorm, precioMax);
-  var texto = generarResultadosBusqueda(resultados, categoriaNorm, precioMax);
-
-  alert(texto);
-  console.log("[Flujo 4 - Buscador]", texto);
 }
 
 // =============================================================================
@@ -615,25 +682,80 @@ function iniciarMenu() {
       salir = true;
       alert("¡Gracias por usar PC Hardware! 👋");
     } else {
-      switch (opcion) {
-        case "1":
-          flujo1Cotizador();
-          break;
-        case "2":
-          flujo2Compatibilidad();
-          break;
-        case "3":
-          flujo3Carrito();
-          break;
-        case "4":
-          flujo4Buscador();
-          break;
-        default:
-          alert("Opción inválida. Elegí entre 0 y 4.");
+      try {
+        switch (opcion) {
+          case "1":
+            cotizadorInteractivo();
+            break;
+          case "2":
+            verificadorCompatibilidad();
+            break;
+          case "3":
+            carritoSimulador();
+            break;
+          case "4":
+            buscadorProductos();
+            break;
+          default:
+            alert("Opción inválida. Elegí entre 0 y 4.");
+        }
+      } catch (err) {
+        alert("Error: " + err.message);
+        console.error(err);
       }
     }
   }
 }
 
-// Iniciar aplicación al cargar el script
+// =============================================================================
+// INICIALIZACIÓN DEL MODAL
+// =============================================================================
+
+/**
+ * Inicializa el event listener para el modal de detalle de producto.
+ * Actualiza los campos del modal cuando se abre, basándose en los data-attributes
+ * del botón que lo dispara.
+ */
+function validarRutaImagenProducto(ruta) {
+  return (
+    typeof ruta === "string" &&
+    ruta.indexOf("..") === -1 &&
+    /^assets\/[a-zA-Z0-9._\/\-]+\.(png|jpg|jpeg|webp|svg)$/i.test(ruta)
+  );
+}
+
+function inicializarModalProducto() {
+  var modalElement = document.getElementById("product-modal");
+  if (!modalElement) return; // El modal no existe en el DOM
+
+  modalElement.addEventListener("show.bs.modal", function (event) {
+    var button = event.relatedTarget;
+    var data = button.dataset;
+
+    // Actualizar título del modal
+    document.getElementById("product-modal-label").textContent =
+      data.productName;
+
+    // Actualizar imagen con validación de seguridad
+    var img = document.getElementById("modal-product-image");
+    var allowedSrc = validarRutaImagenProducto(data.productImage)
+      ? data.productImage
+      : "";
+    img.src = allowedSrc;
+    img.alt = data.productName;
+
+    // Actualizar datos del producto
+    document.getElementById("modal-product-brand").textContent =
+      data.productBrand;
+    document.getElementById("modal-product-specs").textContent =
+      data.productSpecs;
+    document.getElementById("modal-product-stock").textContent =
+      data.productStock;
+    document.getElementById("modal-product-price").textContent =
+      data.productPrice;
+  });
+}
+
+// Inicializar modal y menú al cargar el script
+inicializarModalProducto();
 iniciarMenu();

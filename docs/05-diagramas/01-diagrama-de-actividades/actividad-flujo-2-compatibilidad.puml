@@ -1,0 +1,65 @@
+@startuml actividad-flujo-2-compatibilidad
+title Flujo 2: Verificador de Compatibilidad de Componentes
+skinparam defaultFontName "Segoe UI"
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #333333
+skinparam ArrowColor #333333
+
+|Usuario|
+start
+:Ingresa TDP de la CPU con prompt() (en watts);
+note right
+  Ej: i9-13900K = 125 W
+       Ryzen 9 7950X = 170 W
+end note
+
+|Sistema|
+if (¿validarTdp(tdpCpu) === true?) then (sí)
+else (no)
+  :Mostrar error con alert(): "TDP de CPU inválido (1-1000)";
+  end
+endif
+
+|Usuario|
+:Ingresa TDP de la GPU con prompt() (en watts);
+note right
+  Ej: RTX 4090 = 450 W
+       RX 7900 XTX = 355 W
+end note
+
+|Sistema|
+if (¿validarTdp(tdpGpu) === true?) then (sí)
+else (no)
+  :Mostrar error con alert(): "TDP de GPU inválido (1-1000)";
+  end
+endif
+
+:calcularConsumoTotal(tdpCpu, tdpGpu);
+note right
+  Math.ceil((tdpCpu + tdpGpu + 100) * 1.2)
+  Suma TDPs + 100W base (placa, RAM, etc)
+  Aplica margen de seguridad del 20%.
+end note
+
+:recomendarFuente(consumoWatts);
+note right
+  Recorre el array `fuentesRecomendadas`
+  y devuelve la primera fuente con
+  potencia >= consumoWatts.
+  Devuelve null si el consumo supera 1000 W.
+end note
+
+:generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente);
+
+if (¿fuente !== null?) then (sí)
+  :Informe con fuente recomendada (nombre + potencia + precio);
+else (no)
+  :Informe con advertencia: "Tu sistema supera 1000W. Consultá con un especialista";
+endif
+
+:Mostrar resumen con alert() y console.log();
+
+|Usuario|
+:Visualiza el informe de compatibilidad y la fuente recomendada;
+stop
+@enduml

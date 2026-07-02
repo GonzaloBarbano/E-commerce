@@ -8,7 +8,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
-- [feature/tester-javascript-jasmine] Suite Jasmine 5.10 con 68 specs (59 iniciales + 9 agregados tras el code review de @GonzaloBarbano) sobre los 4 flujos principales (cotizador, compatibilidad, carrito, buscador). 17 funciones puras cubiertas con happy path, casos borde, validación de errores y operaciones array/objeto. Ejecución en browser real vía Playwright con 5 screenshots PASS/FAIL de la corrida inicial. spec-tester.md (BEFORE + AL CIERRE + checklist marcado), test-runner.html con stubs de prompt/alert + advertencia de extensibilidad, script.spec.js y testing-doc.md actualizado con trazabilidad diagrama-código.
+- [feature/tester-javascript-jasmine] Suite Jasmine 5.10 con 68 specs sobre las funciones puras de los 4 flujos del menú. Test-runner, spec-tester (BEFORE + AL CIERRE) y testing-doc completos.
   PR: [#117](https://github.com/GonzaloBarbano/E-commerce/pull/117) - @Naguirre0102 (Tester JavaScript / QA Engineer)
 
 - [feature/dev-javascript-logica-negocio] Implementación lógica JavaScript: 4 flujos testeables (cotizador, compatibilidad, carrito, buscador) + funciones puras expuestas para Jasmine.
@@ -19,6 +19,47 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [feature/coord-devops-update-figma-and-readme] Actualizo spec
   PR: [#109](https://github.com/GonzaloBarbano/E-commerce/pull/109) - @GonzaloBarbano (Coordinador / DevOps)
+
+### Fixed
+
+- [fix/tester-limpiar-comentario-codigo] Resolución de RCN1: eliminado el comentario con snippet de código JavaScript
+  PR: [#136](https://github.com/GonzaloBarbano/E-commerce/pull/136) - @Naguirre0102 (Tester JavaScript / QA Engineer)
+
+- [fix/tester-spyon-orquestadores] Resolución de RCN6 y RCN7
+  PR: [#135](https://github.com/GonzaloBarbano/E-commerce/pull/135) - @Naguirre0102 (Tester JavaScript / QA Engineer)
+
+- [fix/coord-devops-spec-devops-checklist] Resolución de RCN1, validación completa del checklist de criterios de aceptación en `spec-devops.md`.
+  PR: [#130](https://github.com/GonzaloBarbano/E-commerce/pull/130) - @Naguirre0102 (Coordinador / DevOps)
+
+- [fix/coord-devops-puml-fonts] Resolución de RCN2, RCN3, RCN4 y RCN5: corrección del renderizado de caracteres especiales en los 4 PNGs de diagramas.
+  PR: [#129](https://github.com/GonzaloBarbano/E-commerce/pull/129) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
+- [fix/coord-devops-png-diagramas] Resolución de RCN1, RCN2, RCN3 y RCN4.
+  PR: [#128](https://github.com/GonzaloBarbano/E-commerce/pull/128) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
+- [fix/coord-devops-rc23-compatibilidad] Resolución de RC23
+  PR: [#127](https://github.com/GonzaloBarbano/E-commerce/pull/127) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
+- [fix/coord-devops-spec-devops] Resolución de RC29 × 6: reescritura completa de `spec-devops.md`
+  PR: [#126](https://github.com/GonzaloBarbano/E-commerce/pull/126) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
+- [fix/changelog-y-comentarios] Resolución de RC5, RC6, RC6(dup), RC7 y RC8: alineación de los comentarios `// FLUJO N —` de `js/script.js` con la numeración del menú real.
+  PR: [#125](https://github.com/GonzaloBarbano/E-commerce/pull/125) - @Naguirre0102 (Coordinador / DevOps)
+
+- [fix/coord-devops-renumeracion-puml] Resolución de RC10, RC10(dup), RC20 y RC23(dup).
+  PR: [#124](https://github.com/GonzaloBarbano/E-commerce/pull/124) - @Naguirre0102 (Coordinador / DevOps + Arquitecto de Diagramas)
+
+- [fix/dev-javascript-correcciones] Resolución de RC2, RC17, RC27, RC28 y RC33: JS embebido del modal movido a `script.js`, decremento real de stock al agregar al carrito, funciones orquestadoras renombradas (sin prefijo `flujoN`) y `spec-dev-javascript.md` completado.
+  PR: [#123](https://github.com/GonzaloBarbano/E-commerce/pull/123) - @LucasFUces (Desarrollador JavaScript)
+
+- [fix/coord-devops-puml] Resolución de RC11, RC12, RC13, RC18, RC19, RC25 y RC26
+  PR: [#122](https://github.com/GonzaloBarbano/E-commerce/pull/122) - @Naguirre0102 (Coordinador / DevOps)
+
+- [fix/coord-devops-readme-y-titles] Resolución de RC1, RC4, RC9, RC14, RC21, RC31 y RC32
+  PR: [#121](https://github.com/GonzaloBarbano/E-commerce/pull/121) - @Naguirre0102 (Coordinador / DevOps)
+
+- [fix/tester-correcciones] Resolución de RC3, RC22, RC29 y RC30
+  PR: [#120](https://github.com/GonzaloBarbano/E-commerce/pull/120) - @Naguirre0102 (Tester JavaScript / QA Engineer)
 
 ## [ Release Recuperatorio Parcial 1] - 2026-05-05
 

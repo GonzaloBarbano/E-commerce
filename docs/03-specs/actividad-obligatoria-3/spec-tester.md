@@ -34,73 +34,76 @@ Los tests cubrirán **únicamente las funciones puras de lógica de negocio** ex
 - Manipulación del DOM (no permitido por consigna).
 - Persistencia real en base de datos (no existe en esta entrega; los flujos del Arquitecto la modelan como swimlane pero la implementación JS la simula con arrays en memoria).
 
-### 🔢 Funciones planificadas por flujo
+### 🔢 Plan de cobertura — versión inicial (REVISADA — RC29 + RC30)
 
-Este es el plan de cobertura. Los nombres exactos pueden ajustarse al ver el código final de `js/script.js`; lo importante es que la **superficie funcional** quede testeada.
+> 🔴 **Aclaración post-revisión del docente (17 de mayo de 2026):**
+>
+> La versión original de esta sección fue redactada con asistencia de IA **antes** de tener el código real de `js/script.js`, usando como única referencia los diagramas del Arquitecto. Esto generó dos problemas serios señalados en la revisión:
+>
+> 1. **Funciones planificadas que nunca existieron** (`validarSocket`, `validarTipoRAM`, `validarPSU`, `validarTamanoRefrigerador`, `generarReporteCompatibilidad`, `generarIdOrden`, `calcularSubtotalLinea`, `validarCodigoDescuento`, `aplicarDescuento`, `generarRecibo`, `validarStock`, `validarLimitePorUsuario`, `validarCriteriosBusqueda`, `ordenarResultados`). Ninguna de ellas está implementada en `js/script.js`.
+> 2. **Un flujo completo planificado que no se implementó:** "Generación de Recibo" (era el Flujo 4 según los diagramas). Lucas implementó "Cotizador" en su lugar y nadie verificó el cambio antes de testear.
+>
+> **El error conceptual:** confié en la salida de IA + los diagramas como fuente de verdad para diseñar el plan de testing, sin validar contra la implementación real cuando estuvo disponible. **El plan de testing se valida contra el código, no contra el plan del Arquitecto.** La cobertura útil se mide en funciones reales que pasen tests reales.
+>
+> A continuación quedan las dos versiones para evidenciar el aprendizaje: el **plan inicial (ficción IA — INVÁLIDO)** y el **plan final ejecutado (validado contra `js/script.js`)**.
 
-#### Flujo 1 — Búsqueda y Filtrado
+#### ❌ Plan inicial (INVÁLIDO — funciones ficticias generadas por IA)
 
-| Función esperada | Qué valida el test |
+Lista de funciones que se planificaron antes de leer `js/script.js`. **Ninguna de estas funciones existe** en el código entregado por Lucas. Se preservan tachadas como evidencia del error de método:
+
+- ~~`filtrarProductos(catalogo, criterios)`~~ — la firma real de Lucas es `filtrarProductos(productos, categoria, precioMaximo)` (sí existe, pero con otra firma).
+- ~~`validarCriteriosBusqueda(criterios)`~~ — no existe.
+- ~~`ordenarResultados(productos, criterio)`~~ — la firma real es `ordenarPorPrecio(productos)` (sí existe, otro nombre).
+- ~~`validarStock(producto, cantidad)`~~ — no existe (la validación de stock se hace inline en el orquestador, ver RC17).
+- ~~`validarLimitePorUsuario(item, cantidad)`~~ — no existe.
+- ~~`calcularSubtotal(precio, cantidad)`~~ — sí existe (con throw en negativos).
+- ~~`aplicarIVA(monto, alicuota = 0.21)`~~ — la firma real es `aplicarIva(monto)` (alícuota hardcodeada).
+- ~~`calcularTotalCarrito(carrito)`~~ — sí existe.
+- ~~`validarSocket`, `validarTipoRAM`, `validarPSU`, `validarTamanoRefrigerador`, `generarReporteCompatibilidad`~~ — **ninguna existe**. El flujo de compatibilidad real usa `calcularConsumoTotal`, `recomendarFuente`, `validarTdp` y `generarInformeCompatibilidad`.
+- ~~`generarIdOrden`, `calcularSubtotalLinea`, `validarCodigoDescuento`, `aplicarDescuento`, `generarRecibo`~~ — **ninguna existe**. El "Flujo 4 — Recibo" del Arquitecto nunca se implementó.
+
+#### ✅ Plan final ejecutado (validado contra `js/script.js`, post-implementación)
+
+Plan reconstruido el día de la integración tras leer las 639 líneas del código real. Esto es lo que **realmente se testeó**:
+
+##### Flujo 1 — Cotizador de Productos (función orquestadora: `flujo1Cotizador()`)
+
+| Función pura real | Qué valida el test |
 |---|---|
-| `filtrarProductos(catalogo, criterios)` | Devuelve subset correcto del catálogo según marca/precio/specs |
-| `validarCriteriosBusqueda(criterios)` | Rechaza criterios mal formados (string en precio, rangos invertidos) |
-| `ordenarResultados(productos, criterio)` | Orden estable por precio asc/desc, alfabético, etc. |
+| `validarCategoria(categoria)` | Normaliza trim + lowercase y verifica que esté en `preciosPorCategoria`. |
+| `validarCantidad(cantidad)` | Acepta enteros en el rango 1–100. |
+| `calcularDescuento(cantidad)` | Devuelve 0/5/10/15 % según tramos de volumen. |
+| `calcularSubtotal(precioUnitario, cantidad)` | Multiplica con descuento y redondea a 2 decimales. Throws con valores inválidos. |
+| `generarResumenCotizacion(categoria, cantidad, precioUnitario)` | Construye el texto del resumen con IVA 21 %. |
 
-**Tipos de tests:**
-- Happy path: catálogo válido + criterios válidos → array filtrado.
-- Casos borde: catálogo vacío, ningún producto coincide, todos coinciden.
-- Errores: `null`/`undefined` como catálogo, criterios faltantes.
-- Operaciones array: verificar inmutabilidad del catálogo original.
+##### Flujo 2 — Verificador de Compatibilidad (función orquestadora: `flujo2Compatibilidad()`)
 
-#### Flujo 2 — Carrito de Compras
-
-| Función esperada | Qué valida el test |
+| Función pura real | Qué valida el test |
 |---|---|
-| `validarStock(producto, cantidad)` | `true` si hay stock suficiente, `false` si no |
-| `validarLimitePorUsuario(item, cantidad)` | Respeta el límite máximo configurado por producto |
-| `agregarAlCarrito(carrito, producto, cantidad)` | Devuelve carrito con item agregado o cantidad incrementada |
-| `calcularSubtotal(precio, cantidad)` | Producto correcto, rechaza negativos |
-| `aplicarIVA(monto, alicuota = 0.21)` | IVA 21% según consigna del Arquitecto |
-| `calcularTotalCarrito(carrito)` | Suma de subtotales + IVA |
+| `calcularConsumoTotal(tdpCpu, tdpGpu)` | `(tdpCpu + tdpGpu + 100) × 1.2`, `Math.ceil`. Throws con negativos. |
+| `recomendarFuente(consumoWatts)` | Devuelve la primera fuente de `fuentesRecomendadas` con `potencia ≥ consumo`, o `null`. |
+| `validarTdp(valor)` | Acepta enteros en el rango 1–1000. |
+| `generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente)` | Construye el informe (incluye recomendación o advertencia). |
 
-**Tipos de tests:**
-- Happy path: carrito con 2-3 productos, cálculo correcto del total con IVA.
-- Casos borde: carrito vacío (total 0), un solo item, cantidad 1.
-- Errores: stock insuficiente, cantidad negativa, precio negativo (debe lanzar o devolver false).
-- Operaciones objeto/array: estructura del item del carrito (`{id, nombre, precio, cantidad}`).
+##### Flujo 3 — Simulador de Carrito (función orquestadora: `flujo3Carrito()`)
 
-#### Flujo 3 — Validación de Compatibilidad
-
-| Función esperada | Qué valida el test |
+| Función pura real | Qué valida el test |
 |---|---|
-| `validarSocket(cpu, motherboard)` | `cpu.socket === motherboard.socket` |
-| `validarTipoRAM(ram, motherboard)` | DDR4/DDR5 compatible con MB |
-| `calcularConsumoTotal(componentes)` | Suma de TDPs de cada componente |
-| `validarPSU(consumoTotal, psu)` | `psu.watts >= consumoTotal` |
-| `validarTamanoRefrigerador(cooler, case)` | Cooler entra en el case |
-| `generarReporteCompatibilidad(componentes)` | Devuelve `{ compatible: boolean, errores: string[] }` |
+| `agregarAlCarrito(carrito, producto, cantidad)` | Agrega item nuevo o incrementa cantidad. **No muta** el array de entrada. Throws con producto null o cantidad ≤ 0. |
+| `calcularTotalCarrito(carrito)` | Suma `precio × cantidad` por item, redondeado a 2 decimales. |
+| `aplicarIva(monto)` | IVA 21 % redondeado a 2 decimales. Throws con monto negativo. |
+| `generarResumenCarrito(carrito)` | Texto del resumen con líneas, subtotal, IVA, total. |
+| `obtenerProductoPorOpcion(opcion)` | Busca en `catalogo` por número de opción 1–6, devuelve `null` fuera de rango. |
 
-**Tipos de tests:**
-- Happy path: build válido (AM5 + DDR5 + PSU suficiente) → reporte `compatible: true`.
-- Casos borde: justo en el límite (PSU = consumo exacto), una sola incompatibilidad.
-- Errores: componentes faltantes, datos malformados.
-- Operaciones array: el array `errores` se construye correctamente (vacío si compatible, con N entradas si no).
+##### Flujo 4 — Buscador de Productos (función orquestadora: `flujo4Buscador()`)
 
-#### Flujo 4 — Generación de Recibo
-
-| Función esperada | Qué valida el test |
+| Función pura real | Qué valida el test |
 |---|---|
-| `generarIdOrden()` | Devuelve string único (formato esperado) |
-| `calcularSubtotalLinea(item)` | `precio × cantidad` correcto |
-| `validarCodigoDescuento(codigo)` | `{ valido: bool, porcentaje: number }` |
-| `aplicarDescuento(total, porcentaje)` | Resta porcentaje correctamente |
-| `generarRecibo(carrito, codigoDescuento)` | Objeto recibo con id, items, subtotal, IVA, descuento, envío $50, total |
+| `filtrarProductos(productos, categoria, precioMaximo)` | Filtra por categoría (acepta `"todas"`) y precio máximo. No muta. Throws con inputs inválidos. |
+| `ordenarPorPrecio(productos)` | Orden ascendente. No muta el array original. |
+| `generarResultadosBusqueda(resultados, categoria, precioMaximo)` | Texto de resultados con encabezado, lista (marca/precio/stock) y mensaje "No se encontraron" si vacío. |
 
-**Tipos de tests:**
-- Happy path: carrito con items + código de descuento válido → recibo completo.
-- Casos borde: sin código de descuento, descuento 0%, descuento 100%.
-- Errores: carrito vacío debe rechazar la generación de recibo.
-- Operaciones objeto: estructura del recibo y sus líneas.
+**Cobertura final ejecutada (post 2° review del docente):** **99 specs**, 100 % PASS — incluye 4 suites adicionales (5–8) que cubren los orquestadores con `spyOn` por pedido del docente (RCN7 R1). Ver sección AL CIERRE → Resumen de Resultados.
 
 ### 📊 Cobertura mínima por suite
 
@@ -184,7 +187,7 @@ Checklist que debe cumplirse para considerar la tarea cerrada. **Estado actualiz
 - [x] `js/test/script.spec.js` contiene **4 suites `describe()`** (una por flujo).
 - [x] Cada suite tiene **≥ 3 tests `it()`**.
 - [x] Tests cubren happy path, casos borde, validación de errores, operaciones con arrays/objetos.
-- [x] Se usan al menos 4 tipos distintos de assertions de Jasmine (`toBe`, `toEqual`, `toBeTruthy`/`toBeFalsy`, `toContain`, `toThrow`, etc.) — 8 tipos usados en total.
+- [x] Se usan al menos 4 tipos distintos de assertions de Jasmine — **10+ tipos** usados en total, incluyendo `toHaveBeenCalled`, `toHaveBeenCalledWith` y matchers `jasmine.stringMatching`/`stringContaining` introducidos al implementar `spyOn` (RCN7 R1).
 
 ### Ejecución y evidencia
 - [x] Test runner abierto exitosamente en browser vía Playwright (ejecutado a través de Antigravity Agent al no responder Playwright MCP en Copilot; ver AL CIERRE → Obstáculos).
@@ -278,37 +281,39 @@ describe("calcularSubtotal()", function () {
 
 ### Screenshots del test runner
 
-Capturadas con Playwright contra `http://localhost:5501/js/test/test-runner.html` y guardadas en `js/test/screenshots/`:
+Capturadas contra `test-runner.html` (Live Server) y guardadas en `js/test/screenshots/`. Regeneradas el 30 de junio de 2026 con la suite final de 99 specs (RCN6 R1 del 2° review del docente):
 
-| # | Imagen | Contenido (snapshot pre-code-review, 59 specs) |
+| # | Imagen | Contenido |
 |---|---|---|
-| 1 | [`01-overview.png`](../../../js/test/screenshots/01-overview.png) | Resumen global de Jasmine: 59 specs, 0 failures |
-| 2 | [`02-flujo1-cotizador.png`](../../../js/test/screenshots/02-flujo1-cotizador.png) | Suite 1 — Cotizador (14 tests, todos PASS) |
-| 3 | [`03-flujo2-compatibilidad.png`](../../../js/test/screenshots/03-flujo2-compatibilidad.png) | Suite 2 — Verificador de Compatibilidad (13 tests, todos PASS) |
-| 4 | [`04-flujo3-carrito.png`](../../../js/test/screenshots/04-flujo3-carrito.png) | Suite 3 — Simulador de Carrito (15 tests, todos PASS) |
-| 5 | [`05-flujo4-buscador.png`](../../../js/test/screenshots/05-flujo4-buscador.png) | Suite 4 — Buscador de Productos (10 tests, todos PASS) |
+| 1 | [`01-overview.png`](../../../js/test/screenshots/01-overview.png) | Resumen global de Jasmine: **99 specs, 0 failures** + listado de suites 5–8 (orquestadores con `spyOn`) |
+| 2 | [`02-flujo1-cotizador.png`](../../../js/test/screenshots/02-flujo1-cotizador.png) | Suite 1 — Cotizador (funciones puras, 24 tests, todos PASS) |
+| 3 | [`03-flujo2-compatibilidad.png`](../../../js/test/screenshots/03-flujo2-compatibilidad.png) | Suite 2 — Compatibilidad (funciones puras, 14 tests, todos PASS) |
+| 4 | [`04-flujo3-carrito.png`](../../../js/test/screenshots/04-flujo3-carrito.png) | Suite 3 — Carrito (funciones puras, 18 tests, todos PASS) |
+| 5 | [`05-flujo4-buscador.png`](../../../js/test/screenshots/05-flujo4-buscador.png) | Suite 4 — Buscador (funciones puras, 16 tests, todos PASS) |
 
-> ℹ️ Las screenshots reflejan la corrida inicial con Playwright (59 specs). Tras el code review de @GonzaloBarbano se incorporaron 9 specs adicionales por separación de assertions distintas y casos borde extra de la Suite 4. Los **68 specs** finales corren en `test-runner.html` y se verificaron localmente en el browser; no se re-capturaron screenshots para evitar reagendar la corrida de Playwright.
+> ℹ️ Las **suites 5 a 8 (orquestadores con `spyOn`)** quedan visibles en `01-overview.png` que muestra el detalle completo de las 8 describes raíz con los nombres de los specs y sus tiempos de ejecución.
 
 ---
 
 ## AL CIERRE — Resumen de Resultados
 
-| Métrica | Valor (post code review) |
+| Métrica | Valor (final, post-RCN6/RCN7 R1) |
 |---|---|
-| Tests totales (specs) | **68** (subió de 59 tras aplicar los 7 hallazgos del CR) |
-| Tests PASS | **68** ✅ |
+| Tests totales (specs) | **99** (68 post-CR Gonza + 4 nuevos de Lucas Round 2 + 27 nuevos por RCN7 R1 spyOn) |
+| Tests PASS | **99** ✅ |
 | Tests FAIL | **0** |
 | Porcentaje de éxito | **100%** |
-| Suites describe() raíz | 4 (una por flujo del menú) |
-| Sub-suites describe() (una por función pura) | 17 |
-| Cobertura por suite | Suite 1: 23 — Suite 2: 14 — Suite 3: 16 — Suite 4: 15 |
-| Tipos de assertions Jasmine usadas | 8 — `toBe`, `toEqual`, `toBeTruthy`, `toBeFalsy`, `toContain`, `toThrow`, `toBeNull`, `jasmine.objectContaining` (+ `toBeGreaterThan`/`toBeLessThan` post-CR) |
+| Suites `describe()` raíz | **8** — 4 de funciones puras (1–4) + 4 de orquestadores con `spyOn` (5–8) |
+| Sub-suites `describe()` (una por función pura) | 17 |
+| Cobertura por suite | S1: 24 · S2: 14 · S3: 18 · S4: 16 · S5: 7 · S6: 6 · S7: 7 · S8: 7 |
+| Funciones cubiertas | 18 puras + 4 orquestadoras = **22 funciones expuestas globalmente cubiertas** |
+| Tipos de assertions Jasmine usadas | 10+ — `toBe`, `toEqual`, `toBeTruthy`, `toBeFalsy`, `toContain`, `toThrow`, `toBeNull`, `toHaveBeenCalled`, `toHaveBeenCalledTimes`, `toHaveBeenCalledWith`, `jasmine.stringMatching`, `jasmine.stringContaining`, `jasmine.objectContaining`, `jasmine.any` |
+| Técnicas avanzadas | `spyOn(window, "prompt"/"alert")` para mockear UI; `spyOn(X).and.throwError(...)` para forzar excepciones y verificar el `try/catch` global (RCN8 R2) |
 | Bugs reportados como issues en GitHub | 0 (ningún test falló) |
 
 ### Bugs encontrados (issues abiertos)
 
-No se reportaron bugs. La implementación de Lucas (`js/script.js`) pasó las 59 specs en el primer intento.
+No se reportaron bugs. Tras el merge del Round 2 de @LucasFUces (que agregó validaciones estrictas + `try/catch` en los orquestadores), las 99 specs pasan al 100 % en `test-runner.html`.
 
 ---
 
