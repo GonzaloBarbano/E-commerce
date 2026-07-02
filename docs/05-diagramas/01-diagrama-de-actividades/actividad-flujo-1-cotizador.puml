@@ -1,0 +1,52 @@
+@startuml actividad-flujo-1-cotizador
+title Flujo 1: Cotizador de Productos
+skinparam defaultFontName "Segoe UI"
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #333333
+skinparam ArrowColor #333333
+
+|Usuario|
+start
+:Ingresa categoría con prompt();
+note right
+  Categorías admitidas por `validarCategoria(categoria)`:
+  "cpu", "gpu", "ram", "storage", "psu", "cooling".
+  Normaliza espacios y mayúsculas.
+end note
+
+|Sistema|
+if (¿validarCategoria(categoria) === true?) then (sí)
+else (no)
+  :Mostrar error con alert(): "Categoría inválida";
+  end
+endif
+
+|Usuario|
+:Ingresa cantidad con prompt() (1-100);
+
+|Sistema|
+if (¿validarCantidad(cantidad) === true?) then (sí)
+else (no)
+  :Mostrar error con alert(): "Cantidad inválida";
+  end
+endif
+
+:Lee precio unitario desde `preciosPorCategoria[categoria]`
+(objeto en memoria);
+:calcularDescuento(cantidad);
+note right
+  Tramos de descuento por volumen:
+  * cantidad >= 10 -> 15%
+  * cantidad >= 5  -> 10%
+  * cantidad >= 3  -> 5%
+  * cantidad < 3   -> 0%
+end note
+:calcularSubtotal(precioUnitario, cantidad);
+:aplicarIva(subtotal) - alicuota 21%;
+:generarResumenCotizacion(categoria, cantidad, precioUnitario);
+:Mostrar resumen con alert() y console.log();
+
+|Usuario|
+:Visualiza la cotización con descuento, IVA y total;
+stop
+@enduml

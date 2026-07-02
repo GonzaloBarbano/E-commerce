@@ -1,0 +1,346 @@
+# 🧪 spec-tester.md — Testing JavaScript con Jasmine | Actividad Obligatoria 3
+
+**Fecha de creación:** 12 de mayo de 2026
+**Rol:** Tester JavaScript / QA Engineer
+**Responsable:** Nicolás Aguirre (@Naguirre0102)
+**Proyecto:** E-commerce de Hardware para PC
+**Entrega:** Tercera Entrega (Unidad N°3 — JavaScript)
+**Rama:** `feature/tester-javascript-jasmine`
+
+---
+
+## 📑 Tabla de Contenidos
+
+1. [ANTES — Plan de Testing](#antes--plan-de-testing)
+2. [ANTES — Herramientas y Estrategia](#antes--herramientas-y-estrategia)
+3. [ANTES — Criterios de Aceptación](#antes--criterios-de-aceptación)
+4. [AL CIERRE — Evidencia de Ejecución](#al-cierre--evidencia-de-ejecución)
+5. [AL CIERRE — Resumen de Resultados](#al-cierre--resumen-de-resultados)
+6. [AL CIERRE — Ajustes Manuales y Coordinación](#al-cierre--ajustes-manuales-y-coordinación)
+
+---
+
+## ANTES — Plan de Testing
+
+### 🎯 Objetivo
+
+Implementar una suite de tests automatizados con **Jasmine 5.10** que valide la lógica de negocio de los 4 flujos principales definidos por el Arquitecto de Diagramas, asegurando que el código de `js/script.js` se comporte correctamente en casos esperados, casos borde y entradas inválidas.
+
+### 📌 Alcance
+
+Los tests cubrirán **únicamente las funciones puras de lógica de negocio** expuestas en `js/script.js`. No se testea:
+
+- Interacción con `prompt()` / `alert()` (capa de UI, no aplica DOM en esta entrega).
+- Manipulación del DOM (no permitido por consigna).
+- Persistencia real en base de datos (no existe en esta entrega; los flujos del Arquitecto la modelan como swimlane pero la implementación JS la simula con arrays en memoria).
+
+### 🔢 Plan de cobertura — versión inicial (REVISADA — RC29 + RC30)
+
+> 🔴 **Aclaración post-revisión del docente (17 de mayo de 2026):**
+>
+> La versión original de esta sección fue redactada con asistencia de IA **antes** de tener el código real de `js/script.js`, usando como única referencia los diagramas del Arquitecto. Esto generó dos problemas serios señalados en la revisión:
+>
+> 1. **Funciones planificadas que nunca existieron** (`validarSocket`, `validarTipoRAM`, `validarPSU`, `validarTamanoRefrigerador`, `generarReporteCompatibilidad`, `generarIdOrden`, `calcularSubtotalLinea`, `validarCodigoDescuento`, `aplicarDescuento`, `generarRecibo`, `validarStock`, `validarLimitePorUsuario`, `validarCriteriosBusqueda`, `ordenarResultados`). Ninguna de ellas está implementada en `js/script.js`.
+> 2. **Un flujo completo planificado que no se implementó:** "Generación de Recibo" (era el Flujo 4 según los diagramas). Lucas implementó "Cotizador" en su lugar y nadie verificó el cambio antes de testear.
+>
+> **El error conceptual:** confié en la salida de IA + los diagramas como fuente de verdad para diseñar el plan de testing, sin validar contra la implementación real cuando estuvo disponible. **El plan de testing se valida contra el código, no contra el plan del Arquitecto.** La cobertura útil se mide en funciones reales que pasen tests reales.
+>
+> A continuación quedan las dos versiones para evidenciar el aprendizaje: el **plan inicial (ficción IA — INVÁLIDO)** y el **plan final ejecutado (validado contra `js/script.js`)**.
+
+#### ❌ Plan inicial (INVÁLIDO — funciones ficticias generadas por IA)
+
+Lista de funciones que se planificaron antes de leer `js/script.js`. **Ninguna de estas funciones existe** en el código entregado por Lucas. Se preservan tachadas como evidencia del error de método:
+
+- ~~`filtrarProductos(catalogo, criterios)`~~ — la firma real de Lucas es `filtrarProductos(productos, categoria, precioMaximo)` (sí existe, pero con otra firma).
+- ~~`validarCriteriosBusqueda(criterios)`~~ — no existe.
+- ~~`ordenarResultados(productos, criterio)`~~ — la firma real es `ordenarPorPrecio(productos)` (sí existe, otro nombre).
+- ~~`validarStock(producto, cantidad)`~~ — no existe (la validación de stock se hace inline en el orquestador, ver RC17).
+- ~~`validarLimitePorUsuario(item, cantidad)`~~ — no existe.
+- ~~`calcularSubtotal(precio, cantidad)`~~ — sí existe (con throw en negativos).
+- ~~`aplicarIVA(monto, alicuota = 0.21)`~~ — la firma real es `aplicarIva(monto)` (alícuota hardcodeada).
+- ~~`calcularTotalCarrito(carrito)`~~ — sí existe.
+- ~~`validarSocket`, `validarTipoRAM`, `validarPSU`, `validarTamanoRefrigerador`, `generarReporteCompatibilidad`~~ — **ninguna existe**. El flujo de compatibilidad real usa `calcularConsumoTotal`, `recomendarFuente`, `validarTdp` y `generarInformeCompatibilidad`.
+- ~~`generarIdOrden`, `calcularSubtotalLinea`, `validarCodigoDescuento`, `aplicarDescuento`, `generarRecibo`~~ — **ninguna existe**. El "Flujo 4 — Recibo" del Arquitecto nunca se implementó.
+
+#### ✅ Plan final ejecutado (validado contra `js/script.js`, post-implementación)
+
+Plan reconstruido el día de la integración tras leer las 639 líneas del código real. Esto es lo que **realmente se testeó**:
+
+##### Flujo 1 — Cotizador de Productos (función orquestadora: `flujo1Cotizador()`)
+
+| Función pura real | Qué valida el test |
+|---|---|
+| `validarCategoria(categoria)` | Normaliza trim + lowercase y verifica que esté en `preciosPorCategoria`. |
+| `validarCantidad(cantidad)` | Acepta enteros en el rango 1–100. |
+| `calcularDescuento(cantidad)` | Devuelve 0/5/10/15 % según tramos de volumen. |
+| `calcularSubtotal(precioUnitario, cantidad)` | Multiplica con descuento y redondea a 2 decimales. Throws con valores inválidos. |
+| `generarResumenCotizacion(categoria, cantidad, precioUnitario)` | Construye el texto del resumen con IVA 21 %. |
+
+##### Flujo 2 — Verificador de Compatibilidad (función orquestadora: `flujo2Compatibilidad()`)
+
+| Función pura real | Qué valida el test |
+|---|---|
+| `calcularConsumoTotal(tdpCpu, tdpGpu)` | `(tdpCpu + tdpGpu + 100) × 1.2`, `Math.ceil`. Throws con negativos. |
+| `recomendarFuente(consumoWatts)` | Devuelve la primera fuente de `fuentesRecomendadas` con `potencia ≥ consumo`, o `null`. |
+| `validarTdp(valor)` | Acepta enteros en el rango 1–1000. |
+| `generarInformeCompatibilidad(tdpCpu, tdpGpu, fuente)` | Construye el informe (incluye recomendación o advertencia). |
+
+##### Flujo 3 — Simulador de Carrito (función orquestadora: `flujo3Carrito()`)
+
+| Función pura real | Qué valida el test |
+|---|---|
+| `agregarAlCarrito(carrito, producto, cantidad)` | Agrega item nuevo o incrementa cantidad. **No muta** el array de entrada. Throws con producto null o cantidad ≤ 0. |
+| `calcularTotalCarrito(carrito)` | Suma `precio × cantidad` por item, redondeado a 2 decimales. |
+| `aplicarIva(monto)` | IVA 21 % redondeado a 2 decimales. Throws con monto negativo. |
+| `generarResumenCarrito(carrito)` | Texto del resumen con líneas, subtotal, IVA, total. |
+| `obtenerProductoPorOpcion(opcion)` | Busca en `catalogo` por número de opción 1–6, devuelve `null` fuera de rango. |
+
+##### Flujo 4 — Buscador de Productos (función orquestadora: `flujo4Buscador()`)
+
+| Función pura real | Qué valida el test |
+|---|---|
+| `filtrarProductos(productos, categoria, precioMaximo)` | Filtra por categoría (acepta `"todas"`) y precio máximo. No muta. Throws con inputs inválidos. |
+| `ordenarPorPrecio(productos)` | Orden ascendente. No muta el array original. |
+| `generarResultadosBusqueda(resultados, categoria, precioMaximo)` | Texto de resultados con encabezado, lista (marca/precio/stock) y mensaje "No se encontraron" si vacío. |
+
+**Cobertura final ejecutada (post 2° review del docente):** **99 specs**, 100 % PASS — incluye 4 suites adicionales (5–8) que cubren los orquestadores con `spyOn` por pedido del docente (RCN7 R1). Ver sección AL CIERRE → Resumen de Resultados.
+
+### 📊 Cobertura mínima por suite
+
+- **4 suites de tests** (una por flujo) usando `describe()`.
+- **Mínimo 3 tests por suite** (idealmente 5–8 para cubrir happy + borde + error).
+- **Total estimado:** 20–30 tests.
+
+---
+
+## ANTES — Herramientas y Estrategia
+
+### 🧰 Stack de testing
+
+| Herramienta | Versión / Fuente | Uso |
+|---|---|---|
+| **Jasmine** | 5.10.0 vía CDN (cdnjs) | Framework de testing en navegador |
+| **GitHub Copilot Agent Mode** | VS Code | Generar `script.spec.js` a partir de `js/script.js` como contexto |
+| **Playwright MCP** | `@playwright/mcp` (oficial Microsoft) | Abrir `test-runner.html` en browser real, ejecutar las suites y capturar screenshots PASS/FAIL |
+| **VS Code** | última estable | Editor + cliente de MCPs |
+
+### 🤖 Justificación del uso de IA
+
+**Copilot Agent para generación de tests:**
+- Acelera la creación de specs repetitivas (estructura `describe`/`it` × 4 flujos).
+- Sugiere casos borde que se pueden pasar por alto al escribir manualmente.
+- Permite re-generar tests si Lucas cambia firmas de funciones en `js/script.js`.
+
+**Playwright MCP para ejecución:**
+- Reemplaza la necesidad de abrir manualmente el `test-runner.html` y screenshotear.
+- Permite que Copilot Agent controle el browser y capture evidencia de forma reproducible.
+- Configurable en `.vscode/mcp.json` (el repo ya tiene MCPs configurados de la entrega anterior).
+
+### 🔄 Flujo de trabajo
+
+```
+1. Lucas (Dev JS) commitea js/script.js
+        │
+        ▼
+2. Yo abro Copilot Agent y le adjunto:
+   - js/script.js (contexto principal)
+   - spec-tester.md (este archivo, define qué testear)
+        │
+        ▼
+3. Copilot genera draft de js/test/script.spec.js
+        │
+        ▼
+4. Reviso el output, ajusto manualmente, agrego casos faltantes
+        │
+        ▼
+5. Pido a Copilot (vía Playwright MCP) que abra test-runner.html y
+   capture screenshots de cada suite
+        │
+        ▼
+6. Documento resultados en testing-doc.md y en la sección AL CIERRE
+   de este spec. Reporto bugs como issues si fallan tests.
+```
+
+### 📂 Archivos a entregar
+
+| Archivo | Propósito |
+|---|---|
+| `docs/03-specs/actividad-obligatoria-3/spec-tester.md` | Este documento (plan + evidencia) |
+| `js/test/test-runner.html` | Runner Jasmine con CDN configurado |
+| `js/test/script.spec.js` | 4 suites con todos los tests |
+| `js/test/testing-doc.md` | Instrucciones de ejecución, descripción de suites, métricas, screenshots |
+
+---
+
+## ANTES — Criterios de Aceptación
+
+Checklist que debe cumplirse para considerar la tarea cerrada. **Estado actualizado al cierre — todos los criterios fueron alcanzados (ver sección AL CIERRE para evidencia).**
+
+### Documentación
+- [x] `spec-tester.md` existe en `docs/03-specs/actividad-obligatoria-3/`.
+- [x] `spec-tester.md` está commiteado **antes** que `js/test/script.spec.js` (verificable en `git log --diff-filter=A`).
+- [x] Sección BEFORE completa con plan, herramientas y criterios.
+- [x] Sección AL CIERRE completa con prompt, screenshots y resumen.
+
+### Implementación
+- [x] `js/test/test-runner.html` carga Jasmine 5.10.0 desde CDN y referencia `script.js` + `script.spec.js`.
+- [x] `js/test/script.spec.js` contiene **4 suites `describe()`** (una por flujo).
+- [x] Cada suite tiene **≥ 3 tests `it()`**.
+- [x] Tests cubren happy path, casos borde, validación de errores, operaciones con arrays/objetos.
+- [x] Se usan al menos 4 tipos distintos de assertions de Jasmine — **10+ tipos** usados en total, incluyendo `toHaveBeenCalled`, `toHaveBeenCalledWith` y matchers `jasmine.stringMatching`/`stringContaining` introducidos al implementar `spyOn` (RCN7 R1).
+
+### Ejecución y evidencia
+- [x] Test runner abierto exitosamente en browser vía Playwright (ejecutado a través de Antigravity Agent al no responder Playwright MCP en Copilot; ver AL CIERRE → Obstáculos).
+- [x] Screenshots PASS/FAIL capturados y embebidos en `testing-doc.md` y en este spec.
+- [x] Métricas finales documentadas (ver tabla en AL CIERRE → Resumen de Resultados).
+
+### Coordinación
+- [x] Bugs encontrados reportados como issues en GitHub con título claro, esperado vs obtenido, pasos para reproducir, y test que falla — 0 bugs detectados (suite pasó 100 % en primer intento).
+- [x] Ajustes pedidos al Desarrollador JS para mejorar testabilidad están documentados (ver AL CIERRE → Ajustes Manuales y Coordinación).
+
+### Git
+- [x] Rama `feature/tester-javascript-jasmine` creada desde `develop` actualizado.
+- [x] Al menos 1 issue de GitHub asociada al rol.
+- [x] PR contra `develop` abierto con descripción y review de otro integrante (PR #117, review de @GonzaloBarbano).
+- [x] Entrada en `changelog.md` con link al PR y resumen.
+
+---
+
+## AL CIERRE — Evidencia de Ejecución
+
+> Sección completada el 15 de mayo de 2026 tras ejecutar la suite Jasmine en navegador real.
+
+### Herramientas finalmente utilizadas
+
+| Herramienta | Uso | Comentario |
+|---|---|---|
+| **Antigravity Agent (IDE con asistente IA en modo Agente)** | Generación de `js/test/script.spec.js` y ejecución del test runner | Reemplaza a GitHub Copilot Agent. El flujo IA-asistido y la documentación del prompt se mantienen idénticos a lo planificado. |
+| **Playwright (vía script de automatización del Agente)** | Apertura del runner en `http://localhost:5501/`, espera de Jasmine y captura de screenshots PASS/FAIL | Reemplaza la invocación de Playwright vía MCP. Resultado equivalente: browser real + screenshots reproducibles. |
+| **Live Server (VS Code)** | Servir `js/test/test-runner.html` en `localhost:5501` | Necesario para que Playwright lo abra como URL HTTP. |
+
+### Prompt utilizado en el Agente IA para generar `script.spec.js`
+
+```text
+Generá el archivo js/test/script.spec.js con 4 suites describe() — una por
+cada flujo del menú principal de js/script.js (Cotizador, Compatibilidad,
+Carrito, Buscador). Por cada suite incluí mínimo 3 tests it() (objetivo
+5-7 tests por suite) cubriendo los 4 tipos obligatorios:
+  - Happy path (caso normal de uso)
+  - Casos borde (valores límite, vacíos, exactos)
+  - Validación de errores (null, undefined, negativos, tipos inválidos)
+  - Operaciones sobre arrays/objetos (inmutabilidad, búsquedas, estructura)
+
+Usá las firmas EXACTAS de las funciones expuestas globalmente en
+js/script.js (NO inventes nombres). Usá al menos estos 6 tipos de assertions
+Jasmine: toBe, toEqual, toBeTruthy, toBeFalsy, toContain, toThrow. Si una
+función no acepta cierta entrada porque tira Error, testealo con
+expect(() => fn(...)).toThrow().
+
+No uses async/await, no toques el DOM, no llames a prompt/alert en los tests.
+Asumí que prompt/alert están stub-eados en test-runner.html. Escribí los tests
+en español. Compatible con Jasmine 5.10.
+
+Como referencia del plan de cobertura, ver spec-tester.md (adjunto).
+```
+
+**Archivos adjuntos como contexto:**
+
+- `js/script.js` (639 líneas, código bajo prueba).
+- `docs/03-specs/actividad-obligatoria-3/spec-tester.md` (este documento, sección BEFORE — plan de cobertura).
+
+### Fragmento representativo del código generado por el Agente IA
+
+Fragmento de la **Suite 1 — Cotizador** (`describe("Flujo 1 — Cotizador de Productos", ...)`), parte del output IA que se mantuvo sin cambios:
+
+```javascript
+describe("calcularSubtotal()", function () {
+  it("calcula correctamente sin descuento (cantidad < 3)", function () {
+    expect(calcularSubtotal(100, 2)).toBe(200);
+  });
+
+  it("aplica el descuento por volumen del 10% para 5 unidades", function () {
+    // 100 * 5 * 0.90 = 450
+    expect(calcularSubtotal(100, 5)).toBe(450);
+  });
+
+  it("redondea a 2 decimales", function () {
+    // 99.99 * 3 * 0.95 = 284.9715 → 284.97
+    expect(calcularSubtotal(99.99, 3)).toBe(284.97);
+  });
+
+  it("lanza Error si el precio es negativo", function () {
+    expect(function () { calcularSubtotal(-10, 5); }).toThrow();
+  });
+
+  it("lanza Error si la cantidad es 0 o negativa", function () {
+    expect(function () { calcularSubtotal(100, 0); }).toThrow();
+    expect(function () { calcularSubtotal(100, -3); }).toThrow();
+  });
+});
+```
+
+### Screenshots del test runner
+
+Capturadas contra `test-runner.html` (Live Server) y guardadas en `js/test/screenshots/`. Regeneradas el 30 de junio de 2026 con la suite final de 99 specs (RCN6 R1 del 2° review del docente):
+
+| # | Imagen | Contenido |
+|---|---|---|
+| 1 | [`01-overview.png`](../../../js/test/screenshots/01-overview.png) | Resumen global de Jasmine: **99 specs, 0 failures** + listado de suites 5–8 (orquestadores con `spyOn`) |
+| 2 | [`02-flujo1-cotizador.png`](../../../js/test/screenshots/02-flujo1-cotizador.png) | Suite 1 — Cotizador (funciones puras, 24 tests, todos PASS) |
+| 3 | [`03-flujo2-compatibilidad.png`](../../../js/test/screenshots/03-flujo2-compatibilidad.png) | Suite 2 — Compatibilidad (funciones puras, 14 tests, todos PASS) |
+| 4 | [`04-flujo3-carrito.png`](../../../js/test/screenshots/04-flujo3-carrito.png) | Suite 3 — Carrito (funciones puras, 18 tests, todos PASS) |
+| 5 | [`05-flujo4-buscador.png`](../../../js/test/screenshots/05-flujo4-buscador.png) | Suite 4 — Buscador (funciones puras, 16 tests, todos PASS) |
+
+> ℹ️ Las **suites 5 a 8 (orquestadores con `spyOn`)** quedan visibles en `01-overview.png` que muestra el detalle completo de las 8 describes raíz con los nombres de los specs y sus tiempos de ejecución.
+
+---
+
+## AL CIERRE — Resumen de Resultados
+
+| Métrica | Valor (final, post-RCN6/RCN7 R1) |
+|---|---|
+| Tests totales (specs) | **99** (68 post-CR Gonza + 4 nuevos de Lucas Round 2 + 27 nuevos por RCN7 R1 spyOn) |
+| Tests PASS | **99** ✅ |
+| Tests FAIL | **0** |
+| Porcentaje de éxito | **100%** |
+| Suites `describe()` raíz | **8** — 4 de funciones puras (1–4) + 4 de orquestadores con `spyOn` (5–8) |
+| Sub-suites `describe()` (una por función pura) | 17 |
+| Cobertura por suite | S1: 24 · S2: 14 · S3: 18 · S4: 16 · S5: 7 · S6: 6 · S7: 7 · S8: 7 |
+| Funciones cubiertas | 18 puras + 4 orquestadoras = **22 funciones expuestas globalmente cubiertas** |
+| Tipos de assertions Jasmine usadas | 10+ — `toBe`, `toEqual`, `toBeTruthy`, `toBeFalsy`, `toContain`, `toThrow`, `toBeNull`, `toHaveBeenCalled`, `toHaveBeenCalledTimes`, `toHaveBeenCalledWith`, `jasmine.stringMatching`, `jasmine.stringContaining`, `jasmine.objectContaining`, `jasmine.any` |
+| Técnicas avanzadas | `spyOn(window, "prompt"/"alert")` para mockear UI; `spyOn(X).and.throwError(...)` para forzar excepciones y verificar el `try/catch` global (RCN8 R2) |
+| Bugs reportados como issues en GitHub | 0 (ningún test falló) |
+
+### Bugs encontrados (issues abiertos)
+
+No se reportaron bugs. Tras el merge del Round 2 de @LucasFUces (que agregó validaciones estrictas + `try/catch` en los orquestadores), las 99 specs pasan al 100 % en `test-runner.html`.
+
+---
+
+## AL CIERRE — Ajustes Manuales y Coordinación
+
+### Ajustes manuales sobre el output del Agente IA
+
+El output inicial se mantuvo prácticamente intacto. Ajustes puntuales realizados:
+
+1. **Stub de `prompt`/`alert` en `test-runner.html`** — no es un ajuste sobre el spec, pero fue indispensable. `js/script.js` invoca `iniciarMenu()` en su última línea, lo que disparaba prompts infinitos al abrir el runner. Se sobrescribieron `window.prompt` (devuelve `null`) y `window.alert` (no-op) antes del `<script src="../script.js">`, así `iniciarMenu()` sale en la primera iteración y los tests pueden ejecutarse.
+2. **`jasmine.objectContaining` y `jasmine.any`** — agregados manualmente al test de `recomendarFuente()` para verificar la estructura del objeto retornado sin acoplarse a valores específicos.
+3. **Uso de `beforeEach()`** — agregado en Suite 3 (Carrito) y Suite 4 (Buscador) para inicializar `productoBase`/`miniCatalogo` antes de cada test y garantizar aislamiento.
+4. **Tests de inmutabilidad** — agregados explícitamente en `agregarAlCarrito()`, `filtrarProductos()` y `ordenarPorPrecio()` validando que el array de entrada no se mute.
+
+### Ajustes solicitados al Desarrollador JavaScript
+
+Se identificó un único punto de fricción durante el setup del runner: la línea `iniciarMenu();` al final de `js/script.js:639` se auto-ejecuta al cargar el script. Esto **rompía la ejecución de los tests** porque disparaba un loop de `prompt()` que bloqueaba el browser.
+
+**Resolución elegida:** stub de `window.prompt`/`window.alert` en `test-runner.html` antes de cargar `script.js` (ver sección anterior, ajuste #1). Esta solución mantiene `js/script.js` sin cambios y respeta la entrega de Lucas. Alternativa descartada (más prolija pero más invasiva): envolver `iniciarMenu()` en una guarda `if (typeof window.__TESTING__ === 'undefined')` o moverla a un archivo de bootstrap separado. No se aplicó para no requerir un nuevo PR de Lucas a último momento.
+
+Todas las funciones puras del catálogo resultaron testeables sin más cambios: están expuestas globalmente (no encapsuladas en IIFE), tienen parámetros explícitos, devuelven valores o lanzan errores controlados, y no llaman a `prompt`/`alert` directamente. Coordinación con Lucas: ✅ completa.
+
+### Obstáculos encontrados
+
+1. **Playwright MCP no se pudo invocar desde GitHub Copilot** — al activar el modo Agente en Copilot, el servidor MCP `playwright` configurado en `.vscode/mcp.json` no respondió. Se sustituyó por la ejecución de Playwright a través del IDE Antigravity, que también orquesta agentes IA y soporta automatización de browser. El flujo final (browser real → ejecución de Jasmine → screenshots) se cumplió igualmente.
+2. **Auto-ejecución de `iniciarMenu()`** — descripto arriba. Resuelto con el stub en el runner.
+
+---
+
+**Estado del documento:** ✅ Sección ANTES completa | ✅ Sección AL CIERRE completa — entrega cerrada el 15 de mayo de 2026
