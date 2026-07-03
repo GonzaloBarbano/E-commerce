@@ -10,8 +10,6 @@
 
 ## Contexto
 
-Este spec cubre las responsabilidades de **Desarrollador JS Eventos + DOM**. Nico asume este rol además de Coordinador/DevOps y Tester QA, por la reducción del grupo a 2 personas.
-
 **El punto de partida es `js/script.js` post-AO3:** ~700 líneas que contienen datos del catálogo, funciones puras (validaciones, cálculos, serializadores) y 4 funciones orquestadoras (`cotizadorInteractivo`, `verificadorCompatibilidad`, `carritoSimulador`, `buscadorProductos`) que usan `prompt()`/`alert()` para input/output, más `iniciarMenu()` que es un `while` con `switch`.
 
 **La consigna AO4 exige eliminar por completo `prompt()` y `alert()`** (penalización -0.5 pts al grupo si quedan). La interacción del usuario debe pasar a HTML (forms + eventos DOM) y las salidas a manipulación del DOM (crear elementos, actualizar contenido, aplicar clases CSS).
@@ -81,6 +79,7 @@ function handleXxxSubmit(event) {
 ```
 
 Ventajas:
+
 - `event.preventDefault()` evita reload del form.
 - `try/catch` envuelve toda la lógica y muestra errores en el DOM (no crashea).
 - Delegación clara: `script.js` **no** contiene lógica de negocio; delega a las clases de Lucas.
