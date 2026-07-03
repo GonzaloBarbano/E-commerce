@@ -136,7 +136,7 @@ const StorageUtil = {
    * @returns {boolean} true si se guardó correctamente.
    */
   guardarCarrito(carrito) {
-    return this.guardar('pchardware:carrito', carrito, 'local');
+    return this.guardar('pc:carrito', carrito, 'local');
   },
 
   /**
@@ -144,7 +144,7 @@ const StorageUtil = {
    * @returns {Array} Array de items del carrito, o [] si no existe.
    */
   obtenerCarrito() {
-    return this.obtener('pchardware:carrito', 'local') || [];
+    return this.obtener('pc:carrito', 'local') || [];
   },
 
   /**
@@ -203,5 +203,22 @@ const StorageUtil = {
    */
   obtenerFiltrosBusqueda() {
     return this.obtener('pchardware:sesion:busqueda', 'session');
+  },
+
+  /**
+   * Guarda la última cotización generada en la sesión actual.
+   * @param {Object} cotizacion - Objeto con datos de la cotización.
+   * @returns {boolean} true si se guardó correctamente.
+   */
+  guardarUltimaCotizacion(cotizacion) {
+    return this.guardar('pc:ultimaCotizacion', cotizacion, 'session');
+  },
+
+  /**
+   * Recupera la última cotización generada en la sesión actual.
+   * @returns {Object|null} Objeto con la cotización, o null si no existe.
+   */
+  obtenerUltimaCotizacion() {
+    return this.obtener('pc:ultimaCotizacion', 'session');
   }
 };
