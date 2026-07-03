@@ -956,6 +956,250 @@
                 </form>
               </div>
             </section>
+
+            <!-- ================================================================= -->
+            <!-- SIMULADOR PC HARDWARE — AO4: 4 flujos interactivos con DOM/eventos -->
+            <!-- ================================================================= -->
+            <section id="simulador" class="simulador-section" aria-label="Simulador PC Hardware">
+              <div class="container-inner">
+                <h2>Simulador PC Hardware</h2>
+                <p class="text-muted">
+                  4 herramientas interactivas para cotizar, verificar compatibilidad,
+                  simular carrito y buscar productos.
+                </p>
+
+                <div class="accordion" id="acc-simulador">
+
+                <!-- ============ FLUJO 1: COTIZADOR ============ -->
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="heading-cotizador">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse-cotizador"
+                      aria-expanded="true"
+                      aria-controls="collapse-cotizador"
+                    >
+                      Flujo 1: Cotizador de Productos
+                    </button>
+                  </h3>
+                  <div
+                    id="collapse-cotizador"
+                    class="accordion-collapse collapse show"
+                    aria-labelledby="heading-cotizador"
+                  >
+                    <div class="accordion-body">
+                      <form id="form-cotizador" class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-6">
+                          <label for="cot-categoria" class="form-label">Categoría</label>
+                          <select id="cot-categoria" class="form-select" required>
+                            <option value="" disabled selected>Elegí una categoría</option>
+                            <option value="cpu">CPU</option>
+                            <option value="gpu">GPU</option>
+                            <option value="ram">RAM</option>
+                            <option value="storage">Storage</option>
+                            <option value="psu">PSU</option>
+                            <option value="cooling">Cooling</option>
+                          </select>
+                          <div class="invalid-feedback">Seleccioná una categoría válida.</div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="cot-cantidad" class="form-label">Cantidad (1-100)</label>
+                          <input
+                            type="number"
+                            id="cot-cantidad"
+                            class="form-control"
+                            min="1"
+                            max="100"
+                            required
+                            placeholder="Ej: 5"
+                          />
+                          <div class="invalid-feedback">Ingresá un número entre 1 y 100.</div>
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary">Cotizar</button>
+                        </div>
+                      </form>
+                      <div id="resultado-cotizador" class="mt-3" aria-live="polite"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ============ FLUJO 2: COMPATIBILIDAD ============ -->
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="heading-compatibilidad">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse-compatibilidad"
+                      aria-expanded="false"
+                      aria-controls="collapse-compatibilidad"
+                    >
+                      Flujo 2: Verificador de Compatibilidad
+                    </button>
+                  </h3>
+                  <div
+                    id="collapse-compatibilidad"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="heading-compatibilidad"
+                  >
+                    <div class="accordion-body">
+                      <form id="form-compatibilidad" class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-6">
+                          <label for="comp-tdp-cpu" class="form-label">TDP CPU (W, 1-1000)</label>
+                          <input
+                            type="number"
+                            id="comp-tdp-cpu"
+                            class="form-control"
+                            min="1"
+                            max="1000"
+                            required
+                            placeholder="Ej: i9-13900K = 125"
+                          />
+                          <div class="invalid-feedback">TDP inválido. Entre 1 y 1000.</div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="comp-tdp-gpu" class="form-label">TDP GPU (W, 1-1000)</label>
+                          <input
+                            type="number"
+                            id="comp-tdp-gpu"
+                            class="form-control"
+                            min="1"
+                            max="1000"
+                            required
+                            placeholder="Ej: RTX 4090 = 450"
+                          />
+                          <div class="invalid-feedback">TDP inválido. Entre 1 y 1000.</div>
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary">Verificar Compatibilidad</button>
+                        </div>
+                      </form>
+                      <div id="resultado-compatibilidad" class="mt-3" aria-live="polite"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ============ FLUJO 3: CARRITO ============ -->
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="heading-carrito-sim">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse-carrito-sim"
+                      aria-expanded="false"
+                      aria-controls="collapse-carrito-sim"
+                    >
+                      Flujo 3: Simulador de Carrito
+                    </button>
+                  </h3>
+                  <div
+                    id="collapse-carrito-sim"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="heading-carrito-sim"
+                  >
+                    <div class="accordion-body">
+                      <form id="form-carrito-agregar" class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-6">
+                          <label for="car-producto" class="form-label">Producto</label>
+                          <select id="car-producto" class="form-select" required>
+                            <option value="" disabled selected>Elegí un producto</option>
+                            <!-- populado dinámicamente por script.js a partir del catálogo -->
+                          </select>
+                          <div class="invalid-feedback">Seleccioná un producto.</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="car-cantidad" class="form-label">Cantidad (1-10)</label>
+                          <input
+                            type="number"
+                            id="car-cantidad"
+                            class="form-control"
+                            min="1"
+                            max="10"
+                            required
+                            placeholder="Ej: 2"
+                          />
+                          <div class="invalid-feedback">Ingresá un número entre 1 y 10.</div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                          <button type="submit" class="btn btn-primary w-100">Agregar</button>
+                        </div>
+                      </form>
+                      <div id="resultado-carrito" class="mt-3" aria-live="polite"></div>
+                      <button
+                        type="button"
+                        id="btn-vaciar-carrito"
+                        class="btn btn-outline-danger btn-sm mt-2"
+                      >
+                        Vaciar carrito
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ============ FLUJO 4: BUSCADOR ============ -->
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="heading-buscador">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse-buscador"
+                      aria-expanded="false"
+                      aria-controls="collapse-buscador"
+                    >
+                      Flujo 4: Buscador de Productos
+                    </button>
+                  </h3>
+                  <div
+                    id="collapse-buscador"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="heading-buscador"
+                  >
+                    <div class="accordion-body">
+                      <form id="form-buscador" class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-6">
+                          <label for="bus-categoria" class="form-label">Categoría</label>
+                          <select id="bus-categoria" class="form-select" required>
+                            <option value="" disabled selected>Elegí una categoría</option>
+                            <option value="todas">Todas</option>
+                            <option value="cpu">CPU</option>
+                            <option value="gpu">GPU</option>
+                            <option value="ram">RAM</option>
+                            <option value="storage">Storage</option>
+                            <option value="psu">PSU</option>
+                            <option value="cooling">Cooling</option>
+                          </select>
+                          <div class="invalid-feedback">Seleccioná una categoría.</div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="bus-precio-max" class="form-label">Precio máximo (USD)</label>
+                          <input
+                            type="number"
+                            id="bus-precio-max"
+                            class="form-control"
+                            min="1"
+                            step="0.01"
+                            required
+                            placeholder="Ej: 500"
+                          />
+                          <div class="invalid-feedback">Ingresá un precio mayor a 0.</div>
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                      </form>
+                      <div id="resultado-buscador" class="mt-3" aria-live="polite"></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
