@@ -15,25 +15,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/boot1.min.js"></script>
 
   <!--
-    Stub de window.prompt y window.alert ANTES de cargar script.js.
-    Motivo: js/script.js invoca iniciarMenu() al final del archivo, lo que dispararía
-    un loop infinito de prompts() al abrir esta página y bloquearía la ejecución
-    de los tests. Devolver null hace que iniciarMenu() salga inmediatamente en la
-    primera iteración (script.js:614 → `if (opcion === null || opcion === "0")`).
-    Esto NO afecta a los tests actuales: las funciones puras del catálogo no usan
-    prompt/alert.
+    Stub de window.prompt y window.alert.
+    Motivo (histórico, AO3): js/script.js hacía uso de prompt/alert en los
+    orquestadores; para no bloquear el runner al cargar la página, se los
+    stubbeaba globalmente.
 
-    ⚠️ ADVERTENCIA DE EXTENSIBILIDAD: estos stubs son globales y permanecen
-    activos durante toda la sesión del runner. Si en el futuro se necesita
-    simular una entrada específica de prompt() en algún test (por ejemplo
-    para testear un orquestador de flujo), hay que sobreescribir el stub
-    dentro de un beforeEach/afterEach en el spec correspondiente. Ejemplo:
-
-      describe("flujo1Cotizador con entrada simulada", function () {
-        beforeEach(function () { window.prompt = function () { return "cpu"; }; });
-        afterEach(function ()  { window.prompt = function () { return null;  }; });
-        it("...", function () { ... });
-      });
+    En AO4 el nuevo script.js YA NO USA prompt/alert (todo va por DOM).
+    Se mantiene el stub por precaución y para compatibilidad con specs
+    heredados que puedan seguir referenciándolos.
   -->
   <script>
     window.prompt = function () { return null; };
@@ -41,10 +30,33 @@
   </script>
 </head>
 <body>
-  <!-- Código fuente bajo prueba -->
+  <!-- =========================================================== -->
+  <!-- CÓDIGO FUENTE BAJO PRUEBA — orden de carga IMPORTANTE:      -->
+  <!--   1) Clases del dominio (js/models/) — Lucas                -->
+  <!--   2) Capa de storage (js/utils/) — Lucas                    -->
+  <!--   3) Controlador (js/script.js) — Nico                       -->
+  <!-- =========================================================== -->
+
+  <!-- Clases POO (creadas por @LucasFUces en feature/dev-poo-logica-negocio) -->
+  <script src="../models/Producto.js"></script>
+  <script src="../models/Carrito.js"></script>
+  <script src="../models/Cotizacion.js"></script>
+
+  <!-- Capa de persistencia (creada por @LucasFUces en feature/dev-storage) -->
+  <script src="../utils/storage.js"></script>
+
+  <!-- Controlador (refactorizado por @Naguirre0102) -->
   <script src="../script.js"></script>
 
-  <!-- Suites de tests Jasmine -->
+  <!-- =========================================================== -->
+  <!-- SUITES DE TESTS JASMINE                                     -->
+  <!-- =========================================================== -->
+
+  <!-- Legacy (funciones puras heredadas de AO3 — se descartarán suites 5-8) -->
   <script src="./script.spec.js"></script>
+
+  <!-- Nuevos suites AO4 -->
+  <script src="./models.spec.js"></script>
+  <script src="./storage.spec.js"></script>
 </body>
 </html>
