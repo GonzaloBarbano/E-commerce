@@ -1,0 +1,64 @@
+@startuml diagrama-clases
+title Diagrama de Clases — AO4 PC Hardware
+
+skinparam defaultFontName "Segoe UI"
+skinparam classAttributeIconSize 0
+
+class Producto {
+  +id: number
+  +nombre: string
+  +categoria: string
+  +marca: string
+  +precio: number
+  +stock: number
+  +tdp: number
+  --
+  +constructor(datos)
+  +toJSON(): object
+  +{static} fromJSON(json): Producto
+}
+
+class ItemCarrito {
+  +producto: Producto
+  +cantidad: number
+  --
+  +constructor(producto, cantidad)
+  +subtotal(): number
+  +toJSON(): object
+  +{static} fromJSON(json): ItemCarrito
+}
+
+class Carrito {
+  -items: ItemCarrito[]
+  --
+  +constructor()
+  +agregar(producto, cantidad): void
+  +eliminar(idProducto): void
+  +vaciar(): void
+  +calcularSubtotal(): number
+  +aplicarIva(subtotal): number
+  +calcularTotal(): number
+  +estaVacio(): boolean
+  +toJSON(): object
+  +{static} fromJSON(json): Carrito
+}
+
+class Cotizacion {
+  +categoria: string
+  +cantidad: number
+  +precioUnitario: number
+  --
+  +constructor(categoria, cantidad, precioUnitario)
+  +calcularDescuento(): number
+  +calcularSubtotal(): number
+  +aplicarIva(subtotal): number
+  +calcularTotal(): number
+  +generarResumen(): string
+  +toJSON(): object
+  +{static} fromJSON(json): Cotizacion
+}
+
+Carrito "1" o-- "0..*" ItemCarrito : contiene
+ItemCarrito "1" --> "1" Producto : envuelve
+
+@enduml
