@@ -19,51 +19,62 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 ## 🎯 Objetivo del entregable
 
-- Incorporación de Componentes Avanzados de HTML.
-- Implementación de Bootstrap para Diseño Responsivo.
+**Actividad Obligatoria N°4 — Programación Web Avanzada (en curso):**
+
+- Migrar el simulador de `prompt()`/`alert()` a una aplicación web interactiva completa.
+- Manipulación del DOM y captura de eventos del usuario.
+- Programación Orientada a Objetos (POO) con clases del dominio en `js/models/`.
+- Persistencia con `localStorage`/`sessionStorage` a través de `js/utils/storage.js`.
+- Refactorización de la suite Jasmine para cubrir clases y storage.
 
 ---
 
 ## 🛠️ Tecnologías
 
-- **HTML5** - Estructura semántica y accesible
-- **CSS3 / Bootstrap 5** - Estilos y diseño responsive
-- **JavaScript (ES5+)** - Lógica de negocio, validaciones y flujos interactivos con `prompt`/`alert`
-- **Jasmine 5.10** - Framework de testing unitario en navegador
-- **PlantUML** - Diagramas de actividades
-- **GitHub** - Control de versiones y colaboración
-- **Figma** - Diseño y mockups de interfaz
-- **GitHub Copilot / Antigravity Agent** - Asistencia IA en generación de código y documentación
-- **Visual Studio Code** - Editor de desarrollo
-- **Git** - Versionado de cambios
+- **HTML5 + Bootstrap 5.3** — estructura semántica + diseño responsive + componentes (accordion, form validation).
+- **CSS3** — estilos custom con variables y mobile-first.
+- **JavaScript (ES6+)** — POO con `class`, encapsulamiento, serialización JSON, eventos DOM.
+- **Web Storage API** — `localStorage` y `sessionStorage` a través de una capa ORM-like.
+- **Jasmine 5.10** — framework de testing unitario en navegador.
+- **PlantUML** — diagramas de actividades + diagrama de clases (UML).
+- **GitHub** — control de versiones, Pull Requests, Issues y Projects (Kanban).
+- **Figma** — diseño y mockups de interfaz.
+- **GitHub Copilot Agent Mode** — asistencia IA en generación de código y documentación (obligatorio por consigna AO4).
+- **Visual Studio Code** — editor de desarrollo.
+- **Git** — versionado de cambios con branch model (feature/develop/master + release/backport).
 
 ---
 
 ## 🚀 Funcionalidades Previstas
 
-### Entrega 1 (Realizado)
+### Entrega 1 (Completada)
 
-- ✅ Estructura HTML5 semántica y accesible
-- ✅ Mockup de interfaz en Figma
-- ✅ Documentación y especificaciones
+- ✅ Estructura HTML5 semántica y accesible.
+- ✅ Mockup de interfaz en Figma.
+- ✅ Documentación y especificaciones.
 
-### Entrega 2 (Realizado)
+### Entrega 2 (Completada)
 
-- ✅ Estilos CSS responsive
-- ✅ Diseño visual completo
-- ✅ Mejora de UX/UI
+- ✅ Estilos CSS responsive.
+- ✅ Diseño visual completo.
+- ✅ Mejora de UX/UI.
 
-### Entrega 3 (Actual)
+### Entrega 3 (Completada — `LGTM` del docente el 02/07/2026)
 
-- ✅ Lógica de negocio en JavaScript (4 flujos: cotizador, compatibilidad, carrito, buscador)
-- ✅ Diagramas de actividades PlantUML
-- ✅ Suite de tests automatizados con Jasmine
-- ✅ Interactividad básica con `prompt`/`alert`
+- ✅ Lógica de negocio en JavaScript (4 flujos: cotizador, compatibilidad, carrito, buscador).
+- ✅ Diagramas de actividades PlantUML (4 flujos alineados al menú real).
+- ✅ Suite de 99 tests Jasmine (100% PASS, 0 failures).
+- ✅ Interactividad inicial con `prompt`/`alert`.
+- ✅ Resolución de los 3 rounds de reviews del docente (33 RC + 13 RCN).
 
-### Entrega 4 (Próxima)
+### Entrega 4 (En curso)
 
-- 📅 Manipulación del DOM y eventos
-- 📅 Reemplazo de `prompt`/`alert` por interacción visual en la UI
+- 🔄 Migración de `prompt()`/`alert()` a UI HTML con eventos DOM y validación en tiempo real.
+- 🔄 Nueva sección `<section id="simulador">` en `index.html` con 4 cards accordion.
+- 🔄 Clases del dominio (`Producto`, `Carrito`, `Cotizacion`) en `js/models/`.
+- 🔄 Capa de persistencia `js/utils/storage.js` con CRUD sobre localStorage/sessionStorage.
+- 🔄 Refactor de tests + 2 suites nuevas (`models.spec.js`, `storage.spec.js`).
+- 🔄 Code review formal del docente en Slack (requisito para 2° parcial).
 
 ---
 
@@ -71,19 +82,25 @@ En esta primera entrega, se establece la estructura HTML5 fundamental, con marca
 
 - 📁 **[Mockup](docs/01-mockup/disenio-bootstrap.png.png)** - **[Figma](https://www.figma.com/design/LdjthTrqI614Fyr0M8bjF6/%22E-commerce---Mockup-Inicial--copia-?node-id=2012-5&t=ZhvMnQrrSbPoIzV3-1)**
 
-- 🧠 **[Indice de Prompts](docs/02-prompts/prompts.md)**
+- 🧠 **[Índice de Prompts](docs/02-prompts/prompts.md)**
 - 📝 **[Changelog](changelog.md)**
-- 📊 **[Ver Índice de Testing y QA (Playwright)](docs/04-testing/testing-doc.md)**
+- 📊 **[Ver Índice de Testing y QA](docs/04-testing/testing-doc.md)**
+- 📐 **[Diagramas de actividades](docs/05-diagramas/01-diagrama-de-actividades/)**
+- 🏗️ **[Diagrama de clases (AO4)](docs/04-diagramas/02-diagrama-de-clases/)** _(en construcción)_
+- 💾 **[Documentación de Storage (AO4)](docs/06-storage/storage-doc.md)** _(en construcción)_
+- 📋 **Specs AO4:** [Coord/DevOps](docs/03-specs/actividad-obligatoria-4/spec-devops.md) · [Tester QA](docs/03-specs/actividad-obligatoria-4/spec-tester-qa.md) · [Eventos+DOM](docs/03-specs/actividad-obligatoria-4/spec-dev-eventos-dom.md) · [POO](docs/03-specs/actividad-obligatoria-4/spec-dev-poo.md) _(en construcción)_ · [Storage](docs/03-specs/actividad-obligatoria-4/spec-dev-storage.md) _(en construcción)_
 
 ---
 
 ## 👥 Integrantes del Grupo
 
-| Nombre completo    | N° de Matrícula | Usuario GitHub  | Carrera                                 | Materia            | Rol en esta entrega (Actividad 3)      |
-| ------------------ | --------------- | --------------- | --------------------------------------- | ------------------ | -------------------------------------- |
-| Nicolas Aguirre    | 153791          | @Naguirre0102   | Tecnicatura en Programación de Sistemas | Programación Web I | Tester JavaScript / QA Engineer        |
-| Gonzalo Barbano    | 152127          | @GonzaloBarbano | Tecnicatura en Programación de Sistemas | Programación Web I | Coordinador / DevOps + Arquitecto de Diagramas |
-| Lucas Ivan Fischer | 152159          | @LucasFUces     | Tecnicatura en Programación de Sistemas | Programación Web I | Desarrollador JavaScript               |
+> 📌 **Nota administrativa:** @GonzaloBarbano abandonó el grupo el 22/06/2026. La AO4 se realiza con equipo reducido a 2 personas. La distribución de roles se ajustó para cubrir los 4 roles definidos por la consigna. Ver detalle en `docs/03-specs/actividad-obligatoria-4/spec-devops.md`.
+
+| Nombre completo | Matrícula | GitHub | Rol en AO3 | Roles en AO4 |
+|---|---|---|---|---|
+| Nicolas Aguirre | 153791 | @Naguirre0102 | Coordinador/DevOps + Arquitecto de Diagramas + Tester QA (post-baja de Gonza) | Coordinador/DevOps + Tester QA + Dev JS Eventos+DOM |
+| Lucas Ivan Fischer | 152159 | @LucasFUces | Desarrollador JavaScript | Dev JS POO + Dev JS Storage |
+| Gonzalo Barbano | 152127 | @GonzaloBarbano | Coord/DevOps + Arquitecto de Diagramas (hasta 22/06/2026) | — (baja) |
 
 ---
 

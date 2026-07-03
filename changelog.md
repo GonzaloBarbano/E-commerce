@@ -4,6 +4,21 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Unreleased — Actividad Obligatoria N°4] — En curso
+
+### Added
+
+- [feature/coord-devops-cuarta-entrega] Consolidada los 3 roles de @Naguirre0102 (Coord/DevOps + Tester QA + Dev JS Eventos+DOM).
+  PR: [#XXX](https://github.com/GonzaloBarbano/E-commerce/pulls) - @Naguirre0102
+
+- [feature/dev-poo-logica-negocio] Clases del dominio para AO4
+  PR: [#XXX](https://github.com/GonzaloBarbano/E-commerce/pulls) - @LucasFUces (Desarrollador JS POO)
+
+- [feature/dev-storage] Capa de persistencia `js/utils/storage.js` (StorageUtil) con CRUD completo
+  PR: [#XXX](https://github.com/GonzaloBarbano/E-commerce/pulls) - @LucasFUces (Desarrollador JS Storage)
+
+---
+
 ## [Release Actividad Obligatoria N°3] - 2026-05-18
 
 ### Added
