@@ -1,9 +1,20 @@
 # Documentación de Testing - Suite Jasmine
 
 **Proyecto:** E-commerce de Hardware para PC
-**Entrega:** Actividad Obligatoria N°3
-**Framework:** Jasmine 5.10.0 (vía CDN)
+**Entrega:** Actividad Obligatoria N°3 (histórico) — ver nota AO4 más abajo
+**Framework:** Jasmine 5.10.0 (vía CDN) + Playwright (E2E en AO4)
 **Rol responsable:** Tester JavaScript / QA Engineer
+
+> ℹ️ **Nota sobre AO4 (03/07/2026):**
+> Este documento describe el estado del testing al cierre de la **Actividad Obligatoria N°3** (99 specs Jasmine, 100 % PASS, con `spyOn` cubriendo los orquestadores basados en `prompt`/`alert`).
+>
+> Para **AO4** el testing evolucionó:
+>
+> - Los orquestadores `prompt`/`alert` fueron reemplazados por handlers de eventos DOM. Las suites 5-8 con `spyOn` del cierre de AO3 y el archivo `script.spec.js` legacy fueron **descartados** — su cobertura equivalente vive ahora en las clases del dominio.
+> - Se agregaron 2 archivos nuevos de specs: `models.spec.js` (52 specs sobre Producto/Carrito/Cotizacion) y `storage.spec.js` (19 specs sobre StorageUtil). **Total AO4: 71 specs Jasmine, 100 % PASS.**
+> - Se sumó testing **E2E con Playwright** — 20 tests contra el DOM real del simulador. Ver reporte + 8 screenshots en [`docs/07-testing-ao4/`](../../docs/07-testing-ao4/reporte-e2e.md).
+>
+> El resto de este documento describe el estado histórico de AO3 y se preserva como evidencia del cierre con `LGTM` del docente el 02/07/2026.
 
 ## Índice
 
