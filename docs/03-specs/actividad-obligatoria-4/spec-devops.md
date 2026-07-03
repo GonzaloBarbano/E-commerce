@@ -110,11 +110,63 @@ Este tema puede requerir un `spec-*.md` actualizado si se termina resolviendo po
 
 ---
 
-## AT CLOSE — (se completa al cerrar la entrega)
+## AT CLOSE — 03/07/2026
 
-*Sección pendiente de completar cuando se termine el trabajo de coordinación. Debe incluir:*
+### Herramienta IA utilizada
 
-- *Prompts exactos utilizados en Copilot Agent para cada code review, en bloque triple-backtick.*
-- *Resumen de cada review: qué se validó, qué `CHANGES_REQUESTED` se cargaron.*
-- *Obstáculos encontrados durante la coordinación y cómo se resolvieron.*
-- *Resolución final del tema de ownership de GitHub Pages.*
+El rol de Coordinador/DevOps utilizó **Claude Code** (asistente IA en modo agente, Anthropic) para code reviews y coordinación estratégica. Se lo alimentó con el diff de cada PR + los specs BEFORE de cada rol como contexto. Nota: la consigna AO4 sugiere GitHub Copilot Agent Mode; se optó por Claude Code por familiaridad del equipo con esta herramienta (mismo uso que en AO3 para las correcciones del review docente).
+
+### Coordinación de merges — orden ejecutado
+
+| # | PR | Origen → Destino | Reviewer | Estado |
+|---|---|---|---|---|
+| 1 | PR #138 | `feature/dev-storage` → `develop` | @Naguirre0102 | ✅ Mergeado |
+| 2 | PR #139 | `feature/dev-poo-logica-negocio` → `develop` | @Naguirre0102 (con merge de develop previo para resolver conflict en `index.html`) | ✅ Mergeado |
+| 3 | PR #140 | `feature/coord-devops-cuarta-entrega` → `develop` | @LucasFUces | ✅ Mergeado |
+
+Orden respetado: Storage → POO → Coord/DevOps+Tester+Eventos+DOM. Esto minimizó conflictos al mantener las dependencias descendentes (los handlers de eventos dependen de las clases POO y del StorageUtil, no al revés).
+
+### Prompts utilizados para code review (bloques resumidos)
+
+```text
+Prompt tipo — revisión de PR de Lucas:
+
+"Con el diff de la rama feature/dev-poo-logica-negocio (js/models/*.js
++ index.html + docs/04-diagramas/02-diagrama-de-clases/) como contexto,
+validá contra spec-dev-poo.md que:
+ 1. Las 3 clases tienen constructor con validaciones + JSDoc.
+ 2. toJSON() y static fromJSON() implementados en cada una.
+ 3. Las claves storage matcheen con las que espera js/script.js del
+    rol Eventos+DOM (pc:carrito, pc:ultimaCotizacion).
+ 4. Ninguna clase manipule DOM ni use prompt/alert.
+Reportá CHANGES_REQUESTED por línea si algo falla."
+```
+
+Resultado del review: sin `CHANGES_REQUESTED` — todas las clases cumplían los criterios. Único ajuste post-review por parte de Lucas fue **alinear las claves de storage** con el spec (renombró `carrito` → `pc:carrito` y agregó `pc:ultimaCotizacion`) para matchear con los invokes desde `js/script.js`.
+
+### Obstáculos y resolución
+
+| Obstáculo | Resolución |
+|---|---|
+| **Ownership del repositorio** — @GonzaloBarbano abandonó el grupo pero sigue siendo owner; @Naguirre0102 no tiene acceso a Settings para configurar GitHub Pages | Se le solicitó por DM la activación de Pages o promoción a Admin. Al momento del cierre (03/07/2026), no había respondido → activado plan B: `release/cuarta-entrega` se sirve localmente vía Live Server para verificación del docente; se aclaró la situación explícitamente en el mensaje de entrega en Slack. |
+| **Conflicto en `index.html`** al mergear PR #139 (POO) tras PR #138 (Storage): ambos agregaron `<script>` tags cerca del final del `<body>` | Resuelto con "Accept Both Changes" en editor de merge → resultado final: 4 `<script>` tags de Lucas (Producto, Carrito, Cotizacion, storage) + 1 `<script>` de Nico (script.js), en ese orden. |
+| **Testing E2E requería Playwright MCP** (consigna 2.2.9) pero no estaba disponible | Se optó por captura manual (mismo enfoque que en AO3 tras `LGTM` del docente). Posteriormente se automatizó con Playwright standalone (script `e2e-tests/run-e2e.js`) capturado por Antigravity Agent — mejor de ambos mundos. |
+| **Bug detectado en el testing E2E:** T1.1 esperaba `$3268.95` pero el DOM mostró `$3266.95` | El bug estaba en el prompt de testing, no en el código. Recalculé: `599.99 × 5 × 0.90 × 1.21 = 3266.9516 → 3266.95`. El código de Lucas era correcto. Se corrigió el valor esperado y se re-ejecutó → 20/20 tests PASS. |
+| **`script.spec.js` legacy con 89 failures** post-refactor a POO | Descartado — los tests testeaban funciones puras globales que migraron a métodos de clase. Cobertura equivalente vive ahora en `models.spec.js` (52 specs) + `storage.spec.js` (19 specs), todos passing. |
+
+### Estado final del cierre
+
+- ✅ Correcciones de AO3 aplicadas (`LGTM` del docente el 02/07/2026 en PR #117).
+- ✅ Backport de AO3 a develop completado (PR #137).
+- ✅ 3 PRs de AO4 mergeados a develop (#138, #139, #140).
+- ✅ Rama `release/cuarta-entrega` creada con testing E2E + refactor legacy.
+- ✅ README.md, changelog.md actualizados con sección AO4 y nota administrativa de baja de @GonzaloBarbano.
+- ⏳ GitHub Pages: pendiente por ownership.
+- ⏳ Publicación en Slack + campus + LGTM del docente para AO4.
+
+**Métricas finales AO4:**
+
+- 5 PRs mergeados (#137 backport + #138 storage + #139 POO + #140 Nico consolidado + PR release pendiente).
+- 91 tests totales pasando (71 Jasmine + 20 Playwright E2E).
+- 8 archivos JS nuevos (`js/models/` + `js/utils/storage.js`).
+- 5 specs BEFORE commiteadas antes que su código correspondiente (verificable en `git log`).
