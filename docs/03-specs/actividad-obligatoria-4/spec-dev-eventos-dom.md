@@ -167,11 +167,78 @@ Eventos + DOM (0.2 pts del spec + 2.3 pts de implementación):
 
 ---
 
-## AT CLOSE — (se completa al cerrar la entrega)
+## AT CLOSE — 03/07/2026
 
-*Sección pendiente. Debe incluir:*
+### Herramienta IA utilizada
 
-- *Prompt exacto utilizado en Copilot Agent para refactorizar `js/script.js`.*
-- *Fragmento del código generado por Copilot para al menos uno de los handlers.*
-- *Ajustes manuales realizados sobre el output de la IA y su justificación.*
-- *Decisiones finales sobre integración con las clases de Lucas (POO + Storage).*
+**Claude Code** (asistente IA en modo agente, Anthropic) para el refactor completo de `js/script.js` y la inserción de la `<section id="simulador">` en el `index.html`. Se lo alimentó con el spec BEFORE de este rol, las funciones puras del `js/script.js` post-AO3 (700 líneas), el `index.html` actual, y el spec del rol POO de Lucas (para conocer la API de las clases que iban a existir en `js/models/`).
+
+Nota: la consigna AO4 sugiere GitHub Copilot Agent Mode; se optó por Claude Code por familiaridad del equipo (mismo uso que en AO3).
+
+### Prompt utilizado con Claude Code
+
+```text
+Con el js/script.js actual (700 líneas con orquestadores prompt/alert)
++ el spec-dev-eventos-dom.md + el spec-dev-poo.md de Lucas + el
+index.html actual como contexto, refactorizá js/script.js para que
+sea un CONTROLADOR PURO:
+
+- Sin lógica de negocio: toda la lógica va a las clases del dominio
+  de Lucas (Producto, Carrito, Cotizacion en js/models/).
+- Sin prompt() ni alert(): todas las entradas por forms HTML, todas
+  las salidas por manipulación del DOM.
+- 4 handlers submit siguiendo el patrón homogéneo del spec:
+  event.preventDefault() → try/catch → capturar inputs → invocar
+  clase de dominio → renderizar en el DOM → persistir vía StorageUtil.
+- init() en DOMContentLoaded que restaura el carrito (localStorage
+  key pc:carrito) y la última cotización (sessionStorage key
+  pc:ultimaCotizacion).
+- Preservar la función inicializarModalProducto() heredada del
+  Primer Parcial.
+- Eliminar iniciarMenu() y la llamada al final del archivo.
+```
+
+### Fragmento del código generado
+
+El handler del cotizador quedó como caso más representativo del patrón homogéneo:
+
+```javascript
+function handleCotizadorSubmit(event) {
+  event.preventDefault();
+  var contenedor = document.getElementById("resultado-cotizador");
+  try {
+    var categoria = document.getElementById("cot-categoria").value;
+    var cantidad = parseInt(document.getElementById("cot-cantidad").value, 10);
+    var precio = preciosPorCategoria[categoria];
+    if (typeof precio !== "number") {
+      throw new Error("Categoría inválida");
+    }
+    var cot = new Cotizacion(categoria, cantidad, precio);
+    contenedor.innerHTML = renderResumenCotizacion(cot);
+    StorageUtil.guardar("pc:ultimaCotizacion", cot.toJSON(), "session");
+  } catch (err) {
+    mostrarError(contenedor, err.message);
+    console.error(err);
+  }
+}
+```
+
+Los otros 3 handlers (compatibilidad, carrito, buscador) siguen exactamente el mismo esqueleto — solo cambian las clases invocadas y los helpers de render.
+
+### Ajustes manuales sobre el output de la IA
+
+1. **Guarda de dependencias `dependenciasPOOStorageDisponibles()`** — el `init()` original crasheaba si `Producto`/`Carrito`/`Cotizacion`/`StorageUtil` no estaban cargados. Se agregó una verificación con `typeof X !== "undefined"` para las 4 dependencias; si alguna falta, el simulador se deshabilita elegantemente y **no rompe el modal del Primer Parcial** ni el resto del e-commerce. Esto permitió commitear el refactor de `script.js` a la rama de Nico ANTES de que Lucas mergeara sus clases (etapa de la Fase 2 del roadmap AO4).
+2. **Función `escaparHTML()`** — se agregó para escapar las cadenas que vienen del catálogo/inputs antes de usarlas con `innerHTML`. Sin este escape, un producto con nombre `<script>alert('XSS')</script>` en el catálogo ejecutaría JS al renderizarse en el carrito. Con `escaparHTML`, se sanitiza a `&lt;script&gt;...`. No estaba en el spec original, agregado como buena práctica de seguridad.
+3. **`renderResumenCotizacion` como `<pre>`** en vez de HTML formateado — se optó por preservar el output textual de `cot.generarResumen()` (con `\n`) usando `<pre>`. Simplifica la integración con el método de Lucas (no requiere que Cotizacion devuelva HTML) y hace el resumen fácilmente copiable.
+4. **`renderCarrito` sin usar `Carrito.toJSON` internamente** — el render iterá directamente sobre `carrito.items[]` para armar el `<ul>` en vez de serializar-parsear-serializar. Más simple y directo.
+
+### Decisiones finales sobre integración con POO + Storage
+
+- **Contrato de storage keys firmado en los specs BEFORE.** Antes de escribir código, `spec-dev-eventos-dom.md` (Nico) y `spec-dev-storage.md` (Lucas) acordaron `pc:carrito` (localStorage) y `pc:ultimaCotizacion` (sessionStorage). Lucas ajustó su implementación con un commit específico (`fix(storage): alinear claves con spec`) para matchear.
+- **Sin cambios en las clases de Lucas post-integración.** El `js/script.js` invoca `new Cotizacion(cat, cant, precio)`, `new Carrito()`, `carrito.agregar(producto, cantidad)`, `carrito.calcularTotal()`, `StorageUtil.guardar(...)`, `Producto.fromJSON(...)`, `Carrito.fromJSON(...)`, `Cotizacion.fromJSON(...)` — todas con la API acordada. No hizo falta modificar código de Lucas ni de Nico post-merge.
+- **`carrito.agregar` no muta `producto.stock`.** Decisión de diseño acordada con Lucas: el decremento de stock queda fuera de la responsabilidad de `Carrito`. Si en AO5 se quisiera implementar, se agregaría una clase `Catalogo` que orqueste el descuento. En AO4 se omite (cirugía mínima).
+- **`carrito` global como única variable de estado.** El controlador `js/script.js` mantiene una única variable de estado global (`var carrito = null`) inicializada en `init()`. No se usan closures ni módulos porque toda la lógica de negocio vive en las clases; el controlador solo orquesta.
+
+### Verificación end-to-end
+
+Los 20 tests E2E automatizados con Playwright (ver `docs/07-testing-ao4/reporte-e2e.md`) validan que este controlador funciona correctamente end-to-end contra las clases y el StorageUtil de Lucas. **20/20 PASS**.

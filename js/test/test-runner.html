@@ -49,13 +49,13 @@
   <script src="../script.js"></script>
 
   <!-- =========================================================== -->
-  <!-- SUITES DE TESTS JASMINE                                     -->
+  <!-- SUITES DE TESTS JASMINE — AO4                               -->
   <!-- =========================================================== -->
+  <!-- El archivo script.spec.js de AO3 fue descartado porque      -->
+  <!-- testeaba funciones puras globales que en AO4 migraron a     -->
+  <!-- métodos de las clases del dominio. La cobertura equivalente -->
+  <!-- vive ahora en models.spec.js (52 specs) y storage.spec.js.  -->
 
-  <!-- Legacy (funciones puras heredadas de AO3 — se descartarán suites 5-8) -->
-  <script src="./script.spec.js"></script>
-
-  <!-- Nuevos suites AO4 -->
   <script src="./models.spec.js"></script>
   <script src="./storage.spec.js"></script>
 </body>

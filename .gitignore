@@ -28,3 +28,4 @@ build/
 # Testing
 .nyc_output/
 coverage/
+.e2e-temp/
